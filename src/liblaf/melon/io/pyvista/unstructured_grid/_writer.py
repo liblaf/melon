@@ -11,7 +11,7 @@ from . import as_unstructured_grid
 
 
 class UnstructuredGridWriter(melon.io.AbstractWriter):
-    extensions: Container[str] = {"*.vtu"}
+    extensions: Container[str] = {".vtu"}
 
     def save(self, path: StrPath, obj: Any) -> None:
         path = Path(path)
