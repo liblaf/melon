@@ -1,5 +1,6 @@
 from ._abc import TransferAlgorithm, TransferAlgorithmPrepared
 from ._auto import TransferAuto, TransferAutoPrepared
+from ._components import transfer_components
 from ._nearest_point_on_surface import (
     TransferNearestPointOnSurface,
     TransferNearestPointOnSurfacePrepared,
@@ -18,5 +19,6 @@ __all__ = [
     "TransferNearestVertex",
     "TransferNearestVertexPrepared",
     "get_fill_value",
+    "transfer_components",
     "transfer_point_to_point",
 ]

@@ -1,5 +1,5 @@
 import functools
-from typing import Any
+from typing import Any, override
 
 import attrs
 import numpy as np
@@ -10,38 +10,40 @@ from numpy.typing import ArrayLike
 
 from liblaf import melon
 
-from . import NearestVertex, NearestVertexPrepared
+from . import (
+    NearestAlgorithm,
+    NearestAlgorithmPrepared,
+    NearestPoint,
+    NearestPointPrepared,
+    NearestPointResult,
+    NearestResult,
+)
 
 
-@attrs.frozen
-class NearestPointOnSurfaceResult:
-    distance: Float[np.ndarray, " N"]
-    """(N,) float"""
-    missing: Bool[np.ndarray, " N"]
-    """(N,) bool"""
-    nearest: Float[np.ndarray, "N 3"]
-    """(N, 3) float"""
+@attrs.frozen(kw_only=True)
+class NearestPointOnSurfaceResult(NearestResult):
     triangle_id: Integer[np.ndarray, " N"]
-    """(N,) int"""
 
 
-@attrs.frozen
-class NearestPointOnSurfacePrepared:
+@attrs.frozen(kw_only=True)
+class NearestPointOnSurfacePrepared(NearestAlgorithmPrepared):
+    source: tm.Trimesh
+
     distance_threshold: float
     fallback_to_nearest_vertex: bool
+    ignore_orientation: bool
     max_k: int
     normal_threshold: float
     workers: int
 
-    source: tm.Trimesh
-
-    def query(self, target: Any) -> NearestPointOnSurfaceResult:
+    @override
+    def query(self, query: Any) -> NearestPointOnSurfaceResult:
         need_normals: bool = self.normal_threshold > -1.0
-        target: pv.PointSet = melon.as_point_set(target, point_normals=need_normals)
+        query: pv.PointSet = melon.as_point_set(query, point_normals=need_normals)
         nearest: Float[np.ndarray, "N 3"]
         distance: Float[np.ndarray, " N"]
         triangle_id: Integer[np.ndarray, " N"]
-        nearest, distance, triangle_id = self.source.nearest.on_surface(target.points)
+        nearest, distance, triangle_id = self.source.nearest.on_surface(query.points)
         missing: Bool[np.ndarray, " N"] = (
             distance > self.distance_threshold * self.source.scale
         )
@@ -49,11 +51,13 @@ class NearestPointOnSurfacePrepared:
             source_normals: Float[np.ndarray, "N 3"] = self.source.face_normals[
                 triangle_id
             ]
-            target_normals: Float[np.ndarray, "N 3"] = target.point_data["Normals"]
-            normal_similarity: Float[np.ndarray, " N"] = np.vecdot(
+            target_normals: Float[np.ndarray, "N 3"] = query.point_data["Normals"]
+            cosine_similarity: Float[np.ndarray, " N"] = np.vecdot(
                 source_normals, target_normals
             )
-            missing |= normal_similarity < self.normal_threshold
+            if self.ignore_orientation:
+                cosine_similarity = np.abs(cosine_similarity)
+            missing |= cosine_similarity < self.normal_threshold
         distance[missing] = np.inf
         nearest[missing] = np.nan
         triangle_id[missing] = -1
@@ -61,12 +65,12 @@ class NearestPointOnSurfacePrepared:
             distance=distance, missing=missing, nearest=nearest, triangle_id=triangle_id
         )
         if self.fallback_to_nearest_vertex:
-            result = self._fallback_to_nearest_vertex(target, result)
+            result = self._fallback_to_nearest_vertex(query, result)
         return result
 
     @functools.cached_property
-    def _nearest_vertex(self) -> NearestVertexPrepared:
-        return NearestVertex(
+    def _nearest_vertex(self) -> NearestPointPrepared:
+        return NearestPoint(
             distance_threshold=self.distance_threshold,
             max_k=self.max_k,
             normal_threshold=self.normal_threshold,
@@ -78,9 +82,7 @@ class NearestPointOnSurfacePrepared:
     ) -> NearestPointOnSurfaceResult:
         missing_vid: Integer[np.ndarray, " N"] = result.missing.nonzero()[0]
         remaining: pv.PointSet = target.extract_points(missing_vid, include_cells=False)  # pyright: ignore[reportAssignmentType]
-        remaining_result: melon.NearestVertexResult = self._nearest_vertex.query(
-            remaining
-        )
+        remaining_result: NearestPointResult = self._nearest_vertex.query(remaining)
         result.distance[result.missing] = remaining_result.distance
         result.missing[result.missing] = remaining_result.missing
         result.nearest[result.missing] = remaining_result.nearest
@@ -95,25 +97,28 @@ class NearestPointOnSurfacePrepared:
         return self.source.vertex_faces[vertex_id, 0]
 
 
-@attrs.frozen
-class NearestPointOnSurface:
+@attrs.define(kw_only=True, on_setattr=attrs.setters.validate)
+class NearestPointOnSurface(NearestAlgorithm):
     distance_threshold: float = 0.1
     fallback_to_nearest_vertex: bool = False
+    ignore_orientation: bool = False
     max_k: int = 32
     normal_threshold: float = attrs.field(
         default=0.8, validator=attrs.validators.le(1.0)
     )
     workers: int = -1
 
-    def prepare(self, source: Any) -> NearestPointOnSurfacePrepared:
-        source: tm.Trimesh = melon.as_trimesh(source)
+    @override
+    def prepare(self, data: Any) -> NearestPointOnSurfacePrepared:
+        data: tm.Trimesh = melon.as_trimesh(data)
         return NearestPointOnSurfacePrepared(
             distance_threshold=self.distance_threshold,
             fallback_to_nearest_vertex=self.fallback_to_nearest_vertex,
+            ignore_orientation=self.ignore_orientation,
             max_k=self.max_k,
             normal_threshold=self.normal_threshold,
             workers=self.workers,
-            source=source,
+            source=data,
         )
 
 
@@ -123,6 +128,7 @@ def nearest_point_on_surface(
     *,
     distance_threshold: float = 0.1,
     fallback_to_nearest_vertex: bool = False,
+    ignore_orientation: bool = False,
     max_k: int = 32,
     normal_threshold: float = 0.8,
     workers: int = -1,
@@ -130,6 +136,7 @@ def nearest_point_on_surface(
     algorithm = NearestPointOnSurface(
         distance_threshold=distance_threshold,
         fallback_to_nearest_vertex=fallback_to_nearest_vertex,
+        ignore_orientation=ignore_orientation,
         max_k=max_k,
         normal_threshold=normal_threshold,
         workers=workers,

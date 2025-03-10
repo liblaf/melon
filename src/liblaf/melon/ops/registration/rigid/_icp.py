@@ -20,12 +20,12 @@ class RigidICP(RigidRegistrationAlgorithm):
     reflection: bool = False
     scale: bool = True
     translation: bool = True
-    corresp_algo: melon.NearestVertex = attrs.field(factory=melon.NearestVertex)
+    corresp_algo: melon.NearestPoint = attrs.field(factory=melon.NearestPoint)
 
     def register(
         self, source: Any, target: Any, *, init_transform: Float[ArrayLike, "4 4"]
     ) -> RigidRegistrationResult:
-        corresp_algo_prepared: melon.NearestVertexPrepared = self.corresp_algo.prepare(
+        corresp_algo_prepared: melon.NearestPointPrepared = self.corresp_algo.prepare(
             target
         )
         source: pv.PolyData = melon.as_poly_data(source)
@@ -47,9 +47,7 @@ class RigidICP(RigidRegistrationAlgorithm):
             transformed: pv.PolyData = source.transform(
                 result.transformation, inplace=False
             )  # pyright: ignore[reportAssignmentType]
-            corresp: melon.NearestVertexResult = corresp_algo_prepared.query(
-                transformed
-            )
+            corresp: melon.NearestPointResult = corresp_algo_prepared.query(transformed)
             valid_mask: Bool[np.ndarray, " N"] = ~corresp.missing
             matrix: Float[np.ndarray, "4 4"]
             cost: float

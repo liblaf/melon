@@ -9,6 +9,8 @@
     "dcmread",
     "dicom",
     "dmypy",
+    "einops",
+    "fprint",
     "getattr",
     "hynek",
     "ipynb",
@@ -51,11 +53,14 @@
     "scrapy",
     "sdist",
     "stefanzweifel",
+    "tetrahedralize",
+    "tqdm",
     "trimesh",
     "typer",
     "ubelt",
     "vecdot",
-    "venv"
+    "venv",
+    "voxelize"
   ],
   "ignorePaths": [
     "**/.cspell.*",

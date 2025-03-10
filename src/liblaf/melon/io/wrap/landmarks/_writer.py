@@ -14,4 +14,4 @@ def save_landmarks(path: StrPath, points: Float[ArrayLike, "N 3"]) -> None:
     path: Path = get_landmarks_path(path)
     points: Float[np.ndarray, "N 3"] = np.asarray(points)
     data: list[dict[str, float]] = [{"x": p[0], "y": p[1], "z": p[2]} for p in points]
-    grapes.serialize(path, data)
+    grapes.save_json(path, data)
