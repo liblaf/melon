@@ -10,7 +10,7 @@ from jaxtyping import Float
 
 import liblaf.cherries as cherries  # noqa: PLR0402
 import liblaf.grapes as grapes  # noqa: PLR0402
-from liblaf import melon
+import liblaf.melon as melon  # noqa: PLR0402
 
 
 class Config(cherries.BaseConfig):
