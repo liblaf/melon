@@ -1,14 +1,23 @@
 # Changelog
 
+## [0.1.4](https://github.com/liblaf/melon/compare/v0.1.3..v0.1.4) - 2025-03-11
+
+### ✨ Features
+
+- **io:** add support for unstructured grid file formats - ([60929fc](https://github.com/liblaf/melon/commit/60929fc50f189e3060e3da3faafc4618d6c369b9))
+- refactor scripts to use liblaf-cherries for configuration management - ([53e13b6](https://github.com/liblaf/melon/commit/53e13b6bf643ded9f5b2c6e8bac14cefaaaba64f))
+- refactor proximity algorithms and add component transfer functionality - ([d09433a](https://github.com/liblaf/melon/commit/d09433a6afb2af178b6c1f1a263a8e9d5c3db4df))
+- enhance file handling and add rigid alignment for face models - ([acdeab3](https://github.com/liblaf/melon/commit/acdeab341ee450f4b234edb516db645139bc61a5))
+
+### ❤️ New Contributors
+
+- @liblaf made their first contribution
+
 ## [0.1.3](https://github.com/liblaf/melon/compare/v0.1.2..v0.1.3) - 2025-02-16
 
 ### ⬆️ Dependencies
 
 - **deps:** update liblaf-grapes dependency to v0.1.0 - ([d8579ac](https://github.com/liblaf/melon/commit/d8579ac3fe26a44358c5a234c3053c02f26cefaf))
-
-### ❤️ New Contributors
-
-- @liblaf made their first contribution
 
 ## [0.1.2](https://github.com/liblaf/melon/compare/v0.1.1..v0.1.2) - 2025-02-16
 
