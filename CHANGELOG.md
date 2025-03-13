@@ -1,6 +1,16 @@
 # Changelog
 
-## [0.1.4](https://github.com/liblaf/melon/compare/v0.1.3..v0.1.4) - 2025-03-11
+## [0.1.5](https://github.com/liblaf/melon/compare/v0.1.4..v0.1.5) - 2025-03-13
+
+### ♻ Code Refactoring
+
+- update muscle generation logic and point data - ([4027476](https://github.com/liblaf/melon/commit/40274768a815f8183c923dae16bb196de980c461))
+
+### ❤️ New Contributors
+
+- @liblaf made their first contribution
+
+## [0.1.4](https://github.com/liblaf/melon/compare/v0.1.3..v0.1.4) - 2025-03-12
 
 ### ✨ Features
 
@@ -8,10 +18,6 @@
 - refactor scripts to use liblaf-cherries for configuration management - ([53e13b6](https://github.com/liblaf/melon/commit/53e13b6bf643ded9f5b2c6e8bac14cefaaaba64f))
 - refactor proximity algorithms and add component transfer functionality - ([d09433a](https://github.com/liblaf/melon/commit/d09433a6afb2af178b6c1f1a263a8e9d5c3db4df))
 - enhance file handling and add rigid alignment for face models - ([acdeab3](https://github.com/liblaf/melon/commit/acdeab341ee450f4b234edb516db645139bc61a5))
-
-### ❤️ New Contributors
-
-- @liblaf made their first contribution
 
 ## [0.1.3](https://github.com/liblaf/melon/compare/v0.1.2..v0.1.3) - 2025-02-16
 
