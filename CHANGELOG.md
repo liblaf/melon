@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.5](https://github.com/liblaf/melon/compare/v0.1.4...v0.1.5) (2025-03-13)
+
+
+### ♻ Code Refactoring
+
+* update muscle generation logic and point data ([4027476](https://github.com/liblaf/melon/commit/40274768a815f8183c923dae16bb196de980c461))
+
 ## [0.1.4](https://github.com/liblaf/melon/compare/v0.1.3..v0.1.4) - 2025-03-11
 
 ### ✨ Features
