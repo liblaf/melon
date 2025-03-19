@@ -43,7 +43,7 @@ dependencies = [
   "einops>=0.8.1,<0.9",
   "fast-simplification>=0.1.9,<0.2",
   "glom>=24.11.0,<25",
-  "jaxtyping>=0.2.38,<0.3",
+  "jaxtyping>=0.3,<0.4",
   "lazy-loader>=0.4,<0.5",
   "liblaf-cherries==0.0.5",
   "liblaf-grapes>=0.1.7,<0.2",
