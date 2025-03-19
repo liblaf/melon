@@ -16,10 +16,13 @@
     "ipynb",
     "ipython",
     "isdtype",
+    "isin",
     "jaxlib",
     "jaxtyping",
     "libc",
     "liblaf",
+    "loadtxt",
+    "mandibula",
     "meshio",
     "mkdocs",
     "mkdocstrings",
@@ -59,8 +62,7 @@
     "typer",
     "ubelt",
     "vecdot",
-    "venv",
-    "voxelize"
+    "venv"
   ],
   "ignorePaths": [
     "**/.cspell.*",

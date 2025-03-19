@@ -180,7 +180,7 @@ junit.xml
 playground/
 
 *.log
-*.log.jsonl
+*.log.*
 
 *.obj
 *.ply

@@ -1,11 +1,13 @@
 from . import (
     correspondence,
+    is_,
     pyvista,
     registration,
     selection,
     transfer,
     transformations,
 )
+from .is_ import is_volume
 from .proximity import (
     NearestAlgorithm,
     NearestAlgorithmPrepared,
@@ -21,6 +23,7 @@ from .proximity import (
 from .pyvista import (
     contour,
     ensure_positive_volume,
+    extract_cells,
     extract_points,
     gaussian_smooth,
     transform,
@@ -31,6 +34,7 @@ from .registration import (
     RigidRegistrationResult,
     rigid_align,
 )
+from .selection import select_cells_by_group
 from .transfer import (
     TransferAlgorithm,
     TransferAlgorithmPrepared,
@@ -71,13 +75,17 @@ __all__ = [
     "contour",
     "correspondence",
     "ensure_positive_volume",
+    "extract_cells",
     "extract_points",
     "gaussian_smooth",
     "get_fill_value",
+    "is_",
+    "is_volume",
     "nearest",
     "pyvista",
     "registration",
     "rigid_align",
+    "select_cells_by_group",
     "selection",
     "transfer",
     "transfer_components",

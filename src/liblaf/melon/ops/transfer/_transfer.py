@@ -23,7 +23,7 @@ def transfer_point_to_point(
     if algo is None:
         algo = TransferAuto()
     if not isinstance(fill_value, Mapping):
-        fill_value = {key: fill_value for key in data}
+        fill_value = dict.fromkeys(data, fill_value)
     prepared: TransferAlgorithmPrepared = algo.prepare(source, target)
     source: pv.PointSet = melon.as_point_set(source)
     result: Attrs = {}
