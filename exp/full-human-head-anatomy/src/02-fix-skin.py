@@ -1,12 +1,9 @@
 from pathlib import Path
 
-import numpy as np
 import pyvista as pv
-import trimesh as tm
-from jaxtyping import Bool
 
 import liblaf.melon as melon  # noqa: PLR0402
-from liblaf import cherries, grapes
+from liblaf import cherries
 
 
 class Config(cherries.BaseConfig):
