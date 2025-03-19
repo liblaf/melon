@@ -1,5 +1,23 @@
 # Changelog
 
+## [0.1.5](https://github.com/liblaf/melon/compare/v0.1.4...v0.1.5) (2025-03-19)
+
+
+### ✨ Features
+
+* enhance mesh processing and OBJ file loading ([4dd9c2a](https://github.com/liblaf/melon/commit/4dd9c2a8f9189a63ef55b74f3062547e38143d34))
+
+
+### ⬆️ Dependencies
+
+* **deps:** update dependency jaxtyping to &gt;=0.3,&lt;0.4 ([#12](https://github.com/liblaf/melon/issues/12)) ([0b6529e](https://github.com/liblaf/melon/commit/0b6529ecaf694256bdc568b38e9bf709b46827e6))
+* **deps:** update dependency liblaf-cherries to v0.0.6 ([#11](https://github.com/liblaf/melon/issues/11)) ([aada5b5](https://github.com/liblaf/melon/commit/aada5b55c4463f9b2afcaa3cc6df608a55d25704))
+
+
+### ♻ Code Refactoring
+
+* update muscle generation logic and point data ([4027476](https://github.com/liblaf/melon/commit/40274768a815f8183c923dae16bb196de980c461))
+
 ## [0.1.4](https://github.com/liblaf/melon/compare/v0.1.3..v0.1.4) - 2025-03-11
 
 ### ✨ Features
