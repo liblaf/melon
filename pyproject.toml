@@ -26,7 +26,7 @@ docs = [
   "mkdocstrings-python>=1.15.0,<2",
   "mkdocstrings>=0.29,<0.30",
   "pymdown-extensions>=10.14.3,<11",
-  "ruff>=0.9.4,<0.10",
+  "ruff>=0.11,<0.12",
 ]
 test = ["pytest>=8.3.4,<9"]
 
