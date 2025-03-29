@@ -1,4 +1,4 @@
-from . import cli, io, ops, plugin, struct, typed
+from . import cli, io, ops, plugin, struct, tetra, typed
 from .io import (
     as_image_data,
     as_point_set,
@@ -137,6 +137,7 @@ __all__ = [
     "save_polygons",
     "select_cells_by_group",
     "struct",
+    "tetra",
     "transfer_components",
     "transfer_point_to_point",
     "transform",
