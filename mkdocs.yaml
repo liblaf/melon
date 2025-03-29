@@ -1,7 +1,6 @@
-# vim: syntax=yaml
 # yaml-language-server: $schema=https://squidfunk.github.io/mkdocs-material/schema.json
 
-INHERIT: .github/copier/mkdocs.yaml
+INHERIT: .config/copier/mkdocs.yaml
 site_name: Melon
 site_description: TODO
 
@@ -9,5 +8,5 @@ plugins:
   mkdocstrings:
     handlers:
       python:
-        import:
+        inventories:
           - https://docs.python.org/3/objects.inv
