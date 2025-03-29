@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.1.6](https://github.com/liblaf/melon/compare/v0.1.5...v0.1.6) (2025-03-29)
+
+
+### ✨ Features
+
+* **plugin:** add tetwild plugin for tetrahedral mesh generation ([918f47e](https://github.com/liblaf/melon/commit/918f47ec2ad46cdb6e408413e5a94fd3a1059358))
+* **tetra:** add tetrahedral mesh winding correction ([db23780](https://github.com/liblaf/melon/commit/db237807966fe512ecf4b548a40cc3622bb6d3ee))
+
+
+### 👷 Build System
+
+* reorganize config files and update workflows ([df320f5](https://github.com/liblaf/melon/commit/df320f5c467641e7a797410704ceeb56837726b5))
+
 ## [0.1.5](https://github.com/liblaf/melon/compare/v0.1.4..v0.1.5) - 2025-03-19
 
 ### ✨ Features
