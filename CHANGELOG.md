@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.1.7](https://github.com/liblaf/melon/compare/v0.1.6...v0.1.7) (2025-03-31)
+
+
+### ⬆️ Dependencies
+
+* **deps:** update dependency rich to v14 ([#15](https://github.com/liblaf/melon/issues/15)) ([a30c487](https://github.com/liblaf/melon/commit/a30c487f6711c7f3b01e9ee99db8fbc3b97c1b2f))
+
+
+### 👷 Build System
+
+* move optional dependencies to extras ([f090b3d](https://github.com/liblaf/melon/commit/f090b3d9d4aa9975a7ea27591d0ef47216c5f20e))
+* update dependency versions and add tetra module ([43d50d7](https://github.com/liblaf/melon/commit/43d50d7a111614b178a55ca6e0ed42274e2dfe8d))
+
 ## [0.1.6](https://github.com/liblaf/melon/compare/v0.1.5..v0.1.6) - 2025-03-29
 
 ### ✨ Features
