@@ -1,11 +1,14 @@
 # Changelog
 
-## [0.1.8](https://github.com/liblaf/melon/compare/v0.1.7...v0.1.8) (2025-03-31)
-
+## [0.1.8](https://github.com/liblaf/melon/compare/v0.1.7..v0.1.8) - 2025-03-31
 
 ### ✨ Features
 
-* **io:** add ParaView PVD writer support ([ce4e628](https://github.com/liblaf/melon/commit/ce4e62809e57758841382f01f94f15499d1332b1))
+- **io:** add ParaView PVD writer support - ([ce4e628](https://github.com/liblaf/melon/commit/ce4e62809e57758841382f01f94f15499d1332b1))
+
+### ❤️ New Contributors
+
+- @liblaf made their first contribution
 
 ## [0.1.7](https://github.com/liblaf/melon/compare/v0.1.6..v0.1.7) - 2025-03-31
 
@@ -17,11 +20,6 @@
 
 - move optional dependencies to extras - ([f090b3d](https://github.com/liblaf/melon/commit/f090b3d9d4aa9975a7ea27591d0ef47216c5f20e))
 - update dependency versions and add tetra module - ([43d50d7](https://github.com/liblaf/melon/commit/43d50d7a111614b178a55ca6e0ed42274e2dfe8d))
-
-### ❤️ New Contributors
-
-- @liblaf made their first contribution
-- @renovate[bot] made their first contribution in [#15](https://github.com/liblaf/melon/pull/15)
 
 ## [0.1.6](https://github.com/liblaf/melon/compare/v0.1.5..v0.1.6) - 2025-03-29
 
