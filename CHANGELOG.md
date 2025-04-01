@@ -1,14 +1,20 @@
 # Changelog
 
-## [0.1.8](https://github.com/liblaf/melon/compare/v0.1.7..v0.1.8) - 2025-03-31
+## [0.1.9](https://github.com/liblaf/melon/compare/v0.1.8..v0.1.9) - 2025-04-01
 
-### ✨ Features
+### 🐛 Bug Fixes
 
-- **io:** add ParaView PVD writer support - ([ce4e628](https://github.com/liblaf/melon/commit/ce4e62809e57758841382f01f94f15499d1332b1))
+- **io:** replace StrPath with PathLike type alias - ([c157934](https://github.com/liblaf/melon/commit/c157934db1e9a32a9eeb13f31635e85b3b06a3d9))
 
 ### ❤️ New Contributors
 
 - @liblaf made their first contribution
+
+## [0.1.8](https://github.com/liblaf/melon/compare/v0.1.7..v0.1.8) - 2025-04-01
+
+### ✨ Features
+
+- **io:** add ParaView PVD writer support - ([ce4e628](https://github.com/liblaf/melon/commit/ce4e62809e57758841382f01f94f15499d1332b1))
 
 ## [0.1.7](https://github.com/liblaf/melon/compare/v0.1.6..v0.1.7) - 2025-03-31
 
