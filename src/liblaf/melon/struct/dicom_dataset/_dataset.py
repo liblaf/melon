@@ -4,13 +4,13 @@ from typing import Self
 
 import liblaf.grapes as grapes  # noqa: PLR0402
 from liblaf import melon
-from liblaf.melon.typed import StrPath
+from liblaf.melon.typed import PathLike
 
 from . import Acquisition, Attachments, DICOMDatasetMeta, Subject, SubjectMeta
 
 
 class DICOMDataset(Attachments):
-    def __init__(self, path: StrPath, meta: DICOMDatasetMeta | None = None) -> None:
+    def __init__(self, path: PathLike, meta: DICOMDatasetMeta | None = None) -> None:
         super().__init__(path)
         if meta is not None:
             self.meta = meta
@@ -42,7 +42,7 @@ class DICOMDataset(Attachments):
         self.save_meta()
         return subject
 
-    def clone(self, path: StrPath) -> Self:
+    def clone(self, path: PathLike) -> Self:
         self.save_meta(path)
         return type(self)(path=path)
 
@@ -55,7 +55,7 @@ class DICOMDataset(Attachments):
     def get_subject(self, subject_id: str) -> Subject:
         return Subject(self.path / subject_id)
 
-    def save_meta(self, path: StrPath | None = None) -> None:
+    def save_meta(self, path: PathLike | None = None) -> None:
         path = Path(path) if path else self.path
         path.mkdir(parents=True, exist_ok=True)
         grapes.save_pydantic(path / "dataset.json", self.meta)

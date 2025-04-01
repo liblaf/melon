@@ -1,15 +1,15 @@
+import os
 from pathlib import Path
 
 from liblaf import melon
-from liblaf.melon.typed import StrPath
 
 
-def load_dicom(path: StrPath) -> melon.DICOM:
+def load_dicom(path: str | os.PathLike[str]) -> melon.DICOM:
     return melon.DICOM(path)
 
 
 class DICOMReader(melon.io.AbstractReader):
-    def match_path(self, path: StrPath) -> bool:
+    def match_path(self, path: str | os.PathLike[str]) -> bool:
         path = Path(path)
         if path.is_dir() and (path / "DIRFILE").exists():
             return True
@@ -17,5 +17,5 @@ class DICOMReader(melon.io.AbstractReader):
             return True
         return False
 
-    def load(self, path: StrPath) -> melon.DICOM:
+    def load(self, path: str | os.PathLike[str]) -> melon.DICOM:
         return load_dicom(path)

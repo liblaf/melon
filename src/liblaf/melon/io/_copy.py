@@ -1,5 +1,5 @@
-from liblaf.melon.typed import StrPath
+from liblaf.melon.typed import PathLike
 
 
-def copy(src: StrPath, dst: StrPath) -> None:
+def copy(src: PathLike, dst: PathLike) -> None:
     raise NotImplementedError

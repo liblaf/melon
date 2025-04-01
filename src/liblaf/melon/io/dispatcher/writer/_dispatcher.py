@@ -1,9 +1,9 @@
 import bisect
+import os
 from typing import Any
 
-from liblaf.melon.typed import StrPath
-
-from . import AbstractWriter, UnsupportedWriterError
+from ._utils import UnsupportedWriterError
+from ._writer import AbstractWriter
 
 
 class WriterDispatcher:
@@ -15,7 +15,7 @@ class WriterDispatcher:
     def register(self, writer: AbstractWriter) -> None:
         bisect.insort(self.writers, writer, key=lambda r: r.priority)
 
-    def save(self, path: StrPath, obj: Any) -> None:
+    def save(self, path: str | os.PathLike[str], obj: Any) -> None:
         for writer in self.writers:
             if writer.match_path(path):
                 return writer.save(path, obj)

@@ -55,15 +55,20 @@ class PVDWriter:
         self,
         dataset: Any,
         timestep: float | None = None,
+        *,
         group: str = "",
         part: int = 0,
+        ext: str | None = None,
     ) -> None:
         if timestep is None:
             timestep = (
                 self.datasets[-1].timestep + (1 / self.fps) if self.datasets else 0
             )
         frame_id: int = len(self.datasets)
-        filename: str = f"F{frame_id:06d}.vtp"
+        filename: str = f"F{frame_id:06d}"
+        if ext is None:
+            ext = melon.io.identify_data_format(dataset)
+        filename += ext
         filepath: Path = self.frame_dir / filename
         melon.save(filepath, dataset)
         self.datasets.append(

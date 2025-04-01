@@ -8,7 +8,7 @@ import pydicom.valuerep
 import pyvista as pv
 
 from liblaf import melon
-from liblaf.melon.typed import StrPath
+from liblaf.melon.typed import PathLike
 
 from . import DICOMMeta, dcmread_cached, parse_date
 
@@ -16,7 +16,7 @@ from . import DICOMMeta, dcmread_cached, parse_date
 class DICOM:
     path: Path
 
-    def __init__(self, path: StrPath) -> None:
+    def __init__(self, path: PathLike) -> None:
         path = Path(path)
         if path.name == "DIRFILE":
             path = path.parent
@@ -59,7 +59,7 @@ class DICOM:
             for record in directory_record_sequence
         ]
 
-    def save(self, path: StrPath) -> None:
+    def save(self, path: PathLike) -> None:
         path = Path(path)
         if path.name == "DIRFILE":
             path = path.parent

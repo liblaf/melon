@@ -1,7 +1,7 @@
 from typing import Any
 
 from liblaf import melon
-from liblaf.melon.typed import StrPath
+from liblaf.melon.typed import PathLike
 
 from . import reader_dispatcher
 
@@ -10,5 +10,5 @@ reader_dispatcher.register(melon.io.pyvista.PolyDataReader())
 reader_dispatcher.register(melon.io.pyvista.UnstructuredGridReader())
 
 
-def load(path: StrPath) -> Any:
+def load(path: PathLike) -> Any:
     return reader_dispatcher.load(path)

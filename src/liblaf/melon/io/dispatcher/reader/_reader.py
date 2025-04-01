@@ -1,9 +1,8 @@
 import abc
+import os
 from collections.abc import Container
 from pathlib import Path
 from typing import Any
-
-from liblaf.melon.typed import StrPath
 
 
 class AbstractReader(abc.ABC):
@@ -11,8 +10,8 @@ class AbstractReader(abc.ABC):
     priority: int = 0
 
     @abc.abstractmethod
-    def load(self, path: StrPath) -> Any: ...
+    def load(self, path: str | os.PathLike[str]) -> Any: ...
 
-    def match_path(self, path: StrPath) -> bool:
+    def match_path(self, path: str | os.PathLike[str]) -> bool:
         path = Path(path)
         return path.suffix in self.extensions

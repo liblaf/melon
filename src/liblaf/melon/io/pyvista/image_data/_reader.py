@@ -1,14 +1,13 @@
-from os import PathLike
 from pathlib import Path
 
 import pyvista as pv
 
 import liblaf.grapes as grapes  # noqa: PLR0402
 from liblaf import melon
-from liblaf.melon.typed import StrPath
+from liblaf.melon.typed import PathLike
 
 
-def load_image_data(path: StrPath) -> pv.ImageData:
+def load_image_data(path: PathLike) -> pv.ImageData:
     path = Path(path)
     if path.is_file() and path.name == "DIRFILE":
         path = path.parent
@@ -18,7 +17,7 @@ def load_image_data(path: StrPath) -> pv.ImageData:
 
 
 class ImageDataReader(melon.io.AbstractReader):
-    def match_path(self, path: str | PathLike[str]) -> bool:
+    def match_path(self, path: PathLike) -> bool:
         path: Path = grapes.as_path(path)
         if path.is_file() and path.name == "DIRFILE":
             return True
@@ -26,5 +25,5 @@ class ImageDataReader(melon.io.AbstractReader):
             return True
         return path.suffix in {".dcm", ".vti"}
 
-    def load(self, path: StrPath) -> pv.ImageData:
+    def load(self, path: PathLike) -> pv.ImageData:
         return load_image_data(path)

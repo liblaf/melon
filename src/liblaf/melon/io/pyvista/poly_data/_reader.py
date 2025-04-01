@@ -4,12 +4,12 @@ from pathlib import Path
 import pyvista as pv
 
 from liblaf import melon
-from liblaf.melon.typed import StrPath
+from liblaf.melon.typed import PathLike
 
 from . import load_obj
 
 
-def load_poly_data(path: StrPath) -> pv.PolyData:
+def load_poly_data(path: PathLike) -> pv.PolyData:
     path = Path(path)
     if path.suffix == ".obj":
         return load_obj(path)
@@ -19,5 +19,5 @@ def load_poly_data(path: StrPath) -> pv.PolyData:
 class PolyDataReader(melon.io.AbstractReader):
     extensions: Container[str] = {".obj", ".stl", ".vtp", ".ply"}
 
-    def load(self, path: StrPath) -> pv.PolyData:
+    def load(self, path: PathLike) -> pv.PolyData:
         return load_poly_data(path)

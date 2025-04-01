@@ -5,17 +5,17 @@ from typing import Any, Self
 import pyvista as pv
 
 from liblaf import melon
-from liblaf.melon.typed import StrPath
+from liblaf.melon.typed import PathLike
 
 
 class Attachments:
     path: Path
 
-    def __init__(self, path: StrPath) -> None:
+    def __init__(self, path: PathLike) -> None:
         self.path = Path(path)
 
     @classmethod
-    def from_data(cls, path: StrPath, data: Mapping[str, Any]) -> Self:
+    def from_data(cls, path: PathLike, data: Mapping[str, Any]) -> Self:
         self: Self = cls(path)
         for key, value in data.items():
             self.save(key, value)

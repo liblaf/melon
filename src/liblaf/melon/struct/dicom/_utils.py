@@ -3,13 +3,13 @@ import functools
 
 import pydicom
 
-from liblaf.melon.typed import StrPath
+from liblaf.melon.typed import PathLike
 
 type DateLike = str | datetime.datetime | datetime.date
 
 
 @functools.lru_cache
-def dcmread_cached(path: StrPath) -> pydicom.FileDataset:
+def dcmread_cached(path: PathLike) -> pydicom.FileDataset:
     return pydicom.dcmread(path)
 
 

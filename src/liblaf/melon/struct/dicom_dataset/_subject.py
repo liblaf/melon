@@ -5,13 +5,13 @@ from typing import Literal, Self
 
 import liblaf.grapes as grapes  # noqa: PLR0402
 from liblaf import melon
-from liblaf.melon.typed import StrPath
+from liblaf.melon.typed import PathLike
 
 from . import Acquisition, AcquisitionMeta, Attachments, SubjectMeta
 
 
 class Subject(Attachments):
-    def __init__(self, path: StrPath, meta: SubjectMeta | None = None) -> None:
+    def __init__(self, path: PathLike, meta: SubjectMeta | None = None) -> None:
         super().__init__(path)
         if meta is not None:
             self.meta = meta
@@ -43,7 +43,7 @@ class Subject(Attachments):
         self.save_meta()
         return acq
 
-    def clone(self, path: StrPath) -> Self:
+    def clone(self, path: PathLike) -> Self:
         self.save_meta(path)
         return type(self)(path=path)
 
@@ -51,7 +51,7 @@ class Subject(Attachments):
         acq_date: datetime.date = melon.struct.dicom.parse_date(acq_date)
         return Acquisition(self.path / melon.struct.dicom.format_date(acq_date))
 
-    def save_meta(self, path: StrPath | None = None) -> None:
+    def save_meta(self, path: PathLike | None = None) -> None:
         path = Path(path) if path else self.path
         path.mkdir(parents=True, exist_ok=True)
         grapes.save_pydantic(path / "subject.json", self.meta)

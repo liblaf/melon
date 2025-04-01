@@ -6,10 +6,10 @@ import numpy as np
 import pyvista as pv
 from jaxtyping import Integer
 
-from liblaf.melon.typed import StrPath
+from liblaf.melon.typed import PathLike
 
 
-def save_obj(path: StrPath, mesh: pv.PolyData) -> None:
+def save_obj(path: PathLike, mesh: pv.PolyData) -> None:
     if not has_groups(mesh):
         mesh.save(path)
     with Path(path).open("w") as fp:

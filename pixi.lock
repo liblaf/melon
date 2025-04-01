@@ -1411,7 +1411,7 @@ packages:
   requires_python: '>=3.12'
 - pypi: .
   name: liblaf-melon
-  version: 0.1.7.dev3+g43d50d7.d20250331
+  version: 0.1.9.dev0+g1975e9a.d20250401
   sha256: bcfa41b55980cfd97f5640d8fb3dee2e308a59978e5a724c5b94e2b80f8358eb
   requires_dist:
   - attrs>=25.3.0,<26

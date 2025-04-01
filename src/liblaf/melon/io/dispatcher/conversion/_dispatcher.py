@@ -1,7 +1,8 @@
 import bisect
 from typing import Any, TypeVar
 
-from . import AbstractConverter, UnsupportedConversionError
+from ._converter import AbstractConverter
+from ._utils import UnsupportedConversionError
 
 _T = TypeVar("_T")
 

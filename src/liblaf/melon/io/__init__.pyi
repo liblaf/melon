@@ -2,6 +2,7 @@ from . import dispatcher, melon, paraview, pyvista, trimesh
 from ._const import SUFFIXES
 from ._load import load
 from ._save import save
+from ._utils import identify_data_format
 from .dispatcher import (
     AbstractConverter,
     AbstractReader,
@@ -60,6 +61,7 @@ __all__ = [
     "dispatcher",
     "get_landmarks_path",
     "get_polygons_path",
+    "identify_data_format",
     "load",
     "load_dicom",
     "load_image_data",

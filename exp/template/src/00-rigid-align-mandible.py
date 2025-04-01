@@ -5,10 +5,10 @@ import typer
 
 import liblaf.grapes as grapes  # noqa: PLR0402
 import liblaf.melon as melon  # noqa: PLR0402
-from liblaf.melon.typed import StrPath
+from liblaf.melon.typed import PathLike
 
 
-def load_landmarks(path: StrPath) -> np.ndarray:
+def load_landmarks(path: PathLike) -> np.ndarray:
     points = grapes.deserialize(path)
     return np.asarray([[p["x"], p["y"], p["z"]] for p in points])
 

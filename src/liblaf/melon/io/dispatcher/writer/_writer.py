@@ -1,9 +1,8 @@
 import abc
+import os
 from collections.abc import Container
 from pathlib import Path
 from typing import Any
-
-from liblaf.melon.typed import StrPath
 
 
 class AbstractWriter(abc.ABC):
@@ -11,8 +10,8 @@ class AbstractWriter(abc.ABC):
     priority: int = 0
 
     @abc.abstractmethod
-    def save(self, path: StrPath, obj: Any) -> None: ...
+    def save(self, path: str | os.PathLike[str], obj: Any) -> None: ...
 
-    def match_path(self, path: StrPath) -> bool:
+    def match_path(self, path: str | os.PathLike[str]) -> bool:
         path = Path(path)
         return path.suffix in self.extensions

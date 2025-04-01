@@ -1,4 +1,4 @@
-from ._aliases import StrPath
 from ._attrs import Attrs, AttrsLike
+from ._path import PathLike
 
-__all__ = ["Attrs", "AttrsLike", "StrPath"]
+__all__ = ["Attrs", "AttrsLike", "PathLike"]
