@@ -61,7 +61,7 @@ dependencies = [
   "loguru>=0.7.3,<0.8",
   "matplotlib>=3.10.1,<4",
   "meshio>=5.3.5,<6",
-  "numpy>=2.2.4,<3",
+  "numpy",
   "pandas>=2.2.3,<3",
   "polars>=1.26.0,<2",
   "pooch>=1.8.2,<2",
