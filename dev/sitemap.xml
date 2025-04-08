@@ -21,6 +21,10 @@
          <lastmod>2025-04-08</lastmod>
     </url>
     <url>
+         <loc>https://liblaf.github.io/melon/dev/api/liblaf/melon/cli/annotate_landmarks/</loc>
+         <lastmod>2025-04-08</lastmod>
+    </url>
+    <url>
          <loc>https://liblaf.github.io/melon/dev/api/liblaf/melon/io/</loc>
          <lastmod>2025-04-08</lastmod>
     </url>
@@ -182,6 +186,14 @@
     </url>
     <url>
          <loc>https://liblaf.github.io/melon/dev/api/liblaf/melon/tetra/</loc>
+         <lastmod>2025-04-08</lastmod>
+    </url>
+    <url>
+         <loc>https://liblaf.github.io/melon/dev/api/liblaf/melon/triangle/</loc>
+         <lastmod>2025-04-08</lastmod>
+    </url>
+    <url>
+         <loc>https://liblaf.github.io/melon/dev/api/liblaf/melon/triangle/selection/</loc>
          <lastmod>2025-04-08</lastmod>
     </url>
     <url>
