@@ -2,10 +2,10 @@ from typing import Any
 
 import pyvista as pv
 
-from liblaf import melon
-from liblaf.melon.io import conversion_dispatcher
+from liblaf.melon.io.abc import UnsupportedConversionError, conversion_dispatcher
+from liblaf.melon.io.pyvista.poly_data import as_poly_data
 
-from . import PolyDataToPointSet
+from ._poly_data import PolyDataToPointSet
 
 conversion_dispatcher.register(PolyDataToPointSet())
 
@@ -22,8 +22,8 @@ def _as_point_set(data: Any) -> pv.PointSet:
 
 def _as_point_set_with_normals(data: Any) -> pv.PointSet:
     try:
-        mesh: pv.PolyData = melon.as_poly_data(data)
-    except melon.io.UnsupportedConversionError:
+        mesh: pv.PolyData = as_poly_data(data)
+    except UnsupportedConversionError:
         pass
     else:
         if mesh.active_scalars_info.association != pv.FieldAssociation.POINT:

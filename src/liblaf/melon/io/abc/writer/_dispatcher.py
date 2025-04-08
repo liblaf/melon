@@ -13,15 +13,21 @@ class WriterDispatcher:
         self.writers = []
 
     def register(self, writer: AbstractWriter) -> None:
-        bisect.insort(self.writers, writer, key=lambda r: r.priority)
+        bisect.insort(self.writers, writer, key=lambda r: -r.precedence)
 
-    def save(self, path: str | os.PathLike[str], obj: Any) -> None:
+    def save(self, path: str | os.PathLike[str], obj: Any, /, **kwargs) -> None:
         for writer in self.writers:
             if writer.match_path(path):
-                return writer.save(path, obj)
+                return writer.save(path, obj, **kwargs)
         raise UnsupportedWriterError(path)
 
 
 writer_dispatcher = WriterDispatcher()
-register_writer = writer_dispatcher.register
-save = writer_dispatcher.save
+
+
+def register_writer(writer: AbstractWriter) -> None:
+    writer_dispatcher.register(writer)
+
+
+def save(path: str | os.PathLike[str], obj: Any, /, **kwargs) -> None:
+    return writer_dispatcher.save(path, obj, **kwargs)

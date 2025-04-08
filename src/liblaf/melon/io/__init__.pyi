@@ -1,9 +1,9 @@
-from . import dispatcher, melon, paraview, pyvista, trimesh
+from . import abc, melon, paraview, pyvista, trimesh
 from ._const import SUFFIXES
 from ._load import load
 from ._save import save
 from ._utils import identify_data_format
-from .dispatcher import (
+from .abc import (
     AbstractConverter,
     AbstractReader,
     AbstractWriter,
@@ -21,7 +21,7 @@ from .dispatcher import (
     writer_dispatcher,
 )
 from .melon import load_dicom
-from .paraview import PVDWriter
+from .paraview import Series, SeriesWriter
 from .pyvista import (
     as_image_data,
     as_point_set,
@@ -47,10 +47,12 @@ __all__ = [
     "AbstractReader",
     "AbstractWriter",
     "ConversionDispatcher",
-    "PVDWriter",
     "ReaderDispatcher",
+    "Series",
+    "SeriesWriter",
     "UnsupportedConversionError",
     "WriterDispatcher",
+    "abc",
     "as_image_data",
     "as_point_set",
     "as_poly_data",
@@ -58,7 +60,6 @@ __all__ = [
     "as_unstructured_grid",
     "conversion_dispatcher",
     "convert",
-    "dispatcher",
     "get_landmarks_path",
     "get_polygons_path",
     "identify_data_format",

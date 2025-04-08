@@ -1,20 +1,23 @@
+import os
 from collections.abc import Container
 from pathlib import Path
-from typing import Any
+from typing import Any, override
 
 import pyvista as pv
 
-from liblaf import melon
-from liblaf.melon.typed import PathLike
+from liblaf import grapes
+from liblaf.melon.io import abc
 
-from . import as_unstructured_grid
+from .conversion import as_unstructured_grid
 
 
-class UnstructuredGridWriter(melon.io.AbstractWriter):
+class UnstructuredGridWriter(abc.AbstractWriter):
+    # exclude `.vtk` because it is ambiguous
     extensions: Container[str] = {".vtu"}
 
-    def save(self, path: PathLike, obj: Any) -> None:
-        path = Path(path)
+    @override
+    def save(self, path: str | os.PathLike[str], obj: Any, /, **kwargs) -> None:
+        path: Path = grapes.as_path(path)
         obj: pv.UnstructuredGrid = as_unstructured_grid(obj)
         path.parent.mkdir(parents=True, exist_ok=True)
         obj.save(path)

@@ -1,23 +1,26 @@
+import os
 from collections.abc import Container
 from pathlib import Path
+from typing import override
 
 import pyvista as pv
 
-from liblaf import melon
-from liblaf.melon.typed import PathLike
+from liblaf import grapes
+from liblaf.melon.io import abc
 
-from . import load_obj
+from ._load_obj import load_obj
 
 
-def load_poly_data(path: PathLike) -> pv.PolyData:
-    path = Path(path)
+def load_poly_data(path: str | os.PathLike[str], /) -> pv.PolyData:
+    path: Path = grapes.as_path(path)
     if path.suffix == ".obj":
         return load_obj(path)
     return pv.read(path)  # pyright: ignore[reportReturnType]
 
 
-class PolyDataReader(melon.io.AbstractReader):
+class PolyDataReader(abc.AbstractReader):
     extensions: Container[str] = {".obj", ".stl", ".vtp", ".ply"}
 
-    def load(self, path: PathLike) -> pv.PolyData:
-        return load_poly_data(path)
+    @override
+    def load(self, path: str | os.PathLike[str], /, **kwargs) -> pv.PolyData:
+        return load_poly_data(path, **kwargs)

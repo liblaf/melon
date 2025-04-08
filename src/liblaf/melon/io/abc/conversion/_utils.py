@@ -11,7 +11,7 @@ class UnsupportedConversionError(TypeError):
     def __init__(self, obj: Any, type_to: type) -> None:
         self.obj = obj
         self.type_to = type_to
-        super().__init__(f"Cannot convert `{obj}` to `{type_to}.`")
+        super().__init__(f"Cannot convert `{obj}` to `{type_to}`.")
 
 
 def warning_unsupported_association(
@@ -19,4 +19,4 @@ def warning_unsupported_association(
 ) -> None:
     if attr is None:
         return
-    logger.warning("{:r} does not support {:r} data.", to, association)
+    logger.warning("`{}` does not support `{}` data.", to, association)

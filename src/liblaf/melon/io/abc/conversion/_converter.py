@@ -3,12 +3,12 @@ from typing import Any
 
 
 class AbstractConverter(abc.ABC):
-    priority: int = 0
+    precedence: int = 0
     type_from: type
     type_to: type
 
     @abc.abstractmethod
-    def convert(self, obj: Any) -> Any: ...
+    def convert(self, obj: Any, /, **kwargs) -> Any: ...
 
     def match_from(self, obj: Any) -> bool:
         return isinstance(obj, self.type_from)

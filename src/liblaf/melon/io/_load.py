@@ -1,14 +1,12 @@
+import os
 from typing import Any
 
-from liblaf import melon
-from liblaf.melon.typed import PathLike
+from . import abc, melon, pyvista
 
-from . import reader_dispatcher
-
-reader_dispatcher.register(melon.io.melon.DICOMReader())
-reader_dispatcher.register(melon.io.pyvista.PolyDataReader())
-reader_dispatcher.register(melon.io.pyvista.UnstructuredGridReader())
+abc.register_reader(melon.DICOMReader())
+abc.register_reader(pyvista.PolyDataReader())
+abc.register_reader(pyvista.UnstructuredGridReader())
 
 
-def load(path: PathLike) -> Any:
-    return reader_dispatcher.load(path)
+def load(path: str | os.PathLike[str]) -> Any:
+    return abc.load(path)

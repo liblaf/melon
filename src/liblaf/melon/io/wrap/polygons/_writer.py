@@ -1,16 +1,18 @@
+import os
 from pathlib import Path
 
 import numpy as np
 from jaxtyping import Integer
 from numpy.typing import ArrayLike
 
-import liblaf.grapes as grapes  # noqa: PLR0402
-from liblaf.melon.typed import PathLike
+from liblaf import grapes
 
-from . import get_polygons_path
+from ._utils import get_polygons_path
 
 
-def save_polygons(path: PathLike, polygons: Integer[ArrayLike, " N"]) -> None:
+def save_polygons(
+    path: str | os.PathLike[str], polygons: Integer[ArrayLike, " N"]
+) -> None:
     path: Path = get_polygons_path(path)
     polygons = np.asarray(polygons)
-    grapes.serialize(path, polygons.tolist())
+    grapes.save_json(path, polygons.tolist())

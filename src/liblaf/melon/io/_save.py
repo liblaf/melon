@@ -1,14 +1,12 @@
+import os
 from typing import Any
 
-from liblaf import melon
-from liblaf.melon.typed import PathLike
+from . import abc, melon, pyvista
 
-from . import writer_dispatcher
-
-writer_dispatcher.register(melon.io.melon.DICOMWriter())
-writer_dispatcher.register(melon.io.pyvista.PolyDataWriter())
-writer_dispatcher.register(melon.io.pyvista.UnstructuredGridWriter())
+abc.register_writer(melon.DICOMWriter())
+abc.register_writer(pyvista.PolyDataWriter())
+abc.register_writer(pyvista.UnstructuredGridWriter())
 
 
-def save(path: PathLike, obj: Any) -> None:
-    writer_dispatcher.save(path, obj)
+def save(path: str | os.PathLike[str], obj: Any) -> None:
+    abc.save(path, obj)

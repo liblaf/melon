@@ -1,12 +1,16 @@
 import os
+from pathlib import Path
 
 import numpy as np
 import pyvista as pv
 import tinyobjloader
 from jaxtyping import Float
 
+from liblaf import grapes
+
 
 def load_obj(fpath: str | os.PathLike[str]) -> pv.PolyData:
+    fpath: Path = grapes.as_path(fpath)
     reader = tinyobjloader.ObjReader()
     ok: bool = reader.ParseFromFile(str(fpath))
     if not ok:

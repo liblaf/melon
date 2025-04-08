@@ -1,8 +1,8 @@
 from typing import Any
 
-from liblaf import melon
-from liblaf.melon.io import conversion_dispatcher
+from liblaf.melon import struct
+from liblaf.melon.io import abc
 
 
-def as_dicom(obj: Any) -> melon.DICOM:
-    return conversion_dispatcher.convert(obj, melon.DICOM)
+def as_dicom(obj: Any) -> struct.DICOM:
+    return abc.convert(obj, struct.DICOM)

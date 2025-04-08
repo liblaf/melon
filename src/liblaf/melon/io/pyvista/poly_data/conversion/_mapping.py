@@ -1,16 +1,19 @@
 from collections.abc import Mapping
+from typing import override
 
 import glom
 import pyvista as pv
 
-from liblaf import melon
+from liblaf.melon.io import abc
 
 
-class MappingToPolyData(melon.io.AbstractConverter):
-    type_from = Mapping
-    type_to = pv.PolyData
+class MappingToPolyData(abc.AbstractConverter):
+    type_from: type = Mapping
+    type_to: type = pv.PolyData
 
-    def convert(self, obj: Mapping) -> pv.PolyData:
+    @override
+    def convert(self, obj: Mapping, /, **kwargs) -> pv.PolyData:
         return pv.PolyData.from_regular_faces(
-            obj["points"], glom.glom(obj, glom.Coalesce("faces", "cells"))
+            obj["points"],
+            glom.glom(obj, glom.Coalesce("faces", "cells", "triangles", "quads")),
         )

@@ -1,5 +1,6 @@
 from . import cli, io, ops, plugin, struct, tetra, typed
 from .io import (
+    SeriesWriter,
     as_image_data,
     as_point_set,
     as_poly_data,
@@ -90,6 +91,7 @@ __all__ = [
     "RigidICP",
     "RigidRegistrationAlgorithm",
     "RigidRegistrationResult",
+    "SeriesWriter",
     "Subject",
     "SubjectMeta",
     "TransferAlgorithm",

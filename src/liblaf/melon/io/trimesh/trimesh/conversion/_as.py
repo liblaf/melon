@@ -2,12 +2,12 @@ from typing import Any
 
 import trimesh as tm
 
-from liblaf.melon.io import conversion_dispatcher
+from liblaf.melon.io import abc
 
-from . import PolyDataToTrimesh
+from ._poly_data import PolyDataToTrimesh
 
-conversion_dispatcher.register(PolyDataToTrimesh())
+abc.register_converter(PolyDataToTrimesh())
 
 
 def as_trimesh(data: Any) -> tm.Trimesh:
-    return conversion_dispatcher.convert(data, tm.Trimesh)
+    return abc.convert(data, tm.Trimesh)

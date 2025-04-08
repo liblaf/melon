@@ -7,10 +7,10 @@ from typing import Any
 
 class AbstractWriter(abc.ABC):
     extensions: Container[str]
-    priority: int = 0
+    precedence: int = 0
 
     @abc.abstractmethod
-    def save(self, path: str | os.PathLike[str], obj: Any) -> None: ...
+    def save(self, path: str | os.PathLike[str], obj: Any, /, **kwargs) -> None: ...
 
     def match_path(self, path: str | os.PathLike[str]) -> bool:
         path = Path(path)

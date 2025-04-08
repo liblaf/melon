@@ -2,13 +2,14 @@ from typing import Any
 
 import pyvista as pv
 
-from liblaf.melon.io import conversion_dispatcher
+from liblaf.melon.io import abc
 
-from . import MappingToPolyData, WrapToPolyData
+from ._mapping import MappingToPolyData
+from ._wrap import WrapToPolyData
 
-conversion_dispatcher.register(MappingToPolyData())
-conversion_dispatcher.register(WrapToPolyData())
+abc.register_converter(MappingToPolyData())
+abc.register_converter(WrapToPolyData())
 
 
 def as_poly_data(obj: Any) -> pv.PolyData:
-    return conversion_dispatcher.convert(obj, pv.PolyData)
+    return abc.convert(obj, pv.PolyData)
