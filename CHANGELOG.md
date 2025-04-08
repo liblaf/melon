@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.1.10](https://github.com/liblaf/melon/compare/v0.1.9...v0.1.10) (2025-04-08)
+
+
+### ✨ Features
+
+* **triangle:** add triangle mesh processing utilities ([e389514](https://github.com/liblaf/melon/commit/e389514510fa49416401b6dcd61932c22426c168))
+
+
+### ♻ Code Refactoring
+
+* **io/pyvista:** replace custom OBJ parser with tinyobjloader ([945f48a](https://github.com/liblaf/melon/commit/945f48ad8a78f6f9076abb66d5b854dcc4151173))
+* **io:** reorganize dispatcher module into abc and improve type hints ([ab5dcbf](https://github.com/liblaf/melon/commit/ab5dcbf59a3a8365f1def093a1558bb3b6f14d24))
+
 ## [0.1.9](https://github.com/liblaf/melon/compare/v0.1.8..v0.1.9) - 2025-04-01
 
 ### 🐛 Bug Fixes
