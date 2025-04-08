@@ -1,4 +1,4 @@
-from . import cli, io, ops, plugin, struct, tetra, typed
+from . import cli, io, ops, plugin, struct, tetra, triangle, typed
 from .io import (
     SeriesWriter,
     as_image_data,
@@ -56,7 +56,7 @@ from .ops import (
     transfer_point_to_point,
     transform,
 )
-from .plugin import mesh_fix
+from .plugin import annotate_landmarks, fast_wrapping, mesh_fix, tetwild
 from .struct import (
     DICOM,
     Acquisition,
@@ -102,6 +102,7 @@ __all__ = [
     "TransferNearestPointOnSurfacePrepared",
     "TransferNearestVertex",
     "TransferNearestVertexPrepared",
+    "annotate_landmarks",
     "as_image_data",
     "as_point_set",
     "as_poly_data",
@@ -114,6 +115,7 @@ __all__ = [
     "ensure_positive_volume",
     "extract_cells",
     "extract_points",
+    "fast_wrapping",
     "format_date",
     "gaussian_smooth",
     "get_fill_value",
@@ -140,8 +142,10 @@ __all__ = [
     "select_cells_by_group",
     "struct",
     "tetra",
+    "tetwild",
     "transfer_components",
     "transfer_point_to_point",
     "transform",
+    "triangle",
     "typed",
 ]

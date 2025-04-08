@@ -1,4 +1,4 @@
-from liblaf import melon
+from liblaf.melon.struct import dicom
 
 
-class AcquisitionMeta(melon.DICOMMeta): ...
+class AcquisitionMeta(dicom.DICOMMeta): ...

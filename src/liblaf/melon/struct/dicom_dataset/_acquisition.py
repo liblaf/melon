@@ -8,7 +8,8 @@ import liblaf.grapes as grapes  # noqa: PLR0402
 from liblaf import melon
 from liblaf.melon.typed import PathLike
 
-from . import AcquisitionMeta, Attachments
+from ._acquisition_meta import AcquisitionMeta
+from ._attachments import Attachments
 
 
 class Acquisition(Attachments):

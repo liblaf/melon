@@ -74,6 +74,7 @@ dependencies = [
   "scipy>=1.15.2,<2",
   "seaborn>=0.13.2,<0.14",
   "trimesh[easy]>=4.6.6,<5",
+  "typer>=0.15.2,<0.16", "pyassimp>=5.2.5,<6", "pygltflib>=1.16.3,<2",
 ]
 description = "Add your description here"
 dynamic = ["version"]
@@ -85,6 +86,9 @@ requires-python = ">=3.12"
 
 [project.optional-dependencies]
 all = ["pytetwild>=0.1.dev1,<0.2", "tinyobjloader>=2.0.0rc13,<3"]
+
+[project.scripts]
+melon = "liblaf.melon.cli:main"
 
 [project.urls]
 "Changelog" = "https://github.com/liblaf/melon/blob/main/CHANGELOG.md"
@@ -115,6 +119,7 @@ source = "vcs"
 
 [tool.pixi.dependencies]
 python = ">=3.12,<3.13"
+assimp = ">=5.4.3,<6"
 
 [tool.pixi.environments]
 default = { features = ["all", "build", "dev", "docs", "test"] }
@@ -126,6 +131,9 @@ platforms = ["linux-64"]
 
 [tool.pixi.pypi-dependencies]
 "liblaf-melon" = { editable = true, path = "." }
+
+[tool.pixi.pypi-options]
+index-url = "https://mirrors.cernet.edu.cn/pypi/web/simple"
 
 [tool.pixi.system-requirements]
 cuda = "12"

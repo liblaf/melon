@@ -10,14 +10,8 @@ from numpy.typing import ArrayLike
 
 from liblaf import melon
 
-from . import (
-    NearestAlgorithm,
-    NearestAlgorithmPrepared,
-    NearestPoint,
-    NearestPointPrepared,
-    NearestPointResult,
-    NearestResult,
-)
+from ._abc import NearestAlgorithm, NearestAlgorithmPrepared, NearestResult
+from ._nearest_point import NearestPoint, NearestPointPrepared, NearestPointResult
 
 
 @attrs.frozen(kw_only=True)
@@ -78,15 +72,15 @@ class NearestPointOnSurfacePrepared(NearestAlgorithmPrepared):
         ).prepare(self.source)
 
     def _fallback_to_nearest_vertex(
-        self, target: pv.PointSet, result: NearestPointOnSurfaceResult
+        self, query: pv.PointSet, result: NearestPointOnSurfaceResult
     ) -> NearestPointOnSurfaceResult:
         missing_vid: Integer[np.ndarray, " N"] = result.missing.nonzero()[0]
-        remaining: pv.PointSet = target.extract_points(missing_vid, include_cells=False)  # pyright: ignore[reportAssignmentType]
+        remaining: pv.PointSet = query.extract_points(missing_vid, include_cells=False)  # pyright: ignore[reportAssignmentType]
         remaining_result: NearestPointResult = self._nearest_vertex.query(remaining)
-        result.distance[result.missing] = remaining_result.distance
-        result.missing[result.missing] = remaining_result.missing
-        result.nearest[result.missing] = remaining_result.nearest
-        result.triangle_id[result.missing] = self._vertex_id_to_triangle_id(
+        result.distance[missing_vid] = remaining_result.distance
+        result.missing[missing_vid] = remaining_result.missing
+        result.nearest[missing_vid] = remaining_result.nearest
+        result.triangle_id[missing_vid] = self._vertex_id_to_triangle_id(
             remaining_result.vertex_id
         )
         return result
@@ -100,8 +94,8 @@ class NearestPointOnSurfacePrepared(NearestAlgorithmPrepared):
 @attrs.define(kw_only=True, on_setattr=attrs.setters.validate)
 class NearestPointOnSurface(NearestAlgorithm):
     distance_threshold: float = 0.1
-    fallback_to_nearest_vertex: bool = False
-    ignore_orientation: bool = False
+    fallback_to_nearest_vertex: bool = True
+    ignore_orientation: bool = True
     max_k: int = 32
     normal_threshold: float = attrs.field(
         default=0.8, validator=attrs.validators.le(1.0)
@@ -127,8 +121,8 @@ def nearest_point_on_surface(
     target: Any,
     *,
     distance_threshold: float = 0.1,
-    fallback_to_nearest_vertex: bool = False,
-    ignore_orientation: bool = False,
+    fallback_to_nearest_vertex: bool = True,
+    ignore_orientation: bool = True,
     max_k: int = 32,
     normal_threshold: float = 0.8,
     workers: int = -1,

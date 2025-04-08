@@ -3,8 +3,8 @@ from typing import Any
 
 import pyvista as pv
 
-import liblaf.melon as melon  # noqa: PLR0402
 from liblaf import grapes
+from liblaf.melon import ops
 
 
 def mesh_fix(
@@ -24,7 +24,7 @@ def mesh_fix(
         )
     elif shutil.which("MeshFix"):
         mesh: pv.PolyData = _mesh_fix_exe(mesh, verbose=verbose)
-    if check and not melon.is_volume(mesh):
+    if check and not ops.is_volume(mesh):
         msg = "Mesh is not a volume"
         raise ValueError(msg)
     return mesh

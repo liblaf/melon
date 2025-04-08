@@ -1,11 +1,7 @@
 from typing import Any
 
-from . import (
-    NearestAlgorithm,
-    NearestAlgorithmPrepared,
-    NearestPointOnSurface,
-    NearestResult,
-)
+from ._abc import NearestAlgorithm, NearestAlgorithmPrepared, NearestResult
+from ._nearest_point_on_surface import NearestPointOnSurface
 
 
 def nearest(

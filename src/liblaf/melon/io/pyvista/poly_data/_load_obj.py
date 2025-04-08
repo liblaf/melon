@@ -25,7 +25,7 @@ def load_obj(fpath: str | os.PathLike[str]) -> pv.PolyData:
         mesh: tinyobjloader.mesh_t = shape.mesh
         faces.extend(as_cell_array(mesh.num_face_vertices, mesh.vertex_indices()))
         group_ids.extend([group_id] * len(mesh.num_face_vertices))
-        group_names.extend(shape.name)
+        group_names.append(shape.name)
     data = pv.PolyData(vertices, faces=faces)
     data.cell_data["GroupIds"] = group_ids
     data.field_data["GroupNames"] = group_names

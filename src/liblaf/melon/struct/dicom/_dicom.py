@@ -7,10 +7,11 @@ import pydicom
 import pydicom.valuerep
 import pyvista as pv
 
-from liblaf import melon
+from liblaf.melon import io
 from liblaf.melon.typed import PathLike
 
-from . import DICOMMeta, dcmread_cached, parse_date
+from ._meta import DICOMMeta, parse_date
+from ._utils import dcmread_cached
 
 
 class DICOM:
@@ -36,7 +37,7 @@ class DICOM:
 
     @property
     def image_data(self) -> pv.ImageData:
-        return melon.load_image_data(self.path)
+        return io.load_image_data(self.path)
 
     @property
     def meta(self) -> DICOMMeta:

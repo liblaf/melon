@@ -31,5 +31,8 @@ def _as_point_set_with_normals(data: Any) -> pv.PointSet:
         data: pv.PointSet = mesh.cast_to_pointset()
         data.point_data["Normals"] = mesh.point_normals
         return data
-    # TODO: estimate point normals
+    data: pv.PointSet = _as_point_set(data)
+    if "Normals" in data.point_data:
+        return data
+    # TODO: estimate normals
     raise NotImplementedError

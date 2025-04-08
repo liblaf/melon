@@ -1,14 +1,15 @@
 from typing import Any, override
 
 import attrs
+import einops
 import numpy as np
 import pyvista as pv
 import scipy.spatial
 from jaxtyping import Bool, Float, Integer
 
-from liblaf import melon
+from liblaf.melon import io
 
-from . import NearestAlgorithm, NearestAlgorithmPrepared, NearestResult
+from ._abc import NearestAlgorithm, NearestAlgorithmPrepared, NearestResult
 
 
 @attrs.frozen(kw_only=True)
@@ -22,6 +23,7 @@ class NearestPointPrepared(NearestAlgorithmPrepared):
     tree: scipy.spatial.KDTree
 
     distance_threshold: float
+    ignore_orientation: bool
     max_k: int
     normal_threshold: float
     workers: int
@@ -33,7 +35,7 @@ class NearestPointPrepared(NearestAlgorithmPrepared):
         return self._nearest_vertex_with_normal_threshold(query)
 
     def _nearest_vertex(self, query: Any) -> NearestPointResult:
-        query: pv.PointSet = melon.as_point_set(query)
+        query: pv.PointSet = io.as_point_set(query)
         distance: Float[np.ndarray, " N"]
         vertex_id: Integer[np.ndarray, " N"]
         distance, vertex_id = self.tree.query(
@@ -52,7 +54,7 @@ class NearestPointPrepared(NearestAlgorithmPrepared):
 
     def _nearest_vertex_with_normal_threshold(self, query: Any) -> NearestPointResult:
         source_normals: Float[np.ndarray, "N 3"] = self.source.point_data["Normals"]
-        query: pv.PointSet = melon.as_point_set(query, point_normals=True)
+        query: pv.PointSet = io.as_point_set(query, point_normals=True)
         query_normals: Float[np.ndarray, "N 3"] = query.point_data["Normals"]
         result: NearestPointResult = self._nearest_vertex(query)
         distance: Float[np.ndarray, " N"] = result.distance
@@ -75,10 +77,12 @@ class NearestPointPrepared(NearestAlgorithmPrepared):
                 for j in range(k):
                     if v[i, j] == self.source.n_points:
                         continue
-                    normal_similarity: float = np.dot(
+                    cosine_similarity: float = np.dot(
                         source_normals[v[i, j]], query_normals[vid]
                     )
-                    if normal_similarity < self.normal_threshold:
+                    if self.ignore_orientation:
+                        cosine_similarity = np.abs(cosine_similarity)
+                    if cosine_similarity < self.normal_threshold:
                         continue
                     distance[vid] = d[i, j]
                     missing[vid] = False
@@ -93,10 +97,60 @@ class NearestPointPrepared(NearestAlgorithmPrepared):
             distance=distance, missing=missing, nearest=nearest, vertex_id=vertex_id
         )
 
+    def _nearest_vertex_with_normal_threshold(self, query: Any) -> NearestPointResult:
+        source_normals: Float[np.ndarray, "N 3"] = self.source.point_data["Normals"]
+        query: pv.PointSet = io.as_point_set(query, point_normals=True)
+        query_normals: Float[np.ndarray, "N 3"] = query.point_data["Normals"]
+        distance: Float[np.ndarray, " N"] = np.full((query.n_points,), np.inf)
+        missing: Bool[np.ndarray, " N"] = np.full((query.n_points,), fill_value=True)
+        nearest: Float[np.ndarray, " N 3"] = np.full(
+            (query.n_points, 3), fill_value=np.nan
+        )
+        vertex_id: Integer[np.ndarray, " N"] = np.full((query.n_points,), -1)
+        k: int = 1
+        remaining_vertex_id: list[int] = list(range(query.n_points))
+        while k <= self.max_k and remaining_vertex_id:
+            d: Float[np.ndarray, "R k"]
+            v: Integer[np.ndarray, "R k"]
+            d, v = self.tree.query(
+                query.points[remaining_vertex_id],
+                k=k,
+                distance_upper_bound=self.distance_threshold * self.source.length,
+                workers=self.workers,
+            )
+            if k == 1:
+                d = einops.rearrange(d, "R -> R 1")
+                v = einops.rearrange(v, "R -> R 1")
+            next_remaining_vertex_id: list[int] = []
+            for i, vid in enumerate(remaining_vertex_id):
+                for j in range(k):
+                    if v[i, j] == self.source.n_points:
+                        break
+                    normal_similarity: float = np.vecdot(
+                        source_normals[v[i, j]], query_normals[vid]
+                    )
+                    if self.ignore_orientation:
+                        normal_similarity = np.abs(normal_similarity)
+                    if normal_similarity < self.normal_threshold:
+                        continue
+                    distance[vid] = d[i, j]
+                    missing[vid] = False
+                    vertex_id[vid] = v[i, j]
+                    nearest[vid] = self.source.points[v[i, j]]
+                    break
+                else:
+                    next_remaining_vertex_id.append(vid)
+            k *= 2
+            remaining_vertex_id = next_remaining_vertex_id
+        return NearestPointResult(
+            distance=distance, missing=missing, nearest=nearest, vertex_id=vertex_id
+        )
+
 
 @attrs.define(kw_only=True, on_setattr=attrs.setters.validate)
 class NearestPoint(NearestAlgorithm):
     distance_threshold: float = 0.1
+    ignore_orientation: bool = True
     max_k: int = 32
     normal_threshold: float = attrs.field(
         default=0.8, validator=attrs.validators.le(1.0)
@@ -106,7 +160,7 @@ class NearestPoint(NearestAlgorithm):
     @override
     def prepare(self, data: Any) -> NearestPointPrepared:
         need_normals: bool = self.normal_threshold > -1.0
-        data: pv.PointSet = melon.as_point_set(data, point_normals=need_normals)
+        data: pv.PointSet = io.as_point_set(data, point_normals=need_normals)
         tree = scipy.spatial.KDTree(data.points)
         return NearestPointPrepared(
             source=data,
@@ -114,5 +168,6 @@ class NearestPoint(NearestAlgorithm):
             distance_threshold=self.distance_threshold,
             max_k=self.max_k,
             normal_threshold=self.normal_threshold,
+            ignore_orientation=self.ignore_orientation,
             workers=self.workers,
         )
