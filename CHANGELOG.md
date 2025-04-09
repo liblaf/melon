@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.1.11](https://github.com/liblaf/melon/compare/v0.1.10...v0.1.11) (2025-04-09)
+
+
+### ✨ Features
+
+* **paraview:** make visualization optional in mandible pivot script ([ca24c33](https://github.com/liblaf/melon/commit/ca24c33fa329ae71ad0129f0d231520263aae61a))
+
+
+### ♻ Code Refactoring
+
+* **paraview:** use stem name for frames directory ([ca24c33](https://github.com/liblaf/melon/commit/ca24c33fa329ae71ad0129f0d231520263aae61a))
+
 ## [0.1.10](https://github.com/liblaf/melon/compare/v0.1.9..v0.1.10) - 2025-04-08
 
 ### ✨ Features
