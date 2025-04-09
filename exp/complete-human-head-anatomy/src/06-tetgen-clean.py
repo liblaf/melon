@@ -7,8 +7,6 @@ from jaxtyping import Bool, Integer
 import liblaf.melon as melon  # noqa: PLR0402
 from liblaf import cherries, grapes
 
-MANDIBLE_NAME: str = "Mandibula_skull001"
-
 
 class Config(cherries.BaseConfig):
     face: Path = (
@@ -17,7 +15,9 @@ class Config(cherries.BaseConfig):
     full: Path = grapes.find_project_dir() / "data/01-raw/Full human head anatomy.obj"
     groups: Path = grapes.find_project_dir() / "data/02-intermediate/groups.toml"
     input: Path = grapes.find_project_dir() / "data/03-primary/tetgen.vtu"
+    inputs_dir: Path = grapes.find_project_dir() / "data/03-primary/inputs"
     output: Path = grapes.find_project_dir() / "data/03-primary/tetgen-clean.vtu"
+    outputs_dir: Path = grapes.find_project_dir() / "data/03-primary/tetgen"
 
 
 def classify(
@@ -52,22 +52,28 @@ def main(cfg: Config) -> None:
     face: pv.PolyData = melon.load_poly_data(cfg.face)
     full: pv.PolyData = melon.load_poly_data(cfg.full)
     groups: dict[str, list[str]] = grapes.load(cfg.groups)
+    # groups["rigid-with-mandible"] = ["Mandibula_skull001"]
     mesh: pv.UnstructuredGrid = melon.load_unstructured_grid(cfg.input)
 
     mesh.extract_largest(inplace=True)
     mesh.point_data["point-id"] = np.arange(mesh.n_points)
 
     surface: pv.PolyData = mesh.extract_surface()  # pyright: ignore[reportAssignmentType]
-    mandible: pv.PolyData = melon.triangle.extract_groups(full, MANDIBLE_NAME)
+    mandible: pv.PolyData = melon.triangle.extract_groups(
+        full, groups["rigid-with-mandible"]
+    )
     not_mandible: pv.PolyData = pv.merge(
         [
             face,
             melon.triangle.extract_groups(
-                full, set(groups["Skeletons"]) - {MANDIBLE_NAME}
+                full, set(groups["Skeletons"]) - set(groups["rigid-with-mandible"])
             ),
         ]
     )
     skull: pv.PolyData = melon.triangle.extract_groups(full, groups["Skeletons"])
+    melon.save(cfg.inputs_dir / "face.ply", face)
+    melon.save(cfg.inputs_dir / "mandible.ply", mandible)
+    melon.save(cfg.inputs_dir / "skull.ply", skull)
     surface.point_data["is-face"] = classify(surface, face, skull)
     surface.point_data["is-mandible"] = classify(surface, mandible, not_mandible)
     surface.point_data["is-skull"] = classify(surface, skull, face)
@@ -82,7 +88,7 @@ def main(cfg: Config) -> None:
         component: pv.PolyData = melon.triangle.extract_points(
             surface, surface.point_data[f"is-{name}"]
         )
-        melon.save(cfg.output.parent / f"{name}.ply", component)
+        melon.save(cfg.outputs_dir / f"{name}.vtp", component)
 
 
 if __name__ == "__main__":
