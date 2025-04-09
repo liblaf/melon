@@ -1,18 +1,16 @@
 # Changelog
 
-## [0.1.11](https://github.com/liblaf/melon/compare/v0.1.10...v0.1.11) (2025-04-09)
-
+## [0.1.11](https://github.com/liblaf/melon/compare/v0.1.10..v0.1.11) - 2025-04-09
 
 ### ✨ Features
 
-* **paraview:** make visualization optional in mandible pivot script ([ca24c33](https://github.com/liblaf/melon/commit/ca24c33fa329ae71ad0129f0d231520263aae61a))
+- **paraview:** make visualization optional in mandible pivot script - ([ca24c33](https://github.com/liblaf/melon/commit/ca24c33fa329ae71ad0129f0d231520263aae61a))
 
+### ❤️ New Contributors
 
-### ♻ Code Refactoring
+- @liblaf made their first contribution
 
-* **paraview:** use stem name for frames directory ([ca24c33](https://github.com/liblaf/melon/commit/ca24c33fa329ae71ad0129f0d231520263aae61a))
-
-## [0.1.10](https://github.com/liblaf/melon/compare/v0.1.9..v0.1.10) - 2025-04-08
+## [0.1.10](https://github.com/liblaf/melon/compare/v0.1.9..v0.1.10) - 2025-04-09
 
 ### ✨ Features
 
@@ -22,10 +20,6 @@
 
 - **io:** reorganize dispatcher module into abc and improve type hints - ([ab5dcbf](https://github.com/liblaf/melon/commit/ab5dcbf59a3a8365f1def093a1558bb3b6f14d24))
 - **io/pyvista:** replace custom OBJ parser with tinyobjloader - ([945f48a](https://github.com/liblaf/melon/commit/945f48ad8a78f6f9076abb66d5b854dcc4151173))
-
-### ❤️ New Contributors
-
-- @liblaf made their first contribution
 
 ## [0.1.9](https://github.com/liblaf/melon/compare/v0.1.8..v0.1.9) - 2025-04-01
 
