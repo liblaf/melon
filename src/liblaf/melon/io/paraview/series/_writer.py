@@ -77,7 +77,11 @@ class SeriesWriter(Sequence[File], contextlib.AbstractContextManager):
 
     @property
     def frames_dir(self) -> Path:
-        return self.path.parent / "frames"
+        return self.path.parent / self.name
+
+    @property
+    def name(self) -> str:
+        return self.path.with_suffix("").stem
 
     @property
     def time(self) -> float:
