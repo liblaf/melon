@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.12](https://github.com/liblaf/melon/compare/v0.1.11...v0.1.12) (2025-04-13)
+
+
+### ♻ Code Refactoring
+
+* improve tetgen-clean script organization and flexibility ([e5d5e95](https://github.com/liblaf/melon/commit/e5d5e954e6f1434dfd1975dda66db31118d437f4))
+
 ## [0.1.11](https://github.com/liblaf/melon/compare/v0.1.10..v0.1.11) - 2025-04-09
 
 ### ✨ Features
