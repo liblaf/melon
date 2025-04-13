@@ -1,21 +1,20 @@
 # Changelog
 
-## [0.1.12](https://github.com/liblaf/melon/compare/v0.1.11...v0.1.12) (2025-04-13)
-
+## [0.1.12](https://github.com/liblaf/melon/compare/v0.1.11..v0.1.12) - 2025-04-13
 
 ### ♻ Code Refactoring
 
-* improve tetgen-clean script organization and flexibility ([e5d5e95](https://github.com/liblaf/melon/commit/e5d5e954e6f1434dfd1975dda66db31118d437f4))
+- improve tetgen-clean script organization and flexibility - ([e5d5e95](https://github.com/liblaf/melon/commit/e5d5e954e6f1434dfd1975dda66db31118d437f4))
+
+### ❤️ New Contributors
+
+- @liblaf made their first contribution
 
 ## [0.1.11](https://github.com/liblaf/melon/compare/v0.1.10..v0.1.11) - 2025-04-09
 
 ### ✨ Features
 
 - **paraview:** make visualization optional in mandible pivot script - ([ca24c33](https://github.com/liblaf/melon/commit/ca24c33fa329ae71ad0129f0d231520263aae61a))
-
-### ❤️ New Contributors
-
-- @liblaf made their first contribution
 
 ## [0.1.10](https://github.com/liblaf/melon/compare/v0.1.9..v0.1.10) - 2025-04-09
 
