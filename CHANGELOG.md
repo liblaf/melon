@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.13](https://github.com/liblaf/melon/compare/v0.1.12...v0.1.13) (2025-04-21)
+
+
+### ⬆️ Dependencies
+
+* **deps:** update dependency pyvista to &gt;=0.45,&lt;0.46 ([#24](https://github.com/liblaf/melon/issues/24)) ([8c7f39d](https://github.com/liblaf/melon/commit/8c7f39d3141e47b393e87c9487f5205701afc4e8))
+
 ## [0.1.12](https://github.com/liblaf/melon/compare/v0.1.11..v0.1.12) - 2025-04-13
 
 ### ♻ Code Refactoring
