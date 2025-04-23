@@ -190,7 +190,7 @@ environments:
       - pypi: https://mirrors4.tuna.tsinghua.edu.cn/pypi/web/packages/ec/57/56b9bcc3c9c6a792fcbaf139543cee77261f3651ca9da0c93f5c1221264b/python_dateutil-2.9.0.post0-py2.py3-none-any.whl
       - pypi: https://mirrors4.tuna.tsinghua.edu.cn/pypi/web/packages/1e/18/98a99ad95133c6a6e2005fe89faedf294a748bd5dc803008059409ac9b1e/python_dotenv-1.1.0-py3-none-any.whl
       - pypi: https://mirrors4.tuna.tsinghua.edu.cn/pypi/web/packages/81/c4/34e93fe5f5429d7570ec1fa436f1986fb1f00c3e0f43a589fe2bbcd22c3f/pytz-2025.2-py2.py3-none-any.whl
-      - pypi: https://mirrors4.tuna.tsinghua.edu.cn/pypi/web/packages/65/07/699a032f8b5a1b70c9681185541f18523936a76ac5846e93c5eaaa1e2f33/pyvista-0.44.2-py3-none-any.whl
+      - pypi: https://mirrors4.tuna.tsinghua.edu.cn/pypi/web/packages/0a/37/a5179f9fb7993754317d525236e7ef64f8f0e2c4c0f3ca9d503079ac5f62/pyvista-0.45.0-py3-none-any.whl
       - pypi: https://mirrors4.tuna.tsinghua.edu.cn/pypi/web/packages/b9/2b/614b4752f2e127db5cc206abc23a8c19678e92b23c3db30fc86ab731d3bd/PyYAML-6.0.2-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
       - pypi: https://mirrors4.tuna.tsinghua.edu.cn/pypi/web/packages/5a/66/bbb1dd374f5c870f59c5bb1db0e18cbe7fa739415a24cbd95b2d1f5ae0c4/pyyaml_env_tag-0.1-py3-none-any.whl
       - pypi: https://mirrors4.tuna.tsinghua.edu.cn/pypi/web/packages/e1/67/921ec3024056483db83953ae8e48079ad62b92db7880013ca77632921dd0/readme_renderer-44.0-py3-none-any.whl
@@ -1491,8 +1491,8 @@ packages:
   requires_python: '>=3.12'
 - pypi: .
   name: liblaf-melon
-  version: 0.1.10.dev3+gab5dcbf.d20250408
-  sha256: 33545429a931609b9c10c5f0bb8cac931f631bf3c0b5b2710976396a5d5afcf3
+  version: 0.1.13
+  sha256: b9c1232e1d8d130fc3e4da76e9de44067bf0fd219b074a592cef0d2e04b1480c
   requires_dist:
   - attrs>=25.3.0,<26
   - einops>=0.8.1,<0.9
@@ -1515,7 +1515,7 @@ packages:
   - pydicom>=3.0.1,<4
   - pygltflib>=1.16.3,<2
   - pymeshfix>=0.17.0,<0.18
-  - pyvista>=0.44.2,<0.45
+  - pyvista>=0.45,<0.46
   - rich>=14.0.0,<15
   - scipy>=1.15.2,<2
   - seaborn>=0.13.2,<0.14
@@ -2649,18 +2649,20 @@ packages:
   name: pytz
   version: '2025.2'
   sha256: 5ddf76296dd8c44c26eb8f4b6f35488f3ccbf6fbbd7adee0b7262d43f0ec2f00
-- pypi: https://mirrors4.tuna.tsinghua.edu.cn/pypi/web/packages/65/07/699a032f8b5a1b70c9681185541f18523936a76ac5846e93c5eaaa1e2f33/pyvista-0.44.2-py3-none-any.whl
+- pypi: https://mirrors4.tuna.tsinghua.edu.cn/pypi/web/packages/0a/37/a5179f9fb7993754317d525236e7ef64f8f0e2c4c0f3ca9d503079ac5f62/pyvista-0.45.0-py3-none-any.whl
   name: pyvista
-  version: 0.44.2
-  sha256: 8530d35f57cdaa33507ac9aec19e3292be0bc9026b28e4f12df7e8054438d028
+  version: 0.45.0
+  sha256: db11c1246c5f1a252dc5d83ec6491954ae7eae8b7b5b47c0cb8216c99c97bff0
   requires_dist:
   - matplotlib>=3.0.1
   - numpy>=1.21.0
   - pillow
   - pooch
   - scooby>=0.5.1
-  - vtk<9.4.0
   - typing-extensions
+  - vtk!=9.4.0
+  - vtk!=9.4.1
+  - vtk<9.5.0
   - pyvista[colormaps,io,jupyter] ; extra == 'all'
   - cmocean ; extra == 'colormaps'
   - colorcet ; extra == 'colormaps'
@@ -2669,12 +2671,95 @@ packages:
   - ipywidgets ; extra == 'jupyter'
   - jupyter-server-proxy ; extra == 'jupyter'
   - nest-asyncio ; extra == 'jupyter'
-  - trame>=2.5.2 ; extra == 'jupyter'
   - trame-client>=2.12.7 ; extra == 'jupyter'
   - trame-server>=2.11.7 ; extra == 'jupyter'
   - trame-vtk>=2.5.8 ; extra == 'jupyter'
   - trame-vuetify>=2.3.1 ; extra == 'jupyter'
-  requires_python: '>=3.8'
+  - trame>=2.5.2 ; extra == 'jupyter'
+  - matplotlib<3.10.2 ; extra == 'pinned'
+  - numpy<2.2.0 ; extra == 'pinned'
+  - pillow<11.2.0 ; extra == 'pinned'
+  - pooch<1.9.0 ; extra == 'pinned'
+  - scooby<0.11.0 ; extra == 'pinned'
+  - typing-extensions<4.14.0 ; extra == 'pinned'
+  - mypy<1.14.0 ; extra == 'typing'
+  - npt-promote==0.2 ; extra == 'typing'
+  - numpy>=2.0.0 ; extra == 'typing'
+  - pyvista[pinned] ; extra == 'typing'
+  - trimesh<4.6.0 ; extra == 'typing'
+  - cmocean<4.0.4 ; extra == 'test'
+  - colorcet<3.2.0 ; extra == 'test'
+  - embreex<2.17.8 ; (platform_machine != 'arm64' and extra == 'test') or (sys_platform != 'darwin' and extra == 'test')
+  - hypothesis<6.131.1 ; extra == 'test'
+  - imageio-ffmpeg<0.6.0 ; extra == 'test'
+  - imageio<2.37.0 ; extra == 'test'
+  - ipython<9.0.0 ; extra == 'test'
+  - ipywidgets<9.0.0 ; extra == 'test'
+  - meshio<5.4.0 ; extra == 'test'
+  - nest-asyncio<1.6.1 ; extra == 'test'
+  - numpydoc==1.8.0 ; extra == 'test'
+  - pyanalyze<=0.13.1 ; extra == 'test'
+  - pytest-cov<6.2.0 ; extra == 'test'
+  - pytest-memprof<0.3.0 ; extra == 'test'
+  - pytest-mypy-plugins<3.3.0 ; extra == 'test'
+  - pytest-pyvista==0.1.8 ; extra == 'test'
+  - pytest-xdist<3.7.0 ; extra == 'test'
+  - pytest<8.4.0 ; extra == 'test'
+  - pytest-cases<3.8.7 ; extra == 'test'
+  - pytest-mock<3.15.0 ; extra == 'test'
+  - pyvista[pinned] ; extra == 'test'
+  - scipy<1.14.2 ; extra == 'test'
+  - sphinx-book-theme<1.2.0 ; extra == 'test'
+  - sphinx-gallery<0.19.0 ; extra == 'test'
+  - sphinx<8.2.0 ; extra == 'test'
+  - sphinx-design<0.7.0 ; extra == 'test'
+  - sympy<1.14.0 ; extra == 'test'
+  - tqdm<4.68.0 ; extra == 'test'
+  - trame-vtk>=2.5.8,<2.8.12 ; extra == 'test'
+  - trame-vuetify>=2.3.1,<2.7.2 ; extra == 'test'
+  - trame>=2.5.2,<3.7.1 ; extra == 'test'
+  - trimesh<4.6.0 ; extra == 'test'
+  - typing-extensions<4.14.0 ; extra == 'test'
+  - cmocean==4.0.3 ; extra == 'docs'
+  - colorcet==3.1.0 ; extra == 'docs'
+  - enum-tools==0.12.0 ; extra == 'docs'
+  - imageio-ffmpeg==0.6.0 ; extra == 'docs'
+  - imageio==2.37.0 ; extra == 'docs'
+  - jupyter-sphinx==0.5.3 ; extra == 'docs'
+  - jupyterlab==4.3.6 ; extra == 'docs'
+  - lxml==5.3.2 ; extra == 'docs'
+  - meshio==5.3.5 ; extra == 'docs'
+  - mypy-extensions==1.0.0 ; extra == 'docs'
+  - mypy==1.15.0 ; extra == 'docs'
+  - numpydoc==1.8.0 ; extra == 'docs'
+  - osmnx==2.0.2 ; extra == 'docs'
+  - pydata-sphinx-theme==0.15.4 ; extra == 'docs'
+  - pypandoc==1.15 ; extra == 'docs'
+  - pytest-pyvista==0.1.8 ; extra == 'docs'
+  - pytest-sphinx==0.6.3 ; extra == 'docs'
+  - pyvista[pinned] ; extra == 'docs'
+  - scipy==1.15.2 ; extra == 'docs'
+  - sphinx-autobuild==2024.10.3 ; extra == 'docs'
+  - sphinx-book-theme==1.1.4 ; extra == 'docs'
+  - sphinx-copybutton==0.5.2 ; extra == 'docs'
+  - sphinx-design==0.6.1 ; extra == 'docs'
+  - sphinx-gallery==0.19.0 ; extra == 'docs'
+  - sphinx-notfound-page==1.1.0 ; extra == 'docs'
+  - sphinx-sitemap==2.6.0 ; extra == 'docs'
+  - sphinx-tags==0.4.0 ; extra == 'docs'
+  - sphinx-toolbox==3.9.0 ; extra == 'docs'
+  - sphinx==8.2.1 ; extra == 'docs'
+  - sphinxcontrib-asciinema==0.4.2 ; extra == 'docs'
+  - sphinxcontrib-websupport==2.0.0 ; extra == 'docs'
+  - sphinxext-opengraph==0.10.0 ; extra == 'docs'
+  - sympy==1.13.3 ; extra == 'docs'
+  - trame-vtk==2.8.15 ; extra == 'docs'
+  - trame-vuetify==3.0.0 ; extra == 'docs'
+  - trame==3.8.2 ; extra == 'docs'
+  - trimesh==4.6.6 ; extra == 'docs'
+  - pre-commit ; extra == 'dev'
+  - pyvista[test,typing] ; extra == 'dev'
+  requires_python: '>=3.9'
 - pypi: https://mirrors4.tuna.tsinghua.edu.cn/pypi/web/packages/b9/2b/614b4752f2e127db5cc206abc23a8c19678e92b23c3db30fc86ab731d3bd/PyYAML-6.0.2-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
   name: pyyaml
   version: 6.0.2
