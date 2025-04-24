@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.14](https://github.com/liblaf/melon/compare/v0.1.13...v0.1.14) (2025-04-24)
+
+
+### ✨ Features
+
+* add complete human head anatomy processing pipeline ([894d5ca](https://github.com/liblaf/melon/commit/894d5cadc442c1140fb5d6fc4d7f73a1bcfc31fb))
+
 ## [0.1.13](https://github.com/liblaf/melon/compare/v0.1.12..v0.1.13) - 2025-04-21
 
 ### ⬆️ Dependencies
