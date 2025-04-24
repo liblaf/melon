@@ -1,23 +1,21 @@
 # Changelog
 
-## [0.1.14](https://github.com/liblaf/melon/compare/v0.1.13...v0.1.14) (2025-04-24)
-
+## [0.1.14](https://github.com/liblaf/melon/compare/v0.1.13..v0.1.14) - 2025-04-24
 
 ### ✨ Features
 
-* add complete human head anatomy processing pipeline ([894d5ca](https://github.com/liblaf/melon/commit/894d5cadc442c1140fb5d6fc4d7f73a1bcfc31fb))
+- add complete human head anatomy processing pipeline - ([894d5ca](https://github.com/liblaf/melon/commit/894d5cadc442c1140fb5d6fc4d7f73a1bcfc31fb))
+
+### ❤️ New Contributors
+
+- @liblaf-bot[bot] made their first contribution
+- @liblaf made their first contribution
 
 ## [0.1.13](https://github.com/liblaf/melon/compare/v0.1.12..v0.1.13) - 2025-04-21
 
 ### ⬆️ Dependencies
 
 - **deps:** update dependency pyvista to >=0.45,<0.46 (#24) - ([8c7f39d](https://github.com/liblaf/melon/commit/8c7f39d3141e47b393e87c9487f5205701afc4e8))
-
-### ❤️ New Contributors
-
-- @liblaf-bot[bot] made their first contribution
-- @renovate[bot] made their first contribution in [#24](https://github.com/liblaf/melon/pull/24)
-- @liblaf made their first contribution
 
 ## [0.1.12](https://github.com/liblaf/melon/compare/v0.1.11..v0.1.12) - 2025-04-13
 
