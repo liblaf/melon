@@ -77,11 +77,15 @@ def main(cfg: Config) -> None:
     surface.point_data["is-face"] = classify(surface, face, skull)
     surface.point_data["is-mandible"] = classify(surface, mandible, not_mandible)
     surface.point_data["is-skull"] = classify(surface, skull, face)
+    surface.point_data["is-cranium"] = (
+        surface.point_data["is-skull"] & ~surface.point_data["is-mandible"]
+    )
     assert not np.any(surface.point_data["is-face"] & surface.point_data["is-skull"])
     assert np.all(surface.point_data["is-face"] | surface.point_data["is-skull"])
     mesh = transfer_point_data(mesh, surface, "is-face")
     mesh = transfer_point_data(mesh, surface, "is-mandible")
     mesh = transfer_point_data(mesh, surface, "is-skull")
+    mesh = transfer_point_data(mesh, surface, "is-cranium")
     melon.save(cfg.output, mesh)
 
     for name in ["face", "mandible", "skull"]:
