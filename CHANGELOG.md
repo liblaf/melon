@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.15](https://github.com/liblaf/melon/compare/v0.1.14...v0.1.15) (2025-04-30)
+
+
+### ✨ Features
+
+* improve skull mesh generation and add cranium classification ([a82c73f](https://github.com/liblaf/melon/commit/a82c73fa80d1df2819b63cd3fe48a1c8a44ad98d))
+
 ## [0.1.14](https://github.com/liblaf/melon/compare/v0.1.13..v0.1.14) - 2025-04-24
 
 ### ✨ Features
