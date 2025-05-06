@@ -1,15 +1,21 @@
 # Changelog
 
-## [0.1.15](https://github.com/liblaf/melon/compare/v0.1.14..v0.1.15) - 2025-04-30
+## [0.1.16](https://github.com/liblaf/melon/compare/v0.1.15..v0.1.16) - 2025-05-06
 
 ### ✨ Features
 
-- improve skull mesh generation and add cranium classification - ([a82c73f](https://github.com/liblaf/melon/commit/a82c73fa80d1df2819b63cd3fe48a1c8a44ad98d))
+- add tetgen experiment pipeline and array to PointSet converter - ([ac3a353](https://github.com/liblaf/melon/commit/ac3a3534c8691c899f75fe6e8a163092d33f1b2a))
 
 ### ❤️ New Contributors
 
 - @liblaf-bot[bot] made their first contribution
 - @liblaf made their first contribution
+
+## [0.1.15](https://github.com/liblaf/melon/compare/v0.1.14..v0.1.15) - 2025-04-30
+
+### ✨ Features
+
+- improve skull mesh generation and add cranium classification - ([a82c73f](https://github.com/liblaf/melon/commit/a82c73fa80d1df2819b63cd3fe48a1c8a44ad98d))
 
 ## [0.1.14](https://github.com/liblaf/melon/compare/v0.1.13..v0.1.14) - 2025-04-24
 
