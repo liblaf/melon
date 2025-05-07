@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.17](https://github.com/liblaf/melon/compare/v0.1.16...v0.1.17) (2025-05-07)
+
+
+### ⬆️ Dependencies
+
+* **deps:** update dependency liblaf-cherries to &gt;=0.0.12,&lt;0.0.13 ([#29](https://github.com/liblaf/melon/issues/29)) ([9c4d022](https://github.com/liblaf/melon/commit/9c4d022e24438aaef25a3f88583e0a06f606fd2d))
+
 ## [0.1.16](https://github.com/liblaf/melon/compare/v0.1.15..v0.1.16) - 2025-05-06
 
 ### ✨ Features
