@@ -1,15 +1,21 @@
 # Changelog
 
+## [0.1.17](https://github.com/liblaf/melon/compare/v0.1.16..v0.1.17) - 2025-05-07
+
+### ⬆️ Dependencies
+
+- **deps:** update dependency liblaf-cherries to >=0.0.12,<0.0.13 (#29) - ([9c4d022](https://github.com/liblaf/melon/commit/9c4d022e24438aaef25a3f88583e0a06f606fd2d))
+
+### ❤️ New Contributors
+
+- @renovate[bot] made their first contribution in [#29](https://github.com/liblaf/melon/pull/29)
+- @liblaf-bot[bot] made their first contribution
+
 ## [0.1.16](https://github.com/liblaf/melon/compare/v0.1.15..v0.1.16) - 2025-05-06
 
 ### ✨ Features
 
 - add tetgen experiment pipeline and array to PointSet converter - ([ac3a353](https://github.com/liblaf/melon/commit/ac3a3534c8691c899f75fe6e8a163092d33f1b2a))
-
-### ❤️ New Contributors
-
-- @liblaf-bot[bot] made their first contribution
-- @liblaf made their first contribution
 
 ## [0.1.15](https://github.com/liblaf/melon/compare/v0.1.14..v0.1.15) - 2025-04-30
 
