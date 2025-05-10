@@ -196,6 +196,7 @@ playground/
 *.svg
 
 *.glb
+*.landmarks.json
 *.mtl
 *.obj
 *.ply

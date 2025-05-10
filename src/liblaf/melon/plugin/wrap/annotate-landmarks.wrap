@@ -1,0 +1,211 @@
+{
+    "commonDir": "",
+    "formatVersion": 67,
+    "layout": {
+        "items": [{
+            "itemId": 0,
+            "itemType": "node",
+            "nodeId": 0,
+            "x": -139,
+            "y": 89
+        }, {
+            "itemId": 1,
+            "itemType": "node",
+            "nodeId": 1,
+            "x": 144,
+            "y": 89
+        }, {
+            "itemId": 2,
+            "itemType": "node",
+            "nodeId": 2,
+            "x": -9,
+            "y": 200
+        }],
+        "layoutFormatVersion": 2
+    },
+    "metadata": {},
+    "nodes": {
+        "LeftGeom": {
+            "isAlwaysVisible": true,
+            "isEnabled": true,
+            "nodeId": 0,
+            "nodeType": "LoadGeom",
+            "params": {
+                "fileName": {
+                    "expression": "\n",
+                    "value": "$LEFT_FILE"
+                },
+                "rotation": {
+                    "value": {
+                        "x": 0,
+                        "y": 0,
+                        "z": 0
+                    }
+                },
+                "scale": {
+                    "value": 1
+                },
+                "texture": {},
+                "translation": {
+                    "value": {
+                        "x": 0,
+                        "y": 0,
+                        "z": 0
+                    }
+                },
+                "visualParam": {
+                    "value": {
+                        "colorBack": {
+                            "b": 23,
+                            "g": 23,
+                            "r": 23
+                        },
+                        "colorFront": {
+                            "b": 255,
+                            "g": 56,
+                            "r": 12
+                        },
+                        "colorWire": {
+                            "b": 34,
+                            "g": 26,
+                            "r": 17
+                        },
+                        "isLightingEnabled": true,
+                        "isSurfaceEnabled": true,
+                        "isWireframeEnabled": true,
+                        "surfaceFillType": 1
+                    }
+                }
+            }
+        },
+        "RightGeom": {
+            "isAlwaysVisible": true,
+            "isEnabled": true,
+            "nodeId": 1,
+            "nodeType": "LoadGeom",
+            "params": {
+                "fileName": {
+                    "expression": "\n",
+                    "value": "$RIGHT_FILE"
+                },
+                "rotation": {
+                    "value": {
+                        "x": 0,
+                        "y": 0,
+                        "z": 0
+                    }
+                },
+                "scale": {
+                    "value": 1
+                },
+                "texture": {},
+                "translation": {
+                    "value": {
+                        "x": 0,
+                        "y": 0,
+                        "z": 0
+                    }
+                },
+                "visualParam": {
+                    "value": {
+                        "colorBack": {
+                            "b": 23,
+                            "g": 23,
+                            "r": 23
+                        },
+                        "colorFront": {
+                            "b": 255,
+                            "g": 56,
+                            "r": 12
+                        },
+                        "colorWire": {
+                            "b": 34,
+                            "g": 26,
+                            "r": 17
+                        },
+                        "isLightingEnabled": true,
+                        "isSurfaceEnabled": true,
+                        "isWireframeEnabled": true,
+                        "surfaceFillType": 1
+                    }
+                }
+            }
+        },
+        "SelectPointPairs": {
+            "isAlwaysVisible": true,
+            "isEnabled": true,
+            "nodeId": 2,
+            "nodeType": "SelectPointPairs",
+            "params": {
+                "fileNameLeft": {
+                    "expression": "\n",
+                    "value": "$LEFT_LANDMARKS_FILE"
+                },
+                "fileNameRight": {
+                    "expression": "\n",
+                    "value": "$RIGHT_LANDMARKS_FILE"
+                },
+                "geomLeft": {
+                    "connectedNodeId": 0
+                },
+                "geomRight": {
+                    "connectedNodeId": 1
+                },
+                "pointsFormatLeft": {
+                    "value": 1
+                },
+                "pointsFormatRight": {
+                    "value": 1
+                },
+                "pointsLeft": {
+                    "value": []
+                },
+                "pointsRight": {
+                    "value": []
+                },
+                "sourceLeft": {
+                    "value": 0
+                },
+                "sourceRight": {
+                    "value": 0
+                },
+                "symmetryLeft": {
+                    "value": 0
+                },
+                "symmetryRight": {
+                    "value": 0
+                },
+                "syncTransform": {
+                    "value": {
+                        "offset": {
+                            "x": 0,
+                            "y": 0,
+                            "z": 0
+                        },
+                        "rotationQuat": {
+                            "scalar": 1,
+                            "x": 0,
+                            "y": 0,
+                            "z": 0
+                        },
+                        "scale": 1,
+                        "translation": {
+                            "x": 0,
+                            "y": 0,
+                            "z": 0
+                        }
+                    }
+                },
+                "syncViews": {
+                    "value": false
+                }
+            }
+        }
+    },
+    "pythonCode": "",
+    "timeline": {
+        "current": 0,
+        "max": 25,
+        "min": 0
+    }
+}
