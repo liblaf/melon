@@ -1,0 +1,5 @@
+outs:
+- md5: f434c724b9ab259f8ee3d062910dcc9e
+  size: 7853
+  hash: md5
+  path: groups.toml
