@@ -1,0 +1,5 @@
+outs:
+- md5: 37678ec2dab47824985cf5e16b2bbce2
+  size: 315522
+  hash: md5
+  path: skin.ply

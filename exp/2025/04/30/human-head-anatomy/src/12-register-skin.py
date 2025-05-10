@@ -26,10 +26,15 @@ class Config(cherries.BaseConfig):
 
 
 def main(cfg: Config) -> None:
+    cherries.log_input(cfg.source)
     source: pv.PolyData = melon.load_poly_data(cfg.source)
+    cherries.log_input(cfg.target)
     target: pv.PolyData = melon.load_poly_data(cfg.target)
+    cherries.log_input(melon.io.get_landmarks_path(cfg.source))
     source_landmarks: Float[np.ndarray, "L 3"] = melon.load_landmarks(cfg.source)
+    cherries.log_input(melon.io.get_landmarks_path(cfg.target))
     target_landmarks: Float[np.ndarray, "L 3"] = melon.load_landmarks(cfg.target)
+
     free_polygons_floating: Integer[np.ndarray, " F"] = melon.triangle.select_groups(
         source, cfg.floting
     )
@@ -41,8 +46,11 @@ def main(cfg: Config) -> None:
         free_polygons_floating=free_polygons_floating,
         verbose=True,
     )
+
     melon.save(cfg.output, result)
+    cherries.log_output(cfg.output)
     melon.save_landmarks(cfg.output, target_landmarks)
+    cherries.log_output(melon.io.get_landmarks_path(cfg.output))
 
 
 if __name__ == "__main__":
