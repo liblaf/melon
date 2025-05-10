@@ -1,4 +1,4 @@
-from . import io, plugin, typed, utils
+from . import io, plugin, triangle, typed, utils
 from ._version import __version__, __version_tuple__, version, version_tuple
 from .io import (
     as_poly_data,
@@ -25,6 +25,7 @@ __all__ = [
     "plugin",
     "save",
     "tetwild",
+    "triangle",
     "typed",
     "utils",
     "version",
