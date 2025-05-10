@@ -1,4 +1,6 @@
-from . import trimesh
-from .trimesh import as_trimesh
+from . import convert, reader, writer
+from .convert import as_trimesh
+from .reader import load_trimesh
+from .writer import TrimeshWriter
 
-__all__ = ["as_trimesh", "trimesh"]
+__all__ = ["TrimeshWriter", "as_trimesh", "convert", "load_trimesh", "reader", "writer"]
