@@ -118,7 +118,7 @@ packages = ["src/liblaf/"]
 source = "vcs"
 
 [tool.pixi.dependencies]
-python = ">=3.12,<3.13"
+python = ">=3.13,<3.14"
 assimp = ">=5.4.3,<6"
 
 [tool.pixi.environments]
