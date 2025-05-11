@@ -32,7 +32,7 @@ def main(cfg: Config) -> None:
     target: int
     source, target = nearest_result["vertex_id"]
     path: list[int] = nx.shortest_path(graph, source, target, weight="length")  # pyright: ignore[reportAssignmentType]
-    ic(nx.path_weight(graph, path, weight="weight"))
+    ic(nx.path_weight(graph, path, weight="length"))
     path: Integer[np.ndarray, " P"] = np.asarray(path, dtype=int)
     surface.point_data["in-path"] = np.zeros((surface.n_points,), dtype=bool)
     surface.point_data["in-path"][path] = True
