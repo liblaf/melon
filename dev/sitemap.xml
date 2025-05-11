@@ -17,14 +17,6 @@
          <lastmod>2025-05-11</lastmod>
     </url>
     <url>
-         <loc>https://liblaf.github.io/melon/dev/api/liblaf/melon/cli/</loc>
-         <lastmod>2025-05-11</lastmod>
-    </url>
-    <url>
-         <loc>https://liblaf.github.io/melon/dev/api/liblaf/melon/cli/annotate_landmarks/</loc>
-         <lastmod>2025-05-11</lastmod>
-    </url>
-    <url>
          <loc>https://liblaf.github.io/melon/dev/api/liblaf/melon/io/</loc>
          <lastmod>2025-05-11</lastmod>
     </url>
@@ -33,47 +25,7 @@
          <lastmod>2025-05-11</lastmod>
     </url>
     <url>
-         <loc>https://liblaf.github.io/melon/dev/api/liblaf/melon/io/abc/conversion/</loc>
-         <lastmod>2025-05-11</lastmod>
-    </url>
-    <url>
-         <loc>https://liblaf.github.io/melon/dev/api/liblaf/melon/io/abc/reader/</loc>
-         <lastmod>2025-05-11</lastmod>
-    </url>
-    <url>
-         <loc>https://liblaf.github.io/melon/dev/api/liblaf/melon/io/abc/writer/</loc>
-         <lastmod>2025-05-11</lastmod>
-    </url>
-    <url>
-         <loc>https://liblaf.github.io/melon/dev/api/liblaf/melon/io/melon/</loc>
-         <lastmod>2025-05-11</lastmod>
-    </url>
-    <url>
-         <loc>https://liblaf.github.io/melon/dev/api/liblaf/melon/io/melon/dicom/</loc>
-         <lastmod>2025-05-11</lastmod>
-    </url>
-    <url>
-         <loc>https://liblaf.github.io/melon/dev/api/liblaf/melon/io/melon/dicom/conversion/</loc>
-         <lastmod>2025-05-11</lastmod>
-    </url>
-    <url>
-         <loc>https://liblaf.github.io/melon/dev/api/liblaf/melon/io/paraview/</loc>
-         <lastmod>2025-05-11</lastmod>
-    </url>
-    <url>
-         <loc>https://liblaf.github.io/melon/dev/api/liblaf/melon/io/paraview/series/</loc>
-         <lastmod>2025-05-11</lastmod>
-    </url>
-    <url>
          <loc>https://liblaf.github.io/melon/dev/api/liblaf/melon/io/pyvista/</loc>
-         <lastmod>2025-05-11</lastmod>
-    </url>
-    <url>
-         <loc>https://liblaf.github.io/melon/dev/api/liblaf/melon/io/pyvista/image_data/</loc>
-         <lastmod>2025-05-11</lastmod>
-    </url>
-    <url>
-         <loc>https://liblaf.github.io/melon/dev/api/liblaf/melon/io/pyvista/image_data/conversion/</loc>
          <lastmod>2025-05-11</lastmod>
     </url>
     <url>
@@ -81,7 +33,7 @@
          <lastmod>2025-05-11</lastmod>
     </url>
     <url>
-         <loc>https://liblaf.github.io/melon/dev/api/liblaf/melon/io/pyvista/point_set/conversion/</loc>
+         <loc>https://liblaf.github.io/melon/dev/api/liblaf/melon/io/pyvista/point_set/convert/</loc>
          <lastmod>2025-05-11</lastmod>
     </url>
     <url>
@@ -89,7 +41,15 @@
          <lastmod>2025-05-11</lastmod>
     </url>
     <url>
-         <loc>https://liblaf.github.io/melon/dev/api/liblaf/melon/io/pyvista/poly_data/conversion/</loc>
+         <loc>https://liblaf.github.io/melon/dev/api/liblaf/melon/io/pyvista/poly_data/convert/</loc>
+         <lastmod>2025-05-11</lastmod>
+    </url>
+    <url>
+         <loc>https://liblaf.github.io/melon/dev/api/liblaf/melon/io/pyvista/poly_data/reader/</loc>
+         <lastmod>2025-05-11</lastmod>
+    </url>
+    <url>
+         <loc>https://liblaf.github.io/melon/dev/api/liblaf/melon/io/pyvista/poly_data/writer/</loc>
          <lastmod>2025-05-11</lastmod>
     </url>
     <url>
@@ -97,7 +57,15 @@
          <lastmod>2025-05-11</lastmod>
     </url>
     <url>
-         <loc>https://liblaf.github.io/melon/dev/api/liblaf/melon/io/pyvista/unstructured_grid/conversion/</loc>
+         <loc>https://liblaf.github.io/melon/dev/api/liblaf/melon/io/pyvista/unstructured_grid/convert/</loc>
+         <lastmod>2025-05-11</lastmod>
+    </url>
+    <url>
+         <loc>https://liblaf.github.io/melon/dev/api/liblaf/melon/io/pyvista/unstructured_grid/reader/</loc>
+         <lastmod>2025-05-11</lastmod>
+    </url>
+    <url>
+         <loc>https://liblaf.github.io/melon/dev/api/liblaf/melon/io/pyvista/unstructured_grid/writer/</loc>
          <lastmod>2025-05-11</lastmod>
     </url>
     <url>
@@ -105,11 +73,15 @@
          <lastmod>2025-05-11</lastmod>
     </url>
     <url>
-         <loc>https://liblaf.github.io/melon/dev/api/liblaf/melon/io/trimesh/trimesh/</loc>
+         <loc>https://liblaf.github.io/melon/dev/api/liblaf/melon/io/trimesh/convert/</loc>
          <lastmod>2025-05-11</lastmod>
     </url>
     <url>
-         <loc>https://liblaf.github.io/melon/dev/api/liblaf/melon/io/trimesh/trimesh/conversion/</loc>
+         <loc>https://liblaf.github.io/melon/dev/api/liblaf/melon/io/trimesh/reader/</loc>
+         <lastmod>2025-05-11</lastmod>
+    </url>
+    <url>
+         <loc>https://liblaf.github.io/melon/dev/api/liblaf/melon/io/trimesh/writer/</loc>
          <lastmod>2025-05-11</lastmod>
     </url>
     <url>
@@ -125,39 +97,7 @@
          <lastmod>2025-05-11</lastmod>
     </url>
     <url>
-         <loc>https://liblaf.github.io/melon/dev/api/liblaf/melon/ops/</loc>
-         <lastmod>2025-05-11</lastmod>
-    </url>
-    <url>
-         <loc>https://liblaf.github.io/melon/dev/api/liblaf/melon/ops/is_/</loc>
-         <lastmod>2025-05-11</lastmod>
-    </url>
-    <url>
-         <loc>https://liblaf.github.io/melon/dev/api/liblaf/melon/ops/proximity/</loc>
-         <lastmod>2025-05-11</lastmod>
-    </url>
-    <url>
-         <loc>https://liblaf.github.io/melon/dev/api/liblaf/melon/ops/pyvista/</loc>
-         <lastmod>2025-05-11</lastmod>
-    </url>
-    <url>
-         <loc>https://liblaf.github.io/melon/dev/api/liblaf/melon/ops/registration/</loc>
-         <lastmod>2025-05-11</lastmod>
-    </url>
-    <url>
-         <loc>https://liblaf.github.io/melon/dev/api/liblaf/melon/ops/registration/rigid/</loc>
-         <lastmod>2025-05-11</lastmod>
-    </url>
-    <url>
-         <loc>https://liblaf.github.io/melon/dev/api/liblaf/melon/ops/selection/</loc>
-         <lastmod>2025-05-11</lastmod>
-    </url>
-    <url>
-         <loc>https://liblaf.github.io/melon/dev/api/liblaf/melon/ops/transfer/</loc>
-         <lastmod>2025-05-11</lastmod>
-    </url>
-    <url>
-         <loc>https://liblaf.github.io/melon/dev/api/liblaf/melon/ops/transformations/</loc>
+         <loc>https://liblaf.github.io/melon/dev/api/liblaf/melon/mesh/</loc>
          <lastmod>2025-05-11</lastmod>
     </url>
     <url>
@@ -169,19 +109,7 @@
          <lastmod>2025-05-11</lastmod>
     </url>
     <url>
-         <loc>https://liblaf.github.io/melon/dev/api/liblaf/melon/plugin/wrap/resources/</loc>
-         <lastmod>2025-05-11</lastmod>
-    </url>
-    <url>
-         <loc>https://liblaf.github.io/melon/dev/api/liblaf/melon/struct/</loc>
-         <lastmod>2025-05-11</lastmod>
-    </url>
-    <url>
-         <loc>https://liblaf.github.io/melon/dev/api/liblaf/melon/struct/dicom/</loc>
-         <lastmod>2025-05-11</lastmod>
-    </url>
-    <url>
-         <loc>https://liblaf.github.io/melon/dev/api/liblaf/melon/struct/dicom_dataset/</loc>
+         <loc>https://liblaf.github.io/melon/dev/api/liblaf/melon/proximity/</loc>
          <lastmod>2025-05-11</lastmod>
     </url>
     <url>
@@ -193,11 +121,11 @@
          <lastmod>2025-05-11</lastmod>
     </url>
     <url>
-         <loc>https://liblaf.github.io/melon/dev/api/liblaf/melon/triangle/selection/</loc>
+         <loc>https://liblaf.github.io/melon/dev/api/liblaf/melon/typed/</loc>
          <lastmod>2025-05-11</lastmod>
     </url>
     <url>
-         <loc>https://liblaf.github.io/melon/dev/api/liblaf/melon/typed/</loc>
+         <loc>https://liblaf.github.io/melon/dev/api/liblaf/melon/utils/</loc>
          <lastmod>2025-05-11</lastmod>
     </url>
 </urlset>
