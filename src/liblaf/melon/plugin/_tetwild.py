@@ -59,11 +59,12 @@ def _tetwild_exe(
 
 def _tetwild_exe_args(**kwargs: Unpack[TetwildKwargs]) -> Generator[str]:
     for k, v in kwargs.items():
+        key: str = k.replace("_", "-")
         if isinstance(v, bool):
             if v:
-                yield f"--{k}"
+                yield f"--{key}"
         else:
-            yield f"--{k}"
+            yield f"--{key}"
             yield str(v)
 
 
