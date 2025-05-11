@@ -117,7 +117,7 @@ packages = ["src/liblaf/"]
 source = "vcs"
 
 [tool.pixi.dependencies]
-python = ">=3.12,<3.13"
+python = ">=3.13,<3.14"
 
 [tool.pixi.environments]
 default = { features = ["build", "dev", "docs", "test"] }
