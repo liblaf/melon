@@ -6,6 +6,7 @@ from pathlib import Path
 from typing import Any, TypedDict, Unpack
 
 import pyvista as pv
+from loguru import logger
 
 from liblaf import grapes
 from liblaf.melon import io, tetra
@@ -51,6 +52,7 @@ def _tetwild_exe(
         io.save(input_file, surface)
         args: list[PathLike] = ["fTetWild", "--input", input_file, "--output", output]
         args.extend(_tetwild_exe_args(**kwargs))
+        logger.debug(args)
         sp.run(args, check=True)
         return io.load_unstructured_grid(output)
 
@@ -72,8 +74,9 @@ def _tetwild_exe_csg(csg: Any, **kwargs: Unpack[TetwildKwargs]) -> pv.Unstructur
         csg_file: Path = tmpdir / "csg.json"
         grapes.save(csg_file, csg)
         output: Path = tmpdir / "output.msh"
-        args: list[str] = ["fTetWild", "--output", str(output), "--csg", str(csg_file)]
+        args: list[PathLike] = ["fTetWild", "--output", output, "--csg", csg_file]
         args.extend(_tetwild_exe_args(**kwargs))
+        logger.debug(args)
         sp.run(args, check=True)
         return io.load_unstructured_grid(output)
 
