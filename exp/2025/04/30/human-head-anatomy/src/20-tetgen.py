@@ -11,7 +11,7 @@ class Config(cherries.BaseConfig):
     mandible: Path = cherries.data("02-intermediate/mandible.vtp")
     skin: Path = cherries.data("02-intermediate/skin-with-mouth-socket.ply")
 
-    output: Path = cherries.data("02-intermediate/tetgen.vtu")
+    output: Path = cherries.data("02-intermediate/20-tetgen.vtu")
 
 
 def main(cfg: Config) -> None:
@@ -32,6 +32,7 @@ def main(cfg: Config) -> None:
                 "right": mandible,
             },
         },
+        epsr=1e-4,
         csg=True,
     )
 

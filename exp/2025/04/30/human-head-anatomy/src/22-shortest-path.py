@@ -10,7 +10,7 @@ from liblaf import cherries
 
 
 class Config(cherries.BaseConfig):
-    tetgen: Path = cherries.data("02-intermediate/tetgen.vtu")
+    tetgen: Path = cherries.data("02-intermediate/20-tetgen.vtu")
     output: Path = cherries.data("02-intermediate/22-tetgen-distance.vtp")
 
 
