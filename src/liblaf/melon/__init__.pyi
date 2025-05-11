@@ -1,4 +1,4 @@
-from . import io, plugin, triangle, typed, utils
+from . import io, mesh, plugin, proximity, triangle, typed, utils
 from ._version import __version__, __version_tuple__, version, version_tuple
 from .io import (
     as_poly_data,
@@ -14,8 +14,21 @@ from .io import (
     save_polygons,
 )
 from .plugin import annotate_landmarks, fast_wrapping, mesh_fix, tetwild
+from .proximity import (
+    Nearest,
+    NearestPoint,
+    NearestPointPrepared,
+    NearestPrepared,
+    NearestResult,
+    nearest,
+)
 
 __all__ = [
+    "Nearest",
+    "NearestPoint",
+    "NearestPointPrepared",
+    "NearestPrepared",
+    "NearestResult",
     "__version__",
     "__version_tuple__",
     "annotate_landmarks",
@@ -29,8 +42,11 @@ __all__ = [
     "load_polygons",
     "load_trimesh",
     "load_unstructured_grid",
+    "mesh",
     "mesh_fix",
+    "nearest",
     "plugin",
+    "proximity",
     "save",
     "save_landmarks",
     "save_polygons",

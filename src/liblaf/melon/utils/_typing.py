@@ -1,3 +1,4 @@
+from collections.abc import Sequence
 from typing import Any
 
 
@@ -7,6 +8,11 @@ def is_instance(obj: Any, prefix: str, name: str) -> bool:
 
 def is_subclass(cls: type, prefix: str, name: str) -> bool:
     return cls.__module__.startswith(prefix) and cls.__name__ == name
+
+
+def is_array_like(obj: Any) -> bool:
+    # TODO: Implement a more robust check for array-like objects.
+    return isinstance(obj, Sequence)
 
 
 # ----------------------------------- numpy ---------------------------------- #

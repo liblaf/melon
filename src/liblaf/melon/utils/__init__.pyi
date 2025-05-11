@@ -1,4 +1,5 @@
 from ._typing import (
+    is_array_like,
     is_image_data,
     is_instance,
     is_numpy,
@@ -10,6 +11,7 @@ from ._typing import (
 )
 
 __all__ = [
+    "is_array_like",
     "is_image_data",
     "is_instance",
     "is_numpy",

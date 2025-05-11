@@ -1,6 +1,8 @@
 from . import abc, pyvista, trimesh
 from ._save import save
 from .pyvista import (
+    as_mesh,
+    as_point_set,
     as_poly_data,
     as_unstructured_grid,
     load_poly_data,
@@ -18,6 +20,8 @@ from .wrap import (
 
 __all__ = [
     "abc",
+    "as_mesh",
+    "as_point_set",
     "as_poly_data",
     "as_trimesh",
     "as_unstructured_grid",
