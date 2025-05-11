@@ -9,7 +9,7 @@ from liblaf.melon.typed import PathLike
 
 
 class UnstructuredGridReader(AbstractReader):
-    extensions: Container[str] = {".vtu"}
+    extensions: Container[str] = {".msh", ".vtk", ".vtu"}
 
     @override
     def load(self, path: PathLike, /, **kwargs) -> pv.UnstructuredGrid:
