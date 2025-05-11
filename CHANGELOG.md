@@ -1,26 +1,21 @@
 # Changelog
 
-## [0.2.0](https://github.com/liblaf/melon/compare/v0.1.17...v0.2.0) (2025-05-11)
+## [0.2.0](https://github.com/liblaf/melon/compare/v0.1.17..v0.2.0) - 2025-05-11
 
+### 💥 BREAKING CHANGES
 
-### ⚠ BREAKING CHANGES
+- next (#32) - ([ba54e21](https://github.com/liblaf/melon/commit/ba54e212802e04d56d79904316bce0015ab818f1))
 
-* next ([#32](https://github.com/liblaf/melon/issues/32))
+### ❤️ New Contributors
 
-### ✨ Features
+- [@liblaf](https://github.com/liblaf) made their first contribution in [#32](https://github.com/liblaf/melon/pull/32)
+- [@liblaf-bot[bot]](https://github.com/apps/liblaf-bot) made their first contribution
 
-* next ([#32](https://github.com/liblaf/melon/issues/32)) ([ba54e21](https://github.com/liblaf/melon/commit/ba54e212802e04d56d79904316bce0015ab818f1))
-
-## [0.1.17](https://github.com/liblaf/melon/compare/v0.1.16..v0.1.17) - 2025-05-07
+## [0.1.17](https://github.com/liblaf/melon/compare/v0.1.16..v0.1.17) - 2025-05-08
 
 ### ⬆️ Dependencies
 
 - **deps:** update dependency liblaf-cherries to >=0.0.12,<0.0.13 (#29) - ([9c4d022](https://github.com/liblaf/melon/commit/9c4d022e24438aaef25a3f88583e0a06f606fd2d))
-
-### ❤️ New Contributors
-
-- @renovate[bot] made their first contribution in [#29](https://github.com/liblaf/melon/pull/29)
-- @liblaf-bot[bot] made their first contribution
 
 ## [0.1.16](https://github.com/liblaf/melon/compare/v0.1.15..v0.1.16) - 2025-05-06
 
@@ -105,7 +100,7 @@
 
 ### ❤️ New Contributors
 
-- @liblaf-bot[bot] made their first contribution in [#14](https://github.com/liblaf/melon/pull/14)
+- [@liblaf-bot[bot]](https://github.com/apps/liblaf-bot) made their first contribution in [#14](https://github.com/liblaf/melon/pull/14)
 
 ## [0.1.5](https://github.com/liblaf/melon/compare/v0.1.4..v0.1.5) - 2025-03-23
 
@@ -160,7 +155,7 @@
 
 ### ❤️ New Contributors
 
-- @renovate[bot] made their first contribution in [#3](https://github.com/liblaf/melon/pull/3)
+- [@renovate[bot]](https://github.com/apps/renovate) made their first contribution in [#3](https://github.com/liblaf/melon/pull/3)
 
 ## [0.1.0] - 2025-02-09
 
@@ -187,5 +182,5 @@
 
 ### ❤️ New Contributors
 
-- @github-actions[bot] made their first contribution in [#2](https://github.com/liblaf/melon/pull/2)
-- @liblaf made their first contribution
+- [@github-actions[bot]](https://github.com/apps/github-actions) made their first contribution in [#2](https://github.com/liblaf/melon/pull/2)
+- [@liblaf](https://github.com/liblaf) made their first contribution
