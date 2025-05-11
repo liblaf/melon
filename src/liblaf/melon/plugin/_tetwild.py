@@ -14,18 +14,18 @@ from liblaf.melon.typed import PathLike
 
 
 class TetwildKwargs(TypedDict, total=False):
-    lr: float
-    epsr: float
-    level: int
+    lr: float | None
+    epsr: float | None
+    level: int | None
 
 
 def tetwild(
     surface: Any,
     *,
     fix_winding: bool = True,
-    lr: float = 0.05,
-    epsr: float = 1e-3,
-    level: int = 6,
+    lr: float | None = None,
+    epsr: float | None = None,
+    level: int | None = None,
     csg: bool = False,
     **kwargs,
 ) -> pv.UnstructuredGrid:
@@ -60,6 +60,8 @@ def _tetwild_exe(
 def _tetwild_exe_args(**kwargs: Unpack[TetwildKwargs]) -> Generator[str]:
     for k, v in kwargs.items():
         key: str = k.replace("_", "-")
+        if v is None:
+            continue
         if isinstance(v, bool):
             if v:
                 yield f"--{key}"

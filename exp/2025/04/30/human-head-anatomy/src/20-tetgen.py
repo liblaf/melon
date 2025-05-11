@@ -33,9 +33,7 @@ def main(cfg: Config) -> None:
             },
         },
         lr=1.0 / 90.0,
-        epsr=1e-3,
         csg=True,
-        skip_simplify=True,
     )
 
     melon.save(cfg.output, tetmesh)
