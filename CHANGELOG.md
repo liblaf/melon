@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.2.0](https://github.com/liblaf/melon/compare/v0.1.17...v0.2.0) (2025-05-11)
+
+
+### ⚠ BREAKING CHANGES
+
+* next ([#32](https://github.com/liblaf/melon/issues/32))
+
+### ✨ Features
+
+* next ([#32](https://github.com/liblaf/melon/issues/32)) ([ba54e21](https://github.com/liblaf/melon/commit/ba54e212802e04d56d79904316bce0015ab818f1))
+
 ## [0.1.17](https://github.com/liblaf/melon/compare/v0.1.16..v0.1.17) - 2025-05-07
 
 ### ⬆️ Dependencies
