@@ -1,0 +1,8 @@
+import pyvista as pv
+
+from liblaf.melon.io.abc import ConverterDispatcher
+
+from ._poly_data import PolyDataToPointSet
+
+as_point_set = ConverterDispatcher(pv.PointSet)
+as_point_set.register(PolyDataToPointSet())

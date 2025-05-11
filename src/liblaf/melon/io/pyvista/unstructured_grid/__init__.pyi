@@ -1,18 +1,13 @@
-from . import conversion
-from ._reader import UnstructuredGridReader, load_unstructured_grid
-from ._writer import UnstructuredGridWriter
-from .conversion import (
-    MappingToUnstructuredGrid,
-    PolyDataToUnstructuredGrid,
-    as_unstructured_grid,
-)
+from . import convert, reader, writer
+from .convert import as_unstructured_grid
+from .reader import load_unstructured_grid
+from .writer import UnstructuredGridWriter
 
 __all__ = [
-    "MappingToUnstructuredGrid",
-    "PolyDataToUnstructuredGrid",
-    "UnstructuredGridReader",
     "UnstructuredGridWriter",
     "as_unstructured_grid",
-    "conversion",
+    "convert",
     "load_unstructured_grid",
+    "reader",
+    "writer",
 ]

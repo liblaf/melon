@@ -1,4 +1,3 @@
-from ._attrs import Attrs, AttrsLike
-from ._path import PathLike
+from ._misc import PathLike
 
-__all__ = ["Attrs", "AttrsLike", "PathLike"]
+__all__ = ["PathLike"]

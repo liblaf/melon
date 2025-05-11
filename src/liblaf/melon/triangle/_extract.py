@@ -7,7 +7,7 @@ from numpy.typing import ArrayLike
 
 from liblaf.melon import io
 
-from .selection import select_groups
+from ._selection import select_groups
 
 
 def extract_cells(

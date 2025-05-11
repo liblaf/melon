@@ -1,0 +1,5 @@
+outs:
+- md5: df4c420f5e968f11406575758570bb0d
+  size: 3060014
+  hash: md5
+  path: cranium.vtp

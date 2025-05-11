@@ -29,7 +29,7 @@ def fast_wrapping(
     )
     with tempfile.TemporaryDirectory() as tmpdir_str:
         tmpdir: Path = Path(tmpdir_str).absolute()
-        project_file: Path = tmpdir / "wrapping.wrap"
+        project_file: Path = tmpdir / "fast-wrapping.wrap"
         source_file: Path = tmpdir / "source.obj"
         target_file: Path = tmpdir / "target.obj"
         output_file: Path = tmpdir / "output.obj"
@@ -43,8 +43,8 @@ def fast_wrapping(
         io.save_polygons(free_polygons_floating_file, free_polygons_floating)
         template = string.Template(
             (
-                importlib.resources.files("liblaf.melon.plugin.wrap.resources")
-                / "wrapping.wrap"
+                importlib.resources.files("liblaf.melon.plugin.wrap")
+                / "fast-wrapping.wrap"
             ).read_text()
         )
         project: str = template.substitute(

@@ -1,0 +1,5 @@
+outs:
+- md5: 7176c7c57b0549ea44ad19fa5b977826
+  size: 206338292
+  hash: md5
+  path: complete_human_head_anatomy.glb
