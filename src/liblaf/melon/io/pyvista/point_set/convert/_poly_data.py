@@ -13,4 +13,5 @@ class PolyDataToPointSet(AbstractConverter):
 
     @override
     def convert(self, data: pv.PolyData, /, **kwargs) -> pv.PointSet:
+        data.active_scalars_name = None
         return data.cast_to_pointset(**kwargs)
