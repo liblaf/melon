@@ -32,7 +32,8 @@ def main(cfg: Config) -> None:
                 "right": mandible,
             },
         },
-        lr=1.0 / 120.0,
+        lr=0.05 / 3,
+        epsr=1e-3 / 3,
         csg=True,
     )
 
