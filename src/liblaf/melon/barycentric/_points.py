@@ -6,7 +6,7 @@ from numpy.typing import ArrayLike
 
 def barycentric_to_points(
     cells: Float[ArrayLike, "N B D"], barycentric: Float[ArrayLike, "N B"]
-) -> Float[ArrayLike, "N D"]:
+) -> Float[np.ndarray, "N D"]:
     cells: Float[np.ndarray, "N B D"] = np.asarray(cells)
     barycentric: Float[np.ndarray, "N B"] = np.asarray(barycentric)
     points: Float[np.ndarray, "N D"] = einops.einsum(
