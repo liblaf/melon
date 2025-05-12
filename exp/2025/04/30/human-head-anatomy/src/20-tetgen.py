@@ -36,6 +36,8 @@ def main(cfg: Config) -> None:
         epsr=1e-3 / 3.5,
         csg=True,
     )
+    cherries.log_metric("n_points", tetmesh.n_points)
+    cherries.log_metric("n_cells", tetmesh.n_cells)
 
     melon.save(cfg.output, tetmesh)
     cherries.log_output(cfg.output)
