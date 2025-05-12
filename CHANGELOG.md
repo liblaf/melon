@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.2](https://github.com/liblaf/melon/compare/v0.2.1...v0.2.2) (2025-05-12)
+
+
+### ⬆️ Dependencies
+
+* **deps:** update dependency python to &gt;=3.13,&lt;3.14 ([#21](https://github.com/liblaf/melon/issues/21)) ([1f27494](https://github.com/liblaf/melon/commit/1f27494bf17c402b5c8aebd11fea37a8bb237d91))
+
 ## [0.2.1](https://github.com/liblaf/melon/compare/v0.2.0..v0.2.1) - 2025-05-11
 
 ### 🐛 Bug Fixes
