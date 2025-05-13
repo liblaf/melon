@@ -1,15 +1,21 @@
 # Changelog
 
+## [0.2.2](https://github.com/liblaf/melon/compare/v0.2.1..v0.2.2) - 2025-05-12
+
+### ⬆️ Dependencies
+
+- **deps:** update dependency python to >=3.13,<3.14 (#21) - ([1f27494](https://github.com/liblaf/melon/commit/1f27494bf17c402b5c8aebd11fea37a8bb237d91))
+
+### ❤️ New Contributors
+
+- [@renovate[bot]](https://github.com/apps/renovate) made their first contribution in [#21](https://github.com/liblaf/melon/pull/21)
+
 ## [0.2.1](https://github.com/liblaf/melon/compare/v0.2.0..v0.2.1) - 2025-05-11
 
 ### 🐛 Bug Fixes
 
 - update tinyobjloader dependency to v2.0.0rc13 - ([7a93acb](https://github.com/liblaf/melon/commit/7a93acb77b45f9e2c7775bc132b7d775f7eaa5ab))
 - adjust tetgen parameters and scipy version constraint - ([3ec2c11](https://github.com/liblaf/melon/commit/3ec2c11239540f42d7701fde18515299f872a97b))
-
-### ❤️ New Contributors
-
-- [@liblaf](https://github.com/liblaf) made their first contribution
 
 ## [0.2.0](https://github.com/liblaf/melon/compare/v0.1.17..v0.2.0) - 2025-05-11
 
