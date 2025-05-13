@@ -99,7 +99,6 @@ class SeriesWriter(Sequence[File], contextlib.AbstractContextManager):
         self, data: Any, *, time: float | None = None, timestep: float | None = None
     ) -> None:
         filename: str = f"{self.name}_{len(self):06d}{self.ext}"
-        ic(filename, self.ext, self.file)
         save(self.folder / filename, data)
         if time is None:
             if timestep is None:
