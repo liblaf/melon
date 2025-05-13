@@ -1,5 +1,5 @@
 outs:
-- md5: 2498477efaa9d6c7778b11d725ac344c
-  size: 11344235
+- md5: 4ef4ed264e4ea7ef529abc97befe02a1
+  size: 10595291
   hash: md5
   path: 22-tetgen-distance.vtp
