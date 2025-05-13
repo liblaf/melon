@@ -1,22 +1,21 @@
 # Changelog
 
-## [0.2.4](https://github.com/liblaf/melon/compare/v0.2.3...v0.2.4) (2025-05-13)
-
+## [0.2.4](https://github.com/liblaf/melon/compare/v0.2.3..v0.2.4) - 2025-05-13
 
 ### 🐛 Bug Fixes
 
-* **io/paraview:** remove debug logging in SeriesWriter ([bb1a52f](https://github.com/liblaf/melon/commit/bb1a52f436fbdfdcdef8fd5e21b83efe41dea6fb))
-* trigger release-please ([80df7b5](https://github.com/liblaf/melon/commit/80df7b5516b0be5f668e3cc328b6fea1b07be126))
+- **io/paraview:** remove debug logging in SeriesWriter - ([bb1a52f](https://github.com/liblaf/melon/commit/bb1a52f436fbdfdcdef8fd5e21b83efe41dea6fb))
+- trigger release-please - ([80df7b5](https://github.com/liblaf/melon/commit/80df7b5516b0be5f668e3cc328b6fea1b07be126))
+
+### ❤️ New Contributors
+
+- [@liblaf](https://github.com/liblaf) made their first contribution
 
 ## [0.2.3](https://github.com/liblaf/melon/compare/v0.2.2..v0.2.3) - 2025-05-13
 
 ### ✨ Features
 
 - **io:** add ParaView PVD and Series writers - ([3cd1ed8](https://github.com/liblaf/melon/commit/3cd1ed87abae3f99b05cc4d051413fd7fe25c6fe))
-
-### ❤️ New Contributors
-
-- [@liblaf](https://github.com/liblaf) made their first contribution
 
 ## [0.2.2](https://github.com/liblaf/melon/compare/v0.2.1..v0.2.2) - 2025-05-13
 
