@@ -52,6 +52,7 @@ class WriterDispatcher:
     def save(self, path: PathLike, data: Any, /, **kwargs) -> None:
         for writer in self.writers:
             if writer.match_data(data) and writer.match_path(path):
+                Path(path).parent.mkdir(parents=True, exist_ok=True)
                 writer.save(path, data, **kwargs)
                 logger.debug('Saved {} to "{}".', type(data), path)
                 return

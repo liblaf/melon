@@ -2,6 +2,8 @@ from . import barycentric, io, mesh, plugin, proximity, triangle, typed, utils
 from ._version import __version__, __version_tuple__, version, version_tuple
 from .barycentric import barycentric_to_points, sample_barycentric_coords
 from .io import (
+    PVDWriter,
+    SeriesWriter,
     as_poly_data,
     as_trimesh,
     as_unstructured_grid,
@@ -30,6 +32,8 @@ __all__ = [
     "NearestPointPrepared",
     "NearestPrepared",
     "NearestResult",
+    "PVDWriter",
+    "SeriesWriter",
     "__version__",
     "__version_tuple__",
     "annotate_landmarks",

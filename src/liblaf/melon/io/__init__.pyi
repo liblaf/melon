@@ -1,5 +1,6 @@
-from . import abc, pyvista, trimesh
+from . import abc, paraview, pyvista, trimesh
 from ._save import save
+from .paraview import PVDWriter, SeriesWriter
 from .pyvista import (
     as_mesh,
     as_point_set,
@@ -19,6 +20,8 @@ from .wrap import (
 )
 
 __all__ = [
+    "PVDWriter",
+    "SeriesWriter",
     "abc",
     "as_mesh",
     "as_point_set",
@@ -32,6 +35,7 @@ __all__ = [
     "load_polygons",
     "load_trimesh",
     "load_unstructured_grid",
+    "paraview",
     "pyvista",
     "save",
     "save_landmarks",
