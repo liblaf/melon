@@ -34,7 +34,7 @@ def main(cfg: Config) -> None:
     source, target = nearest_result["vertex_id"]
     path: list[int] = nx.shortest_path(graph, source, target, weight="length")  # pyright: ignore[reportAssignmentType]
     cherries.log_metric(
-        "shortest path length", nx.path_weight(graph, path, weight="length")
+        "shortest_path_length", nx.path_weight(graph, path, weight="length")
     )
     path: Integer[np.ndarray, " P"] = np.asarray(path, dtype=int)
     surface.point_data["in-path"] = np.zeros((surface.n_points,), dtype=bool)
