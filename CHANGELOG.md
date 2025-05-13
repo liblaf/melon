@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.3](https://github.com/liblaf/melon/compare/v0.2.2...v0.2.3) (2025-05-13)
+
+
+### ✨ Features
+
+* **io:** add ParaView PVD and Series writers ([3cd1ed8](https://github.com/liblaf/melon/commit/3cd1ed87abae3f99b05cc4d051413fd7fe25c6fe))
+
 ## [0.2.2](https://github.com/liblaf/melon/compare/v0.2.1..v0.2.2) - 2025-05-12
 
 ### ⬆️ Dependencies
