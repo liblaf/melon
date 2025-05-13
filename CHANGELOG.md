@@ -1,14 +1,21 @@
 # Changelog
 
-## [0.2.2](https://github.com/liblaf/melon/compare/v0.2.1..v0.2.2) - 2025-05-12
+## [0.2.3](https://github.com/liblaf/melon/compare/v0.2.2..v0.2.3) - 2025-05-13
 
-### ⬆️ Dependencies
+### ✨ Features
 
-- **deps:** update dependency python to >=3.13,<3.14 (#21) - ([1f27494](https://github.com/liblaf/melon/commit/1f27494bf17c402b5c8aebd11fea37a8bb237d91))
+- **io:** add ParaView PVD and Series writers - ([3cd1ed8](https://github.com/liblaf/melon/commit/3cd1ed87abae3f99b05cc4d051413fd7fe25c6fe))
 
 ### ❤️ New Contributors
 
-- [@renovate[bot]](https://github.com/apps/renovate) made their first contribution in [#21](https://github.com/liblaf/melon/pull/21)
+- [@liblaf](https://github.com/liblaf) made their first contribution
+
+## [0.2.2](https://github.com/liblaf/melon/compare/v0.2.1..v0.2.2) - 2025-05-13
+
+### ⬆️ Dependencies
+
+- **deps:** update dependency python to >=3.13,<3.14 (#36) - ([73c0c94](https://github.com/liblaf/melon/commit/73c0c94d3c550501017e68935b3dffd9e532e979))
+- **deps:** update dependency python to >=3.13,<3.14 (#21) - ([1f27494](https://github.com/liblaf/melon/commit/1f27494bf17c402b5c8aebd11fea37a8bb237d91))
 
 ## [0.2.1](https://github.com/liblaf/melon/compare/v0.2.0..v0.2.1) - 2025-05-11
 
