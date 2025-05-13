@@ -25,19 +25,19 @@ def is_array_like(obj: Any) -> bool:
 
 
 def is_jax(obj: Any) -> bool:
-    return is_subclass(obj, "jax", "Array")
+    return is_instance(obj, "jax", "Array")
 
 
 def is_numpy(obj: Any) -> bool:
-    return is_subclass(obj, "numpy", "ndarray")
+    return is_instance(obj, "numpy", "ndarray")
 
 
 def is_torch(obj: Any) -> bool:
-    return is_subclass(obj, "torch", "Tensor")
+    return is_instance(obj, "torch", "Tensor")
 
 
 def is_warp(obj: Any) -> bool:
-    return is_subclass(obj, "warp", "array")
+    return is_instance(obj, "warp", "array")
 
 
 # ---------------------------------- pyvista --------------------------------- #
