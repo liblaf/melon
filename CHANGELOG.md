@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.2.4](https://github.com/liblaf/melon/compare/v0.2.3...v0.2.4) (2025-05-13)
+
+
+### 🐛 Bug Fixes
+
+* **io/paraview:** remove debug logging in SeriesWriter ([bb1a52f](https://github.com/liblaf/melon/commit/bb1a52f436fbdfdcdef8fd5e21b83efe41dea6fb))
+* trigger release-please ([80df7b5](https://github.com/liblaf/melon/commit/80df7b5516b0be5f668e3cc328b6fea1b07be126))
+
 ## [0.2.3](https://github.com/liblaf/melon/compare/v0.2.2..v0.2.3) - 2025-05-13
 
 ### ✨ Features
