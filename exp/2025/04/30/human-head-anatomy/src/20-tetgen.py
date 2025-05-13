@@ -32,8 +32,8 @@ def main(cfg: Config) -> None:
                 "right": mandible,
             },
         },
-        lr=0.05 * 0.26,
-        epsr=1e-3 * 0.26,
+        lr=0.05 * 0.25,
+        epsr=1e-3 * 0.25,
         csg=True,
     )
     cherries.log_metric("n_points", tetmesh.n_points)
