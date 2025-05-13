@@ -12,28 +12,28 @@
         <meta name="author" content="liblaf">
       
       
-        <link rel="canonical" href="https://liblaf.github.io/melon/dev/api/liblaf/melon/io/pyvista/unstructured_grid/writer/">
+        <link rel="canonical" href="https://liblaf.github.io/melon/dev/api/liblaf/melon/barycentric/">
       
       
-        <link rel="prev" href="../reader/">
+        <link rel="prev" href="../">
       
       
-        <link rel="next" href="../../../trimesh/">
+        <link rel="next" href="../io/">
       
       
-      <link rel="icon" href="../../../../../../../assets/images/favicon.png">
+      <link rel="icon" href="../../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
     
     
       
-        <title>liblaf.melon.io.pyvista.unstructured_grid.writer - Melon</title>
+        <title>liblaf.melon.barycentric - Melon</title>
       
     
     
-      <link rel="stylesheet" href="../../../../../../../assets/stylesheets/main.342714a4.min.css">
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.342714a4.min.css">
       
         
-        <link rel="stylesheet" href="../../../../../../../assets/stylesheets/palette.06af60db.min.css">
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.06af60db.min.css">
       
       
 
@@ -52,15 +52,15 @@
       
     
     
-      <link rel="stylesheet" href="../../../../../../../assets/_mkdocstrings.css">
+      <link rel="stylesheet" href="../../../../assets/_mkdocstrings.css">
     
-      <link rel="stylesheet" href="../../../../../../../css/fonts.css">
+      <link rel="stylesheet" href="../../../../css/fonts.css">
     
-      <link rel="stylesheet" href="../../../../../../../css/mkdocstrings/material.css">
+      <link rel="stylesheet" href="../../../../css/mkdocstrings/material.css">
     
-      <link rel="stylesheet" href="../../../../../../../css/mkdocstrings/syntax-highlight-in-signatures.css">
+      <link rel="stylesheet" href="../../../../css/mkdocstrings/syntax-highlight-in-signatures.css">
     
-    <script>__md_scope=new URL("../../../../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -69,11 +69,11 @@
       
         <meta  property="og:type"  content="website" >
       
-        <meta  property="og:title"  content="liblaf.melon.io.pyvista.unstructured_grid.writer - Melon" >
+        <meta  property="og:title"  content="liblaf.melon.barycentric - Melon" >
       
         <meta  property="og:description"  content="TODO" >
       
-        <meta  property="og:image"  content="https://liblaf.github.io/melon/dev/assets/images/social/api/liblaf/melon/io/pyvista/unstructured_grid/writer/README.png" >
+        <meta  property="og:image"  content="https://liblaf.github.io/melon/dev/assets/images/social/api/liblaf/melon/barycentric/README.png" >
       
         <meta  property="og:image:type"  content="image/png" >
       
@@ -81,15 +81,15 @@
       
         <meta  property="og:image:height"  content="630" >
       
-        <meta  property="og:url"  content="https://liblaf.github.io/melon/dev/api/liblaf/melon/io/pyvista/unstructured_grid/writer/" >
+        <meta  property="og:url"  content="https://liblaf.github.io/melon/dev/api/liblaf/melon/barycentric/" >
       
         <meta  name="twitter:card"  content="summary_large_image" >
       
-        <meta  name="twitter:title"  content="liblaf.melon.io.pyvista.unstructured_grid.writer - Melon" >
+        <meta  name="twitter:title"  content="liblaf.melon.barycentric - Melon" >
       
         <meta  name="twitter:description"  content="TODO" >
       
-        <meta  name="twitter:image"  content="https://liblaf.github.io/melon/dev/assets/images/social/api/liblaf/melon/io/pyvista/unstructured_grid/writer/README.png" >
+        <meta  name="twitter:image"  content="https://liblaf.github.io/melon/dev/assets/images/social/api/liblaf/melon/barycentric/README.png" >
       
     
     
@@ -112,7 +112,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#liblaf.melon.io.pyvista.unstructured_grid.writer" class="md-skip">
+        <a href="#liblaf.melon.barycentric" class="md-skip">
           Skip to content
         </a>
       
@@ -132,7 +132,7 @@
 
 <header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../../../../../../.." title="Melon" class="md-header__button md-logo" aria-label="Melon" data-md-component="logo">
+    <a href="../../../.." title="Melon" class="md-header__button md-logo" aria-label="Melon" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -152,7 +152,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              liblaf.melon.io.pyvista.unstructured_grid.writer
+              liblaf.melon.barycentric
             
           </span>
         </div>
@@ -274,7 +274,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../../../../../.." class="md-tabs__link">
+      <a href="../../../.." class="md-tabs__link">
         
   
   
@@ -306,7 +306,7 @@
     
     
       <li class="md-tabs__item md-tabs__item--active">
-        <a href="../../../../" class="md-tabs__link">
+        <a href="../" class="md-tabs__link">
           
   
   
@@ -349,7 +349,7 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../../../../../.." title="Melon" class="md-nav__button md-logo" aria-label="Melon" data-md-component="logo">
+    <a href="../../../.." title="Melon" class="md-nav__button md-logo" aria-label="Melon" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -379,7 +379,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../../.." class="md-nav__link">
+      <a href="../../../.." class="md-nav__link">
         
   
   
@@ -516,7 +516,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../../" class="md-nav__link ">
+            <a href="../" class="md-nav__link ">
               
   
   
@@ -546,10 +546,30 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../../../barycentric/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    liblaf.melon.barycentric
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -560,6 +580,51 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#liblaf.melon.barycentric" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-module"></code>&nbsp;barycentric
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#liblaf.melon.barycentric.barycentric_to_points" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-function"></code>&nbsp;barycentric_to_points
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#liblaf.melon.barycentric.sample_barycentric_coords" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-function"></code>&nbsp;sample_barycentric_coords
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -569,8 +634,6 @@
                 
   
   
-    
-  
   
   
     
@@ -583,15 +646,15 @@
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_1_2" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_1_2" >
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../" class="md-nav__link ">
+            <a href="../io/" class="md-nav__link ">
               
   
   
@@ -610,7 +673,7 @@
             
           </div>
         
-        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_1_1_2_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_1_1_2_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2_1_1_2">
             <span class="md-nav__icon md-icon"></span>
             liblaf.melon.io
@@ -624,7 +687,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../abc/" class="md-nav__link">
+      <a href="../io/abc/" class="md-nav__link">
         
   
   
@@ -647,7 +710,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../paraview/" class="md-nav__link">
+      <a href="../io/paraview/" class="md-nav__link">
         
   
   
@@ -667,8 +730,6 @@
                 
   
   
-    
-  
   
   
     
@@ -681,15 +742,15 @@
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_1_2_3" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_1_2_3" >
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../" class="md-nav__link ">
+            <a href="../io/pyvista/" class="md-nav__link ">
               
   
   
@@ -708,7 +769,7 @@
             
           </div>
         
-        <nav class="md-nav" data-md-level="5" aria-labelledby="__nav_2_1_1_2_3_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="5" aria-labelledby="__nav_2_1_1_2_3_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2_1_1_2_3">
             <span class="md-nav__icon md-icon"></span>
             liblaf.melon.io.pyvista
@@ -739,7 +800,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../point_set/" class="md-nav__link ">
+            <a href="../io/pyvista/point_set/" class="md-nav__link ">
               
   
   
@@ -772,7 +833,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../point_set/convert/" class="md-nav__link">
+      <a href="../io/pyvista/point_set/convert/" class="md-nav__link">
         
   
   
@@ -820,7 +881,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../poly_data/" class="md-nav__link ">
+            <a href="../io/pyvista/poly_data/" class="md-nav__link ">
               
   
   
@@ -853,7 +914,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../poly_data/convert/" class="md-nav__link">
+      <a href="../io/pyvista/poly_data/convert/" class="md-nav__link">
         
   
   
@@ -876,7 +937,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../poly_data/reader/" class="md-nav__link">
+      <a href="../io/pyvista/poly_data/reader/" class="md-nav__link">
         
   
   
@@ -899,7 +960,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../poly_data/writer/" class="md-nav__link">
+      <a href="../io/pyvista/poly_data/writer/" class="md-nav__link">
         
   
   
@@ -927,8 +988,6 @@
                 
   
   
-    
-  
   
   
     
@@ -941,15 +1000,15 @@
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_1_2_3_3" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_1_2_3_3" >
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../" class="md-nav__link ">
+            <a href="../io/pyvista/unstructured_grid/" class="md-nav__link ">
               
   
   
@@ -968,7 +1027,7 @@
             
           </div>
         
-        <nav class="md-nav" data-md-level="6" aria-labelledby="__nav_2_1_1_2_3_3_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="6" aria-labelledby="__nav_2_1_1_2_3_3_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2_1_1_2_3_3">
             <span class="md-nav__icon md-icon"></span>
             liblaf.melon.io.pyvista.unstructured_grid
@@ -982,7 +1041,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../convert/" class="md-nav__link">
+      <a href="../io/pyvista/unstructured_grid/convert/" class="md-nav__link">
         
   
   
@@ -1005,7 +1064,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../reader/" class="md-nav__link">
+      <a href="../io/pyvista/unstructured_grid/reader/" class="md-nav__link">
         
   
   
@@ -1025,30 +1084,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    liblaf.melon.io.pyvista.unstructured_grid.writer
-    
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../io/pyvista/unstructured_grid/writer/" class="md-nav__link">
         
   
   
@@ -1059,102 +1098,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#liblaf.melon.io.pyvista.unstructured_grid.writer" class="md-nav__link">
-    <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-module"></code>&nbsp;writer
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#liblaf.melon.io.pyvista.unstructured_grid.writer.UnstructuredGridWriter" class="md-nav__link">
-    <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;UnstructuredGridWriter
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label=" UnstructuredGridWriter">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#liblaf.melon.io.pyvista.unstructured_grid.writer.UnstructuredGridWriter.extensions" class="md-nav__link">
-    <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;extensions
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#liblaf.melon.io.pyvista.unstructured_grid.writer.UnstructuredGridWriter.precedence" class="md-nav__link">
-    <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;precedence
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#liblaf.melon.io.pyvista.unstructured_grid.writer.UnstructuredGridWriter.__call__" class="md-nav__link">
-    <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;__call__
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#liblaf.melon.io.pyvista.unstructured_grid.writer.UnstructuredGridWriter.match_data" class="md-nav__link">
-    <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;match_data
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#liblaf.melon.io.pyvista.unstructured_grid.writer.UnstructuredGridWriter.match_path" class="md-nav__link">
-    <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;match_path
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#liblaf.melon.io.pyvista.unstructured_grid.writer.UnstructuredGridWriter.save" class="md-nav__link">
-    <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;save
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1200,7 +1143,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../trimesh/" class="md-nav__link ">
+            <a href="../io/trimesh/" class="md-nav__link ">
               
   
   
@@ -1233,7 +1176,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../trimesh/convert/" class="md-nav__link">
+      <a href="../io/trimesh/convert/" class="md-nav__link">
         
   
   
@@ -1256,7 +1199,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../trimesh/reader/" class="md-nav__link">
+      <a href="../io/trimesh/reader/" class="md-nav__link">
         
   
   
@@ -1279,7 +1222,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../trimesh/writer/" class="md-nav__link">
+      <a href="../io/trimesh/writer/" class="md-nav__link">
         
   
   
@@ -1327,7 +1270,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../wrap/" class="md-nav__link ">
+            <a href="../io/wrap/" class="md-nav__link ">
               
   
   
@@ -1360,7 +1303,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../wrap/landmarks/" class="md-nav__link">
+      <a href="../io/wrap/landmarks/" class="md-nav__link">
         
   
   
@@ -1383,7 +1326,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../wrap/polygons/" class="md-nav__link">
+      <a href="../io/wrap/polygons/" class="md-nav__link">
         
   
   
@@ -1422,7 +1365,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../mesh/" class="md-nav__link">
+      <a href="../mesh/" class="md-nav__link">
         
   
   
@@ -1462,7 +1405,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../../plugin/" class="md-nav__link ">
+            <a href="../plugin/" class="md-nav__link ">
               
   
   
@@ -1495,7 +1438,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../plugin/wrap/" class="md-nav__link">
+      <a href="../plugin/wrap/" class="md-nav__link">
         
   
   
@@ -1526,7 +1469,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../proximity/" class="md-nav__link">
+      <a href="../proximity/" class="md-nav__link">
         
   
   
@@ -1549,7 +1492,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../tetra/" class="md-nav__link">
+      <a href="../tetra/" class="md-nav__link">
         
   
   
@@ -1572,7 +1515,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../triangle/" class="md-nav__link">
+      <a href="../triangle/" class="md-nav__link">
         
   
   
@@ -1595,7 +1538,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../typed/" class="md-nav__link">
+      <a href="../typed/" class="md-nav__link">
         
   
   
@@ -1618,7 +1561,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../utils/" class="md-nav__link">
+      <a href="../utils/" class="md-nav__link">
         
   
   
@@ -1682,80 +1625,29 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#liblaf.melon.io.pyvista.unstructured_grid.writer" class="md-nav__link">
+  <a href="#liblaf.melon.barycentric" class="md-nav__link">
     <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-module"></code>&nbsp;writer
+      <code class="doc-symbol doc-symbol-toc doc-symbol-module"></code>&nbsp;barycentric
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#liblaf.melon.io.pyvista.unstructured_grid.writer.UnstructuredGridWriter" class="md-nav__link">
+  <a href="#liblaf.melon.barycentric.barycentric_to_points" class="md-nav__link">
     <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;UnstructuredGridWriter
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label=" UnstructuredGridWriter">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#liblaf.melon.io.pyvista.unstructured_grid.writer.UnstructuredGridWriter.extensions" class="md-nav__link">
-    <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;extensions
+      <code class="doc-symbol doc-symbol-toc doc-symbol-function"></code>&nbsp;barycentric_to_points
     </span>
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#liblaf.melon.io.pyvista.unstructured_grid.writer.UnstructuredGridWriter.precedence" class="md-nav__link">
+      
+        <li class="md-nav__item">
+  <a href="#liblaf.melon.barycentric.sample_barycentric_coords" class="md-nav__link">
     <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;precedence
+      <code class="doc-symbol doc-symbol-toc doc-symbol-function"></code>&nbsp;sample_barycentric_coords
     </span>
   </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#liblaf.melon.io.pyvista.unstructured_grid.writer.UnstructuredGridWriter.__call__" class="md-nav__link">
-    <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;__call__
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#liblaf.melon.io.pyvista.unstructured_grid.writer.UnstructuredGridWriter.match_data" class="md-nav__link">
-    <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;match_data
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#liblaf.melon.io.pyvista.unstructured_grid.writer.UnstructuredGridWriter.match_path" class="md-nav__link">
-    <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;match_path
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#liblaf.melon.io.pyvista.unstructured_grid.writer.UnstructuredGridWriter.save" class="md-nav__link">
-    <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;save
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -1775,7 +1667,7 @@
 
 
   
-    <a href="https://github.com/liblaf/melon/blob/main/src/liblaf/melon/io/pyvista/unstructured_grid/writer/__init__.py" title="Edit this page" class="md-content__button md-icon">
+    <a href="https://github.com/liblaf/melon/blob/main/src/liblaf/melon/barycentric/__init__.py" title="Edit this page" class="md-content__button md-icon">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
     </a>
@@ -1784,20 +1676,20 @@
     
       
     
-    <a href="https://github.com/liblaf/melon/raw/main/src/liblaf/melon/io/pyvista/unstructured_grid/writer/__init__.py" title="View source of this page" class="md-content__button md-icon">
+    <a href="https://github.com/liblaf/melon/raw/main/src/liblaf/melon/barycentric/__init__.py" title="View source of this page" class="md-content__button md-icon">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 18c.56 0 1 .44 1 1s-.44 1-1 1-1-.44-1-1 .44-1 1-1m0-3c-2.73 0-5.06 1.66-6 4 .94 2.34 3.27 4 6 4s5.06-1.66 6-4c-.94-2.34-3.27-4-6-4m0 6.5a2.5 2.5 0 0 1-2.5-2.5 2.5 2.5 0 0 1 2.5-2.5 2.5 2.5 0 0 1 2.5 2.5 2.5 2.5 0 0 1-2.5 2.5M9.27 20H6V4h7v5h5v4.07c.7.08 1.36.25 2 .49V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h4.5a8.2 8.2 0 0 1-1.23-2"/></svg>
     </a>
   
 
 
-  <h1>liblaf.melon.io.pyvista.unstructured_grid.writer</h1>
+  <h1>liblaf.melon.barycentric</h1>
 
 <div class="doc doc-object doc-module">
 
 
 
-<a id="liblaf.melon.io.pyvista.unstructured_grid.writer"></a>
+<a id="liblaf.melon.barycentric"></a>
     <div class="doc doc-contents first">
 
 
@@ -1807,18 +1699,25 @@
 
 
 
-<p><span class="doc-section-title">Classes:</span></p>
+
+
+<p><span class="doc-section-title">Functions:</span></p>
     <ul>
-        <li class="doc-section-item field-body">
-          <b><code><a class="autorefs autorefs-internal" title="&lt;code class=&quot;doc-symbol doc-symbol-heading doc-symbol-class&quot;&gt;&lt;/code&gt;            &lt;span class=&quot;doc doc-object-name doc-class-name&quot;&gt;UnstructuredGridWriter&lt;/span&gt; (&lt;code&gt;liblaf.melon.io.pyvista.unstructured_grid.writer.UnstructuredGridWriter&lt;/code&gt;)" href="#liblaf.melon.io.pyvista.unstructured_grid.writer.UnstructuredGridWriter">UnstructuredGridWriter</a></code></b>
-          –
-          <div class="doc-md-description">
-            
-          </div>
-        </li>
+          <li class="doc-section-item field-body">
+            <b><code><a class="autorefs autorefs-internal" title="&lt;code class=&quot;doc-symbol doc-symbol-heading doc-symbol-function&quot;&gt;&lt;/code&gt;            &lt;span class=&quot;doc doc-object-name doc-function-name&quot;&gt;barycentric_to_points&lt;/span&gt; (&lt;code&gt;liblaf.melon.barycentric.barycentric_to_points&lt;/code&gt;)" href="#liblaf.melon.barycentric.barycentric_to_points">barycentric_to_points</a></code></b>
+            –
+            <div class="doc-md-description">
+              
+            </div>
+          </li>
+          <li class="doc-section-item field-body">
+            <b><code><a class="autorefs autorefs-internal" title="&lt;code class=&quot;doc-symbol doc-symbol-heading doc-symbol-function&quot;&gt;&lt;/code&gt;            &lt;span class=&quot;doc doc-object-name doc-function-name&quot;&gt;sample_barycentric_coords&lt;/span&gt; (&lt;code&gt;liblaf.melon.barycentric.sample_barycentric_coords&lt;/code&gt;)" href="#liblaf.melon.barycentric.sample_barycentric_coords">sample_barycentric_coords</a></code></b>
+            –
+            <div class="doc-md-description">
+              
+            </div>
+          </li>
     </ul>
-
-
 
 
 
@@ -1833,277 +1732,94 @@
 
 
 
-<div class="doc doc-object doc-class">
-
-
-
-<h2 id="liblaf.melon.io.pyvista.unstructured_grid.writer.UnstructuredGridWriter" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>            <span class="doc doc-object-name doc-class-name">UnstructuredGridWriter</span>
-
-
-<a href="#liblaf.melon.io.pyvista.unstructured_grid.writer.UnstructuredGridWriter" class="headerlink" title="Permanent link">¤</a></h2>
-
-
-    <div class="doc doc-contents ">
-            <p class="doc doc-class-bases">
-              Bases: <code><a class="autorefs autorefs-internal" title="&lt;code class=&quot;doc-symbol doc-symbol-heading doc-symbol-class&quot;&gt;&lt;/code&gt;            &lt;span class=&quot;doc doc-object-name doc-class-name&quot;&gt;AbstractWriter&lt;/span&gt; (&lt;code&gt;liblaf.melon.io.abc.AbstractWriter&lt;/code&gt;)" href="../../../abc/#liblaf.melon.io.abc.AbstractWriter">AbstractWriter</a></code></p>
-
-
-
-
-
-
-
-
-
-
-
-<p><span class="doc-section-title">Methods:</span></p>
-    <ul>
-          <li class="doc-section-item field-body">
-            <b><code><a class="autorefs autorefs-internal" title="&lt;code class=&quot;doc-symbol doc-symbol-heading doc-symbol-method&quot;&gt;&lt;/code&gt;            &lt;span class=&quot;doc doc-object-name doc-function-name&quot;&gt;__call__&lt;/span&gt; (&lt;code&gt;liblaf.melon.io.pyvista.unstructured_grid.writer.UnstructuredGridWriter.__call__&lt;/code&gt;)" href="#liblaf.melon.io.pyvista.unstructured_grid.writer.UnstructuredGridWriter.__call__">__call__</a></code></b>
-            –
-            <div class="doc-md-description">
-              
-            </div>
-          </li>
-          <li class="doc-section-item field-body">
-            <b><code><a class="autorefs autorefs-internal" title="&lt;code class=&quot;doc-symbol doc-symbol-heading doc-symbol-method&quot;&gt;&lt;/code&gt;            &lt;span class=&quot;doc doc-object-name doc-function-name&quot;&gt;match_data&lt;/span&gt; (&lt;code&gt;liblaf.melon.io.pyvista.unstructured_grid.writer.UnstructuredGridWriter.match_data&lt;/code&gt;)" href="#liblaf.melon.io.pyvista.unstructured_grid.writer.UnstructuredGridWriter.match_data">match_data</a></code></b>
-            –
-            <div class="doc-md-description">
-              
-            </div>
-          </li>
-          <li class="doc-section-item field-body">
-            <b><code><a class="autorefs autorefs-internal" title="&lt;code class=&quot;doc-symbol doc-symbol-heading doc-symbol-method&quot;&gt;&lt;/code&gt;            &lt;span class=&quot;doc doc-object-name doc-function-name&quot;&gt;match_path&lt;/span&gt; (&lt;code&gt;liblaf.melon.io.pyvista.unstructured_grid.writer.UnstructuredGridWriter.match_path&lt;/code&gt;)" href="#liblaf.melon.io.pyvista.unstructured_grid.writer.UnstructuredGridWriter.match_path">match_path</a></code></b>
-            –
-            <div class="doc-md-description">
-              
-            </div>
-          </li>
-          <li class="doc-section-item field-body">
-            <b><code><a class="autorefs autorefs-internal" title="&lt;code class=&quot;doc-symbol doc-symbol-heading doc-symbol-method&quot;&gt;&lt;/code&gt;            &lt;span class=&quot;doc doc-object-name doc-function-name&quot;&gt;save&lt;/span&gt; (&lt;code&gt;liblaf.melon.io.pyvista.unstructured_grid.writer.UnstructuredGridWriter.save&lt;/code&gt;)" href="#liblaf.melon.io.pyvista.unstructured_grid.writer.UnstructuredGridWriter.save">save</a></code></b>
-            –
-            <div class="doc-md-description">
-              
-            </div>
-          </li>
-    </ul>
-
-
-
-
-<p><span class="doc-section-title">Attributes:</span></p>
-    <ul>
-        <li class="doc-section-item field-body">
-          <b><code><a class="autorefs autorefs-internal" title="&lt;code class=&quot;doc-symbol doc-symbol-heading doc-symbol-attribute&quot;&gt;&lt;/code&gt;            &lt;span class=&quot;doc doc-object-name doc-attribute-name&quot;&gt;extensions&lt;/span&gt;
-
-
-  &lt;span class=&quot;doc doc-labels&quot;&gt;
-      &lt;small class=&quot;doc doc-label doc-label-class-attribute&quot;&gt;&lt;code&gt;class-attribute&lt;/code&gt;&lt;/small&gt;
-      &lt;small class=&quot;doc doc-label doc-label-instance-attribute&quot;&gt;&lt;code&gt;instance-attribute&lt;/code&gt;&lt;/small&gt;
-  &lt;/span&gt; (&lt;code&gt;liblaf.melon.io.pyvista.unstructured_grid.writer.UnstructuredGridWriter.extensions&lt;/code&gt;)" href="#liblaf.melon.io.pyvista.unstructured_grid.writer.UnstructuredGridWriter.extensions">extensions</a></code></b>
-              (<code><a class="autorefs autorefs-external" title="&lt;code&gt;collections.abc.Container&lt;/code&gt;" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Container">Container</a>[<a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a>]</code>)
-          –
-          <div class="doc-md-description">
-            
-          </div>
-        </li>
-        <li class="doc-section-item field-body">
-          <b><code><a class="autorefs autorefs-internal" title="&lt;code class=&quot;doc-symbol doc-symbol-heading doc-symbol-attribute&quot;&gt;&lt;/code&gt;            &lt;span class=&quot;doc doc-object-name doc-attribute-name&quot;&gt;precedence&lt;/span&gt;
-
-
-  &lt;span class=&quot;doc doc-labels&quot;&gt;
-      &lt;small class=&quot;doc doc-label doc-label-class-attribute&quot;&gt;&lt;code&gt;class-attribute&lt;/code&gt;&lt;/small&gt;
-      &lt;small class=&quot;doc doc-label doc-label-instance-attribute&quot;&gt;&lt;code&gt;instance-attribute&lt;/code&gt;&lt;/small&gt;
-  &lt;/span&gt; (&lt;code&gt;liblaf.melon.io.pyvista.unstructured_grid.writer.UnstructuredGridWriter.precedence&lt;/code&gt;)" href="#liblaf.melon.io.pyvista.unstructured_grid.writer.UnstructuredGridWriter.precedence">precedence</a></code></b>
-              (<code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#int">int</a></code>)
-          –
-          <div class="doc-md-description">
-            
-          </div>
-        </li>
-    </ul>
-
-
-
-
-  <div class="doc doc-children">
-
-
-
-
-
-
-
-<div class="doc doc-object doc-attribute">
-
-
-
-<h3 id="liblaf.melon.io.pyvista.unstructured_grid.writer.UnstructuredGridWriter.extensions" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <span class="doc doc-object-name doc-attribute-name">extensions</span>
-
-
-  <span class="doc doc-labels">
-      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
-      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
-  </span>
-
-<a href="#liblaf.melon.io.pyvista.unstructured_grid.writer.UnstructuredGridWriter.extensions" class="headerlink" title="Permanent link">¤</a></h3>
-<div class="doc-signature highlight"><pre><span></span><code><span class="n">extensions</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" title="&lt;code&gt;collections.abc.Container&lt;/code&gt;" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Container">Container</a></span><span class="p">[</span><span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;.vtu&#39;</span><span class="p">}</span>
-</code></pre></div>
-
-    <div class="doc doc-contents ">
-
-    </div>
-
-</div>
-
-<div class="doc doc-object doc-attribute">
-
-
-
-<h3 id="liblaf.melon.io.pyvista.unstructured_grid.writer.UnstructuredGridWriter.precedence" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <span class="doc doc-object-name doc-attribute-name">precedence</span>
-
-
-  <span class="doc doc-labels">
-      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
-      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
-  </span>
-
-<a href="#liblaf.melon.io.pyvista.unstructured_grid.writer.UnstructuredGridWriter.precedence" class="headerlink" title="Permanent link">¤</a></h3>
-<div class="doc-signature highlight"><pre><span></span><code><span class="n">precedence</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#int">int</a></span> <span class="o">=</span> <span class="mi">0</span>
-</code></pre></div>
-
-    <div class="doc doc-contents ">
-
-    </div>
-
-</div>
-
-
 
 <div class="doc doc-object doc-function">
 
 
-<h3 id="liblaf.melon.io.pyvista.unstructured_grid.writer.UnstructuredGridWriter.__call__" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <span class="doc doc-object-name doc-function-name">__call__</span>
+<h2 id="liblaf.melon.barycentric.barycentric_to_points" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-function"></code>            <span class="doc doc-object-name doc-function-name">barycentric_to_points</span>
 
 
-<a href="#liblaf.melon.io.pyvista.unstructured_grid.writer.UnstructuredGridWriter.__call__" class="headerlink" title="Permanent link">¤</a></h3>
-<div class="doc-signature highlight"><pre><span></span><code><span class="fm">__call__</span><span class="p">(</span><span class="nf">path</span><span class="p">:</span> <span class="n"><span title="liblaf.melon.typed.PathLike">PathLike</span></span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" title="&lt;code&gt;typing.Any&lt;/code&gt;" href="https://docs.python.org/3/library/typing.html#typing.Any">Any</a></span><span class="p">,</span> <span class="o">/</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+<a href="#liblaf.melon.barycentric.barycentric_to_points" class="headerlink" title="Permanent link">¤</a></h2>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">barycentric_to_points</span><span class="p">(</span>
+    <span class="n">cells</span><span class="p">:</span> <span class="n"><span title="jaxtyping.Float">Float</span></span><span class="p">[</span><span class="n"><span title="numpy.typing.ArrayLike">ArrayLike</span></span><span class="p">,</span> <span class="s2">&quot;*N B D&quot;</span><span class="p">],</span>
+    <span class="n">barycentric</span><span class="p">:</span> <span class="n"><span title="jaxtyping.Float">Float</span></span><span class="p">[</span><span class="n"><span title="numpy.typing.ArrayLike">ArrayLike</span></span><span class="p">,</span> <span class="s2">&quot;*N B&quot;</span><span class="p">],</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n"><span title="jaxtyping.Float">Float</span></span><span class="p">[</span><span class="n"><span title="numpy.ndarray">ndarray</span></span><span class="p">,</span> <span class="s2">&quot;*N D&quot;</span><span class="p">]</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
 
 
             <details class="quote">
-              <summary>Source code in <code>src/liblaf/melon/io/abc/_writer.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">26</span>
-<span class="normal">27</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">PathLike</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="o">/</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
-            </details>
-    </div>
-
-</div>
-
-<div class="doc doc-object doc-function">
-
-
-<h3 id="liblaf.melon.io.pyvista.unstructured_grid.writer.UnstructuredGridWriter.match_data" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <span class="doc doc-object-name doc-function-name">match_data</span>
-
-
-<a href="#liblaf.melon.io.pyvista.unstructured_grid.writer.UnstructuredGridWriter.match_data" class="headerlink" title="Permanent link">¤</a></h3>
-<div class="doc-signature highlight"><pre><span></span><code><span class="nf">match_data</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" title="&lt;code&gt;typing.Any&lt;/code&gt;" href="https://docs.python.org/3/library/typing.html#typing.Any">Any</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#bool">bool</a></span>
-</code></pre></div>
-
-    <div class="doc doc-contents ">
-
-
-            <details class="quote">
-              <summary>Source code in <code>src/liblaf/melon/io/abc/_writer.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">29</span>
-<span class="normal">30</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">match_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="o">/</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>  <span class="c1"># noqa: ARG002</span>
-    <span class="k">return</span> <span class="kc">True</span>
-</code></pre></div></td></tr></table></div>
-            </details>
-    </div>
-
-</div>
-
-<div class="doc doc-object doc-function">
-
-
-<h3 id="liblaf.melon.io.pyvista.unstructured_grid.writer.UnstructuredGridWriter.match_path" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <span class="doc doc-object-name doc-function-name">match_path</span>
-
-
-<a href="#liblaf.melon.io.pyvista.unstructured_grid.writer.UnstructuredGridWriter.match_path" class="headerlink" title="Permanent link">¤</a></h3>
-<div class="doc-signature highlight"><pre><span></span><code><span class="nf">match_path</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="n"><span title="liblaf.melon.typed.PathLike">PathLike</span></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#bool">bool</a></span>
-</code></pre></div>
-
-    <div class="doc doc-contents ">
-
-
-            <details class="quote">
-              <summary>Source code in <code>src/liblaf/melon/io/abc/_writer.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">32</span>
-<span class="normal">33</span>
-<span class="normal">34</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">match_path</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">PathLike</span><span class="p">,</span> <span class="o">/</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-    <span class="n">path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">path</span><span class="o">.</span><span class="n">suffix</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">extensions</span>
-</code></pre></div></td></tr></table></div>
-            </details>
-    </div>
-
-</div>
-
-<div class="doc doc-object doc-function">
-
-
-<h3 id="liblaf.melon.io.pyvista.unstructured_grid.writer.UnstructuredGridWriter.save" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <span class="doc doc-object-name doc-function-name">save</span>
-
-
-<a href="#liblaf.melon.io.pyvista.unstructured_grid.writer.UnstructuredGridWriter.save" class="headerlink" title="Permanent link">¤</a></h3>
-<div class="doc-signature highlight"><pre><span></span><code><span class="nf">save</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="n"><span title="liblaf.melon.typed.PathLike">PathLike</span></span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" title="&lt;code&gt;typing.Any&lt;/code&gt;" href="https://docs.python.org/3/library/typing.html#typing.Any">Any</a></span><span class="p">,</span> <span class="o">/</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
-</code></pre></div>
-
-    <div class="doc doc-contents ">
-
-
-            <details class="quote">
-              <summary>Source code in <code>src/liblaf/melon/io/pyvista/unstructured_grid/writer/_pyvista.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">13</span>
+              <summary>Source code in <code>src/liblaf/melon/barycentric/_points.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
 <span class="normal">14</span>
-<span class="normal">15</span>
-<span class="normal">16</span>
-<span class="normal">17</span>
-<span class="normal">18</span>
-<span class="normal">19</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@override</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">PathLike</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="o">/</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="kn">import</span><span class="w"> </span><span class="nn">pyvista</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pv</span>
-
-    <span class="n">path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
-    <span class="n">data</span><span class="p">:</span> <span class="n">pv</span><span class="o">.</span><span class="n">UnstructuredGrid</span> <span class="o">=</span> <span class="n">as_unstructured_grid</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">data</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="normal">15</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">barycentric_to_points</span><span class="p">(</span>
+    <span class="n">cells</span><span class="p">:</span> <span class="n">Float</span><span class="p">[</span><span class="n">ArrayLike</span><span class="p">,</span> <span class="s2">&quot;*N B D&quot;</span><span class="p">],</span> <span class="n">barycentric</span><span class="p">:</span> <span class="n">Float</span><span class="p">[</span><span class="n">ArrayLike</span><span class="p">,</span> <span class="s2">&quot;*N B&quot;</span><span class="p">]</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Float</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="s2">&quot;*N D&quot;</span><span class="p">]:</span>
+    <span class="n">cells</span><span class="p">:</span> <span class="n">Float</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="s2">&quot;*N B D&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">cells</span><span class="p">)</span>
+    <span class="n">barycentric</span><span class="p">:</span> <span class="n">Float</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="s2">&quot;*N B&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">barycentric</span><span class="p">)</span>
+    <span class="n">points</span><span class="p">:</span> <span class="n">Float</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="s2">&quot;*N D&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">einops</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span>
+        <span class="n">barycentric</span><span class="p">,</span> <span class="n">cells</span><span class="p">,</span> <span class="s2">&quot;... B, ... B D -&gt; ... D&quot;</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">points</span>
 </code></pre></div></td></tr></table></div>
             </details>
     </div>
 
 </div>
 
+<div class="doc doc-object doc-function">
 
 
-  </div>
+<h2 id="liblaf.melon.barycentric.sample_barycentric_coords" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-function"></code>            <span class="doc doc-object-name doc-function-name">sample_barycentric_coords</span>
 
+
+<a href="#liblaf.melon.barycentric.sample_barycentric_coords" class="headerlink" title="Permanent link">¤</a></h2>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">sample_barycentric_coords</span><span class="p">(</span>
+    <span class="n">shape</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#tuple">tuple</a></span><span class="p">[</span><span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#int">int</a></span><span class="p">,</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#int">int</a></span><span class="p">],</span>
+    <span class="n">generator</span><span class="p">:</span> <span class="n"><span title="numpy.random.Generator">Generator</span></span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n"><span title="jaxtyping.Float">Float</span></span><span class="p">[</span><span class="n"><span title="numpy.ndarray">ndarray</span></span><span class="p">,</span> <span class="s2">&quot;N D&quot;</span><span class="p">]</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+
+            <details class="quote">
+              <summary>Source code in <code>src/liblaf/melon/barycentric/_sample.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">sample_barycentric_coords</span><span class="p">(</span>
+    <span class="n">shape</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span> <span class="n">generator</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">Generator</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Float</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="s2">&quot;N D&quot;</span><span class="p">]:</span>
+    <span class="k">if</span> <span class="n">generator</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">generator</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">()</span>
+    <span class="n">n_samples</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">dim</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">coords</span><span class="p">:</span> <span class="n">Float</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="s2">&quot;N D-1&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">generator</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="n">n_samples</span><span class="p">,</span> <span class="n">dim</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="n">coords</span><span class="p">:</span> <span class="n">Float</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="s2">&quot;N D-1&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">coords</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">coords</span><span class="p">:</span> <span class="n">Float</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="s2">&quot;N D&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">coords</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">prepend</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">append</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">coords</span>
+</code></pre></div></td></tr></table></div>
+            </details>
     </div>
 
 </div>
-
 
 
 
@@ -2134,7 +1850,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="May 13, 2025 13:34:42">May 13, 2025</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="May 13, 2025 13:34:41">May 13, 2025</span>
   </span>
 
     
@@ -2144,7 +1860,7 @@
     <span class="md-icon" title="Created">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="May 13, 2025 13:34:42">May 13, 2025</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="May 13, 2025 13:34:41">May 13, 2025</span>
   </span>
 
     
@@ -2202,10 +1918,10 @@
     
     
       
-      <script id="__config" type="application/json">{"base": "../../../../../../..", "features": ["announce.dismiss", "content.action.edit", "content.action.view", "content.code.annotate", "content.code.copy", "content.code.select", "content.footnote.tooltips", "content.tabs.link", "content.tooltips", "navigation.instant", "navigation.instant.prefetch", "navigation.instant.progress", "navigation.path", "navigation.sections", "navigation.tabs", "navigation.tabs.sticky", "navigation.top", "navigation.tracking", "search.highlight", "search.share", "search.suggest", "toc.follow"], "search": "../../../../../../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+      <script id="__config" type="application/json">{"base": "../../../..", "features": ["announce.dismiss", "content.action.edit", "content.action.view", "content.code.annotate", "content.code.copy", "content.code.select", "content.footnote.tooltips", "content.tabs.link", "content.tooltips", "navigation.instant", "navigation.instant.prefetch", "navigation.instant.progress", "navigation.path", "navigation.sections", "navigation.tabs", "navigation.tabs.sticky", "navigation.top", "navigation.tracking", "search.highlight", "search.share", "search.suggest", "toc.follow"], "search": "../../../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../../../../../../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      <script src="../../../../assets/javascripts/bundle.13a4f30d.min.js"></script>
       
     
   </body>
