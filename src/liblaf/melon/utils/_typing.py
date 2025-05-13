@@ -12,12 +12,32 @@ def is_subclass(cls: type, prefix: str, name: str) -> bool:
 
 def is_array_like(obj: Any) -> bool:
     # TODO: Implement a more robust check for array-like objects.
-    return isinstance(obj, Sequence)
+    return (
+        is_jax(obj)
+        or is_numpy(obj)
+        or is_torch(obj)
+        or is_warp(obj)
+        or isinstance(obj, Sequence)
+    )
 
 
 # ----------------------------------- numpy ---------------------------------- #
+
+
+def is_jax(obj: Any) -> bool:
+    return is_subclass(obj, "jax", "Array")
+
+
 def is_numpy(obj: Any) -> bool:
     return is_subclass(obj, "numpy", "ndarray")
+
+
+def is_torch(obj: Any) -> bool:
+    return is_subclass(obj, "torch", "Tensor")
+
+
+def is_warp(obj: Any) -> bool:
+    return is_subclass(obj, "warp", "array")
 
 
 # ---------------------------------- pyvista --------------------------------- #

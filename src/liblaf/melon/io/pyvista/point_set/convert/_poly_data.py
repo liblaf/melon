@@ -8,7 +8,7 @@ from liblaf.melon.io.abc import AbstractConverter
 
 class PolyDataToPointSet(AbstractConverter):
     @override
-    def match_from(self, data: Any) -> bool:
+    def match_from(self, data: Any, /) -> bool:
         return utils.is_poly_data(data)
 
     @override

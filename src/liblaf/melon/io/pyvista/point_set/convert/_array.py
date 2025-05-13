@@ -8,7 +8,7 @@ from liblaf.melon.io.abc import AbstractConverter
 
 class ArrayToPointSet(AbstractConverter):
     @override
-    def match_from(self, data: Any) -> bool:
+    def match_from(self, data: Any, /) -> bool:
         return utils.is_array_like(data)
 
     @override
