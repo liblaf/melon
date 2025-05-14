@@ -69,14 +69,13 @@ dependencies = [
   "pydantic>=2.11.4,<3",
   "pydicom>=3.0.1,<4",
   "pygltflib>=1.16.4,<2",
-  "pymeshfix>=0.17.1,<0.18",
   "pyvista>=0.45.1,<0.46",
   "rich>=14.0.0,<15",
   "scipy>=1.15.2,<2",
   "seaborn>=0.13.2,<0.14",
   "tinyobjloader>=2.0.0rc13,<3",
   "trimesh[easy]>=4.6.8,<5",
-  "typer>=0.15.3,<0.16",
+  "typer>=0.15.3,<0.16", "pymeshfix>=0.17.1,<0.18",
 ]
 description = "Add your description here"
 dynamic = ["version"]
