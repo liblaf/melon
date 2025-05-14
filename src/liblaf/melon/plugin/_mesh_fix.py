@@ -4,6 +4,7 @@ from typing import Any
 import pyvista as pv
 
 from liblaf import grapes
+from liblaf.melon import triangle
 
 
 def mesh_fix(
@@ -26,7 +27,7 @@ def mesh_fix(
     else:
         raise NotImplementedError
     if check:
-        raise NotImplementedError
+        assert triangle.is_volume(mesh)
     return mesh
 
 
