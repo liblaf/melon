@@ -84,7 +84,7 @@ keywords = []
 license = "MIT"
 name = "liblaf-melon"
 readme = "docs/README.md"
-requires-python = ">=3.12,<3.13"
+requires-python = ">=3.13,<3.14"
 
 [project.scripts]
 melon = "liblaf.melon.cli:main"
