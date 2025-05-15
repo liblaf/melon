@@ -32,6 +32,10 @@ def main(cfg: Config) -> None:
         muscle.field_data["moment-inertia"] = melon.as_trimesh(muscle).moment_inertia
         muscle.field_data["principal-inertia-vectors"] = vectors[index]
         muscle.field_data["principal-inertia-components"] = components[index]
+        ic(
+            muscle.cell_data["GroupIds"][0],
+            muscle.field_data["GroupNames"][muscle.cell_data["GroupIds"][0]],
+        )
 
     pv.set_plot_theme("document_pro")
     plotter = pv.Plotter()
@@ -49,7 +53,7 @@ def main(cfg: Config) -> None:
             mag=1,
             color="green",
         )
-    plotter.show()
+    # plotter.show()
 
 
 if __name__ == "__main__":
