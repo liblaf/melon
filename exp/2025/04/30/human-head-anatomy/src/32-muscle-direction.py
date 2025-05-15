@@ -18,8 +18,8 @@ def main(cfg: Config) -> None:
     groups: dict[str, list[str]] = grapes.load(cfg.groups)
 
     muscles: pv.PolyData = melon.triangle.extract_groups(full, groups["Muscles"])
-    ic(muscles.cell_data)
     muscles: pv.MultiBlock = muscles.split_bodies().as_polydata_blocks()
+    ic(muscles.cell_data)
     muscles: list[pv.PolyData] = [melon.mesh_fix(muscle) for muscle in muscles]
 
     for muscle in muscles:
