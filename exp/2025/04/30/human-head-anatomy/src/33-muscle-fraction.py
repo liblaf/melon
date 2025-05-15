@@ -49,8 +49,10 @@ def main(cfg: Config) -> None:
                 itertools.repeat(muscles),
                 itertools.repeat(cfg.n_samples),
                 range(tetmesh.n_cells),
+                chunksize=1024,
             ),
             total=tetmesh.n_cells,
+            callback_stop=grapes.timing.callback.NOOP,
         ):
             tetmesh.cell_data["muscle-direction"][result.cid] = result.muscle_direction
             tetmesh.cell_data["muscle-fraction"][result.cid] = result.muscle_fraction
