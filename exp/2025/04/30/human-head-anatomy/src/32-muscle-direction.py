@@ -19,7 +19,10 @@ def main(cfg: Config) -> None:
 
     muscles: pv.PolyData = melon.triangle.extract_groups(full, groups["Muscles"])
     muscles: pv.MultiBlock = muscles.split_bodies().as_polydata_blocks()
-    ic(muscles[0].cell_data)
+    for muscle in muscles:
+        muscle.user_dict["name"] = muscle.field_data["GroupNames"][
+            muscle.cell_data["GroupIds"][0]
+        ]
     muscles: list[pv.PolyData] = [melon.mesh_fix(muscle) for muscle in muscles]
 
     for muscle in muscles:
