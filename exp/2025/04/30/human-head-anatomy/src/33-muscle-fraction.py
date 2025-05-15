@@ -10,7 +10,7 @@ import pyvista as pv
 from jaxtyping import Bool, Float
 
 import liblaf.melon as melon  # noqa: PLR0402
-from liblaf import cherries
+from liblaf import cherries, grapes
 
 
 class Config(cherries.BaseConfig):
@@ -42,12 +42,15 @@ def main(cfg: Config) -> None:
     tetmesh.cell_data["muscle-direction"] = np.zeros((tetmesh.n_cells, 3))
     tetmesh.cell_data["muscle-fraction"] = np.zeros((tetmesh.n_cells,))
     with concurrent.futures.ProcessPoolExecutor() as executor:
-        for result in executor.map(
-            compute_muscle_fraction,
-            itertools.repeat(tetmesh),
-            itertools.repeat(muscles),
-            itertools.repeat(cfg.n_samples),
-            range(tetmesh.n_cells),
+        for result in grapes.track(
+            executor.map(
+                compute_muscle_fraction,
+                itertools.repeat(tetmesh),
+                itertools.repeat(muscles),
+                itertools.repeat(cfg.n_samples),
+                range(tetmesh.n_cells),
+            ),
+            total=tetmesh.n_cells,
         ):
             tetmesh.cell_data["muscle-direction"][result.cid] = result.muscle_direction
             tetmesh.cell_data["muscle-fraction"][result.cid] = result.muscle_fraction
