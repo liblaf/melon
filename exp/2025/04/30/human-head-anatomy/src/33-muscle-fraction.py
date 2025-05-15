@@ -31,6 +31,7 @@ def main(cfg: Config) -> None:
         muscle.field_data["muscle-direction"] = melon.as_trimesh(
             muscle
         ).principal_inertia_vectors[:, 0]
+        ic(muscle.field_data["muscle-direction"])
 
     for cid, cell in grapes.track(
         enumerate(tetmesh.cell),
