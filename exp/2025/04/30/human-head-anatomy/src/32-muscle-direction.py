@@ -29,6 +29,7 @@ def main(cfg: Config) -> None:
         vectors: Float[np.ndarray, "3 3"] = melon.as_trimesh(
             muscle
         ).principal_inertia_vectors
+        ic(components)
         plotter.add_mesh(muscle)
         plotter.add_arrows(muscle.center_of_mass(), vectors[0])
         plotter.show()
