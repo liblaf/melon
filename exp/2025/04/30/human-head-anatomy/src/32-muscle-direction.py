@@ -35,7 +35,7 @@ def main(cfg: Config) -> None:
 
     plotter = pv.Plotter()
     for muscle in muscles:
-        plotter.add_mesh(muscle)
+        plotter.add_mesh(muscle, opacity=0.5)
         plotter.add_arrows(
             muscle.center_of_mass(),
             muscle.field_data["principal-inertia-vectors"][0],
