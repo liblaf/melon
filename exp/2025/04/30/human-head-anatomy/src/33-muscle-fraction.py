@@ -49,7 +49,7 @@ def main(cfg: Config) -> None:
                 itertools.repeat(muscles),
                 itertools.repeat(cfg.n_samples),
                 range(tetmesh.n_cells),
-                chunksize=1024,
+                chunksize=tetmesh.n_cells // 1024,
             ),
             total=tetmesh.n_cells,
             callback_stop=grapes.timing.callback.NOOP,
