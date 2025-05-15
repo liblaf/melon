@@ -33,6 +33,8 @@ def main(cfg: Config) -> None:
         ).principal_inertia_vectors[:, 0]
         ic(muscle.field_data["muscle-direction"])
 
+    tetmesh.cell_data["muscle-direction"] = np.zeros((tetmesh.n_cells, 3))
+    tetmesh.cell_data["muscle-fraction"] = np.zeros((tetmesh.n_cells,))
     for cid, cell in grapes.track(
         enumerate(tetmesh.cell),
         total=tetmesh.n_cells,
