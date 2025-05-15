@@ -43,6 +43,12 @@ def main(cfg: Config) -> None:
             mag=2,
             color="red",
         )
+        plotter.add_arrows(
+            muscle.center_of_mass(),
+            muscle.field_data["principal-inertia-vectors"][1],
+            mag=1,
+            color="green",
+        )
     plotter.show()
 
 
