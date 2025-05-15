@@ -33,7 +33,7 @@ def main(cfg: Config) -> None:
         muscle.field_data["principal-inertia-vectors"] = vectors[index]
         muscle.field_data["principal-inertia-components"] = components[index]
 
-    plotter = pv.Plotter()
+    plotter = pv.Plotter(theme="document_pro")
     for muscle in muscles:
         plotter.add_mesh(muscle)
         plotter.add_arrows(
