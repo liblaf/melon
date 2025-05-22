@@ -69,6 +69,7 @@ dependencies = [
   "pydantic>=2.11.4,<3",
   "pydicom>=3.0.1,<4",
   "pygltflib>=1.16.4,<2",
+  "pymeshfix>=0.17.1,<0.18",
   "pyvista>=0.45.2,<0.46",
   "rich>=14.0.0,<15",
   "scipy>=1.15.3,<2",
@@ -76,7 +77,6 @@ dependencies = [
   "tinyobjloader>=2.0.0rc13,<3",
   "trimesh[easy]>=4.6.10,<5",
   "typer>=0.15.4,<0.16",
-  "pymeshfix>=0.17.1,<0.18",
 ]
 description = "Add your description here"
 dynamic = ["version"]
@@ -126,9 +126,6 @@ platforms = ["linux-64"]
 
 [tool.pixi.pypi-dependencies]
 "liblaf-melon" = { editable = true, path = "." }
-
-[tool.pixi.pypi-options]
-index-url = "https://mirrors.cernet.edu.cn/pypi/web/simple"
 
 [tool.pixi.system-requirements]
 cuda = "12"
