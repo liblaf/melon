@@ -21,9 +21,10 @@ class NearestPointPrepared(NearestPrepared):
 
     @override
     def query(self, query: Any) -> NearestResult:
+        query: pv.PointSet = io.as_point_set(query)
         distance: Float[np.ndarray, " Q"]
         index: Integer[np.ndarray, " Q"]
-        distance, index = self.kdtree.query(query, workers=self.workers)
+        distance, index = self.kdtree.query(query.points, workers=self.workers)
         return NearestResult(
             distance=distance, nearest=self.kdtree.data[index], vertex_id=index
         )
