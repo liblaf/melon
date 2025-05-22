@@ -13,5 +13,9 @@ class PolyDataToPointSet(AbstractConverter):
 
     @override
     def convert(self, data: pv.PolyData, /, **kwargs) -> pv.PointSet:
+        point_normals: bool = kwargs.pop("point_normals", False)
         data.active_scalars_name = None
-        return data.cast_to_pointset(**kwargs)
+        result: pv.PointSet = data.cast_to_pointset(**kwargs)
+        if point_normals:
+            result.point_data["Normals"] = data.point_normals
+        return result
