@@ -47,6 +47,7 @@ def main(cfg: Config) -> None:
 
     tetmesh.cell_data["muscle-direction"] = np.zeros((tetmesh.n_cells, 3))
     tetmesh.cell_data["muscle-fraction"] = np.zeros((tetmesh.n_cells,))
+    muscle_name: list[str] = [None] * tetmesh.n_cells
     with concurrent.futures.ProcessPoolExecutor() as executor:
         for result in grapes.track(
             executor.map(
@@ -62,8 +63,8 @@ def main(cfg: Config) -> None:
         ):
             tetmesh.cell_data["muscle-direction"][result.cid] = result.muscle_direction
             tetmesh.cell_data["muscle-fraction"][result.cid] = result.muscle_fraction
-            tetmesh.cell_data["muscle-name"][result.cid] = result.major_muscle
-
+            muscle_name[result.cid] = result.major_muscle or ""
+    tetmesh.cell_data["muscle-name"] = muscle_name
     melon.save(cfg.output, tetmesh)
 
 
