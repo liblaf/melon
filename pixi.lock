@@ -2457,8 +2457,8 @@ packages:
   requires_python: '>=3.12'
 - pypi: ./
   name: liblaf-melon
-  version: 0.2.5.dev31+g354d93a.d20250522
-  sha256: 2a715829f805257a6c80e9731d926b94440820f9cec18666d5e338df7dee490a
+  version: 0.2.5.dev32+ga162744.d20250522
+  sha256: d7dd12b098e6dd89322139f544123f0dfe4bbe2eb72677c9225ca7cf213139c7
   requires_dist:
   - attrs>=25.3.0,<26
   - einops>=0.8.1,<0.9
@@ -2471,7 +2471,7 @@ packages:
   - loguru>=0.7.3,<0.8
   - matplotlib>=3.10.3,<4
   - meshio>=5.3.5,<6
-  - numpy>=2.2.6,<3
+  - numpy
   - pandas>=2.2.3,<3
   - polars>=1.30.0,<2
   - pooch>=1.8.2,<2
@@ -2482,7 +2482,7 @@ packages:
   - pymeshfix>=0.17.1,<0.18
   - pyvista>=0.45.2,<0.46
   - rich>=14.0.0,<15
-  - scipy>=1.15.3,<2
+  - scipy
   - seaborn>=0.13.2,<0.14
   - tinyobjloader>=2.0.0rc13,<3
   - trimesh[easy]>=4.6.10,<5

@@ -7,7 +7,7 @@ requires = ["hatch-vcs", "hatchling"]
 
 [dependency-groups]
 build = ["check-wheel-contents", "hatch", "twine"]
-dev = ["icecream"]
+dev = ["icecream", "pygltflib>=1.16.4,<2"]
 docs = [
   "gitpython",
   "mdx-truly-sane-lists",
@@ -61,7 +61,7 @@ dependencies = [
   "loguru>=0.7.3,<0.8",
   "matplotlib>=3.10.3,<4",
   "meshio>=5.3.5,<6",
-  "numpy>=2.2.6,<3",
+  "numpy",
   "pandas>=2.2.3,<3",
   "polars>=1.30.0,<2",
   "pooch>=1.8.2,<2",
@@ -72,7 +72,7 @@ dependencies = [
   "pymeshfix>=0.17.1,<0.18",
   "pyvista>=0.45.2,<0.46",
   "rich>=14.0.0,<15",
-  "scipy>=1.15.3,<2",
+  "scipy",
   "seaborn>=0.13.2,<0.14",
   "tinyobjloader>=2.0.0rc13,<3",
   "trimesh[easy]>=4.6.10,<5",
