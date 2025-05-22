@@ -10,7 +10,7 @@ from liblaf.melon.io.abc import AbstractConverter
 class TrimeshToPointSet(AbstractConverter):
     @override
     def match_from(self, data: Any, /) -> bool:
-        return utils.is_poly_data(data)
+        return utils.is_trimesh(data)
 
     @override
     def convert(self, data: tm.Trimesh, /, **kwargs) -> pv.PointSet:
