@@ -3,34 +3,31 @@ from pathlib import Path
 import pyvista as pv
 
 import liblaf.melon as melon  # noqa: PLR0402
-from liblaf import cherries
+from liblaf import cherries, grapes
 
 
 class Config(cherries.BaseConfig):
-    cranium: Path = cherries.data("02-intermediate/cranium.vtp")
-    mandible: Path = cherries.data("02-intermediate/mandible.vtp")
+    full: Path = cherries.data("01-raw/Full human head anatomy.obj")
+    groups: Path = cherries.data("02-intermediate/groups.toml")
     skin: Path = cherries.data("02-intermediate/skin-with-mouth-socket.ply")
 
     output: Path = cherries.data("02-intermediate/20-tetgen.vtu")
 
 
 def main(cfg: Config) -> None:
-    cherries.log_input(cfg.cranium)
-    cranium: pv.PolyData = melon.load_poly_data(cfg.cranium)
-    cherries.log_input(cfg.mandible)
-    mandible: pv.PolyData = melon.load_poly_data(cfg.mandible)
+    full: pv.PolyData = melon.load_poly_data(cfg.full)
+    groups: dict[str, list[str]] = grapes.load(cfg.groups)
     cherries.log_input(cfg.skin)
     skin: pv.PolyData = melon.load_poly_data(cfg.skin)
+    skeletons: pv.PolyData = melon.triangle.extract_groups(
+        full, groups["Brain"] + groups["cranium"] + groups["mandible"]
+    )
 
     tetmesh: pv.UnstructuredGrid = melon.tetwild(
         {
             "operation": "difference",
             "left": skin,
-            "right": {
-                "operation": "union",
-                "left": cranium,
-                "right": mandible,
-            },
+            "right": skeletons,
         },
         lr=0.05 * 0.25,
         epsr=1e-3 * 0.25,

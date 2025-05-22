@@ -54,6 +54,6 @@ class WriterDispatcher:
             if writer.match_data(data) and writer.match_path(path):
                 Path(path).parent.mkdir(parents=True, exist_ok=True)
                 writer.save(path, data, **kwargs)
-                logger.debug('Saved {} to "{}".', type(data), path)
+                logger.opt(depth=2).debug('Saved {} to "{}".', type(data), path)
                 return
         raise UnsupportedWriterError(data, path)
