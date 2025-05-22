@@ -26,6 +26,14 @@ def main(cfg: Config) -> None:
     full: pv.PolyData = melon.load_poly_data(cfg.full)
     tetmesh: pv.UnstructuredGrid = melon.load_unstructured_grid(cfg.tetgen)
 
+    groups: list[str] = ["Levator_labii_superioris001"]
+    muscles: list[pv.PolyData] = []
+    for group in groups:
+        muscle: pv.PolyData = melon.triangle.extract_groups(full, group)
+        blocks: pv.MultiBlock = muscle.split_bodies(label=True).as_polydata_blocks()
+        for block in enumerate(blocks):
+            ic(block)
+    return
     muscles_union: pv.PolyData = melon.triangle.extract_groups(
         full, ["Levator_labii_superioris001"]
     )
@@ -56,15 +64,17 @@ def main(cfg: Config) -> None:
         ):
             tetmesh.cell_data["muscle-direction"][result.cid] = result.muscle_direction
             tetmesh.cell_data["muscle-fraction"][result.cid] = result.muscle_fraction
+            tetmesh.cell_data["muscle-name"][result.cid] = result.major_muscle
 
     melon.save(cfg.output, tetmesh)
 
 
-@attrs.frozen
+@attrs.frozen(kw_only=True)
 class Result:
     cid: int
-    muscle_fraction: float
+    major_muscle: str | None = None
     muscle_direction: Float[np.ndarray, " 3"]
+    muscle_fraction: float
 
 
 def compute_muscle_fraction(
@@ -80,13 +90,27 @@ def compute_muscle_fraction(
     is_in: Bool[np.ndarray, " N"] = np.zeros((n_samples,), dtype=bool)
     muscle_direction: Float[np.ndarray, " 3"] = np.zeros((3,))
     muscle_fraction: float = 0.0
+    major_muscle: pv.PolyData | None = None
+    major_muscle_fraction: float = 0.0
     for muscle in muscles:
-        is_in |= melon.triangle.contains(muscle, samples)
+        contains: Bool[np.ndarray, " N"] = melon.triangle.contains(muscle, samples)
+        n_contains: int = np.count_nonzero(contains)
+        if n_contains == 0:
+            continue
+        if n_contains / n_samples > major_muscle_fraction:
+            major_muscle_fraction = n_contains / n_samples
+            major_muscle = muscle
+        is_in |= contains
         muscle_direction = muscle.field_data["muscle-direction"]
     muscle_fraction = np.count_nonzero(is_in) / n_samples
 
     return Result(
-        cid=cid, muscle_fraction=muscle_fraction, muscle_direction=muscle_direction
+        cid=cid,
+        major_muscle=major_muscle.user_dict["name"]
+        if major_muscle is not None
+        else None,
+        muscle_direction=muscle_direction,
+        muscle_fraction=muscle_fraction,
     )
 
 
