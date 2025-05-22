@@ -19,7 +19,7 @@ def main(cfg: Config) -> None:
     surface: pv.PolyData = melon.load_poly_data(cfg.surface)
 
     graph: nx.Graph = melon.mesh.graph(surface)
-    nearest_result: melon.NearestResult = melon.nearest(
+    nearest_result: melon.NearestPointResult = melon.nearest(
         surface,
         np.asarray(
             [

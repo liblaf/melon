@@ -18,19 +18,27 @@ from .io import (
 )
 from .plugin import annotate_landmarks, fast_wrapping, mesh_fix, tetwild
 from .proximity import (
-    Nearest,
+    NearestAlgorithm,
+    NearestAlgorithmPrepared,
     NearestPoint,
+    NearestPointOnSurface,
+    NearestPointOnSurfacePrepared,
+    NearestPointOnSurfaceResult,
     NearestPointPrepared,
-    NearestPrepared,
+    NearestPointResult,
     NearestResult,
     nearest,
 )
 
 __all__ = [
-    "Nearest",
+    "NearestAlgorithm",
+    "NearestAlgorithmPrepared",
     "NearestPoint",
+    "NearestPointOnSurface",
+    "NearestPointOnSurfacePrepared",
+    "NearestPointOnSurfaceResult",
     "NearestPointPrepared",
-    "NearestPrepared",
+    "NearestPointResult",
     "NearestResult",
     "PVDWriter",
     "SeriesWriter",

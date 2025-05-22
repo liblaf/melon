@@ -1,11 +1,27 @@
-from typing import Any
+from typing import Any, overload
 
-from ._abc import Nearest, NearestPrepared, NearestResult
-from ._nearest_point import NearestPoint
+from ._abc import NearestAlgorithm, NearestAlgorithmPrepared, NearestResult
+from ._nearest_point import NearestPoint, NearestPointResult
+from ._nearest_point_on_surface import (
+    NearestPointOnSurface,
+    NearestPointOnSurfaceResult,
+)
 
 
-def nearest(source: Any, query: Any, algo: Nearest | None = None) -> NearestResult:
+@overload
+def nearest(
+    source: Any, query: Any, algo: NearestPoint | None = None
+) -> NearestPointResult: ...
+@overload
+def nearest(
+    source: Any, query: Any, algo: NearestPointOnSurface
+) -> NearestPointOnSurfaceResult: ...
+@overload
+def nearest(source: Any, query: Any, algo: NearestAlgorithm) -> NearestResult: ...
+def nearest(
+    source: Any, query: Any, algo: NearestAlgorithm | None = None
+) -> NearestResult:
     if algo is None:
         algo = NearestPoint()
-    prepared: NearestPrepared = algo.prepare(source)
+    prepared: NearestAlgorithmPrepared = algo.prepare(source)
     return prepared.query(query)

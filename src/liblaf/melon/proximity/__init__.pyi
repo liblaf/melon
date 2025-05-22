@@ -1,12 +1,21 @@
-from ._abc import Nearest, NearestPrepared, NearestResult
+from ._abc import NearestAlgorithm, NearestAlgorithmPrepared, NearestResult
 from ._nearest import nearest
-from ._nearest_point import NearestPoint, NearestPointPrepared
+from ._nearest_point import NearestPoint, NearestPointPrepared, NearestPointResult
+from ._nearest_point_on_surface import (
+    NearestPointOnSurface,
+    NearestPointOnSurfacePrepared,
+    NearestPointOnSurfaceResult,
+)
 
 __all__ = [
-    "Nearest",
+    "NearestAlgorithm",
+    "NearestAlgorithmPrepared",
     "NearestPoint",
+    "NearestPointOnSurface",
+    "NearestPointOnSurfacePrepared",
+    "NearestPointOnSurfaceResult",
     "NearestPointPrepared",
-    "NearestPrepared",
+    "NearestPointResult",
     "NearestResult",
     "nearest",
 ]
