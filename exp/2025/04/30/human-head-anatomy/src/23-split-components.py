@@ -14,7 +14,7 @@ class Config(cherries.BaseConfig):
     groups: Path = cherries.data("02-intermediate/groups.toml")
     tetgen: Path = cherries.data("02-intermediate/20-tetgen.vtu")
 
-    output: Path = cherries.data("02-intermediate/23-tetgen.vtp")
+    output: Path = cherries.data("02-intermediate/23-tetgen.vtu")
 
 
 def classify(
