@@ -34,8 +34,8 @@ def main(cfg: Config) -> None:
         blocks: pv.MultiBlock = muscle.split_bodies(label=True).as_polydata_blocks()
         for block in blocks:
             fixed: pv.PolyData = melon.mesh_fix(block)
-            fixed.field_data["name"] = f"{group}.{block.point_data['RegionId'][0]}"
-            ic(fixed.field_data["name"])
+            fixed.user_dict["name"] = f"{group}.{block.point_data['RegionId'][0]}"
+            ic(fixed.user_dict["name"])
             muscles.append(fixed)
 
     for muscle in muscles:
