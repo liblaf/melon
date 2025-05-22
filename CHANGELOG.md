@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.2.5](https://github.com/liblaf/melon/compare/v0.2.4...v0.2.5) (2025-05-22)
+
+
+### 👷 Build System
+
+* migrate from Just to Mise for task management ([354d93a](https://github.com/liblaf/melon/commit/354d93aa02ee8d60405b5970e0bf867f455e4901))
+* update dependencies in pyproject.toml ([b872515](https://github.com/liblaf/melon/commit/b87251569f2a8090ea51f0f16420a2eecbd7efa6))
+
 ## [0.2.4](https://github.com/liblaf/melon/compare/v0.2.3..v0.2.4) - 2025-05-13
 
 ### 🐛 Bug Fixes
