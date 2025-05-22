@@ -17,7 +17,7 @@ class Config(cherries.BaseConfig):
     n_samples: int = 100
 
     full: Path = cherries.data("01-raw/Full human head anatomy.obj")
-    tetgen: Path = cherries.data("02-intermediate/20-tetgen.vtu")
+    tetgen: Path = cherries.data("02-intermediate/23-tetgen.vtu")
 
     output: Path = cherries.data("02-intermediate/33-muscle-fraction.vtu")
 
