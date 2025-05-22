@@ -15,4 +15,4 @@ def save_polygons(
 ) -> None:
     path: Path = get_polygons_path(path)
     polygons = np.asarray(polygons)
-    grapes.save_json(path, polygons.tolist())
+    grapes.save(path, polygons.tolist())

@@ -111,7 +111,7 @@ class SeriesWriter(Sequence[File], contextlib.AbstractContextManager):
         self.save()
 
     def save(self) -> None:
-        grapes.save_json(self.file, self.series.model_dump(by_alias=True))
+        grapes.save(self.file, self.series.model_dump(by_alias=True))
 
     def start(self) -> None:
         pass

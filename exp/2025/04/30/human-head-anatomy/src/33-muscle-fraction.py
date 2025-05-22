@@ -52,7 +52,7 @@ def main(cfg: Config) -> None:
                 chunksize=tetmesh.n_cells // 256,
             ),
             total=tetmesh.n_cells,
-            callback_stop=grapes.timing.callback.NOOP,
+            callback_stop=grapes.nop,
         ):
             tetmesh.cell_data["muscle-direction"][result.cid] = result.muscle_direction
             tetmesh.cell_data["muscle-fraction"][result.cid] = result.muscle_fraction
