@@ -49,7 +49,7 @@ class ReaderDispatcher[T]:
         for reader in self.readers:
             if reader.match_path(path):
                 data: T = reader.load(path, **kwargs)
-                logger.debug('Loaded {} from "{}".', type(data), path)
+                logger.opt(depth=2).debug('Loaded {} from "{}".', type(data), path)
                 return data
         raise UnsupportedReaderError(self.dtype, path)
 
