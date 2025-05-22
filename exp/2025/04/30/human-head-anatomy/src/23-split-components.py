@@ -20,7 +20,11 @@ class Config(cherries.BaseConfig):
 def classify(
     surface: pv.PolyData, include: pv.PolyData, exclude: pv.PolyData
 ) -> Bool[np.ndarray, " N"]:
-    nearest_algo: melon.NearestAlgorithm = melon.NearestPointOnSurface()
+    nearest_algo: melon.NearestAlgorithm = melon.NearestPointOnSurface(
+        distance_threshold=np.inf,
+        fallback_to_nearest_vertex=False,
+        normal_threshold=-np.inf,
+    )
     nearest_include: melon.NearestResult = melon.nearest(
         include, surface, algo=nearest_algo
     )
