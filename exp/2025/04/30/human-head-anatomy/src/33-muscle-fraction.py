@@ -35,20 +35,6 @@ def main(cfg: Config) -> None:
             block.field_data["name"] = f"{group}.{block.point_data['RegionId'][0]}"
             ic(block.field_data["name"])
             muscles.append(block)
-    return
-
-    muscles_union: pv.PolyData = melon.triangle.extract_groups(
-        full, ["Levator_labii_superioris001"]
-    )
-    muscles: pv.MultiBlock = muscles_union.split_bodies().as_polydata_blocks()
-    for muscle in muscles:
-        muscle.user_dict["name"] = muscle.field_data["GroupNames"][
-            muscle.cell_data["GroupIds"][0]
-        ]
-        muscle.field_data["muscle-direction"] = melon.as_trimesh(
-            muscle
-        ).principal_inertia_vectors[0]
-        ic(muscle.field_data["muscle-direction"])
 
     tetmesh.cell_data["muscle-direction"] = np.zeros((tetmesh.n_cells, 3))
     tetmesh.cell_data["muscle-fraction"] = np.zeros((tetmesh.n_cells,))
