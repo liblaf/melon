@@ -157,7 +157,7 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/bc/b3/9458adb9472e61a998c8c4d95cfdfec91c73c53a375b30b1428310f923e4/kiwisolver-1.4.8-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
       - pypi: https://files.pythonhosted.org/packages/5d/35/1407fb0b2f5b07b50cbaf97fce09ad87d3bfefbf64f7171a8651cd8d2f68/kombu-5.5.3-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/83/60/d497a310bde3f01cb805196ac61b7ad6dc5dcf8dce66634dc34364b20b4f/lazy_loader-0.4-py3-none-any.whl
-      - pypi: https://files.pythonhosted.org/packages/f0/fb/6fcab5224ef0df57f6a2a9cf1d15a4456c065f59bd754f25207bb8174b89/liblaf_cherries-0.0.13-py3-none-any.whl
+      - pypi: https://files.pythonhosted.org/packages/4c/51/619aaaac9b1acf87f991202b9a53cf1e97165e87f1ce71822409bfcb5c4b/liblaf_cherries-0.0.14-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/87/5b/2a40d6c2633ffeae4831ee8644ebaf7ab8c823e2d93bca8d7b9e2e0bb00f/liblaf_grapes-0.1.25-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/0c/29/0348de65b8cc732daa3e33e67806420b2ae89bdce2b04af740289c5c6c8c/loguru-0.7.3-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/ad/36/239820114bf1d71f38f12208b9c58dec033cbcf80101cde006b9bde5cffd/lxml-5.4.0-cp312-cp312-manylinux_2_28_x86_64.whl
@@ -2419,16 +2419,16 @@ packages:
   purls: []
   size: 452635
   timestamp: 1746642113092
-- pypi: https://files.pythonhosted.org/packages/f0/fb/6fcab5224ef0df57f6a2a9cf1d15a4456c065f59bd754f25207bb8174b89/liblaf_cherries-0.0.13-py3-none-any.whl
+- pypi: https://files.pythonhosted.org/packages/4c/51/619aaaac9b1acf87f991202b9a53cf1e97165e87f1ce71822409bfcb5c4b/liblaf_cherries-0.0.14-py3-none-any.whl
   name: liblaf-cherries
-  version: 0.0.13
-  sha256: 3a8a2fa600664701cf69dcc149331a9eb568a6cf324d2a0960ff61ad6e5f103b
+  version: 0.0.14
+  sha256: 9efa711a8a416fffe48e50ec4d294dbaba728fe08595f9dc6e1a13109333d93c
   requires_dist:
   - dvc[webdav]>=3.59.2,<4
   - environs>=14.1.1,<15
   - gitpython>=3.1.44,<4
   - lazy-loader>=0.4,<0.5
-  - liblaf-grapes>=0.1.23,<0.2
+  - liblaf-grapes>=0.1.25,<0.2
   - loguru>=0.7.3,<0.8
   - mlflow>=2.22.0,<3
   - pydantic-settings>=2.9.1,<3
@@ -2457,8 +2457,8 @@ packages:
   requires_python: '>=3.12'
 - pypi: ./
   name: liblaf-melon
-  version: 0.2.5.dev33+gb872515.d20250522
-  sha256: d7dd12b098e6dd89322139f544123f0dfe4bbe2eb72677c9225ca7cf213139c7
+  version: 0.2.5.dev39+g33bbc6f.d20250522
+  sha256: 8955baa74a1242cdc01c2efbcba2db82e6269129df480a0445de1fe2d573a943
   requires_dist:
   - attrs>=25.3.0,<26
   - einops>=0.8.1,<0.9
@@ -2466,7 +2466,7 @@ packages:
   - glom>=24.11.0,<25
   - jaxtyping>=0.3.2,<0.4
   - lazy-loader>=0.4,<0.5
-  - liblaf-cherries>=0.0.13,<0.0.14
+  - liblaf-cherries>=0.0.14,<0.0.15
   - liblaf-grapes>=0.1.24,<0.2
   - loguru>=0.7.3,<0.8
   - matplotlib>=3.10.3,<4
