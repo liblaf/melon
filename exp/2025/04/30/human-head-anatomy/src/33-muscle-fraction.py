@@ -31,9 +31,14 @@ def main(cfg: Config) -> None:
     for group in groups:
         muscle: pv.PolyData = melon.triangle.extract_groups(full, group)
         blocks: pv.MultiBlock = muscle.split_bodies(label=True).as_polydata_blocks()
-        for block in enumerate(blocks):
-            ic(block)
+        for block in blocks:
+            ic(block.point_data)
+            ic(block.cell_data)
+            ic(block.field_data)
+            block.field_data["name"] = group + "_" + str(block.cell_data["RegionId"][0])
+            muscles.append(block)
     return
+
     muscles_union: pv.PolyData = melon.triangle.extract_groups(
         full, ["Levator_labii_superioris001"]
     )
