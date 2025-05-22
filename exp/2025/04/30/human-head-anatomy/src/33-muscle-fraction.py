@@ -7,7 +7,8 @@ import attrs
 import einops
 import numpy as np
 import pyvista as pv
-from jaxtyping import Bool, Float
+import trimesh as tm
+from jaxtyping import Bool, Float, Integer
 
 import liblaf.melon as melon  # noqa: PLR0402
 from liblaf import cherries, grapes
@@ -32,9 +33,17 @@ def main(cfg: Config) -> None:
         muscle: pv.PolyData = melon.triangle.extract_groups(full, group)
         blocks: pv.MultiBlock = muscle.split_bodies(label=True).as_polydata_blocks()
         for block in blocks:
-            block.field_data["name"] = f"{group}.{block.point_data['RegionId'][0]}"
-            ic(block.field_data["name"])
-            muscles.append(block)
+            fixed: pv.PolyData = melon.mesh_fix(block)
+            fixed.field_data["name"] = f"{group}.{block.point_data['RegionId'][0]}"
+            ic(fixed.field_data["name"])
+            muscles.append(fixed)
+
+    for muscle in muscles:
+        muscle_tm: tm.Trimesh = melon.as_trimesh(muscle)
+        vectors: Float[np.ndarray, "3 3"] = muscle_tm.principal_inertia_vectors
+        components: Float[np.ndarray, " 3"] = muscle_tm.principal_inertia_components
+        index: Integer[np.ndarray, " 3"] = np.argsort(components)
+        muscle.field_data["muscle-direction"] = vectors[index[0]]
 
     tetmesh.cell_data["muscle-direction"] = np.zeros((tetmesh.n_cells, 3))
     tetmesh.cell_data["muscle-fraction"] = np.zeros((tetmesh.n_cells,))
