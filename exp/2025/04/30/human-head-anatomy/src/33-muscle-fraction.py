@@ -32,7 +32,7 @@ def main(cfg: Config) -> None:
         muscle: pv.PolyData = melon.triangle.extract_groups(full, group)
         blocks: pv.MultiBlock = muscle.split_bodies(label=True).as_polydata_blocks()
         for block in blocks:
-            block.field_data["name"] = f"{group}_{block.point_data['RegionId'][0]}"
+            block.field_data["name"] = f"{group}.{block.point_data['RegionId'][0]}"
             ic(block.field_data["name"])
             muscles.append(block)
     return
