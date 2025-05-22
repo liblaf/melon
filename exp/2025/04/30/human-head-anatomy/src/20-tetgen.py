@@ -20,7 +20,8 @@ def main(cfg: Config) -> None:
     cherries.log_input(cfg.skin)
     skin: pv.PolyData = melon.load_poly_data(cfg.skin)
     skeletons: pv.PolyData = melon.triangle.extract_groups(
-        full, groups["Brain"] + groups["cranium"] + groups["mandible"]
+        full,
+        groups["Brain"] + groups["Nervous"] + groups["cranium"] + groups["mandible"],
     )
 
     tetmesh: pv.UnstructuredGrid = melon.tetwild(
