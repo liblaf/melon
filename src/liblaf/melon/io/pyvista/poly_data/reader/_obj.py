@@ -9,7 +9,7 @@ from liblaf.melon.typed import PathLike
 
 class ObjReader(AbstractReader):
     extensions: Container[str] = {".obj"}
-    precedence: int = 1
+    precedence: int = 1  # prefer over pyvista.read
 
     @override
     def load(self, path: PathLike, /, **kwargs) -> pv.PolyData:
