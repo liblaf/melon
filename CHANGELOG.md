@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.6](https://github.com/liblaf/melon/compare/v0.2.5...v0.2.6) (2025-05-25)
+
+
+### ✨ Features
+
+* **cli:** add new CLI framework with cyclopts integration ([99d7983](https://github.com/liblaf/melon/commit/99d79831e2d76d6286abe99dce2c854ae2e1407d))
+
 ## [0.2.5](https://github.com/liblaf/melon/compare/v0.2.4..v0.2.5) - 2025-05-22
 
 ### 👷 Build System
