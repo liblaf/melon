@@ -1,15 +1,22 @@
 # Changelog
 
-## [0.2.5](https://github.com/liblaf/melon/compare/v0.2.4..v0.2.5) - 2025-05-22
+## [0.2.6](https://github.com/liblaf/melon/compare/v0.2.5..v0.2.6) - 2025-05-25
+
+### ✨ Features
+
+- **cli:** add new CLI framework with cyclopts integration - ([99d7983](https://github.com/liblaf/melon/commit/99d79831e2d76d6286abe99dce2c854ae2e1407d))
+
+### ❤️ New Contributors
+
+- [@liblaf](https://github.com/liblaf) made their first contribution
+- [@liblaf-bot[bot]](https://github.com/apps/liblaf-bot) made their first contribution
+
+## [0.2.5](https://github.com/liblaf/melon/compare/v0.2.4..v0.2.5) - 2025-05-23
 
 ### 👷 Build System
 
 - update dependencies in pyproject.toml - ([b872515](https://github.com/liblaf/melon/commit/b87251569f2a8090ea51f0f16420a2eecbd7efa6))
 - migrate from Just to Mise for task management - ([354d93a](https://github.com/liblaf/melon/commit/354d93aa02ee8d60405b5970e0bf867f455e4901))
-
-### ❤️ New Contributors
-
-- [@liblaf](https://github.com/liblaf) made their first contribution
 
 ## [0.2.4](https://github.com/liblaf/melon/compare/v0.2.3..v0.2.4) - 2025-05-13
 
