@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.7](https://github.com/liblaf/melon/compare/v0.2.6...v0.2.7) (2025-05-27)
+
+
+### ✨ Features
+
+* **io:** enhance Paraview series writer and pyvista converters ([72488cc](https://github.com/liblaf/melon/commit/72488cc7e565faf935f69ad0f87dc9d660cac9fc))
+
 ## [0.2.6](https://github.com/liblaf/melon/compare/v0.2.5..v0.2.6) - 2025-05-25
 
 ### ✨ Features
