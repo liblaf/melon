@@ -1,3 +1,4 @@
+import inspect
 from collections.abc import Sequence
 from typing import Any
 
@@ -7,7 +8,10 @@ def is_instance(obj: Any, prefix: str, name: str) -> bool:
 
 
 def is_subclass(cls: type, prefix: str, name: str) -> bool:
-    return cls.__module__.startswith(prefix) and cls.__name__ == name
+    for base in inspect.getmro(cls):
+        if base.__module__.startswith(prefix) and base.__name__ == name:
+            return True
+    return False
 
 
 def is_array_like(obj: Any) -> bool:
@@ -41,6 +45,12 @@ def is_warp(obj: Any) -> bool:
 
 
 # ---------------------------------- pyvista --------------------------------- #
+
+
+def is_data_set(obj: Any) -> bool:
+    return is_instance(obj, "pyvista", "DataSet")
+
+
 def is_image_data(obj: Any) -> bool:
     return is_instance(obj, "pyvista", "ImageData")
 

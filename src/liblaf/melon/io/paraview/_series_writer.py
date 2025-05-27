@@ -79,7 +79,7 @@ class SeriesWriter(Sequence[File], contextlib.AbstractContextManager):
 
     @property
     def folder(self) -> Path:
-        return self.file.parent
+        return self.file.with_suffix("")
 
     @property
     def fps(self) -> float:
@@ -99,19 +99,22 @@ class SeriesWriter(Sequence[File], contextlib.AbstractContextManager):
         self, data: Any, *, time: float | None = None, timestep: float | None = None
     ) -> None:
         filename: str = f"{self.name}_{len(self):06d}{self.ext}"
-        save(self.folder / filename, data)
+        filepath: Path = self.folder / filename
+        save(filepath, data)
         if time is None:
             if timestep is None:
                 timestep = self.timestep
             time = self.time + timestep
-        self.series.files.append(File(name=filename, time=time))
+        self.series.files.append(
+            File(name=filepath.relative_to(self.file.parent).as_posix(), time=time)
+        )
         self.save()
 
     def end(self) -> None:
         self.save()
 
     def save(self) -> None:
-        grapes.save(self.file, self.series.model_dump(by_alias=True))
+        grapes.save_pydantic(self.file, self.series, ext=".json", by_alias=True)
 
     def start(self) -> None:
         pass

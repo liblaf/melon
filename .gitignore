@@ -186,6 +186,7 @@ _version.py
 *.log.gz
 *.log.jsonl
 *.log.jsonl.gz
+data/
 junit.xml
 mlruns/
 playground/
