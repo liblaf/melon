@@ -2161,14 +2161,15 @@ packages:
   requires_python: '>=3.12'
 - pypi: ./
   name: liblaf-melon
-  version: 0.2.7.dev0+g561c33f.d20250527
-  sha256: 14bf6b1a33e79caf4896e635f567db9f4c3b9bfbf37bbf42aae3dfe7634679ee
+  version: 0.2.8.dev0+ged5b91e.d20250528
+  sha256: 5f94f647de79a9ecd493d8afdd525cf27a1474c7975add71224e790c91079848
   requires_dist:
   - attrs>=25.3.0,<26
   - cyclopts>=3.16.1,<4
   - einops>=0.8.1,<0.9
   - glom>=24.11.0,<25
   - jaxtyping>=0.3.2,<0.4
+  - joblib>=1.5.1,<2
   - lazy-loader>=0.4,<0.5
   - liblaf-grapes>=0.1.30,<0.2
   - loguru>=0.7.3,<0.8

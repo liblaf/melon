@@ -54,6 +54,7 @@ dependencies = [
   "einops>=0.8.1,<0.9",
   "glom>=24.11.0,<25",
   "jaxtyping>=0.3.2,<0.4",
+  "joblib>=1.5.1,<2",
   "lazy-loader>=0.4,<0.5",
   "liblaf-grapes>=0.1.30,<0.2",
   "loguru>=0.7.3,<0.8",

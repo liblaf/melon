@@ -5,6 +5,7 @@ from collections.abc import Generator, Mapping
 from pathlib import Path
 from typing import Any, TypedDict, Unpack
 
+import joblib
 import pyvista as pv
 from loguru import logger
 
@@ -12,11 +13,14 @@ from liblaf import grapes
 from liblaf.melon import io, tetra
 from liblaf.melon.typed import PathLike
 
+memory = joblib.Memory(Path(tempfile.gettempdir()) / "joblib-memory")
+
 
 class TetwildKwargs(TypedDict, total=False):
     lr: float | None
     epsr: float | None
     level: int | None
+    no_color: bool | None
 
 
 def tetwild(
@@ -26,13 +30,22 @@ def tetwild(
     lr: float | None = None,
     epsr: float | None = None,
     level: int | None = None,
+    color: bool = False,
     csg: bool = False,
     **kwargs,
 ) -> pv.UnstructuredGrid:
+    surface: pv.PolyData = copy_structure(surface)
     if shutil.which("fTetWild"):
         mesh: pv.UnstructuredGrid = _tetwild_exe(
-            surface, lr=lr, epsr=epsr, level=level, csg=csg, **kwargs
+            surface,
+            lr=lr,
+            epsr=epsr,
+            level=level,
+            no_color=not color,
+            csg=csg,
+            **kwargs,
         )
+        memory.reduce_size(bytes_limit="1G")
     else:
         raise NotImplementedError
     if fix_winding:
@@ -40,6 +53,16 @@ def tetwild(
     return mesh
 
 
+def copy_structure(surface: Any) -> pv.PolyData | Mapping[str, Any]:
+    if isinstance(surface, Mapping):
+        return {k: copy_structure(v) for k, v in surface.items()}
+    surface: pv.PolyData = io.as_poly_data(surface)
+    structure: pv.PolyData = pv.PolyData()
+    structure.copy_structure(surface)
+    return structure
+
+
+@memory.cache
 def _tetwild_exe(
     surface: Any, *, csg: bool = False, **kwargs: Unpack[TetwildKwargs]
 ) -> pv.UnstructuredGrid:
