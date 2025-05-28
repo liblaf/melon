@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.8](https://github.com/liblaf/melon/compare/v0.2.7...v0.2.8) (2025-05-28)
+
+
+### ✨ Features
+
+* **plugin:** add joblib caching to tetwild function ([8ec8241](https://github.com/liblaf/melon/commit/8ec8241f2d17be1f98797e81bdadb7efd1d2cfb4))
+
 ## [0.2.7](https://github.com/liblaf/melon/compare/v0.2.6..v0.2.7) - 2025-05-27
 
 ### ✨ Features
