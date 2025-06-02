@@ -53,7 +53,9 @@ def tetwild(
     return mesh
 
 
-def copy_structure(surface: Any) -> pv.PolyData | Mapping[str, Any]:
+def copy_structure(surface: Any) -> str | Mapping[str, Any] | pv.PolyData:
+    if isinstance(surface, str):
+        return surface
     if isinstance(surface, Mapping):
         return {k: copy_structure(v) for k, v in surface.items()}
     surface: pv.PolyData = io.as_poly_data(surface)
