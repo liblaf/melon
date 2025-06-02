@@ -20,7 +20,20 @@ def main(cfg: Config) -> None:
     skin: pv.PolyData = melon.load_poly_data(cfg.skin)
     skeletons: pv.PolyData = melon.triangle.extract_groups(
         full,
-        groups["Brain"] + groups["Nervous"] + groups["cranium"] + groups["mandible"],
+        groups["Brain"]
+        + [
+            # "Nervous_001",
+            # "olfactory_nerves002",
+            # "olfactory_bulb002",
+            # "olfactory_bulb001",
+            "Brain_membrane_001",
+            # "Nervous_002",
+            "Spinal_cords001",
+            "Spinal_cord_membrane_001",
+            # "olfactory_nerves001",
+        ]
+        + groups["cranium"]
+        + groups["mandible"],
     )
     surface: pv.PolyData = pv.merge([skin, skeletons.flip_faces()])
 
