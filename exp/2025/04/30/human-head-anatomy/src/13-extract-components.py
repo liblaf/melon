@@ -12,7 +12,6 @@ class Config(cherries.BaseConfig):
 
     cranium: Path = cherries.output("02-intermediate/cranium.vtp")
     mandible: Path = cherries.output("02-intermediate/mandible.vtp")
-    scalp_head: Path = cherries.output("02-intermediate/scalp-head.vtp")
 
 
 def main(cfg: Config) -> None:
@@ -21,11 +20,9 @@ def main(cfg: Config) -> None:
 
     cranium: pv.PolyData = melon.triangle.extract_groups(full, groups["cranium"])
     mandible: pv.PolyData = melon.triangle.extract_groups(full, groups["mandible"])
-    scalp_head: pv.PolyData = melon.triangle.extract_groups(full, "Scalp_head")
 
     melon.save(cfg.cranium, cranium)
     melon.save(cfg.mandible, mandible)
-    melon.save(cfg.scalp_head, scalp_head)
 
 
 if __name__ == "__main__":

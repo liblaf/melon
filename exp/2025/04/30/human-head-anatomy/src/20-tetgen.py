@@ -7,17 +7,16 @@ from liblaf import cherries, grapes
 
 
 class Config(cherries.BaseConfig):
-    full: Path = cherries.data("01-raw/Full human head anatomy.obj")
-    groups: Path = cherries.data("02-intermediate/groups.toml")
-    skin: Path = cherries.data("02-intermediate/skin-with-mouth-socket.ply")
+    full: Path = cherries.input("01-raw/Full human head anatomy.obj")
+    groups: Path = cherries.input("02-intermediate/groups.toml")
+    skin: Path = cherries.input("02-intermediate/skin-with-mouth-socket.ply")
 
-    output: Path = cherries.data("02-intermediate/20-tetgen.vtu")
+    output: Path = cherries.output("02-intermediate/20-tetgen.vtu")
 
 
 def main(cfg: Config) -> None:
     full: pv.PolyData = melon.load_poly_data(cfg.full)
     groups: dict[str, list[str]] = grapes.load(cfg.groups)
-    cherries.log_input(cfg.skin)
     skin: pv.PolyData = melon.load_poly_data(cfg.skin)
     skeletons: pv.PolyData = melon.triangle.extract_groups(
         full,
@@ -38,7 +37,6 @@ def main(cfg: Config) -> None:
     cherries.log_metric("n_cells", tetmesh.n_cells)
 
     melon.save(cfg.output, tetmesh)
-    cherries.log_output(cfg.output)
 
 
 if __name__ == "__main__":
