@@ -15,5 +15,7 @@ def save_landmarks(
 ) -> None:
     path: Path = get_landmarks_path(path)
     points: Float[np.ndarray, "N 3"] = np.asarray(points)
-    data: list[dict[str, float]] = [{"x": p[0], "y": p[1], "z": p[2]} for p in points]
+    data: list[dict[str, float]] = [
+        {"x": p[0], "y": p[1], "z": p[2]} for p in points.tolist()
+    ]
     grapes.save(path, data)
