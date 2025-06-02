@@ -52,9 +52,7 @@ def pretty_tree(gltf: pygltflib.GLTF2) -> Tree:
 
 
 def main(cfg: Config) -> None:
-    cherries.log_input(cfg.glb)
     glb: pygltflib.GLTF2 = pygltflib.GLTF2.load(cfg.glb)  # pyright: ignore[reportAssignmentType]
-    cherries.log_input(cfg.obj)
     obj: pv.PolyData = melon.load_poly_data(cfg.obj)
     rich.print(pretty_tree(glb))
     obj_groups: set[str] = set(obj.field_data["GroupNames"])
@@ -79,7 +77,6 @@ def main(cfg: Config) -> None:
         logger.warning('Not found in GLTF2: "{}".', name_obj)
     tree = {key: value for key, value in tree.items() if len(value) > 1}
     grapes.save(cfg.output, tree)
-    cherries.log_output(cfg.output)
 
 
 if __name__ == "__main__":
