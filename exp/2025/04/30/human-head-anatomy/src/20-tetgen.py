@@ -22,16 +22,10 @@ def main(cfg: Config) -> None:
         full,
         groups["Brain"] + groups["Nervous"] + groups["cranium"] + groups["mandible"],
     )
+    surface: pv.PolyData = pv.merge([skin, skeletons.flip_faces()])
 
     tetmesh: pv.UnstructuredGrid = melon.tetwild(
-        {
-            "operation": "difference",
-            "left": skin,
-            "right": skeletons,
-        },
-        lr=0.05 * 0.25,
-        epsr=1e-3 * 0.25,
-        csg=True,
+        surface, lr=0.05 * 0.25, epsr=1e-3 * 0.25
     )
     cherries.log_metric("n_points", tetmesh.n_points)
     cherries.log_metric("n_cells", tetmesh.n_cells)
