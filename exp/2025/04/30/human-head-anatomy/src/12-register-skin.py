@@ -20,9 +20,19 @@ class Config(cherries.BaseConfig):
         "MouthSocketBottom",
         "MouthSocketTop",
     ]
-    output: Path = Path("data/02-intermediate/skin-with-mouth-socket.ply")
-    source: Path = Path("data/01-raw/XYZ_ReadyToSculpt_eyesOpen_PolyGroups_GEO.obj")
-    target: Path = Path("data/02-intermediate/skin.ply")
+    source: Path = cherries.input(
+        "data/01-raw/XYZ_ReadyToSculpt_eyesOpen_PolyGroups_GEO.obj",
+        extra=melon.io.get_landmarks_path,
+    )
+    target: Path = cherries.input(
+        "data/02-intermediate/skin.ply",
+        extra=melon.io.get_landmarks_path,
+    )
+
+    output: Path = cherries.output(
+        "data/02-intermediate/skin-with-mouth-socket.ply",
+        extra=melon.io.get_landmarks_path,
+    )
 
 
 def main(cfg: Config) -> None:
