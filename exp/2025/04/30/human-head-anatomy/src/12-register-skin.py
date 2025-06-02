@@ -21,28 +21,22 @@ class Config(cherries.BaseConfig):
         "MouthSocketTop",
     ]
     source: Path = cherries.input(
-        "data/01-raw/XYZ_ReadyToSculpt_eyesOpen_PolyGroups_GEO.obj",
+        "01-raw/XYZ_ReadyToSculpt_eyesOpen_PolyGroups_GEO.obj",
         extra=melon.io.get_landmarks_path,
     )
     target: Path = cherries.input(
-        "data/02-intermediate/skin.ply",
-        extra=melon.io.get_landmarks_path,
+        "02-intermediate/skin.ply", extra=melon.io.get_landmarks_path
     )
 
     output: Path = cherries.output(
-        "data/02-intermediate/skin-with-mouth-socket.ply",
-        extra=melon.io.get_landmarks_path,
+        "02-intermediate/skin-with-mouth-socket.ply", extra=melon.io.get_landmarks_path
     )
 
 
 def main(cfg: Config) -> None:
-    cherries.log_input(cfg.source)
     source: pv.PolyData = melon.load_poly_data(cfg.source)
-    cherries.log_input(cfg.target)
     target: pv.PolyData = melon.load_poly_data(cfg.target)
-    cherries.log_input(melon.io.get_landmarks_path(cfg.source))
     source_landmarks: Float[np.ndarray, "L 3"] = melon.load_landmarks(cfg.source)
-    cherries.log_input(melon.io.get_landmarks_path(cfg.target))
     target_landmarks: Float[np.ndarray, "L 3"] = melon.load_landmarks(cfg.target)
 
     free_polygons_floating: Integer[np.ndarray, " F"] = melon.triangle.select_groups(
@@ -58,9 +52,7 @@ def main(cfg: Config) -> None:
     )
 
     melon.save(cfg.output, result)
-    cherries.log_output(cfg.output)
     melon.save_landmarks(cfg.output, target_landmarks)
-    cherries.log_output(melon.io.get_landmarks_path(cfg.output))
 
 
 if __name__ == "__main__":
