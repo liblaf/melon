@@ -12,9 +12,10 @@ from liblaf import cherries, grapes
 
 
 class Config(cherries.BaseConfig):
-    glb: Path = cherries.data("01-raw/complete_human_head_anatomy.glb")
-    obj: Path = cherries.data("01-raw/Full human head anatomy.obj")
-    output: Path = cherries.data("01-raw/groups.toml")
+    glb: Path = cherries.input("01-raw/complete_human_head_anatomy.glb")
+    obj: Path = cherries.input("01-raw/Full human head anatomy.obj")
+
+    output: Path = cherries.output("01-raw/groups.toml")
 
 
 def traverse_names(gltf: pygltflib.GLTF2, node_id: int) -> set[str]:
