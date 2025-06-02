@@ -19,25 +19,16 @@ def main(cfg: Config) -> None:
     full: pv.PolyData = melon.load_poly_data(cfg.full)
     groups: dict[str, list[str]] = grapes.load(cfg.groups)
     skin: pv.PolyData = melon.load_poly_data(cfg.skin)
-    brain: pv.PolyData = melon.triangle.extract_groups(full, groups["Brain"])
-    nervous: pv.PolyData = melon.triangle.extract_groups(
-        full,
-        [
-            "Brain_membrane_001",
-            # "Spinal_cords001",
-            # "Spinal_cord_membrane_001",
-        ],
-    )
-    skull: pv.PolyData = melon.triangle.extract_groups(
-        full, groups["cranium"] + groups["mandible"]
-    )
+    skeletons: list[pv.PolyData] = [
+        melon.triangle.extract_groups(full, group)
+        for group in groups["Brain"]
+        + groups["Nervous"]
+        + groups["cranium"]
+        + groups["mandible"]
+    ]
 
     tetmesh: pv.UnstructuredGrid = melon.tetwild(
-        {
-            "operation": "difference",
-            "left": skin,
-            "right": csg_union(brain, nervous, skull),
-        },
+        {"operation": "difference", "left": skin, "right": csg_union(*skeletons)},
         lr=0.05 * 0.25,
         epsr=1e-3 * 0.25,
         csg=True,
