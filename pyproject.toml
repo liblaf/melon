@@ -7,7 +7,7 @@ requires = ["hatch-vcs", "hatchling"]
 
 [dependency-groups]
 build = ["check-wheel-contents", "hatch", "twine"]
-dev = ["icecream", "liblaf-cherries>=0.1.2,<0.2", "pygltflib"]
+dev = ["icecream", "liblaf-cherries", "pygltflib"]
 docs = [
   "gitpython",
   "mdx-truly-sane-lists",
@@ -56,13 +56,13 @@ dependencies = [
   "jaxtyping>=0.3.2,<0.4",
   "joblib>=1.5.1,<2",
   "lazy-loader>=0.4,<0.5",
-  "liblaf-grapes>=0.1.30,<0.2",
+  "liblaf-grapes>=0.1.32,<0.2",
   "loguru>=0.7.3,<0.8",
   "meshio>=5.3.5,<6",
-  "networkx>=3.4.2,<4",
+  "networkx>=3.5,<4",
   "numpy",
   "polars>=1.30.0,<2",
-  "pydantic>=2.11.4,<3",
+  "pydantic>=2.11.5,<3",
   "pydicom>=3.0.1,<4",
   "pymeshfix>=0.17.1,<0.18",
   "pyvista>=0.45.2,<0.46",
@@ -123,7 +123,7 @@ platforms = ["linux-64"]
 [tool.pixi.system-requirements]
 cuda = "12"
 libc = { family = "glibc", version = "2.41" }
-linux = "6.13"
+linux = "6.12"
 
 [tool.pytest.ini_options]
 addopts = ["--showlocals", "--strict-config", "--strict-markers"]
