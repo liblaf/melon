@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from pathlib import Path
 
 import pyvista as pv
@@ -18,32 +19,31 @@ def main(cfg: Config) -> None:
     full: pv.PolyData = melon.load_poly_data(cfg.full)
     groups: dict[str, list[str]] = grapes.load(cfg.groups)
     skin: pv.PolyData = melon.load_poly_data(cfg.skin)
-    skeletons: pv.PolyData = melon.triangle.extract_groups(
-        full,
-        groups["Brain"]
-        + [
-            # "Nervous_001",
-            # "olfactory_nerves002",
-            # "olfactory_bulb002",
-            # "olfactory_bulb001",
-            "Brain_membrane_001",
-            # "Nervous_002",
-            "Spinal_cords001",
-            "Spinal_cord_membrane_001",
-            # "olfactory_nerves001",
-        ]
-        + groups["cranium"]
-        + groups["mandible"],
+    brain: pv.PolyData = melon.triangle.extract_groups(full, groups["Brain"])
+    nervous: pv.PolyData = melon.triangle.extract_groups(full, groups["Nervous"])
+    skull: pv.PolyData = melon.triangle.extract_groups(
+        full, groups["cranium"] + groups["mandible"]
     )
-    surface: pv.PolyData = pv.merge([skin, skeletons.flip_faces()])
 
     tetmesh: pv.UnstructuredGrid = melon.tetwild(
-        surface, lr=0.05 * 0.25, epsr=1e-3 * 0.25
+        {
+            "operation": "difference",
+            "left": skin,
+            "right": csg_union(brain, nervous, skull),
+        },
+        lr=0.05 * 0.25,
+        epsr=1e-3 * 0.25,
     )
     cherries.log_metric("n_points", tetmesh.n_points)
     cherries.log_metric("n_cells", tetmesh.n_cells)
 
     melon.save(cfg.output, tetmesh)
+
+
+def csg_union(left: pv.PolyData, *geometries: pv.PolyData) -> Mapping | pv.PolyData:
+    if not geometries:
+        return left
+    return {"operation": "union", "left": left, "right": csg_union(*geometries)}
 
 
 if __name__ == "__main__":
