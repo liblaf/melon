@@ -25,7 +25,7 @@ def main(cfg: Config) -> None:
         [
             "Brain_membrane_001",
             # "Spinal_cords001",
-            "Spinal_cord_membrane_001",
+            # "Spinal_cord_membrane_001",
         ],
     )
     skull: pv.PolyData = melon.triangle.extract_groups(

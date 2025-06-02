@@ -1,5 +1,5 @@
 outs:
-- md5: e30cd06c25ea85bdf84944043f754f03
-  size: 65551923
+- md5: bf4a0b81faaa9e34075f9f674bf1c76c
+  size: 40846523
   hash: md5
   path: 20-tetgen.vtu
