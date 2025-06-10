@@ -1,4 +1,4 @@
-from ._app import main
+from ._app import app
 
 if __name__ == "__main__":
-    main()
+    app.meta()

@@ -5,7 +5,7 @@ import cyclopts
 from liblaf import grapes
 from liblaf.melon import _version
 
-from . import _info
+from . import _annotate_landmarks, _info
 
 app = cyclopts.App(name="melon", version=_version.__version__)
 
@@ -18,8 +18,5 @@ def init(
     app(tokens)
 
 
+app.command(_annotate_landmarks.annotate_landmarks)
 app.command(_info.info)
-
-
-def main() -> None:
-    app.meta()

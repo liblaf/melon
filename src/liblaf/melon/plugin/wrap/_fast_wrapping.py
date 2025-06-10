@@ -20,7 +20,7 @@ def fast_wrapping(
     source_landmarks: Float[ArrayLike, "L 3"] | None = None,
     target_landmarks: Float[ArrayLike, "L 3"] | None = None,
     free_polygons_floating: Integer[ArrayLike, " F"] | None = None,
-    verbose: bool = False,
+    verbose: bool = True,
 ) -> pv.PolyData:
     source_landmarks = source_landmarks if source_landmarks is not None else []
     target_landmarks = target_landmarks if target_landmarks is not None else []
