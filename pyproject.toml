@@ -50,7 +50,7 @@ classifiers = [
 ]
 dependencies = [
   "attrs>=25.3.0,<26",
-  "cyclopts>=3.16.1,<4",
+  "cyclopts>=3.18.0,<4",
   "einops>=0.8.1,<0.9",
   "glom>=24.11.0,<25",
   "jaxtyping>=0.3.2,<0.4",
@@ -69,7 +69,7 @@ dependencies = [
   "rich>=14.0.0,<15",
   "scipy",
   "tinyobjloader==2.0.0rc13",
-  "trimesh[easy]>=4.6.10,<5",
+  "trimesh[easy]>=4.6.11,<5",
 ]
 description = "Add your description here"
 dynamic = ["version"]
