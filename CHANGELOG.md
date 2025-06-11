@@ -1,14 +1,26 @@
 # Changelog
 
+## [0.3.0](https://github.com/liblaf/melon/compare/v0.2.8..v0.3.0) - 2025-06-10
+
+### 💥 BREAKING CHANGES
+
+- **cli:** add annotate-landmarks command and refactor entry points - ([f441374](https://github.com/liblaf/melon/commit/f44137416769e56de24535d5f2d08ff5ebde1db9))
+
+### ⬆️ Dependencies
+
+- **deps:** update dependency liblaf-grapes to >=0.2.1,<0.3 (#45) - ([d717ae6](https://github.com/liblaf/melon/commit/d717ae63b1bf957fdd2d332660a7c8b290e537e0))
+
+### ❤️ New Contributors
+
+- [@liblaf](https://github.com/liblaf) made their first contribution
+- [@renovate[bot]](https://github.com/apps/renovate) made their first contribution in [#45](https://github.com/liblaf/melon/pull/45)
+- [@liblaf-bot[bot]](https://github.com/apps/liblaf-bot) made their first contribution
+
 ## [0.2.8](https://github.com/liblaf/melon/compare/v0.2.7..v0.2.8) - 2025-05-28
 
 ### ✨ Features
 
 - **plugin:** add joblib caching to tetwild function - ([8ec8241](https://github.com/liblaf/melon/commit/8ec8241f2d17be1f98797e81bdadb7efd1d2cfb4))
-
-### ❤️ New Contributors
-
-- [@liblaf](https://github.com/liblaf) made their first contribution
 
 ## [0.2.7](https://github.com/liblaf/melon/compare/v0.2.6..v0.2.7) - 2025-05-27
 
