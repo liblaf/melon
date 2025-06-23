@@ -1,6 +1,17 @@
 # Changelog
 
-## [0.3.0](https://github.com/liblaf/melon/compare/v0.2.8..v0.3.0) - 2025-06-10
+## [0.4.0](https://github.com/liblaf/melon/compare/v0.3.0..v0.4.0) - 2025-06-23
+
+### 💥 BREAKING CHANGES
+
+- **deps:** update dependencies and documentation tooling - ([137ecff](https://github.com/liblaf/melon/commit/137ecffd8d7ab7b8909d3520d73e9e7ec6f5bcfd))
+
+### ❤️ New Contributors
+
+- [@liblaf](https://github.com/liblaf) made their first contribution
+- [@liblaf-bot[bot]](https://github.com/apps/liblaf-bot) made their first contribution
+
+## [0.3.0](https://github.com/liblaf/melon/compare/v0.2.8..v0.3.0) - 2025-06-11
 
 ### 💥 BREAKING CHANGES
 
@@ -9,12 +20,6 @@
 ### ⬆️ Dependencies
 
 - **deps:** update dependency liblaf-grapes to >=0.2.1,<0.3 (#45) - ([d717ae6](https://github.com/liblaf/melon/commit/d717ae63b1bf957fdd2d332660a7c8b290e537e0))
-
-### ❤️ New Contributors
-
-- [@liblaf](https://github.com/liblaf) made their first contribution
-- [@renovate[bot]](https://github.com/apps/renovate) made their first contribution in [#45](https://github.com/liblaf/melon/pull/45)
-- [@liblaf-bot[bot]](https://github.com/apps/liblaf-bot) made their first contribution
 
 ## [0.2.8](https://github.com/liblaf/melon/compare/v0.2.7..v0.2.8) - 2025-05-28
 
