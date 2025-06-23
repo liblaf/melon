@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.4.0](https://github.com/liblaf/melon/compare/v0.3.0...v0.4.0) (2025-06-23)
+
+
+### ⚠ BREAKING CHANGES
+
+* **deps:** Requires liblaf-grapes v0.3.0+ and adds minimum version requirements for numpy (>=2.3.1) and scipy (>=1.16.0). Documentation build process has changed significantly.
+
+### ⬆️ Dependencies
+
+* **deps:** update dependencies and documentation tooling ([137ecff](https://github.com/liblaf/melon/commit/137ecffd8d7ab7b8909d3520d73e9e7ec6f5bcfd))
+
 ## [0.3.0](https://github.com/liblaf/melon/compare/v0.2.8..v0.3.0) - 2025-06-10
 
 ### 💥 BREAKING CHANGES
