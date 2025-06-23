@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.1](https://github.com/liblaf/melon/compare/v0.4.0...v0.4.1) (2025-06-23)
+
+
+### ⬆️ Dependencies
+
+* **deps:** loosen dependency version constraints ([5a9fe99](https://github.com/liblaf/melon/commit/5a9fe9959d185c4e4c07e29aeb54072af6143ff6))
+
 ## [0.4.0](https://github.com/liblaf/melon/compare/v0.3.0..v0.4.0) - 2025-06-23
 
 ### 💥 BREAKING CHANGES
