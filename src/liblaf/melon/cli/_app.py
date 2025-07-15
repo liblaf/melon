@@ -14,7 +14,7 @@ app = cyclopts.App(name="melon", version=_version.__version__)
 def init(
     *tokens: Annotated[str, cyclopts.Parameter(show=False, allow_leading_hyphen=True)],
 ) -> None:
-    grapes.init_logging()
+    grapes.logging.init()
     app(tokens)
 
 

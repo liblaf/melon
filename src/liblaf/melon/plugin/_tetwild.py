@@ -5,15 +5,12 @@ from collections.abc import Generator, Mapping
 from pathlib import Path
 from typing import Any, TypedDict, Unpack
 
-import joblib
 import pyvista as pv
 from loguru import logger
 
 from liblaf import grapes
 from liblaf.melon import io, tetra
 from liblaf.melon.typed import PathLike
-
-memory = joblib.Memory(Path(tempfile.gettempdir()) / "joblib-memory")
 
 
 class TetwildKwargs(TypedDict, total=False):
@@ -45,7 +42,6 @@ def tetwild(
             csg=csg,
             **kwargs,
         )
-        memory.reduce_size(bytes_limit="1G")
     else:
         raise NotImplementedError
     if fix_winding:
@@ -64,7 +60,7 @@ def copy_structure(surface: Any) -> str | Mapping[str, Any] | pv.PolyData:
     return structure
 
 
-@memory.cache
+@grapes.cache
 def _tetwild_exe(
     surface: Any, *, csg: bool = False, **kwargs: Unpack[TetwildKwargs]
 ) -> pv.UnstructuredGrid:

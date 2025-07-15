@@ -30,13 +30,7 @@ docs = [
   "pymdown-extensions",
   "ruff",
 ]
-test = [
-  "pytest",
-  "pytest-benchmark",
-  "pytest-codspeed",
-  "pytest-cov",
-  "pytest-xdist",
-]
+test = ["pytest", "pytest-codspeed", "pytest-cov", "pytest-xdist"]
 
 [project]
 authors = [
@@ -60,11 +54,11 @@ dependencies = [
   "glom>=24.0.0,<25",
   "jaxtyping>=0.3.0,<0.4",
   "joblib>=1.0.0,<2",
-  "lazy-loader>=0.4.0,<0.5",
-  "liblaf-grapes>=0.4.1,<0.5",
+  "lazy-loader>=0.4,<0.5",
+  "liblaf-grapes>=0.6.0,<0.7",
   "loguru>=0.7.0,<0.8",
   "meshio>=5.0.0,<6",
-  "networkx>=3.0.0,<4",
+  "networkx>=3.5,<4",
   "numpy>=2.0.0,<3",
   "polars>=1.0.0,<2",
   "pydantic>=2.0.0,<3",
@@ -113,6 +107,9 @@ packages = ["src/liblaf/"]
 
 [tool.hatch.version]
 source = "vcs"
+
+[tool.pixi.dependencies]
+python = "3.12.*"
 
 [tool.pixi.environments]
 default = { features = ["build", "dev", "docs", "test"] }
