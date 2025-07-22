@@ -16,7 +16,7 @@ class UnsupportedConverterError(ValueError):
 
 
 class AbstractConverter[T](abc.ABC):
-    from_type: ClassInfo = type(None)
+    from_type: ClassInfo = ()
     precedence: int = 0
 
     def __call__(self, data: Any, /, **kwargs) -> T:

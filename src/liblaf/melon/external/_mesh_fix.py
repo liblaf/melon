@@ -4,7 +4,7 @@ from typing import Any
 import pyvista as pv
 
 from liblaf import grapes
-from liblaf.melon import io, triangle
+from liblaf.melon import io, tri
 
 
 def mesh_fix(
@@ -27,7 +27,7 @@ def mesh_fix(
     else:
         raise NotImplementedError
     if check:
-        assert triangle.is_volume(result)
+        assert tri.is_volume(result)
     mesh: pv.PolyData = io.as_poly_data(mesh)
     result.field_data.update(mesh.field_data)
     return result

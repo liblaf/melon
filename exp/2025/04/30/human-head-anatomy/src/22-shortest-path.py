@@ -10,24 +10,25 @@ from liblaf import cherries
 
 
 class Config(cherries.BaseConfig):
-    tetgen: Path = cherries.data("02-intermediate/20-tetgen.vtu")
-    output: Path = cherries.data("02-intermediate/22-tetgen-distance.vtp")
+    tetgen: Path = cherries.input("02-intermediate/20-tetgen.vtu")
+    output: Path = cherries.output("02-intermediate/22-tetgen-distance.vtp")
 
 
 def main(cfg: Config) -> None:
     cherries.log_input(cfg.tetgen)
     tetgen: pv.UnstructuredGrid = melon.load_unstructured_grid(cfg.tetgen)
     surface: pv.PolyData = tetgen.extract_surface()
-
+    surface = surface.compute_normals()
     graph: nx.Graph = melon.mesh.graph(surface)
     nearest_result: melon.NearestResult = melon.nearest(
         surface,
         np.asarray(
             [
-                [0.724907, 25.935352, 9.666245],
-                [0.689024, 26.452383, 9.960980],
+                [0.724907, 25.935352, 9.666245],  # midpoint below lips
+                [0.689024, 26.452383, 9.960980],  # midpoint above lips
             ]
         ),
+        algo=melon.NearestPoint(normal_threshold=-np.inf),
     )
     source: int
     target: int
@@ -49,4 +50,4 @@ def main(cfg: Config) -> None:
 
 
 if __name__ == "__main__":
-    cherries.run(main)
+    cherries.run(main, profile="playground")

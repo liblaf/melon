@@ -1,35 +1,22 @@
-from collections.abc import Sequence
 from pathlib import Path
 
 import numpy as np
 import pyvista as pv
-from jaxtyping import Float, Integer
+from jaxtyping import Float
 
 import liblaf.melon as melon  # noqa: PLR0402
 from liblaf import cherries
 
 
 class Config(cherries.BaseConfig):
-    floting: Sequence[int | str] = [
-        "Caruncle",
-        "EarSocket EyeSocketTop",
-        "EyeSocketBottom",
-        "EyeSocketTop",
-        "LipInnerBottom",
-        "LipInnerTop",
-        "MouthSocketBottom",
-        "MouthSocketTop",
-    ]
     source: Path = cherries.input(
-        "01-raw/XYZ_ReadyToSculpt_eyesOpen_PolyGroups_GEO.obj",
-        extra=melon.io.get_landmarks_path,
+        "01-raw/sculptor/cranium.ply", extra=melon.io.get_landmarks_path
     )
     target: Path = cherries.input(
-        "02-intermediate/11-skin.ply", extra=melon.io.get_landmarks_path
+        "02-intermediate/13-cranium.vtp", extra=melon.io.get_landmarks_path
     )
-
     output: Path = cherries.output(
-        "02-intermediate/12-skin.ply", extra=melon.io.get_landmarks_path
+        "02-intermediate/14-cranium.ply", extra=melon.io.get_landmarks_path
     )
 
 
@@ -39,16 +26,11 @@ def main(cfg: Config) -> None:
     target: pv.PolyData = melon.load_poly_data(cfg.target)
     source_landmarks: Float[np.ndarray, "L 3"] = melon.load_landmarks(cfg.source)
     target_landmarks: Float[np.ndarray, "L 3"] = melon.load_landmarks(cfg.target)
-
-    free_polygons_floating: Integer[np.ndarray, " F"] = melon.tri.select_groups(
-        source, cfg.floting
-    )
-    result: pv.PolyData = melon.fast_wrapping(
+    result: pv.PolyData = melon.tri.fast_wrapping(
         source,
         target,
         source_landmarks=source_landmarks,
         target_landmarks=target_landmarks,
-        free_polygons_floating=free_polygons_floating,
         verbose=True,
     )
 

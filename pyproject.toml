@@ -42,7 +42,6 @@ dependencies = [
   "pyvista>=0.45.0,<0.46",
   "rich>=14.0.0,<15",
   "scipy>=1.0.0,<2",
-  "tinyobjloader==2.0.0rc13",
   "trimesh[easy]>=4.0.0,<5",
 ]
 dynamic = ["version"]
@@ -60,7 +59,7 @@ melon = "liblaf.melon.cli:app.meta"
 
 [dependency-groups]
 build = ["check-wheel-contents", "hatch", "twine"]
-dev = ["icecream", "liblaf-cherries>=0.2.2,<0.3", "pygltflib"]
+dev = ["icecream", "liblaf-cherries", "pygltflib", "tinyobjloader==2.0.0rc13"]
 docs = [
   "docstring-inheritance",
   "griffe-fieldz",

@@ -15,4 +15,5 @@ class PolyDataToTrimesh(AbstractConverter):
         import trimesh as tm
 
         assert isinstance(data, pv.PolyData)
+        data = data.triangulate()
         return tm.Trimesh(data.points, data.regular_faces, **kwargs)

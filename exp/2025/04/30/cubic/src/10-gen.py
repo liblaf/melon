@@ -29,7 +29,7 @@ def main(cfg: Config) -> None:
         samples: Float[np.ndarray, "N 3"] = melon.barycentric_to_points(
             einops.repeat(cell.points, "B D -> N B D", N=cfg.n_samples), barycentric
         )
-        is_in: Bool[np.ndarray, " N"] = melon.triangle.contains(muscle, samples)
+        is_in: Bool[np.ndarray, " N"] = melon.tri.contains(muscle, samples)
         tetmesh.cell_data["muscle-fraction"][cid] = (
             np.count_nonzero(is_in) / cfg.n_samples
         )

@@ -10,8 +10,8 @@ from liblaf import cherries
 
 
 class Config(cherries.BaseConfig):
-    surface: Path = cherries.data("02-intermediate/skin-with-mouth-socket.ply")
-    output: Path = cherries.data("02-intermediate/skin-distance.vtp")
+    surface: Path = cherries.input("02-intermediate/skin-with-mouth-socket.ply")
+    output: Path = cherries.output("02-intermediate/skin-distance.vtp")
 
 
 def main(cfg: Config) -> None:
@@ -23,8 +23,8 @@ def main(cfg: Config) -> None:
         surface,
         np.asarray(
             [
-                [0.724907, 25.935352, 9.666245],
-                [0.689024, 26.452383, 9.960980],
+                [0.724907, 25.935352, 9.666245],  # midpoint below lips
+                [0.689024, 26.452383, 9.960980],  # midpoint above lips
             ]
         ),
     )

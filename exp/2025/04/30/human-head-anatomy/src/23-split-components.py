@@ -9,12 +9,12 @@ from liblaf import cherries, grapes
 
 
 class Config(cherries.BaseConfig):
-    face: Path = cherries.data("02-intermediate/skin-with-mouth-socket.ply")
-    full: Path = cherries.data("01-raw/Full human head anatomy.obj")
-    groups: Path = cherries.data("02-intermediate/groups.toml")
-    tetgen: Path = cherries.data("02-intermediate/20-tetgen.vtu")
+    face: Path = cherries.input("02-intermediate/skin-with-mouth-socket.ply")
+    full: Path = cherries.input("01-raw/Full human head anatomy.obj")
+    groups: Path = cherries.input("02-intermediate/groups.toml")
+    tetgen: Path = cherries.input("02-intermediate/20-tetgen.vtu")
 
-    output: Path = cherries.data("02-intermediate/23-tetgen.vtu")
+    output: Path = cherries.output("02-intermediate/23-tetgen.vtu")
 
 
 def classify(
@@ -37,7 +37,7 @@ def classify(
     return is_include
 
 
-def trimesh_point_data_to_tetmesh(
+def transfer_trimesh_point_data_to_tetmesh(
     tetmesh: pv.UnstructuredGrid, surface: pv.PolyData, data_name: str
 ) -> pv.UnstructuredGrid:
     point_ids: Integer[np.ndarray, " N"] = surface.point_data["point-id"]
@@ -57,14 +57,14 @@ def main(cfg: Config) -> None:
     mesh.point_data["point-id"] = np.arange(mesh.n_points)
 
     surface: pv.PolyData = mesh.extract_surface()  # pyright: ignore[reportAssignmentType]
-    mandible: pv.PolyData = melon.triangle.extract_groups(full, groups["mandible"])
+    mandible: pv.PolyData = melon.tri.extract_groups(full, groups["mandible"])
     not_mandible: pv.PolyData = pv.merge(
         [
             face,
-            melon.triangle.extract_groups(full, groups["cranium"]),
+            melon.tri.extract_groups(full, groups["cranium"]),
         ]
     )
-    skull: pv.PolyData = melon.triangle.extract_groups(
+    skull: pv.PolyData = melon.tri.extract_groups(
         full, groups["cranium"] + groups["mandible"]
     )
     surface.point_data["is-face"] = classify(surface, face, skull)
@@ -75,12 +75,12 @@ def main(cfg: Config) -> None:
     )
     assert not np.any(surface.point_data["is-face"] & surface.point_data["is-skull"])
     assert np.all(surface.point_data["is-face"] | surface.point_data["is-skull"])
-    mesh = trimesh_point_data_to_tetmesh(mesh, surface, "is-cranium")
-    mesh = trimesh_point_data_to_tetmesh(mesh, surface, "is-face")
-    mesh = trimesh_point_data_to_tetmesh(mesh, surface, "is-mandible")
-    mesh = trimesh_point_data_to_tetmesh(mesh, surface, "is-skull")
+    mesh = transfer_trimesh_point_data_to_tetmesh(mesh, surface, "is-cranium")
+    mesh = transfer_trimesh_point_data_to_tetmesh(mesh, surface, "is-face")
+    mesh = transfer_trimesh_point_data_to_tetmesh(mesh, surface, "is-mandible")
+    mesh = transfer_trimesh_point_data_to_tetmesh(mesh, surface, "is-skull")
     melon.save(cfg.output, mesh)
 
 
 if __name__ == "__main__":
-    cherries.run(main)
+    cherries.run(main, profile="playground")

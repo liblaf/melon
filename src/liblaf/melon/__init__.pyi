@@ -1,6 +1,7 @@
-from . import barycentric, io, mesh, plugin, proximity, triangle, typed, utils
+from . import barycentric, external, io, mesh, proximity, tri, typed, utils
 from ._version import __version__, __version_tuple__, version, version_tuple
 from .barycentric import barycentric_to_points, sample_barycentric_coords
+from .external import annotate_landmarks, fast_wrapping, mesh_fix, tetwild
 from .io import (
     PVDWriter,
     SeriesWriter,
@@ -16,7 +17,6 @@ from .io import (
     save_landmarks,
     save_polygons,
 )
-from .plugin import annotate_landmarks, fast_wrapping, mesh_fix, tetwild
 from .proximity import (
     NearestAlgorithm,
     NearestAlgorithmPrepared,
@@ -50,6 +50,7 @@ __all__ = [
     "as_unstructured_grid",
     "barycentric",
     "barycentric_to_points",
+    "external",
     "fast_wrapping",
     "io",
     "load_landmarks",
@@ -60,14 +61,13 @@ __all__ = [
     "mesh",
     "mesh_fix",
     "nearest",
-    "plugin",
     "proximity",
     "sample_barycentric_coords",
     "save",
     "save_landmarks",
     "save_polygons",
     "tetwild",
-    "triangle",
+    "tri",
     "typed",
     "utils",
     "version",

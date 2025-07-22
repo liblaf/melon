@@ -17,10 +17,10 @@ from liblaf import cherries, grapes
 class Config(cherries.BaseConfig):
     n_samples: int = 100
 
-    full: Path = cherries.data("01-raw/Full human head anatomy.obj")
-    tetgen: Path = cherries.data("02-intermediate/23-tetgen.vtu")
+    full: Path = cherries.input("01-raw/Full human head anatomy.obj")
+    tetgen: Path = cherries.input("02-intermediate/23-tetgen.vtu")
 
-    output: Path = cherries.data("02-intermediate/33-muscle-fraction.vtu")
+    output: Path = cherries.output("02-intermediate/33-muscle-fraction.vtu")
 
 
 def main(cfg: Config) -> None:
@@ -30,7 +30,7 @@ def main(cfg: Config) -> None:
     groups: list[str] = ["Levator_labii_superioris001"]
     muscles: list[pv.PolyData] = []
     for group in groups:
-        muscle: pv.PolyData = melon.triangle.extract_groups(full, group)
+        muscle: pv.PolyData = melon.tri.extract_groups(full, group)
         blocks: pv.MultiBlock = muscle.split_bodies(label=True).as_polydata_blocks()
         for block in blocks:
             fixed: pv.PolyData = melon.mesh_fix(block)
@@ -91,7 +91,7 @@ def compute_muscle_fraction(
     major_muscle: pv.PolyData | None = None
     major_muscle_fraction: float = 0.0
     for muscle in muscles:
-        contains: Bool[np.ndarray, " N"] = melon.triangle.contains(muscle, samples)
+        contains: Bool[np.ndarray, " N"] = melon.tri.contains(muscle, samples)
         n_contains: int = np.count_nonzero(contains)
         if n_contains == 0:
             continue
@@ -113,4 +113,4 @@ def compute_muscle_fraction(
 
 
 if __name__ == "__main__":
-    cherries.run(main)
+    cherries.run(main, profile="playground")

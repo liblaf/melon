@@ -9,17 +9,19 @@ from liblaf import cherries, grapes
 
 
 class Config(cherries.BaseConfig):
-    full: Path = cherries.data("01-raw/Full human head anatomy.obj")
-    groups: Path = cherries.data("02-intermediate/groups.toml")
+    full: Path = cherries.input("01-raw/Full human head anatomy.obj")
+    groups: Path = cherries.input("02-intermediate/groups.toml")
 
 
 def main(cfg: Config) -> None:
     full: pv.PolyData = melon.load_poly_data(cfg.full)
+    full.clean(inplace=True)
     groups: dict[str, list[str]] = grapes.load(cfg.groups)
 
-    muscles: pv.PolyData = melon.triangle.extract_groups(full, groups["Muscles"])
+    muscles: pv.PolyData = melon.tri.extract_groups(full, groups["Muscles"])
     muscles: pv.MultiBlock = muscles.split_bodies().as_polydata_blocks()
     for muscle in muscles:
+        muscle: pv.PolyData
         muscle.user_dict["name"] = muscle.field_data["GroupNames"][
             muscle.cell_data["GroupIds"][0]
         ]
@@ -54,8 +56,8 @@ def main(cfg: Config) -> None:
             mag=1,
             color="green",
         )
-    # plotter.show()
+    plotter.show()
 
 
 if __name__ == "__main__":
-    cherries.run(main)
+    cherries.run(main, profile="playground")

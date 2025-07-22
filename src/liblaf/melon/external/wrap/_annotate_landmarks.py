@@ -36,7 +36,7 @@ def annotate_landmarks(
         io.save_landmarks(right_landmarks_file, right_landmarks)
         template = string.Template(
             (
-                importlib.resources.files("liblaf.melon.plugin.wrap")
+                importlib.resources.files("liblaf.melon.external.wrap")
                 / "annotate-landmarks.wrap"
             ).read_text()
         )
