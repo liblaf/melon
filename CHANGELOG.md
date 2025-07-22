@@ -1,21 +1,15 @@
 # Changelog
 
-## [0.5.0](https://github.com/liblaf/melon/compare/v0.4.2...v0.5.0) (2025-07-22)
+## [0.5.0](https://github.com/liblaf/melon/compare/v0.4.2..v0.5.0) - 2025-07-22
 
+### 💥 BREAKING CHANGES
 
-### ⚠ BREAKING CHANGES
+- **melon:** rename triangle to tri and reorganize modules - ([817726f](https://github.com/liblaf/melon/commit/817726ff754f561123a74d608485466505bdd6b5))
+- modernize tooling and dependencies - ([79e12fe](https://github.com/liblaf/melon/commit/79e12feed02d60b4031f77f71814b26bcc683cdf))
 
-* **melon:** rename triangle to tri and reorganize modules
-* Removed pixi configuration and bumped liblaf-grapes to major version 1.0. Projects using pixi will need to migrate to uv.
+### ❤️ New Contributors
 
-### 🎫 Chores
-
-* modernize tooling and dependencies ([79e12fe](https://github.com/liblaf/melon/commit/79e12feed02d60b4031f77f71814b26bcc683cdf))
-
-
-### ♻ Code Refactoring
-
-* **melon:** rename triangle to tri and reorganize modules ([817726f](https://github.com/liblaf/melon/commit/817726ff754f561123a74d608485466505bdd6b5))
+- [@liblaf](https://github.com/liblaf) made their first contribution
 
 ## [0.4.2](https://github.com/liblaf/melon/compare/v0.4.1..v0.4.2) - 2025-07-15
 
@@ -23,12 +17,6 @@
 
 - **deps:** update dependencies and config - ([71b9cd1](https://github.com/liblaf/melon/commit/71b9cd1a65e429e1a98271a61137b5aa0a6d386a))
 - **deps:** update dependency liblaf-grapes to >=0.4.1,<0.5 (#49) - ([dbafa14](https://github.com/liblaf/melon/commit/dbafa141a025783b80f6987015265b1870f07eb5))
-
-### ❤️ New Contributors
-
-- [@liblaf](https://github.com/liblaf) made their first contribution
-- [@renovate[bot]](https://github.com/apps/renovate) made their first contribution in [#49](https://github.com/liblaf/melon/pull/49)
-- [@liblaf-bot[bot]](https://github.com/apps/liblaf-bot) made their first contribution
 
 ## [0.4.1](https://github.com/liblaf/melon/compare/v0.4.0..v0.4.1) - 2025-06-23
 
