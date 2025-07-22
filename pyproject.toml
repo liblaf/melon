@@ -1,13 +1,66 @@
 #:schema https://json.schemastore.org/pyproject.json
 # ref: <https://packaging.python.org/en/latest/specifications/pyproject-toml/>
 
-[build-system]
-build-backend = "hatchling.build"
-requires = ["hatch-vcs", "hatchling"]
+[project]
+name = "liblaf-melon"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+license = "MIT"
+authors = [
+  { name = "liblaf", email = "30631553+liblaf@users.noreply.github.com" },
+]
+keywords = []
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.12",
+  "Typing :: Typed",
+]
+dependencies = [
+  "attrs>=25.0.0,<26",
+  "cyclopts>=3.0.0,<4",
+  "einops>=0.8.0,<0.9",
+  "glom>=24.0.0,<25",
+  "jaxtyping>=0.3.0,<0.4",
+  "joblib>=1.0.0,<2",
+  "lazy-loader>=0.4,<0.5",
+  "liblaf-grapes>=1.0.0,<2",
+  "loguru>=0.7.0,<0.8",
+  "meshio>=5.0.0,<6",
+  "networkx>=3.0.0,<4",
+  "numpy>=2.0.0,<3",
+  "polars>=1.0.0,<2",
+  "pydantic>=2.0.0,<3",
+  "pydicom>=3.0.0,<4",
+  "pymeshfix>=0.17.0,<0.18",
+  "pyvista>=0.45.0,<0.46",
+  "rich>=14.0.0,<15",
+  "scipy>=1.0.0,<2",
+  "tinyobjloader==2.0.0rc13",
+  "trimesh[easy]>=4.0.0,<5",
+]
+dynamic = ["version"]
+
+[project.urls]
+"Changelog" = "https://github.com/liblaf/melon/blob/main/CHANGELOG.md"
+"Documentation" = "https://liblaf.github.io/melon/"
+"Homepage" = "https://github.com/liblaf/melon"
+"Issue Tracker" = "https://github.com/liblaf/melon/issues"
+"Release Notes" = "https://github.com/liblaf/melon/releases"
+"Source Code" = "https://github.com/liblaf/melon"
+
+[project.scripts]
+melon = "liblaf.melon.cli:app.meta"
 
 [dependency-groups]
 build = ["check-wheel-contents", "hatch", "twine"]
-dev = ["icecream", "liblaf-cherries", "pygltflib"]
+dev = ["icecream", "liblaf-cherries>=0.2.2,<0.3", "pygltflib"]
 docs = [
   "docstring-inheritance",
   "griffe-fieldz",
@@ -30,64 +83,11 @@ docs = [
   "pymdown-extensions",
   "ruff",
 ]
-test = ["pytest", "pytest-codspeed", "pytest-cov", "pytest-xdist"]
+test = ["hypothesis", "pytest", "pytest-codspeed", "pytest-cov", "pytest-xdist"]
 
-[project]
-authors = [
-  { email = "30631553+liblaf@users.noreply.github.com", name = "liblaf" },
-]
-classifiers = [
-  "Development Status :: 4 - Beta",
-  "Intended Audience :: Developers",
-  "License :: OSI Approved :: MIT License",
-  "License :: OSI Approved",
-  "Operating System :: OS Independent",
-  "Programming Language :: Python :: 3",
-  "Programming Language :: Python :: 3.12",
-  "Programming Language :: Python",
-  "Typing :: Typed",
-]
-dependencies = [
-  "attrs>=25.0.0,<26",
-  "cyclopts>=3.0.0,<4",
-  "einops>=0.8.0,<0.9",
-  "glom>=24.0.0,<25",
-  "jaxtyping>=0.3.0,<0.4",
-  "joblib>=1.0.0,<2",
-  "lazy-loader>=0.4,<0.5",
-  "liblaf-grapes>=0.6.0,<0.7",
-  "loguru>=0.7.0,<0.8",
-  "meshio>=5.0.0,<6",
-  "networkx>=3.5,<4",
-  "numpy>=2.0.0,<3",
-  "polars>=1.0.0,<2",
-  "pydantic>=2.0.0,<3",
-  "pydicom>=3.0.0,<4",
-  "pymeshfix>=0.17.0,<0.18",
-  "pyvista>=0.45.0,<0.46",
-  "rich>=14.0.0,<15",
-  "scipy>=1.0.0,<2",
-  "tinyobjloader==2.0.0rc13",
-  "trimesh[easy]>=4.0.0,<5",
-]
-description = "Add your description here"
-dynamic = ["version"]
-keywords = []
-license = "MIT"
-name = "liblaf-melon"
-readme = "README.md"
-requires-python = ">=3.12"
-
-[project.scripts]
-melon = "liblaf.melon.cli:app.meta"
-
-[project.urls]
-"Changelog" = "https://github.com/liblaf/melon/blob/main/CHANGELOG.md"
-"Documentation" = "https://liblaf.github.io/melon/"
-"Homepage" = "https://github.com/liblaf/melon"
-"Issue Tracker" = "https://github.com/liblaf/melon/issues"
-"Release Notes" = "https://github.com/liblaf/melon/releases"
-"Source Code" = "https://github.com/liblaf/melon"
+[build-system]
+requires = ["hatch-vcs", "hatchling"]
+build-backend = "hatchling.build"
 
 [tool.check-wheel-contents]
 ignore = ["W002"]
@@ -108,25 +108,9 @@ packages = ["src/liblaf/"]
 [tool.hatch.version]
 source = "vcs"
 
-[tool.pixi.dependencies]
-python = "3.12.*"
-
-[tool.pixi.environments]
-default = { features = ["build", "dev", "docs", "test"] }
-
-[tool.pixi.project]
-channel-priority = "disabled"
-channels = ["conda-forge"]
-platforms = ["linux-64"]
-
-[tool.pixi.pypi-dependencies]
-"liblaf-melon" = { editable = true, path = "." }
-
-[tool.pixi.system-requirements]
-cuda = "12"
-libc = { family = "glibc", version = "2.41" }
-linux = "6.12"
-
 [tool.pytest.ini_options]
 addopts = ["--showlocals", "--strict-config", "--strict-markers"]
 testpaths = ["benches/", "tests/"]
+
+[tool.uv]
+default-groups = "all"
