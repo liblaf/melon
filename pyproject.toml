@@ -27,6 +27,7 @@ dependencies = [
   "cyclopts>=3.0.0,<4",
   "einops>=0.8.0,<0.9",
   "glom>=24.0.0,<25",
+  "h5py>=3.14.0",
   "jaxtyping>=0.3.0,<0.4",
   "joblib>=1.0.0,<2",
   "lazy-loader>=0.4,<0.5",
