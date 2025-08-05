@@ -4,7 +4,7 @@ from ._extract import extract_cells, extract_groups, extract_points
 from ._is_volume import is_volume
 from ._merge_points import merge_points
 from ._ray import contains
-from ._selection import select_groups
+from ._selection import group_selection_mask, select_groups
 from ._wrapping import fast_wrapping
 
 __all__ = [
@@ -14,6 +14,7 @@ __all__ = [
     "extract_groups",
     "extract_points",
     "fast_wrapping",
+    "group_selection_mask",
     "intersection",
     "is_volume",
     "merge_points",

@@ -9,7 +9,7 @@ from liblaf import cherries, grapes
 
 
 class Config(cherries.BaseConfig):
-    face: Path = cherries.input("02-intermediate/skin-with-mouth-socket.ply")
+    face: Path = cherries.input("02-intermediate/12-skin.vtp")
     full: Path = cherries.input("01-raw/Full human head anatomy.obj")
     groups: Path = cherries.input("02-intermediate/groups.toml")
     tetgen: Path = cherries.input("02-intermediate/20-tetgen.vtu")
@@ -79,6 +79,33 @@ def main(cfg: Config) -> None:
     mesh = transfer_trimesh_point_data_to_tetmesh(mesh, surface, "is-face")
     mesh = transfer_trimesh_point_data_to_tetmesh(mesh, surface, "is-mandible")
     mesh = transfer_trimesh_point_data_to_tetmesh(mesh, surface, "is-skull")
+
+    # face.point_data["is-lip-top"] = melon.tri.group_selection_mask(face, "LipTop")
+    # face.point_data["is-lip-bottom"] = melon.tri.group_selection_mask(face, "LipBottom")
+    lip_top: pv.PolyData = melon.tri.extract_groups(
+        face, ["LipInnerTop", "LipTop", "MouthSocketTop"]
+    )
+    not_lip_top: pv.PolyData = melon.tri.extract_groups(
+        face, ["LipInnerTop", "LipTop", "MouthSocketTop"], invert=True
+    )
+    surface.point_data["is-lip-top"] = classify(
+        surface, lip_top, pv.merge([not_lip_top, skull])
+    )
+    lip_bottom: pv.PolyData = melon.tri.extract_groups(
+        face, ["LipInnerBottom", "LipBottom", "MouthSocketBottom"]
+    )
+    not_lip_bottom: pv.PolyData = melon.tri.extract_groups(
+        face, ["LipInnerBottom", "LipBottom", "MouthSocketBottom"], invert=True
+    )
+    surface.point_data["is-lip-bottom"] = classify(
+        surface, lip_bottom, pv.merge([not_lip_bottom, skull])
+    )
+    assert not np.any(
+        surface.point_data["is-lip-top"] & surface.point_data["is-lip-bottom"]
+    )
+    mesh = transfer_trimesh_point_data_to_tetmesh(mesh, surface, "is-lip-top")
+    mesh = transfer_trimesh_point_data_to_tetmesh(mesh, surface, "is-lip-bottom")
+
     melon.save(cfg.output, mesh)
 
 

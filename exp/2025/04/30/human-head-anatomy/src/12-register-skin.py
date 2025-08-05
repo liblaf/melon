@@ -29,7 +29,7 @@ class Config(cherries.BaseConfig):
     )
 
     output: Path = cherries.output(
-        "02-intermediate/12-skin.ply", extra=melon.io.get_landmarks_path
+        "02-intermediate/12-skin.vtp", extra=melon.io.get_landmarks_path
     )
 
 
@@ -51,7 +51,7 @@ def main(cfg: Config) -> None:
         free_polygons_floating=free_polygons_floating,
         verbose=True,
     )
-
+    result.copy_attributes(source)
     melon.save(cfg.output, result)
     melon.save_landmarks(cfg.output, target_landmarks)
 

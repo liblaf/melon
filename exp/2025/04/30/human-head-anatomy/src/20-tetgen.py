@@ -9,7 +9,7 @@ from liblaf import cherries
 class Config(cherries.BaseConfig):
     cranium: Path = cherries.input("02-intermediate/14-cranium.ply")
     mandible: Path = cherries.input("02-intermediate/14-mandible.ply")
-    skin: Path = cherries.input("02-intermediate/12-skin.ply")
+    skin: Path = cherries.input("02-intermediate/12-skin.vtp")
 
     output: Path = cherries.output("02-intermediate/20-tetgen.vtu")
 

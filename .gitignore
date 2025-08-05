@@ -206,3 +206,5 @@ playground/
 *.vtk
 *.vtp
 *.vtu
+
+.cherries/
