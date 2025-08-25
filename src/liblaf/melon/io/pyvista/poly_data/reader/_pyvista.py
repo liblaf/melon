@@ -13,4 +13,4 @@ class PolyDataReader(AbstractReader):
 
     @override
     def load(self, path: PathLike, /, **kwargs) -> pv.PolyData:
-        return pv.read(Path(path), **kwargs)
+        return pv.read(Path(path), **kwargs)  # pyright: ignore[reportReturnType]

@@ -59,30 +59,30 @@ class ObjReader(AbstractReader):
         return mesh
 
 
-def _load_tinyobjloader(path: PathLike, /) -> pv.PolyData:
-    import numpy as np
-    import tinyobjloader
-    from jaxtyping import Float
+# def _load_tinyobjloader(path: PathLike, /) -> pv.PolyData:
+#     import numpy as np
+#     import tinyobjloader
+#     from jaxtyping import Float
 
-    reader = tinyobjloader.ObjReader()
-    ok: bool = reader.ParseFromFile(str(path))
-    if not ok:
-        raise RuntimeError(reader.Error())
-    attrib: tinyobjloader.attrib_t = reader.GetAttrib()
-    vertices: Float[np.ndarray, "V 3"] = np.asarray(attrib.vertices).reshape(-1, 3)
-    shapes: list[tinyobjloader.shape_t] = reader.GetShapes()
-    faces: list[int] = []
-    group_ids: list[int] = []
-    group_names: list[str] = []
-    for group_id, shape in enumerate(shapes):
-        mesh: tinyobjloader.mesh_t = shape.mesh
-        faces.extend(_as_cell_array(mesh.num_face_vertices, mesh.vertex_indices()))
-        group_ids.extend([group_id] * len(mesh.num_face_vertices))
-        group_names.append(shape.name)
-    data = pv.PolyData(vertices, faces=faces)
-    data.cell_data["GroupIds"] = group_ids
-    data.field_data["GroupNames"] = group_names
-    return data
+#     reader = tinyobjloader.ObjReader()
+#     ok: bool = reader.ParseFromFile(str(path))
+#     if not ok:
+#         raise RuntimeError(reader.Error())
+#     attrib: tinyobjloader.attrib_t = reader.GetAttrib()
+#     vertices: Float[np.ndarray, "V 3"] = np.asarray(attrib.vertices).reshape(-1, 3)
+#     shapes: list[tinyobjloader.shape_t] = reader.GetShapes()
+#     faces: list[int] = []
+#     group_ids: list[int] = []
+#     group_names: list[str] = []
+#     for group_id, shape in enumerate(shapes):
+#         mesh: tinyobjloader.mesh_t = shape.mesh
+#         faces.extend(_as_cell_array(mesh.num_face_vertices, mesh.vertex_indices()))
+#         group_ids.extend([group_id] * len(mesh.num_face_vertices))
+#         group_names.append(shape.name)
+#     data = pv.PolyData(vertices, faces=faces)
+#     data.cell_data["GroupIds"] = group_ids
+#     data.field_data["GroupNames"] = group_names
+#     return data
 
 
 def _as_cell_array(

@@ -2,7 +2,7 @@ import abc
 import bisect
 from typing import Any
 
-from liblaf.grapes.typed import ClassInfo
+from liblaf.grapes.typing import ClassInfo
 
 
 class UnsupportedConverterError(ValueError):

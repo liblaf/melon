@@ -13,4 +13,4 @@ class UnstructuredGridReader(AbstractReader):
 
     @override
     def load(self, path: PathLike, /, **kwargs) -> pv.UnstructuredGrid:
-        return pv.read(Path(path), **kwargs)
+        return pv.read(Path(path), **kwargs)  # pyright: ignore[reportReturnType]

@@ -41,7 +41,7 @@ class SeriesWriter(Sequence[File], contextlib.AbstractContextManager):
         fps: float = 30.0,
         timestep: float | None = None,
     ) -> None:
-        self.file = grapes.as_path(path)
+        self.file = Path(path)
         self.series = Series()
         if timestep is not None:
             self.timestep = timestep
@@ -114,7 +114,9 @@ class SeriesWriter(Sequence[File], contextlib.AbstractContextManager):
         self.save()
 
     def save(self) -> None:
-        grapes.save_pydantic(self.file, self.series, ext=".json", by_alias=True)
+        grapes.save(
+            self.file, self.series, force_ext=".json", pydantic={"by_alias": True}
+        )
 
     def start(self) -> None:
         pass
