@@ -44,16 +44,13 @@ def process_muscle(
     is_in: Bool[np.ndarray, " N"] = np.zeros((n_samples,), dtype=bool)
     muscle_orientation: Float[np.ndarray, "3 3"] = np.zeros((3, 3))
     muscle_fraction: float = 0.0
-    major_muscle: pv.PolyData | None = None
     major_muscle_fraction: float = 0.0
     for muscle in muscles:
         contains: Bool[np.ndarray, " N"] = melon.tri.contains(muscle, samples)
         n_contains: int = np.count_nonzero(contains)  # pyright: ignore[reportAssignmentType]
         if n_contains == 0:
             continue
-        if n_contains / n_samples > major_muscle_fraction:
-            major_muscle_fraction = n_contains / n_samples
-            major_muscle = muscle
+        major_muscle_fraction = max(major_muscle_fraction, n_contains / n_samples)
         is_in |= contains
         muscle_orientation = muscle.field_data["muscle-orientation"]
         assert muscle_orientation.shape == (3, 3)

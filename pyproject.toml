@@ -110,5 +110,8 @@ testpaths = ["benches", "src", "tests"]
 [tool.ruff]
 extend = ".config/linters/.ruff.toml"
 
+[tool.ruff.lint]
+ignore = ["F722"]
+
 [tool.uv]
 default-groups = "all"
