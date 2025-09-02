@@ -42,7 +42,7 @@ TODO: DESCRIPTION <br />
 To install `liblaf-melon`, run the following command:
 
 ```bash
-$ uv add liblaf-melon
+uv add liblaf-melon
 ```
 
 <div align="right" markdown>
@@ -60,9 +60,9 @@ You can use Github Codespaces for online development:
 Or clone it for local development:
 
 ```bash
-$ gh repo clone liblaf/melon
-$ cd melon
-$ just test
+gh repo clone liblaf/melon
+cd melon
+just test
 ```
 
 <div align="right" markdown>
