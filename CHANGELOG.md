@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.1](https://github.com/liblaf/melon/compare/v0.6.0...v0.6.1) (2025-09-15)
+
+
+### 📝 Documentation
+
+* revamp README and update project documentation ([b3fe547](https://github.com/liblaf/melon/commit/b3fe547f6f56df114e377657788b2c54a8e4454b))
+
 ## [0.6.0](https://github.com/liblaf/melon/compare/v0.5.1..v0.6.0) - 2025-08-25
 
 ### 💥 BREAKING CHANGES
