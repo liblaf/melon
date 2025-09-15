@@ -3,7 +3,7 @@
 
 [project]
 name = "liblaf-melon"
-description = "Add your description here"
+description = "🍉 A comprehensive Python library for 3D mesh processing with advanced I/O capabilities, proximity analysis, and integration with external mesh processing tools."
 readme = "README.md"
 requires-python = ">=3.12"
 license = "MIT"
@@ -30,7 +30,7 @@ dependencies = [
   "jaxtyping>=0.3,<0.4",
   "joblib>=1,<2",
   "lazy-loader>=0.4,<0.5",
-  "liblaf-grapes>=2,<3",
+  "liblaf-grapes>=4,<5",
   "loguru>=0.7,<0.8",
   "meshio>=5,<6",
   "networkx>=3,<4",
@@ -61,14 +61,7 @@ melon = "liblaf.melon.cli:app.meta"
 build = ["check-wheel-contents>=0.6,<0.7", "hatch>=1,<2", "twine>=6,<7"]
 dev = ["icecream>=2,<3", "liblaf-cherries>=0.4,<0.5", "pygltflib>=1,<2"]
 docs = ["liblaf-mkdocs-preset>=0.2,<0.3", "mkdocs>=1,<2"]
-test = [
-  "hypothesis>=6,<7",
-  "pytest-codspeed>=4,<5",
-  "pytest-cov>=7,<8",
-  "pytest-randomly>=4,<5",
-  "pytest-xdist>=3,<4",
-  "pytest>=8,<9",
-]
+test = ["liblaf-pytest-preset>=0.1,<0.2,<7", "pytest>=8,<9"]
 
 [build-system]
 requires = ["hatch-vcs", "hatchling"]
@@ -94,13 +87,13 @@ packages = ["src/liblaf"]
 source = "vcs"
 
 [tool.pyright]
-exclude = ["**/.*", "**/__pycache__", "**/marimo", "**/node_modules"]
 extends = ".config/linters/pyrightconfig.json"
 
 [tool.pytest.ini_options]
 addopts = [
   "--doctest-modules",
   "--hypothesis-show-statistics",
+  "--import-mode=importlib",
   "--showlocals",
   "--strict-config",
   "--strict-markers",

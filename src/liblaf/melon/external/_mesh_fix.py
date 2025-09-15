@@ -40,8 +40,8 @@ def _pymeshfix(
     joincomp: bool = False,
     remove_smallest_components: bool = True,
 ) -> pv.PolyData:
-    with grapes.optional_imports():
-        import pymeshfix
+    import pymeshfix
+
     mesh: pv.PolyData = io.as_poly_data(mesh)
     fix = pymeshfix.MeshFix(mesh)
     fix.repair(

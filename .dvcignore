@@ -4,7 +4,5 @@
 # https://dvc.org/doc/user-guide/dvcignore
 
 *.log
-*.log.gz
-*.log.jsonl
-*.log.jsonl.gz
+*.log.*
 *.py
