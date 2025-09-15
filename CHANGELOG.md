@@ -1,11 +1,16 @@
 # Changelog
 
-## [0.6.1](https://github.com/liblaf/melon/compare/v0.6.0...v0.6.1) (2025-09-15)
-
+## [0.6.1](https://github.com/liblaf/melon/compare/v0.6.0..v0.6.1) - 2025-09-15
 
 ### 📝 Documentation
 
-* revamp README and update project documentation ([b3fe547](https://github.com/liblaf/melon/commit/b3fe547f6f56df114e377657788b2c54a8e4454b))
+- revamp README and update project documentation - ([b3fe547](https://github.com/liblaf/melon/commit/b3fe547f6f56df114e377657788b2c54a8e4454b))
+
+### ❤️ New Contributors
+
+- [@liblaf](https://github.com/liblaf) made their first contribution
+- [@renovate[bot]](https://github.com/apps/renovate) made their first contribution in [#64](https://github.com/liblaf/melon/pull/64)
+- [@liblaf-bot[bot]](https://github.com/apps/liblaf-bot) made their first contribution
 
 ## [0.6.0](https://github.com/liblaf/melon/compare/v0.5.1..v0.6.0) - 2025-08-25
 
@@ -16,11 +21,6 @@
 ### ♻ Code Refactoring
 
 - **exp/muscles:** remove unused variable and simplify logic - ([5ae8f62](https://github.com/liblaf/melon/commit/5ae8f622d24a33fd1a5c999cc21003d6e4104e7c))
-
-### ❤️ New Contributors
-
-- [@liblaf](https://github.com/liblaf) made their first contribution
-- [@renovate[bot]](https://github.com/apps/renovate) made their first contribution in [#58](https://github.com/liblaf/melon/pull/58)
 
 ## [0.5.1](https://github.com/liblaf/melon/compare/v0.5.0..v0.5.1) - 2025-08-10
 
