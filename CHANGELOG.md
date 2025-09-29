@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.2](https://github.com/liblaf/melon/compare/v0.6.1...v0.6.2) (2025-09-29)
+
+
+### 🐛 Bug Fixes
+
+* **deps:** update dependency liblaf-grapes to v5 ([#68](https://github.com/liblaf/melon/issues/68)) ([e515139](https://github.com/liblaf/melon/commit/e5151394ad5c4d82f92cf2159578a6405ba77e59))
+
 ## [0.6.1](https://github.com/liblaf/melon/compare/v0.6.0..v0.6.1) - 2025-09-15
 
 ### 📝 Documentation
