@@ -3,7 +3,7 @@ from pathlib import Path
 import numpy as np
 from jaxtyping import Integer
 
-import liblaf.grapes as grapes  # noqa: PLR0402
+from liblaf import grapes
 from liblaf.melon.typed import PathLike
 
 from ._utils import get_polygons_path
