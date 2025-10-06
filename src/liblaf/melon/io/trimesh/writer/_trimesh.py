@@ -2,15 +2,15 @@ from collections.abc import Container
 from typing import Any, override
 
 from liblaf.melon import utils
-from liblaf.melon.io.abc import AbstractWriter
-from liblaf.melon.typed import PathLike
+from liblaf.melon.io.abc import Writer
+from liblaf.melon.typing import PathLike
 
 
-class TrimeshWriter(AbstractWriter):
+class TrimeshWriter(Writer):
     extensions: Container[str] = {".off", ".ply", ".stl"}
 
     @override
-    def match_data(self, data: Any) -> bool:
+    def match_obj(self, data: Any) -> bool:
         return utils.is_trimesh(data)
 
     @override

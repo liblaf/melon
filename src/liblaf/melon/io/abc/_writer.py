@@ -1,59 +1,39 @@
-import abc
-import bisect
-from collections.abc import Container
+from collections.abc import Iterable
 from pathlib import Path
-from typing import Any
+from typing import Any, Protocol
 
-from loguru import logger
+import attrs
 
-from liblaf.melon.typed import PathLike
+from liblaf.melon.typing import PathLike
 
 
+@attrs.define
 class UnsupportedWriterError(ValueError):
-    data: Any
-    path: Path
+    from_type: type
+    path: Path = attrs.field(converter=Path)
 
-    def __init__(self, data: Any, path: PathLike, /) -> None:
-        self.data = data
-        self.path = Path(path)
-        super().__init__(f'Cannot save {type(data)} to "{self.path}".')
+    def __str__(self) -> str:
+        return f"Cannot save {self.from_type} to '{self.path}'."
 
 
-class AbstractWriter(abc.ABC):
-    extensions: Container[str] = ()
-    precedence: int = 0
-
-    def __call__(self, path: PathLike, data: Any, /, **kwargs) -> None:
-        return self.save(path, data, **kwargs)
-
-    def match_data(self, data: Any, /) -> bool:  # noqa: ARG002
-        return True
-
-    def match_path(self, path: PathLike, /) -> bool:
-        path = Path(path)
-        return path.suffix in self.extensions
-
-    @abc.abstractmethod
-    def save(self, path: PathLike, data: Any, /, **kwargs) -> None: ...
+class Writer(Protocol):
+    @property
+    def suffixes(self) -> Iterable[str]: ...
+    def __call__(self, path: Path, obj: Any, /, **kwargs) -> None: ...
 
 
+@attrs.define
 class WriterDispatcher:
-    writers: list[AbstractWriter]
-
-    def __init__(self) -> None:
-        self.writers = []
+    writers: dict[str, Writer] = attrs.field(factory=dict)
 
     def __call__(self, path: PathLike, data: Any, /, **kwargs) -> None:
-        return self.save(path, data, **kwargs)
+        path = Path(path)
+        writer: Writer | None = self.writers.get(path.suffix)
+        if writer is None:
+            raise UnsupportedWriterError(type(data), path)
+        path.parent.mkdir(parents=True, exist_ok=True)
+        writer(path, data, **kwargs)
 
-    def register(self, writer: AbstractWriter, /) -> None:
-        bisect.insort(self.writers, writer, key=lambda r: -r.precedence)
-
-    def save(self, path: PathLike, data: Any, /, **kwargs) -> None:
-        for writer in self.writers:
-            if writer.match_data(data) and writer.match_path(path):
-                Path(path).parent.mkdir(parents=True, exist_ok=True)
-                writer.save(path, data, **kwargs)
-                logger.opt(depth=2).debug('Saved {} to "{}".', type(data), path)
-                return
-        raise UnsupportedWriterError(data, path)
+    def register(self, writer: Writer) -> None:
+        for s in writer.suffixes:
+            self.writers[s] = writer

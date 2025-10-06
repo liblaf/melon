@@ -16,7 +16,7 @@ def extract_cells(
     *,
     invert: bool = False,
 ) -> pv.PolyData:
-    mesh: pv.PolyData = io.as_poly_data(mesh)
+    mesh: pv.PolyData = io.as_polydata(mesh)
     cells: pv.UnstructuredGrid = mesh.extract_cells(ind, invert=invert)  # pyright: ignore[reportAssignmentType]
     surface: pv.PolyData = cells.extract_surface()  # pyright: ignore[reportAssignmentType]
     return surface
@@ -35,7 +35,7 @@ def extract_points(
     adjacent_cells: bool = True,
     include_cells: bool = True,
 ) -> pv.PolyData:
-    mesh: pv.PolyData = io.as_poly_data(mesh)
+    mesh: pv.PolyData = io.as_polydata(mesh)
     points: pv.UnstructuredGrid = mesh.extract_points(
         ind, adjacent_cells=adjacent_cells, include_cells=include_cells
     )  # pyright: ignore[reportAssignmentType]

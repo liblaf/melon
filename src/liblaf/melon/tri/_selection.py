@@ -12,7 +12,7 @@ from liblaf.melon import io
 def group_selection_mask(
     mesh: pv.PolyData, groups: int | str | Iterable[int | str]
 ) -> Bool[np.ndarray, " C"]:
-    mesh: pv.PolyData = io.as_poly_data(mesh)
+    mesh: pv.PolyData = io.as_polydata(mesh)
     group_ids: list[int] = as_group_ids(mesh, groups)
     mask: Bool[np.ndarray, " C"] = np.isin(mesh.cell_data["GroupIds"], group_ids)
     return mask
@@ -21,7 +21,7 @@ def group_selection_mask(
 def select_groups(
     mesh: Any, groups: int | str | Iterable[int | str]
 ) -> Integer[np.ndarray, " N"]:
-    mesh: pv.PolyData = io.as_poly_data(mesh)
+    mesh: pv.PolyData = io.as_polydata(mesh)
     group_ids: list[int] = as_group_ids(mesh, groups)
     mask: Bool[np.ndarray, " C"] = np.isin(mesh.cell_data["GroupIds"], group_ids)
     indices: Integer[np.ndarray, " N"]

@@ -1,52 +1,44 @@
-import abc
-import bisect
+import functools
+import types
+from collections.abc import Callable
 from typing import Any
 
-from liblaf.grapes.typing import ClassInfo
+import attrs
+
+from ._typing import SingleDispatchCallable
 
 
+@attrs.define
 class UnsupportedConverterError(ValueError):
-    data: Any
+    from_type: type
     to_type: type
 
-    def __init__(self, data: Any, to_type: type, /) -> None:
-        self.data = data
-        self.to_type = to_type
-        super().__init__(f"Cannot convert {type(data)} to {to_type}.")
+    def __init__(self, obj_or_cls: Any, to_type: type, /) -> None:
+        from_type: type = (
+            obj_or_cls if isinstance(obj_or_cls, type) else type(obj_or_cls)
+        )
+        self.__attrs_init__(from_type=from_type, to_type=to_type)  # pyright: ignore[reportAttributeAccessIssue]
+
+    def __str__(self) -> str:
+        return f"Cannot convert {self.from_type} to {self.to_type}."
 
 
-class AbstractConverter[T](abc.ABC):
-    from_type: ClassInfo = ()
-    precedence: int = 0
-
-    def __call__(self, data: Any, /, **kwargs) -> T:
-        return self.convert(data, **kwargs)
-
-    @abc.abstractmethod
-    def convert(self, data: Any, /, **kwargs) -> T: ...
-
-    def match_from(self, data: Any, /) -> bool:
-        return isinstance(data, self.from_type)
-
-
+@attrs.define
 class ConverterDispatcher[T]:
-    converters: list[AbstractConverter]
     to_type: type[T]
+    dispatch: SingleDispatchCallable[T]
 
-    def __init__(self, to_type: type[T], /) -> None:
-        self.converters = []
-        self.to_type = to_type
+    def __init__(self, to_type: type[T]) -> None:
+        @functools.singledispatch
+        def dispatch(obj: Any, /, **kwargs) -> T:  # noqa: ARG001
+            raise UnsupportedConverterError(obj, to_type)
 
-    def __call__(self, data: Any, /, **kwargs) -> T:
-        return self.convert(data, **kwargs)
+        self.__attrs_init__(to_type=to_type, dispatch=dispatch)  # pyright: ignore[reportAttributeAccessIssue]
 
-    def convert(self, data: Any, /, **kwargs) -> T:
-        if isinstance(data, self.to_type):
-            return data
-        for converter in self.converters:
-            if converter.match_from(data):
-                return converter.convert(data, **kwargs)
-        raise UnsupportedConverterError(data, self.to_type)
+    def __call__(self, obj: Any, /, **kwargs) -> T:
+        return self.dispatch(obj, **kwargs)
 
-    def register(self, converter: AbstractConverter, /) -> None:
-        bisect.insort(self.converters, converter, key=lambda c: -c.precedence)
+    def register(
+        self, cls: type | types.UnionType
+    ) -> Callable[[Callable[..., T]], Callable[..., T]]:
+        return self.dispatch.register(cls)

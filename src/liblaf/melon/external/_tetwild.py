@@ -10,7 +10,7 @@ from loguru import logger
 
 from liblaf import grapes
 from liblaf.melon import io, tetra
-from liblaf.melon.typed import PathLike
+from liblaf.melon.typing import PathLike
 
 
 class TetwildKwargs(TypedDict, total=False):
@@ -54,7 +54,7 @@ def copy_structure(surface: Any) -> str | Mapping[str, Any] | pv.PolyData:
         return surface
     if isinstance(surface, Mapping):
         return {k: copy_structure(v) for k, v in surface.items()}
-    surface: pv.PolyData = io.as_poly_data(surface)
+    surface: pv.PolyData = io.as_polydata(surface)
     structure: pv.PolyData = pv.PolyData()
     structure.copy_structure(surface)
     return structure

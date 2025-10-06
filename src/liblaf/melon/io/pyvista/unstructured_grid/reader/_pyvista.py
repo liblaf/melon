@@ -4,11 +4,11 @@ from typing import override
 
 import pyvista as pv
 
-from liblaf.melon.io.abc import AbstractReader
-from liblaf.melon.typed import PathLike
+from liblaf.melon.io.abc import Reader
+from liblaf.melon.typing import PathLike
 
 
-class UnstructuredGridReader(AbstractReader):
+class UnstructuredGridReader(Reader):
     extensions: Container[str] = {".msh", ".vtk", ".vtu"}
 
     @override

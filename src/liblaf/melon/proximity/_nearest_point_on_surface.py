@@ -32,7 +32,7 @@ class NearestPointOnSurfacePrepared(NearestAlgorithmPrepared):
     @override
     def query(self, query: Any) -> NearestPointOnSurfaceResult:
         need_normals: bool = self.normal_threshold > -1.0
-        query: pv.PointSet = io.as_point_set(query, point_normals=need_normals)
+        query: pv.PointSet = io.as_pointset(query, point_normals=need_normals)
         nearest: Float[np.ndarray, "N 3"]
         distance: Float[np.ndarray, " N"]
         triangle_id: Integer[np.ndarray, " N"]

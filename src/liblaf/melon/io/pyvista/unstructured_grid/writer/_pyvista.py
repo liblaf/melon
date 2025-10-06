@@ -2,12 +2,12 @@ from collections.abc import Container
 from pathlib import Path
 from typing import Any, override
 
-from liblaf.melon.io.abc import AbstractWriter
+from liblaf.melon.io.abc import Writer
 from liblaf.melon.io.pyvista.unstructured_grid.convert import as_unstructured_grid
-from liblaf.melon.typed import PathLike
+from liblaf.melon.typing import PathLike
 
 
-class UnstructuredGridWriter(AbstractWriter):
+class UnstructuredGridWriter(Writer):
     extensions: Container[str] = {".vtu"}
 
     @override

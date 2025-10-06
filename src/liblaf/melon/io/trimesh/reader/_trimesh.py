@@ -1,11 +1,11 @@
 from pathlib import Path
 from typing import Any, override
 
-from liblaf.melon.io.abc import AbstractReader
-from liblaf.melon.typed import PathLike
+from liblaf.melon.io.abc import Reader
+from liblaf.melon.typing import PathLike
 
 
-class TrimeshReader(AbstractReader):
+class TrimeshReader(Reader):
     @override
     def load(self, path: PathLike, /, **kwargs) -> Any:
         import trimesh as tm

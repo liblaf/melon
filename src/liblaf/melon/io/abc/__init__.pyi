@@ -1,19 +1,14 @@
-from ._converter import (
-    AbstractConverter,
-    ConverterDispatcher,
-    UnsupportedConverterError,
-)
-from ._reader import AbstractReader, ReaderDispatcher, UnsupportedReaderError
-from ._writer import AbstractWriter, UnsupportedWriterError, WriterDispatcher
+from ._converter import ConverterDispatcher, UnsupportedConverterError
+from ._reader import Reader, ReaderDispatcher, UnsupportedReaderError
+from ._writer import UnsupportedWriterError, Writer, WriterDispatcher
 
 __all__ = [
-    "AbstractConverter",
-    "AbstractReader",
-    "AbstractWriter",
     "ConverterDispatcher",
+    "Reader",
     "ReaderDispatcher",
     "UnsupportedConverterError",
     "UnsupportedReaderError",
     "UnsupportedWriterError",
+    "Writer",
     "WriterDispatcher",
 ]

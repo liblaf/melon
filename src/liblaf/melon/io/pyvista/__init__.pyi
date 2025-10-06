@@ -1,7 +1,7 @@
-from . import point_set, poly_data, unstructured_grid
+from . import pointset, polydata, unstructured_grid
 from ._convert import as_mesh
-from .point_set import as_point_set
-from .poly_data import PolyDataWriter, as_poly_data, load_poly_data
+from .pointset import as_pointset
+from .polydata import PolyDataWriter, as_polydata, load_polydata
 from .unstructured_grid import (
     UnstructuredGridWriter,
     as_unstructured_grid,
@@ -12,12 +12,12 @@ __all__ = [
     "PolyDataWriter",
     "UnstructuredGridWriter",
     "as_mesh",
-    "as_point_set",
-    "as_poly_data",
+    "as_pointset",
+    "as_polydata",
     "as_unstructured_grid",
-    "load_poly_data",
+    "load_polydata",
     "load_unstructured_grid",
-    "point_set",
-    "poly_data",
+    "pointset",
+    "polydata",
     "unstructured_grid",
 ]

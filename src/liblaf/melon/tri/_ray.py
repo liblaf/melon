@@ -10,5 +10,5 @@ from liblaf.melon import io
 
 def contains(mesh: Any, pcl: Any) -> Bool[np.ndarray, " N"]:
     mesh: tm.Trimesh = io.as_trimesh(mesh)
-    pcl: pv.PointSet = io.as_point_set(pcl)
+    pcl: pv.PointSet = io.as_pointset(pcl)
     return mesh.contains(pcl.points)

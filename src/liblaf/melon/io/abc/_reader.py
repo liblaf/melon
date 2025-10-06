@@ -1,57 +1,44 @@
-import abc
-import bisect
-from collections.abc import Container
+from collections.abc import Callable
 from pathlib import Path
+from typing import Protocol
 
-from loguru import logger
+import attrs
 
-from liblaf.melon.typed import PathLike
+from liblaf import grapes
+from liblaf.melon.typing import PathLike
 
 
+@attrs.define
 class UnsupportedReaderError(ValueError):
-    dtype: type
-    path: Path
+    path: Path = attrs.field(converter=Path)
+    to_type: type
 
-    def __init__(self, dtype: type, path: PathLike, /) -> None:
-        self.dtype = dtype
-        self.path = Path(path)
-        super().__init__(f'Cannot load "{self.path}" as {dtype}.')
+    def __str__(self) -> str:
+        return f"Cannot load '{self.path}' as {self.to_type}."
 
 
-class AbstractReader[T](abc.ABC):
-    extensions: Container[str] = ()
-    precedence: int = 0
-
-    def __call__(self, path: PathLike, /, **kwargs) -> T:
-        return self.load(path, **kwargs)
-
-    @abc.abstractmethod
-    def load(self, path: PathLike, /, **kwargs) -> T: ...
-
-    def match_path(self, path: PathLike, /) -> bool:
-        path = Path(path)
-        return path.suffix in self.extensions
+class Reader[T](Protocol):
+    def __call__(self, path: Path, /, **kwargs) -> T: ...
 
 
+@attrs.define
 class ReaderDispatcher[T]:
-    readers: list[AbstractReader]
-    dtype: type[T]
+    to_type: type[T]
+    registry: dict[str, Reader[T]] = attrs.field(factory=dict)
 
-    def __init__(self, dtype: type[T], /) -> None:
-        self.dtype = dtype
-        self.readers = []
-
+    @grapes.logging.depth_tracker
     def __call__(self, path: PathLike, /, **kwargs) -> T:
-        return self.load(path, **kwargs)
-
-    def load(self, path: PathLike, /, **kwargs) -> T:
         path = Path(path)
-        for reader in self.readers:
-            if reader.match_path(path):
-                data: T = reader.load(path, **kwargs)
-                logger.opt(depth=2).debug('Loaded {} from "{}".', type(data), path)
-                return data
-        raise UnsupportedReaderError(self.dtype, path)
+        reader: Reader[T] | None = self.registry.get(path.suffix)
+        if reader is None:
+            raise UnsupportedReaderError(path, self.to_type)
+        obj: T = reader(path, **kwargs)
+        return obj
 
-    def register(self, reader: AbstractReader, /) -> None:
-        bisect.insort(self.readers, reader, key=lambda r: -r.precedence)
+    def register(self, *suffixes: str) -> Callable[[Reader[T]], Reader[T]]:
+        def wrapper(reader: Reader[T]) -> Reader[T]:
+            for s in suffixes:
+                self.registry[s] = reader
+            return reader
+
+        return wrapper

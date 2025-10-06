@@ -4,7 +4,7 @@ import numpy as np
 from jaxtyping import Integer
 
 from liblaf import grapes
-from liblaf.melon.typed import PathLike
+from liblaf.melon.typing import PathLike
 
 from ._utils import get_polygons_path
 

@@ -28,7 +28,7 @@ def mesh_fix(
         raise NotImplementedError
     if check:
         assert tri.is_volume(result)
-    mesh: pv.PolyData = io.as_poly_data(mesh)
+    mesh: pv.PolyData = io.as_polydata(mesh)
     result.field_data.update(mesh.field_data)
     return result
 
@@ -42,7 +42,7 @@ def _pymeshfix(
 ) -> pv.PolyData:
     import pymeshfix
 
-    mesh: pv.PolyData = io.as_poly_data(mesh)
+    mesh: pv.PolyData = io.as_polydata(mesh)
     fix = pymeshfix.MeshFix(mesh)
     fix.repair(
         verbose=verbose,

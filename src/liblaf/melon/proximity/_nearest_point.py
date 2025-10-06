@@ -34,7 +34,7 @@ class NearestPointPrepared(NearestAlgorithmPrepared):
         return self._nearest_vertex_with_normal_threshold(query)
 
     def _nearest_vertex(self, query: Any) -> NearestPointResult:
-        query: pv.PointSet = io.as_point_set(query)
+        query: pv.PointSet = io.as_pointset(query)
         distance: Float[np.ndarray, " N"]
         vertex_id: Integer[np.ndarray, " N"]
         distance, vertex_id = self.tree.query(
@@ -53,7 +53,7 @@ class NearestPointPrepared(NearestAlgorithmPrepared):
 
     def _nearest_vertex_with_normal_threshold(self, query: Any) -> NearestPointResult:
         source_normals: Float[np.ndarray, "N 3"] = self.source.point_data["Normals"]
-        query: pv.PointSet = io.as_point_set(query, point_normals=True)
+        query: pv.PointSet = io.as_pointset(query, point_normals=True)
         query_normals: Float[np.ndarray, "N 3"] = query.point_data["Normals"]
         result: NearestPointResult = self._nearest_vertex(query)
         distance: Float[np.ndarray, " N"] = result["distance"]
@@ -98,7 +98,7 @@ class NearestPointPrepared(NearestAlgorithmPrepared):
 
     def _nearest_vertex_with_normal_threshold(self, query: Any) -> NearestPointResult:
         source_normals: Float[np.ndarray, "N 3"] = self.source.point_data["Normals"]
-        query: pv.PointSet = io.as_point_set(query, point_normals=True)
+        query: pv.PointSet = io.as_pointset(query, point_normals=True)
         query_normals: Float[np.ndarray, "N 3"] = query.point_data["Normals"]
         distance: Float[np.ndarray, " N"] = np.full((query.n_points,), np.inf)
         missing: Bool[np.ndarray, " N"] = np.full((query.n_points,), fill_value=True)
@@ -159,7 +159,7 @@ class NearestPoint(NearestAlgorithm):
     @override
     def prepare(self, source: Any) -> NearestPointPrepared:
         need_normals: bool = self.normal_threshold > -1.0
-        source: pv.PointSet = io.as_point_set(source, point_normals=need_normals)
+        source: pv.PointSet = io.as_pointset(source, point_normals=need_normals)
         tree = scipy.spatial.KDTree(source.points)
         return NearestPointPrepared(
             source=source,

@@ -1,11 +1,11 @@
-from . import barycentric, external, io, mesh, proximity, tri, typed, utils
+from . import barycentric, external, io, mesh, proximity, tri, typing, utils
 from ._version import __version__, __version_tuple__, version, version_tuple
 from .barycentric import barycentric_to_points, sample_barycentric_coords
 from .external import annotate_landmarks, fast_wrapping, mesh_fix, tetwild
 from .io import (
     PVDWriter,
     SeriesWriter,
-    as_poly_data,
+    as_polydata,
     as_trimesh,
     as_unstructured_grid,
     load_landmarks,
@@ -45,7 +45,7 @@ __all__ = [
     "__version__",
     "__version_tuple__",
     "annotate_landmarks",
-    "as_poly_data",
+    "as_polydata",
     "as_trimesh",
     "as_unstructured_grid",
     "barycentric",
@@ -68,7 +68,7 @@ __all__ = [
     "save_polygons",
     "tetwild",
     "tri",
-    "typed",
+    "typing",
     "utils",
     "version",
     "version_tuple",

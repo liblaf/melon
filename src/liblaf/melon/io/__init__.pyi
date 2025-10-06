@@ -3,10 +3,10 @@ from ._save import save
 from .paraview import PVDWriter, SeriesWriter
 from .pyvista import (
     as_mesh,
-    as_point_set,
-    as_poly_data,
+    as_pointset,
+    as_polydata,
     as_unstructured_grid,
-    load_poly_data,
+    load_polydata,
     load_unstructured_grid,
 )
 from .trimesh import as_trimesh, load_trimesh
@@ -24,14 +24,14 @@ __all__ = [
     "SeriesWriter",
     "abc",
     "as_mesh",
-    "as_point_set",
-    "as_poly_data",
+    "as_pointset",
+    "as_polydata",
     "as_trimesh",
     "as_unstructured_grid",
     "get_landmarks_path",
     "get_polygons_path",
     "load_landmarks",
-    "load_poly_data",
+    "load_polydata",
     "load_polygons",
     "load_trimesh",
     "load_unstructured_grid",
