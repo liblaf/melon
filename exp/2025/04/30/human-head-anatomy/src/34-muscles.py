@@ -8,7 +8,7 @@ import einops
 import numpy as np
 import pyvista as pv
 import trimesh as tm
-from jaxtyping import Bool, Float, Integer
+from jaxtyping import Bool, Float
 
 import liblaf.melon as melon  # noqa: PLR0402
 from liblaf import cherries, grapes
@@ -53,8 +53,9 @@ def process_muscle(
             continue
         major_muscle_fraction = max(major_muscle_fraction, n_contains / n_samples)
         is_in |= contains
-        muscle_orientation = muscle.field_data["muscle-orientation"]
-        assert muscle_orientation.shape == (3, 3)
+        muscle_orientation = np.reshape(
+            muscle.field_data["muscle-orientation"], shape=(3, 3)
+        )
     muscle_fraction = np.count_nonzero(is_in) / n_samples  # pyright: ignore[reportAssignmentType]
 
     return TaskResult(
