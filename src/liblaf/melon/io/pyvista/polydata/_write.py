@@ -1,29 +1,20 @@
-from collections.abc import Iterable
 from pathlib import Path
-from typing import Any, override
 
 import pyvista as pv
 
-from liblaf.melon.io.abc import Writer
-
-from ._convert import as_polydata
+from liblaf.melon.io._save import save
 
 
-class PolyDataWriter(Writer):
-    @property
-    @override
-    def suffixes(self) -> Iterable[str]:
-        return [".geo", ".iv", ".obj", ".ply", ".stl", ".vtk", ".vtkhdf", ".vtp"]
+@save.register(pv.PolyData, [".ply", ".stl", ".vtp"])
+def save_polydata(path: Path, obj: pv.PolyData, /, **kwargs) -> None:
+    obj.save(path, **kwargs)
 
-    def __call__(self, path: Path, obj: Any, /, **kwargs) -> None:
-        obj: pv.PolyData = as_polydata(obj)
-        if path.suffix == ".obj":
-            obj = self._remove_materials(obj)  # `.obj` writer is buggy with materials
-        obj.save(path, **kwargs)
 
-    def _remove_materials(self, obj: pv.PolyData) -> pv.PolyData:
-        obj = obj.copy()
-        obj.point_data.active_texture_coordinates_name = None
-        if "MaterialNames" in obj.field_data:
-            del obj.field_data["MaterialNames"]
-        return obj
+@save.register(pv.PolyData, [".obj"])
+def save_polydata_obj(path: Path, obj: pv.PolyData, /, **kwargs) -> None:
+    obj = obj.copy()
+    # `.obj` writer is buggy with materials
+    obj.point_data.active_texture_coordinates_name = None
+    if "MaterialNames" in obj.field_data:
+        del obj.field_data["MaterialNames"]
+    obj.save(path, **kwargs)

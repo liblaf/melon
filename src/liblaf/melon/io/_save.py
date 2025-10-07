@@ -1,4 +1,24 @@
-from liblaf.melon.io.abc import WriterDispatcher
+from typing import Any
 
-save: WriterDispatcher = WriterDispatcher()
-save.register()
+from liblaf.melon.io.abc import WriterDispatcher as _WriterDispatcher
+from liblaf.melon.typing import PathLike
+
+
+class WriterDispatcher(_WriterDispatcher):
+    initialized: bool = False
+
+    def __call__(self, path: PathLike, obj: Any, /, **kwargs) -> None:
+        if not self.initialized:
+            self.init()
+        return super().__call__(path, obj, **kwargs)
+
+    def init(self) -> None:
+        # ruff: noqa: F401
+        from .pyvista.polydata._write import save_polydata, save_polydata_obj
+        from .pyvista.unstructured_grid._write import save_unstructured_grid
+        from .trimesh._write import save_trimesh
+
+        self.initialized = True
+
+
+save = WriterDispatcher()

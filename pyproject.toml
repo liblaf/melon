@@ -37,6 +37,7 @@ dependencies = [
   "meshio>=5,<6",
   "networkx>=3,<4",
   "numpy>=2,<3",
+  "plum-dispatch>=2,<3",
   "polars>=1,<2",
   "pydantic>=2,<3",
   "pydicom>=3,<4",

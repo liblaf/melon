@@ -22,11 +22,6 @@ def cell_to_polydata(obj: pv.Cell, **kwargs) -> pv.PolyData:
     return obj.cast_to_polydata(**kwargs)
 
 
-@as_polydata.register(pv.PointSet)
-def pointset_to_polydata(obj: pv.PointSet, **kwargs) -> pv.PolyData:
-    return obj.cast_to_polydata(**kwargs)
-
-
 @as_polydata.register(tm.Trimesh)
 def trimesh_to_polydata(obj: tm.Trimesh, **kwargs) -> pv.PolyData:
     return pv.wrap(obj, **kwargs)

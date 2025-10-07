@@ -1,11 +1,11 @@
 import functools
-import types
 from collections.abc import Callable
 from typing import Any
 
 import attrs
+from loguru import logger
 
-from ._typing import SingleDispatchCallable
+from ._typing import RegType, SingleDispatchCallable
 
 
 @attrs.define
@@ -36,9 +36,9 @@ class ConverterDispatcher[T]:
         self.__attrs_init__(to_type=to_type, dispatch=dispatch)  # pyright: ignore[reportAttributeAccessIssue]
 
     def __call__(self, obj: Any, /, **kwargs) -> T:
-        return self.dispatch(obj, **kwargs)
+        result: T = self.dispatch(obj, **kwargs)
+        logger.debug(f"Converted {type(obj)} to {type(result)}.")
+        return result
 
-    def register(
-        self, cls: type | types.UnionType
-    ) -> Callable[[Callable[..., T]], Callable[..., T]]:
+    def register(self, cls: RegType) -> Callable[[Callable[..., T]], Callable[..., T]]:
         return self.dispatch.register(cls)
