@@ -1,0 +1,5 @@
+outs:
+- md5: 50fce4885238de559bb496a1a3a17ae9
+  size: 259136
+  hash: md5
+  path: 11-skin.ply

@@ -1,0 +1,5 @@
+outs:
+- md5: 6d7bc61b83bec532259f64944b6f8c85
+  size: 718
+  hash: md5
+  path: 11-skin.landmarks.json
