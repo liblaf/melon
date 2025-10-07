@@ -1,16 +1,32 @@
 # Changelog
 
+## [0.7.0](https://github.com/liblaf/melon/compare/v0.6.1..v0.7.0) - 2025-10-07
+
+### 💥 BREAKING CHANGES
+
+- **io:** Redesign I/O system for modularity and extensibility - ([df5f8df](https://github.com/liblaf/melon/commit/df5f8df9f12e637c4a6d5dbf0bf0c942e08c1260))
+- **io:** Overhaul I/O framework with singledispatch and protocols - ([70508a0](https://github.com/liblaf/melon/commit/70508a099e5c649949e61c94728bd3a0ae51825c))
+
+### ♻ Code Refactoring
+
+- **io:** Rename load_poly_data to load_polydata for consistency - ([c89a0b7](https://github.com/liblaf/melon/commit/c89a0b7234764c56aca9110175001160729e8843))
+
+### 👷 Build System
+
+- **deps:** Update liblaf-grapes to v5 and add Python 3.13 support - ([263a19a](https://github.com/liblaf/melon/commit/263a19a83f0c44a9754246ac56317acdb58dece8))
+- update lockfile - ([971a3ae](https://github.com/liblaf/melon/commit/971a3ae9afaea8538971d7d12e103b83131c792e))
+
+### ❤️ New Contributors
+
+- [@liblaf](https://github.com/liblaf) made their first contribution
+- [@renovate[bot]](https://github.com/apps/renovate) made their first contribution in [#67](https://github.com/liblaf/melon/pull/67)
+- [@liblaf-bot[bot]](https://github.com/apps/liblaf-bot) made their first contribution
+
 ## [0.6.1](https://github.com/liblaf/melon/compare/v0.6.0..v0.6.1) - 2025-09-15
 
 ### 📝 Documentation
 
 - revamp README and update project documentation - ([b3fe547](https://github.com/liblaf/melon/commit/b3fe547f6f56df114e377657788b2c54a8e4454b))
-
-### ❤️ New Contributors
-
-- [@liblaf](https://github.com/liblaf) made their first contribution
-- [@renovate[bot]](https://github.com/apps/renovate) made their first contribution in [#64](https://github.com/liblaf/melon/pull/64)
-- [@liblaf-bot[bot]](https://github.com/apps/liblaf-bot) made their first contribution
 
 ## [0.6.0](https://github.com/liblaf/melon/compare/v0.5.1..v0.6.0) - 2025-08-25
 
