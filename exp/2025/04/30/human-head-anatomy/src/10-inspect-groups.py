@@ -82,7 +82,7 @@ def main(cfg: Config) -> None:
         name: str = subtree.node.name.replace(" ", "_")
         name_to_tree[name] = subtree
 
-    obj: pv.PolyData = io.load_poly_data(cfg.obj)
+    obj: pv.PolyData = io.load_polydata(cfg.obj)
     obj.clean(inplace=True)
     subgroups: dict[str, list[str]] = collections.defaultdict(list)
     for group_name_np in obj.field_data["GroupNames"]:
@@ -102,4 +102,4 @@ def main(cfg: Config) -> None:
 
 
 if __name__ == "__main__":
-    cherries.run(main, profile="playground")
+    cherries.run(main)

@@ -14,7 +14,7 @@ class Config(cherries.BaseConfig):
 
 def main(cfg: Config) -> None:
     tetmesh: pv.UnstructuredGrid = melon.load_unstructured_grid(cfg.tetgen)
-    full: pv.PolyData = melon.load_poly_data(cfg.full)
+    full: pv.PolyData = melon.load_polydata(cfg.full)
     full.clean(inplace=True)
     groups: dict[str, list[str]] = grapes.load(cfg.groups)
 

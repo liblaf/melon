@@ -62,4 +62,4 @@ def fast_wrapping(
         if verbose:
             args.append("--verbose")
         sp.run(args, check=True)
-        return io.load_poly_data(output_file)
+        return io.load_polydata(output_file)

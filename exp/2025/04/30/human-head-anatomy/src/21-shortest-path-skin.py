@@ -16,7 +16,7 @@ class Config(cherries.BaseConfig):
 
 def main(cfg: Config) -> None:
     cherries.log_input(cfg.surface)
-    surface: pv.PolyData = melon.load_poly_data(cfg.surface)
+    surface: pv.PolyData = melon.load_polydata(cfg.surface)
 
     graph: nx.Graph = melon.mesh.graph(surface)
     nearest_result: melon.NearestPointResult = melon.nearest(
@@ -46,4 +46,4 @@ def main(cfg: Config) -> None:
 
 
 if __name__ == "__main__":
-    cherries.run(main)
+    cherries.run(main, profile="playground")

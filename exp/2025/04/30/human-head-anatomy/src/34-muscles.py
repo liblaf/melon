@@ -62,7 +62,7 @@ def process_muscle(
 
 
 def main(cfg: Config) -> None:
-    full: pv.PolyData = melon.load_poly_data(cfg.full)
+    full: pv.PolyData = melon.load_polydata(cfg.full)
     tetmesh: pv.UnstructuredGrid = melon.load_unstructured_grid(cfg.tetgen)
 
     groups: list[str] = [
@@ -156,4 +156,4 @@ def compute_muscle_fraction(
 
 
 if __name__ == "__main__":
-    cherries.run(main, profile="playground")
+    cherries.run(main)

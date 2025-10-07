@@ -13,7 +13,7 @@ class Config(cherries.BaseConfig):
 
 
 def main(cfg: Config) -> None:
-    full: pv.PolyData = melon.load_poly_data(cfg.full)
+    full: pv.PolyData = melon.load_polydata(cfg.full)
     groups: dict[str, list[str]] = grapes.load(cfg.groups)
     mandible: pv.PolyData = melon.tri.extract_groups(full, groups["mandible"])
     left_point_id: int = np.argmin(mandible.points[:, 0])  # pyright: ignore[reportAssignmentType]

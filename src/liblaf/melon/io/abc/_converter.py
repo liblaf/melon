@@ -36,6 +36,8 @@ class ConverterDispatcher[T]:
         self.__attrs_init__(to_type=to_type, dispatch=dispatch)  # pyright: ignore[reportAttributeAccessIssue]
 
     def __call__(self, obj: Any, /, **kwargs) -> T:
+        if isinstance(obj, self.to_type):
+            return obj
         result: T = self.dispatch(obj, **kwargs)
         logger.debug(f"Converted {type(obj)} to {type(result)}.")
         return result

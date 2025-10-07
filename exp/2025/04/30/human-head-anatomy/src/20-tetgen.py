@@ -18,9 +18,9 @@ class Config(cherries.BaseConfig):
 
 
 def main(cfg: Config) -> None:
-    cranium: pv.PolyData = melon.load_poly_data(cfg.cranium)
-    mandible: pv.PolyData = melon.load_poly_data(cfg.mandible)
-    skin: pv.PolyData = melon.load_poly_data(cfg.skin)
+    cranium: pv.PolyData = melon.load_polydata(cfg.cranium)
+    mandible: pv.PolyData = melon.load_polydata(cfg.mandible)
+    skin: pv.PolyData = melon.load_polydata(cfg.skin)
     skull: pv.PolyData = pv.merge([cranium, mandible])
     tetmesh: pv.UnstructuredGrid = melon.tetwild(
         pv.merge([skull.flip_faces(), skin]), lr=cfg.lr, epsr=cfg.epsr
@@ -31,4 +31,4 @@ def main(cfg: Config) -> None:
 
 
 if __name__ == "__main__":
-    cherries.run(main, profile="playground")
+    cherries.run(main)

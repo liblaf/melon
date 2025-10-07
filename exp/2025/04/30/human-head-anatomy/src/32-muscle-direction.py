@@ -14,7 +14,7 @@ class Config(cherries.BaseConfig):
 
 
 def main(cfg: Config) -> None:
-    full: pv.PolyData = melon.load_poly_data(cfg.full)
+    full: pv.PolyData = melon.load_polydata(cfg.full)
     full.clean(inplace=True)
     groups: dict[str, list[str]] = grapes.load(cfg.groups)
 

@@ -21,9 +21,9 @@ class Config(cherries.BaseConfig):
 
 
 def main(cfg: Config) -> None:
-    source: pv.PolyData = melon.load_poly_data(cfg.source)
+    source: pv.PolyData = melon.load_polydata(cfg.source)
     source.clean(inplace=True)
-    target: pv.PolyData = melon.load_poly_data(cfg.target)
+    target: pv.PolyData = melon.load_polydata(cfg.target)
     source_landmarks: Float[np.ndarray, "L 3"] = melon.load_landmarks(cfg.source)
     target_landmarks: Float[np.ndarray, "L 3"] = melon.load_landmarks(cfg.target)
     result: pv.PolyData = melon.tri.fast_wrapping(
@@ -39,4 +39,4 @@ def main(cfg: Config) -> None:
 
 
 if __name__ == "__main__":
-    cherries.run(main, profile="playground")
+    cherries.run(main)

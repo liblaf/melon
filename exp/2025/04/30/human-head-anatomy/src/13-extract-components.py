@@ -15,7 +15,7 @@ class Config(cherries.BaseConfig):
 
 
 def main(cfg: Config) -> None:
-    full: pv.PolyData = melon.load_poly_data(cfg.full)
+    full: pv.PolyData = melon.load_polydata(cfg.full)
     full.clean(inplace=True)
     groups: dict = grapes.load(cfg.groups)
     cranium: pv.PolyData = melon.tri.extract_groups(
@@ -29,4 +29,4 @@ def main(cfg: Config) -> None:
 
 
 if __name__ == "__main__":
-    cherries.run(main, profile="playground")
+    cherries.run(main)

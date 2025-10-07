@@ -48,8 +48,8 @@ def transfer_trimesh_point_data_to_tetmesh(
 
 
 def main(cfg: Config) -> None:
-    face: pv.PolyData = melon.load_poly_data(cfg.face)
-    full: pv.PolyData = melon.load_poly_data(cfg.full)
+    face: pv.PolyData = melon.load_polydata(cfg.face)
+    full: pv.PolyData = melon.load_polydata(cfg.full)
     groups: dict[str, list[str]] = grapes.load(cfg.groups)
     mesh: pv.UnstructuredGrid = melon.load_unstructured_grid(cfg.tetgen)
 
@@ -110,4 +110,4 @@ def main(cfg: Config) -> None:
 
 
 if __name__ == "__main__":
-    cherries.run(main, profile="playground")
+    cherries.run(main)

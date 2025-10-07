@@ -24,7 +24,7 @@ class Config(cherries.BaseConfig):
 
 
 def main(cfg: Config) -> None:
-    full: pv.PolyData = melon.load_poly_data(cfg.full)
+    full: pv.PolyData = melon.load_polydata(cfg.full)
     tetmesh: pv.UnstructuredGrid = melon.load_unstructured_grid(cfg.tetgen)
 
     groups: list[str] = ["Levator_labii_superioris001"]

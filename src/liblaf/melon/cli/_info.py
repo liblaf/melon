@@ -21,7 +21,7 @@ def info(
     user_dict: bool = True,
 ) -> None:
     if path.suffix in POLY_DATA_SUFFIXES:
-        mesh: pv.PolyData = io.load_poly_data(path)
+        mesh: pv.PolyData = io.load_polydata(path)
     elif path.suffix in UNSTRUCTURED_GRID_SUFFIXES:
         mesh: pv.UnstructuredGrid = io.load_unstructured_grid(path)
     else:

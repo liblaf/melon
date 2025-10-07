@@ -21,22 +21,17 @@ class Config(cherries.BaseConfig):
         "MouthSocketTop",
     ]
     source: Path = cherries.input(
-        "01-raw/XYZ_ReadyToSculpt_eyesOpen_PolyGroups_GEO.obj",
-        extra=melon.io.get_landmarks_path,
+        "01-raw/XYZ_ReadyToSculpt_eyesOpen_PolyGroups_GEO.obj"
     )
-    target: Path = cherries.input(
-        "02-intermediate/11-skin.ply", extra=melon.io.get_landmarks_path
-    )
+    target: Path = cherries.input("02-intermediate/11-skin.ply")
 
-    output: Path = cherries.output(
-        "02-intermediate/12-skin.vtp", extra=melon.io.get_landmarks_path
-    )
+    output: Path = cherries.output("02-intermediate/12-skin.vtp")
 
 
 def main(cfg: Config) -> None:
-    source: pv.PolyData = melon.load_poly_data(cfg.source)
+    source: pv.PolyData = melon.load_polydata(cfg.source)
     source.clean(inplace=True)
-    target: pv.PolyData = melon.load_poly_data(cfg.target)
+    target: pv.PolyData = melon.load_polydata(cfg.target)
     source_landmarks: Float[np.ndarray, "L 3"] = melon.load_landmarks(cfg.source)
     target_landmarks: Float[np.ndarray, "L 3"] = melon.load_landmarks(cfg.target)
 
@@ -57,4 +52,4 @@ def main(cfg: Config) -> None:
 
 
 if __name__ == "__main__":
-    cherries.run(main, profile="playground")
+    cherries.run(main)
