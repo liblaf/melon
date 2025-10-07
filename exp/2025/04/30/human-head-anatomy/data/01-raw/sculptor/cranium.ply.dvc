@@ -1,0 +1,5 @@
+outs:
+- md5: 147f5f23e7fa5a5dfc889b1e21a0bfa6
+  size: 879217
+  hash: md5
+  path: cranium.ply
