@@ -152,7 +152,7 @@ class NearestPoint(NearestAlgorithm):
     ignore_orientation: bool = True
     max_k: int = 32
     normal_threshold: float = attrs.field(
-        default=0.8, validator=attrs.validators.le(1.0)
+        default=-1.0, validator=attrs.validators.le(1.0)
     )
     workers: int = -1
 

@@ -13,6 +13,7 @@ as_pointset: ConverterDispatcher[pv.PointSet] = ConverterDispatcher(pv.PointSet)
 
 @as_pointset.register(Mapping)
 def mapping_to_pointset(obj: Mapping, **kwargs) -> pv.PointSet:
+    kwargs.pop("point_normals", None)
     points: Float[np.ndarray, "P 3"] = np.asarray(obj["points"])
     return pv.PointSet(points, **kwargs)
 
@@ -20,12 +21,23 @@ def mapping_to_pointset(obj: Mapping, **kwargs) -> pv.PointSet:
 @as_pointset.register(Sequence)
 @as_pointset.register(np.ndarray)
 def numpy_to_pointset(obj: ArrayLike, **kwargs) -> pv.PointSet:
+    kwargs.pop("point_normals", None)
     points: Float[np.ndarray, "P 3"] = np.asarray(obj)
     return pv.PointSet(points, **kwargs)
 
 
 @as_pointset.register(pv.DataSet)
-def polydata_to_pointset(obj: pv.DataSet, **kwargs) -> pv.PointSet:
+def dataset_to_pointset(obj: pv.DataSet, **kwargs) -> pv.PointSet:
+    kwargs.pop("point_normals", None)
+    return obj.cast_to_pointset(**kwargs)
+
+
+@as_pointset.register(pv.PolyData)
+def polydata_to_pointset(
+    obj: pv.PolyData, *, point_normals: bool = False, **kwargs
+) -> pv.PointSet:
+    if point_normals:
+        obj.point_data["Normals"] = obj.point_normals
     return obj.cast_to_pointset(**kwargs)
 
 
