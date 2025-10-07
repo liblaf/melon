@@ -18,6 +18,7 @@ class Config(cherries.BaseConfig):
     n_samples: int = 100
 
     full: Path = cherries.input("01-raw/Full human head anatomy.obj")
+    groups: Path = cherries.input("02-intermediate/groups.toml")
     tetgen: Path = cherries.input("02-intermediate/23-tetgen.vtu")
 
     output: Path = cherries.output("02-intermediate/34-tetgen.vtu")
@@ -65,6 +66,7 @@ def main(cfg: Config) -> None:
     full: pv.PolyData = melon.load_polydata(cfg.full)
     tetmesh: pv.UnstructuredGrid = melon.load_unstructured_grid(cfg.tetgen)
 
+    # groups: list[str] = grapes.load(cfg.groups)["Muscles"]
     groups: list[str] = [
         "Levator_labii_superioris001",
         "Zygomaticus_major001",
@@ -134,8 +136,9 @@ def compute_muscle_fraction(
     major_muscle: pv.PolyData | None = None
     major_muscle_fraction: float = 0.0
     for muscle in muscles:
+        muscle: pv.PolyData
         contains: Bool[np.ndarray, " N"] = melon.tri.contains(muscle, samples)
-        n_contains: int = np.count_nonzero(contains)
+        n_contains: int = np.count_nonzero(contains)  # pyright: ignore[reportAssignmentType]
         if n_contains == 0:
             continue
         if n_contains / n_samples > major_muscle_fraction:
@@ -143,7 +146,7 @@ def compute_muscle_fraction(
             major_muscle = muscle
         is_in |= contains
         muscle_direction = muscle.field_data["muscle-direction"]
-    muscle_fraction = np.count_nonzero(is_in) / n_samples
+    muscle_fraction = np.count_nonzero(is_in) / n_samples  # pyright: ignore[reportAssignmentType]
 
     return Result(
         cid=cid,

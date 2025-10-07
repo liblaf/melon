@@ -39,7 +39,7 @@ class ConverterDispatcher[T]:
         if isinstance(obj, self.to_type):
             return obj
         result: T = self.dispatch(obj, **kwargs)
-        logger.debug(f"Converted {type(obj)} to {type(result)}.")
+        logger.trace(f"Converted {type(obj)} to {type(result)}.")
         return result
 
     def register(self, cls: RegType) -> Callable[[Callable[..., T]], Callable[..., T]]:
