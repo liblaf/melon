@@ -8,7 +8,7 @@
 * **io:** The I/O system has been completely redesigned.
     - Writer classes (e.g., `PolyDataWriter`) have been removed. Use the new `melon.io.save(path, obj)` function for all saving operations.
     - The `load_poly_data` function has been renamed to `load_polydata` for consistency.
-* **io:** 
+* **io:**
 
 ### ✨ Features
 
