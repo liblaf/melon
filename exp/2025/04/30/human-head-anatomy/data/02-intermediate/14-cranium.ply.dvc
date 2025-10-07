@@ -1,0 +1,5 @@
+outs:
+- md5: eb74d040eae8c0deb33d8f454846e66d
+  size: 879217
+  hash: md5
+  path: 14-cranium.ply
