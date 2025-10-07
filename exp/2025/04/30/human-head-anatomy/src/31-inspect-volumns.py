@@ -18,9 +18,9 @@ def main(cfg: Config) -> None:
     full.clean(inplace=True)
     groups: dict[str, list[str]] = grapes.load(cfg.groups)
 
-    muscles: pv.PolyData = melon.tri.extract_groups(full, groups["Muscles"])
-    muscles: pv.MultiBlock = muscles.split_bodies().as_polydata_blocks()
-    muscles: list[pv.PolyData] = [melon.mesh_fix(muscle) for muscle in muscles]
+    muscles_union: pv.PolyData = melon.tri.extract_groups(full, groups["Muscles"])
+    blocks: pv.MultiBlock = muscles_union.split_bodies().as_polydata_blocks()
+    muscles: list[pv.PolyData] = [melon.mesh_fix(muscle) for muscle in blocks]
     muscles_volume: float = sum(muscle.volume for muscle in muscles)
     ic(muscles_volume / tetmesh.volume)
 

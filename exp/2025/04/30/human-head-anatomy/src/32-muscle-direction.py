@@ -18,14 +18,14 @@ def main(cfg: Config) -> None:
     full.clean(inplace=True)
     groups: dict[str, list[str]] = grapes.load(cfg.groups)
 
-    muscles: pv.PolyData = melon.tri.extract_groups(full, groups["Muscles"])
-    muscles: pv.MultiBlock = muscles.split_bodies().as_polydata_blocks()
-    for muscle in muscles:
+    muscles_union: pv.PolyData = melon.tri.extract_groups(full, groups["Muscles"])
+    blocks: pv.MultiBlock = muscles_union.split_bodies().as_polydata_blocks()
+    for muscle in blocks:
         muscle: pv.PolyData
         muscle.user_dict["name"] = muscle.field_data["GroupNames"][
             muscle.cell_data["GroupIds"][0]
         ]
-    muscles: list[pv.PolyData] = [melon.mesh_fix(muscle) for muscle in muscles]
+    muscles: list[pv.PolyData] = [melon.mesh_fix(muscle) for muscle in blocks]
 
     for muscle in muscles:
         components: Float[np.ndarray, " 3"] = melon.as_trimesh(

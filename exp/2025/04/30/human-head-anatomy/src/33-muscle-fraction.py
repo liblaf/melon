@@ -47,7 +47,7 @@ def main(cfg: Config) -> None:
 
     tetmesh.cell_data["muscle-direction"] = np.zeros((tetmesh.n_cells, 3))
     tetmesh.cell_data["muscle-fraction"] = np.zeros((tetmesh.n_cells,))
-    muscle_name: list[str] = [None] * tetmesh.n_cells
+    muscle_name: list[str | None] = [None] * tetmesh.n_cells
     with concurrent.futures.ProcessPoolExecutor() as executor:
         for result in grapes.track(
             executor.map(
@@ -92,7 +92,7 @@ def compute_muscle_fraction(
     major_muscle_fraction: float = 0.0
     for muscle in muscles:
         contains: Bool[np.ndarray, " N"] = melon.tri.contains(muscle, samples)
-        n_contains: int = np.count_nonzero(contains)
+        n_contains: int = np.count_nonzero(contains)  # pyright: ignore[reportAssignmentType]
         if n_contains == 0:
             continue
         if n_contains / n_samples > major_muscle_fraction:
@@ -100,7 +100,7 @@ def compute_muscle_fraction(
             major_muscle = muscle
         is_in |= contains
         muscle_direction = muscle.field_data["muscle-direction"]
-    muscle_fraction = np.count_nonzero(is_in) / n_samples
+    muscle_fraction = np.count_nonzero(is_in) / n_samples  # pyright: ignore[reportAssignmentType]
 
     return Result(
         cid=cid,
