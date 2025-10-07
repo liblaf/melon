@@ -1,0 +1,5 @@
+outs:
+- md5: 3f028003fe4abfeacc88f6459a160f6b
+  size: 473
+  hash: md5
+  path: 14-mandible.landmarks.json

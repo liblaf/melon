@@ -1,0 +1,5 @@
+outs:
+- md5: bb59c2dd0fa997e251ea75231dfb0b56
+  size: 474058
+  hash: md5
+  path: 14-mandible.ply

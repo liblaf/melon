@@ -1,0 +1,5 @@
+outs:
+- md5: 2141bb97358dc5235b59d05868e4bd11
+  size: 474058
+  hash: md5
+  path: mandible.ply
