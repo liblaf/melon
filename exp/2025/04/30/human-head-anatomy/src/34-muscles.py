@@ -86,10 +86,8 @@ def main(cfg: Config) -> None:
         muscle_tm: tm.Trimesh = melon.as_trimesh(muscle)
         vectors: Float[np.ndarray, "3 3"] = muscle_tm.principal_inertia_vectors
         components: Float[np.ndarray, " 3"] = muscle_tm.principal_inertia_components
-        index: Integer[np.ndarray, " 3"] = np.argsort(components)
-        muscle.field_data["muscle-orientation"] = np.column_stack(
-            [vectors[index[i]] for i in range(3)]
-        )
+        vectors = vectors[np.argsort(components)]
+        muscle.field_data["muscle-orientation"] = vectors.ravel()
 
     tetmesh.cell_data["muscle-fraction"] = np.zeros((tetmesh.n_cells,))
     tetmesh.cell_data["muscle-orientation"] = np.zeros((tetmesh.n_cells, 3, 3))
