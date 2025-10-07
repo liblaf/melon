@@ -9,6 +9,6 @@ load_unstructured_grid: ReaderDispatcher[pv.UnstructuredGrid] = ReaderDispatcher
 )
 
 
-@load_unstructured_grid.register(".vtu")
+@load_unstructured_grid.register(".msh", ".vtu")
 def load_unstructured_grid_pyvista(path: Path, **kwargs) -> pv.UnstructuredGrid:
     return pv.read(path, **kwargs)  # pyright: ignore[reportReturnType]
