@@ -190,21 +190,4 @@ junit.xml
 mlruns/
 playground/
 
-*.jpg
-*.pdf
-*.png
-*.svg
-
-*.glb
-*.landmarks.json
-*.mtl
-*.obj
-*.ply
-*.pvd
-*.series
-*.stl
-*.vtk
-*.vtp
-*.vtu
-
 .cherries/
