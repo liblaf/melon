@@ -1,16 +1,19 @@
 # Changelog
 
-## [0.7.1](https://github.com/liblaf/melon/compare/v0.7.0...v0.7.1) (2025-10-13)
-
+## [0.7.1](https://github.com/liblaf/melon/compare/v0.7.0..v0.7.1) - 2025-10-13
 
 ### ✨ Features
 
-* **exp:** Add human head anatomy dataset and component groupings ([83c029a](https://github.com/liblaf/melon/commit/83c029a85adea3d126d341994776beebd45e4123))
+- **exp:** Add human head anatomy dataset and component groupings - ([83c029a](https://github.com/liblaf/melon/commit/83c029a85adea3d126d341994776beebd45e4123))
 
+### 👷 Build System
 
-### 🛠 Builds
+- **lfs:** Configure Git LFS for large data files - ([87ae687](https://github.com/liblaf/melon/commit/87ae687e0884d85d736ebc1ac66696c14f598cb5))
 
-* **lfs:** Configure Git LFS for large data files ([87ae687](https://github.com/liblaf/melon/commit/87ae687e0884d85d736ebc1ac66696c14f598cb5))
+### ❤️ New Contributors
+
+- [@liblaf](https://github.com/liblaf) made their first contribution
+- [@liblaf-bot[bot]](https://github.com/apps/liblaf-bot) made their first contribution
 
 ## [0.7.0](https://github.com/liblaf/melon/compare/v0.6.1..v0.7.0) - 2025-10-07
 
@@ -27,12 +30,6 @@
 
 - **deps:** Update liblaf-grapes to v5 and add Python 3.13 support - ([263a19a](https://github.com/liblaf/melon/commit/263a19a83f0c44a9754246ac56317acdb58dece8))
 - update lockfile - ([971a3ae](https://github.com/liblaf/melon/commit/971a3ae9afaea8538971d7d12e103b83131c792e))
-
-### ❤️ New Contributors
-
-- [@liblaf](https://github.com/liblaf) made their first contribution
-- [@renovate[bot]](https://github.com/apps/renovate) made their first contribution in [#67](https://github.com/liblaf/melon/pull/67)
-- [@liblaf-bot[bot]](https://github.com/apps/liblaf-bot) made their first contribution
 
 ## [0.6.1](https://github.com/liblaf/melon/compare/v0.6.0..v0.6.1) - 2025-09-15
 
