@@ -183,11 +183,8 @@ poetry.toml
 
 _version.py
 *.log
-*.log.gz
-*.log.jsonl
-*.log.jsonl.gz
+*.log.*
 junit.xml
-mlruns/
 playground/
 
 .cherries/
