@@ -1,4 +1,4 @@
 from ._pvd_writer import PVDWriter
-from ._series_writer import SeriesWriter
+from .series import SeriesReader, SeriesWriter
 
-__all__ = ["PVDWriter", "SeriesWriter"]
+__all__ = ["PVDWriter", "SeriesReader", "SeriesWriter"]

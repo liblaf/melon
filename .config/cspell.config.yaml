@@ -14,35 +14,80 @@ ignorePaths:
 ignoreRandomStrings: true
 useGitignore: true
 words:
+  - anguli
   - arithmatex
+  - atlanto
+  - auricularis
+  - callosum
+  - capitis
+  - cava
+  - cervicis
+  - chodra
+  - cingulate
+  - circothyroid
+  - colli
+  - cricoarytenoid
+  - cricothyroid
   - cython
   - dicom
+  - digastiric
   - direnv
   - dmypy
   - einops
+  - epicranius
   - epsr
   - fieldz
+  - flava
+  - genioglossus
+  - geniohyoid
   - getattr
+  - globus
   - gltf
+  - griseum
   - hynek
+  - hyoglossus
+  - illiocostalis
+  - inferioris
+  - inferor
   - inlinehilite
+  - interansversarii
+  - intertransversarii
   - ipynb
   - ipython
   - isin
   - jaxtyping
   - labii
   - liblaf
+  - ligamenta
+  - lumborum
+  - mandibula
+  - mentalis
   - meshio
   - mkdocs
   - mkdocstrings
-  - mlruns
+  - multifidus
   - mypy
+  - nasi
+  - nasolacrimal
   - ndarray
   - networkx
+  - nuchal
   - numprocesses
   - numpy
+  - obliqyys
+  - occipitofrontalis
+  - omohyoid
+  - orbicularis
+  - oris
+  - palatini
+  - palatoglossus
+  - pallidus
+  - palpebrae
+  - palpebral
   - pipenv
   - pixi
+  - procerus
+  - pterygoid
   - pybuilder
   - pycache
   - pydantic
@@ -65,15 +110,32 @@ words:
   - pytype
   - pyvenv
   - pyvista
+  - retopo
+  - rhomboideus
+  - risorius
   - scipy
   - scrapy
   - sdist
+  - septi
+  - serratus
+  - sphenomandibular
+  - spinalis
+  - sternocleidomastoid
+  - styloglossus
+  - stylohyoid
+  - stylomandibular
+  - supercilii
+  - supercilli
   - superioris
+  - tectorial
+  - thyrohyoid
   - tombi
   - trimesh
   - unshallow
   - vecdot
+  - veli
   - venv
+  - vestibulocochlear
   - virtualenv
-  - xdist
+  - vtkhdf
   - zygomaticus

@@ -1,15 +1,16 @@
 import contextlib
-import os
 import shutil
 import types
 from collections.abc import Sequence
 from pathlib import Path
 from typing import Any, Literal, Self, overload
 
+import attrs
 import pydantic
 
 from liblaf import grapes
 from liblaf.melon.io._save import save
+from liblaf.melon.typing import PathLike
 
 
 def snake_to_kebab(snake: str) -> str:
@@ -27,27 +28,24 @@ class Series(pydantic.BaseModel):
     files: list[File] = []
 
 
+@attrs.define
 class SeriesWriter(Sequence[File], contextlib.AbstractContextManager):
     file: Path
     series: Series
-    timestep: float
+    step: float
 
     def __init__(
         self,
-        path: str | os.PathLike[str],
+        file: PathLike,
         /,
         *,
         clear: bool = False,
         fps: float = 30.0,
-        timestep: float | None = None,
+        step: float | None = None,
     ) -> None:
-        self.file = Path(path)
-        self.series = Series()
-        if timestep is not None:
-            self.timestep = timestep
-        else:
-            self.timestep = 1.0 / fps
-
+        if step is None:
+            step = 1.0 / fps
+        self.__attrs_init__(file=Path(file), series=Series(), step=step)  # pyright: ignore[reportAttributeAccessIssue]
         if clear:
             shutil.rmtree(self.folder, ignore_errors=True)
 
@@ -79,11 +77,11 @@ class SeriesWriter(Sequence[File], contextlib.AbstractContextManager):
 
     @property
     def folder(self) -> Path:
-        return self.file.with_suffix("")
+        return self.file.with_suffix(".d")
 
     @property
     def fps(self) -> float:
-        return 1.0 / self.timestep
+        return 1.0 / self.step
 
     @property
     def name(self) -> str:
@@ -95,6 +93,7 @@ class SeriesWriter(Sequence[File], contextlib.AbstractContextManager):
             return 0.0
         return self.series.files[-1].time
 
+    @grapes.logging.helper
     def append(
         self, data: Any, *, time: float | None = None, timestep: float | None = None
     ) -> None:
@@ -103,7 +102,7 @@ class SeriesWriter(Sequence[File], contextlib.AbstractContextManager):
         save(filepath, data)
         if time is None:
             if timestep is None:
-                timestep = self.timestep
+                timestep = self.step
             time = self.time + timestep
         self.series.files.append(
             File(name=filepath.relative_to(self.file.parent).as_posix(), time=time)

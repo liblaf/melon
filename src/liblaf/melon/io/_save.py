@@ -1,5 +1,6 @@
 from typing import Any
 
+from liblaf import grapes
 from liblaf.melon.io.abc import WriterDispatcher as _WriterDispatcher
 from liblaf.melon.typing import PathLike
 
@@ -7,6 +8,7 @@ from liblaf.melon.typing import PathLike
 class WriterDispatcher(_WriterDispatcher):
     initialized: bool = False
 
+    @grapes.logging.helper
     def __call__(self, path: PathLike, obj: Any, /, **kwargs) -> None:
         if not self.initialized:
             self.init()
@@ -15,6 +17,7 @@ class WriterDispatcher(_WriterDispatcher):
     def init(self) -> None:
         # ruff: noqa: F401
         from .pyvista.polydata._write import save_polydata, save_polydata_obj
+        from .pyvista.structured_grid._write import save_structured_grid
         from .pyvista.unstructured_grid._write import save_unstructured_grid
         from .trimesh._write import save_trimesh
 
