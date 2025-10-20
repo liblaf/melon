@@ -27,14 +27,16 @@ class ReaderDispatcher[T]:
     to_type: type[T]
     registry: dict[str, Reader[T]] = attrs.field(factory=dict)
 
-    @grapes.logging.depth_tracker
+    @grapes.logging.helper
     def __call__(self, path: PathLike, /, **kwargs) -> T:
         path = Path(path)
         reader: Reader[T] | None = self.registry.get(path.suffix)
         if reader is None:
             raise UnsupportedReaderError(path, self.to_type)
         obj: T = reader(path, **kwargs)
-        logger.debug(f"Loaded '{path}' as {type(obj)}.")
+        logger.opt(depth=grapes.logging.helper.depth).debug(
+            f"Loaded '{path}' as {type(obj)}."
+        )
         return obj
 
     def register(self, *suffixes: str) -> Callable[[Reader[T]], Reader[T]]:

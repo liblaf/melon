@@ -20,10 +20,11 @@ def info(
     field_data_values: bool = False,
     user_dict: bool = True,
 ) -> None:
+    mesh: pv.PolyData | pv.UnstructuredGrid
     if path.suffix in POLY_DATA_SUFFIXES:
-        mesh: pv.PolyData = io.load_polydata(path)
+        mesh = io.load_polydata(path)
     elif path.suffix in UNSTRUCTURED_GRID_SUFFIXES:
-        mesh: pv.UnstructuredGrid = io.load_unstructured_grid(path)
+        mesh = io.load_unstructured_grid(path)
     else:
         msg: str = f"Unsupported file format: {path.suffix}"
         raise ValueError(msg)

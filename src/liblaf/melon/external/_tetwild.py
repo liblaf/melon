@@ -18,6 +18,7 @@ class TetwildKwargs(TypedDict, total=False):
     epsr: float | None
     level: int | None
     no_color: bool | None
+    coarsen: bool | None
 
 
 def tetwild(
@@ -28,10 +29,11 @@ def tetwild(
     epsr: float | None = None,
     level: int | None = None,
     color: bool = False,
+    coarsen: bool = False,
     csg: bool = False,
     **kwargs,
 ) -> pv.UnstructuredGrid:
-    surface: pv.PolyData = copy_structure(surface)
+    surface: pv.PolyData = copy_structure(surface)  # pyright: ignore[reportAssignmentType]
     if shutil.which("fTetWild"):
         mesh: pv.UnstructuredGrid = _tetwild_exe(
             surface,
@@ -40,6 +42,7 @@ def tetwild(
             level=level,
             no_color=not color,
             csg=csg,
+            coarsen=coarsen,
             **kwargs,
         )
     else:

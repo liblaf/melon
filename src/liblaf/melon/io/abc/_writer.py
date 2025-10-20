@@ -38,6 +38,7 @@ class WriterDispatcher:
         )
     )
 
+    @grapes.logging.helper
     def __call__(self, path: PathLike, obj: Any, /, **kwargs) -> None:
         path = Path(path)
         writer: SingleDispatchCallable[None] | None = self.writers.get(path.suffix)
@@ -48,7 +49,9 @@ class WriterDispatcher:
         if impl is _dummy:
             raise UnsupportedWriterError(type(obj), path)
         impl(path, obj, **kwargs)
-        logger.debug(f"Saved {type(obj)} to '{path}'.")
+        logger.opt(depth=grapes.logging.helper.depth).debug(
+            f"Saved {type(obj)} to '{path}'."
+        )
 
     def register(
         self, cls: RegType, suffix: str | Iterable[str]

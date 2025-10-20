@@ -85,7 +85,7 @@ def main(cfg: Config) -> None:
     obj: pv.PolyData = io.load_polydata(cfg.obj)
     obj.clean(inplace=True)
     subgroups: dict[str, list[str]] = collections.defaultdict(list)
-    for group_name_np in obj.field_data["GroupNames"]:
+    for group_name_np in obj.field_data["group-name"]:
         group_name = str(group_name_np)
         if group_name not in name_to_tree:
             logger.warning("Node not found in glTF: {}", group_name)

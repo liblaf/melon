@@ -14,7 +14,7 @@ def group_selection_mask(
 ) -> Bool[np.ndarray, " C"]:
     mesh: pv.PolyData = io.as_polydata(mesh)
     group_ids: list[int] = as_group_ids(mesh, groups)
-    mask: Bool[np.ndarray, " C"] = np.isin(mesh.cell_data["GroupIds"], group_ids)
+    mask: Bool[np.ndarray, " C"] = np.isin(mesh.cell_data["group-id"], group_ids)
     return mask
 
 
@@ -23,7 +23,7 @@ def select_groups(
 ) -> Integer[np.ndarray, " N"]:
     mesh: pv.PolyData = io.as_polydata(mesh)
     group_ids: list[int] = as_group_ids(mesh, groups)
-    mask: Bool[np.ndarray, " C"] = np.isin(mesh.cell_data["GroupIds"], group_ids)
+    mask: Bool[np.ndarray, " C"] = np.isin(mesh.cell_data["group-id"], group_ids)
     indices: Integer[np.ndarray, " N"]
     (indices,) = np.nonzero(mask)
     return indices
@@ -38,7 +38,7 @@ def as_group_ids(
         if isinstance(group, int):
             group_ids.append(group)
         elif isinstance(group, str):
-            group_names: list[str] = list(mesh.field_data["GroupNames"])
+            group_names: list[str] = list(mesh.field_data["group-name"])
             group_ids.append(group_names.index(group))
         else:
             raise NotImplementedError

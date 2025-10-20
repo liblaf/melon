@@ -42,5 +42,10 @@ def polydata_to_pointset(
 
 
 @as_pointset.register(tm.Trimesh)
-def trimesh_to_pointset(obj: tm.Trimesh, **kwargs) -> pv.PointSet:
-    return pv.PointSet(obj.vertices, **kwargs)
+def trimesh_to_pointset(
+    obj: tm.Trimesh, *, point_normals: bool = False, **kwargs
+) -> pv.PointSet:
+    result = pv.PointSet(obj.vertices, **kwargs)
+    if point_normals:
+        result.point_data["Normals"] = obj.vertex_normals
+    return result

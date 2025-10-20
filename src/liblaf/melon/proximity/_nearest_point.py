@@ -1,7 +1,6 @@
 from typing import Any, override
 
 import attrs
-import einops
 import numpy as np
 import pyvista as pv
 import scipy.spatial
@@ -96,55 +95,6 @@ class NearestPointPrepared(NearestAlgorithmPrepared):
             distance=distance, missing=missing, nearest=nearest, vertex_id=vertex_id
         )
 
-    def _nearest_vertex_with_normal_threshold(self, query: Any) -> NearestPointResult:
-        source_normals: Float[np.ndarray, "N 3"] = self.source.point_data["Normals"]
-        query: pv.PointSet = io.as_pointset(query, point_normals=True)
-        query_normals: Float[np.ndarray, "N 3"] = query.point_data["Normals"]
-        distance: Float[np.ndarray, " N"] = np.full((query.n_points,), np.inf)
-        missing: Bool[np.ndarray, " N"] = np.full((query.n_points,), fill_value=True)
-        nearest: Float[np.ndarray, " N 3"] = np.full(
-            (query.n_points, 3), fill_value=np.nan
-        )
-        vertex_id: Integer[np.ndarray, " N"] = np.full((query.n_points,), -1)
-        k: int = 1
-        remaining_vertex_id: list[int] = list(range(query.n_points))
-        while k <= self.max_k and remaining_vertex_id:
-            d: Float[np.ndarray, "R k"]
-            v: Integer[np.ndarray, "R k"]
-            d, v = self.tree.query(
-                query.points[remaining_vertex_id],
-                k=k,
-                distance_upper_bound=self.distance_threshold * self.source.length,
-                workers=self.workers,
-            )
-            if k == 1:
-                d = einops.rearrange(d, "R -> R 1")
-                v = einops.rearrange(v, "R -> R 1")
-            next_remaining_vertex_id: list[int] = []
-            for i, vid in enumerate(remaining_vertex_id):
-                for j in range(k):
-                    if v[i, j] == self.source.n_points:
-                        break
-                    normal_similarity: float = np.vecdot(
-                        source_normals[v[i, j]], query_normals[vid]
-                    )
-                    if self.ignore_orientation:
-                        normal_similarity = np.abs(normal_similarity)
-                    if normal_similarity < self.normal_threshold:
-                        continue
-                    distance[vid] = d[i, j]
-                    missing[vid] = False
-                    vertex_id[vid] = v[i, j]
-                    nearest[vid] = self.source.points[v[i, j]]
-                    break
-                else:
-                    next_remaining_vertex_id.append(vid)
-            k *= 2
-            remaining_vertex_id = next_remaining_vertex_id
-        return NearestPointResult(
-            distance=distance, missing=missing, nearest=nearest, vertex_id=vertex_id
-        )
-
 
 @attrs.define(kw_only=True, on_setattr=attrs.setters.validate)
 class NearestPoint(NearestAlgorithm):
@@ -152,7 +102,7 @@ class NearestPoint(NearestAlgorithm):
     ignore_orientation: bool = True
     max_k: int = 32
     normal_threshold: float = attrs.field(
-        default=-1.0, validator=attrs.validators.le(1.0)
+        default=-np.inf, validator=attrs.validators.le(1.0)
     )
     workers: int = -1
 

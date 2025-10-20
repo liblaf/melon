@@ -22,8 +22,8 @@ def main(cfg: Config) -> None:
     blocks: pv.MultiBlock = muscles_union.split_bodies().as_polydata_blocks()
     for muscle in blocks:
         muscle: pv.PolyData
-        muscle.user_dict["name"] = muscle.field_data["GroupNames"][
-            muscle.cell_data["GroupIds"][0]
+        muscle.user_dict["name"] = muscle.field_data["group-name"][
+            muscle.cell_data["group-id"][0]
         ]
     muscles: list[pv.PolyData] = [melon.mesh_fix(muscle) for muscle in blocks]
 

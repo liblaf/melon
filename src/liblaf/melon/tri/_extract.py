@@ -2,8 +2,7 @@ from collections.abc import Iterable
 from typing import Any
 
 import pyvista as pv
-from jaxtyping import Bool, Integer
-from numpy.typing import ArrayLike
+from pyvista import VectorLike
 
 from liblaf.melon import io
 
@@ -11,10 +10,7 @@ from ._selection import select_groups
 
 
 def extract_cells(
-    mesh: Any,
-    ind: Bool[ArrayLike, " C"] | Integer[ArrayLike, " S"],
-    *,
-    invert: bool = False,
+    mesh: Any, ind: int | VectorLike[int], *, invert: bool = False
 ) -> pv.PolyData:
     mesh: pv.PolyData = io.as_polydata(mesh)
     cells: pv.UnstructuredGrid = mesh.extract_cells(ind, invert=invert)  # pyright: ignore[reportAssignmentType]
@@ -30,7 +26,7 @@ def extract_groups(
 
 def extract_points(
     mesh: Any,
-    ind: Bool[ArrayLike, " N"] | Integer[ArrayLike, " S"],
+    ind: int | VectorLike[int] | VectorLike[bool],
     *,
     adjacent_cells: bool = True,
     include_cells: bool = True,

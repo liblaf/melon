@@ -28,7 +28,7 @@ def fast_wrapping(
         )
         logger.debug("procrustes cost: {}", cost)
         source: pv.PolyData = io.as_polydata(source)
-        source = source.transform(matrix)
+        source = source.transform(matrix)  # pyright: ignore[reportAssignmentType]
         source_landmarks = transformed
     result: pv.PolyData = external.wrap.fast_wrapping(
         source,
