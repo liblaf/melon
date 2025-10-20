@@ -25,7 +25,7 @@ classifiers = [
 ]
 dependencies = [
   "attrs>=25,<26",
-  "cyclopts>=3,<4",
+  "cyclopts>=4,<5",
   "einops>=0.8,<0.9",
   "glom>=24,<25",
   "h5py>=3,<4",
