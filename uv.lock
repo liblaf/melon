@@ -2357,7 +2357,7 @@ dev = [
     { name = "icecream", specifier = ">=2,<3" },
     { name = "liblaf-cherries", specifier = ">=0.6,<0.7" },
     { name = "pygltflib", specifier = ">=1,<2" },
-    { name = "scipy-stubs", specifier = ">=1.16.2.4" },
+    { name = "scipy-stubs", specifier = ">=1,<2" },
 ]
 docs = [
     { name = "liblaf-mkdocs-preset", specifier = ">=0.2,<0.3" },

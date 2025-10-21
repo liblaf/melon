@@ -40,7 +40,7 @@ class NearestPointPrepared(NearestAlgorithmPrepared):
             query.points,
             distance_upper_bound=self.distance_threshold * self.source.length,
             workers=self.workers,
-        )
+        )  # pyright: ignore[reportAssignmentType]
         missing: Bool[np.ndarray, " N"] = vertex_id == self.source.n_points
         distance[missing] = np.inf
         vertex_id[missing] = -1
@@ -69,7 +69,7 @@ class NearestPointPrepared(NearestAlgorithmPrepared):
                 k=k,
                 distance_upper_bound=self.distance_threshold * self.source.length,
                 workers=self.workers,
-            )
+            )  # pyright: ignore[reportAssignmentType]
             next_remaining_vertex_id: list[int] = []
             for i, vid in enumerate(remaining_vertex_id):
                 for j in range(k):
@@ -110,7 +110,7 @@ class NearestPoint(NearestAlgorithm):
     def prepare(self, source: Any) -> NearestPointPrepared:
         need_normals: bool = self.normal_threshold > -1.0
         source: pv.PointSet = io.as_pointset(source, point_normals=need_normals)
-        tree = scipy.spatial.KDTree(source.points)
+        tree: scipy.spatial.KDTree = scipy.spatial.KDTree(source.points)
         return NearestPointPrepared(
             source=source,
             tree=tree,

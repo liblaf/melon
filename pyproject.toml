@@ -69,7 +69,7 @@ dev = [
   "icecream>=2,<3",
   "liblaf-cherries>=0.6,<0.7",
   "pygltflib>=1,<2",
-  "scipy-stubs>=1.16.2.4"
+  "scipy-stubs>=1,<2"
 ]
 docs = ["liblaf-mkdocs-preset>=0.2,<0.3", "mkdocs>=1,<2"]
 test = ["liblaf-pytest-preset>=0.1,<0.2,<7", "pytest>=8,<9"]
