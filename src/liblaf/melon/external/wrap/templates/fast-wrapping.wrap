@@ -56,7 +56,7 @@
             "nodeType": "LoadGeom",
             "params": {
                 "fileName": {
-                    "value": "$SOURCE_FILE"
+                    "value": "{{ source }}"
                 },
                 "rotation": {
                     "value": {
@@ -124,7 +124,7 @@
                 },
                 "fileName": {
                     "expression": "\n",
-                    "value": "$OUTPUT_FILE"
+                    "value": "{{ output }}"
                 },
                 "geom": {
                     "connectedNodeId": 5
@@ -144,7 +144,7 @@
             "nodeType": "LoadGeom",
             "params": {
                 "fileName": {
-                    "value": "$TARGET_FILE"
+                    "value": "{{ target }}"
                 },
                 "rotation": {
                     "value": {
@@ -197,11 +197,11 @@
             "params": {
                 "fileNameLeft": {
                     "expression": "\n",
-                    "value": "$SOURCE_LANDMARKS_FILE"
+                    "value": "{{ source_landmarks }}"
                 },
                 "fileNameRight": {
                     "expression": "\n",
-                    "value": "$TARGET_LANDMARKS_FILE"
+                    "value": "{{ target_landmarks }}"
                 },
                 "geomLeft": {
                     "connectedNodeId": 0
@@ -270,7 +270,7 @@
                 },
                 "fileName": {
                     "expression": "\n",
-                    "value": "$FREE_POLYGONS_FLOATING_FILE"
+                    "value": "{{ free_polygons_floating }}"
                 },
                 "geom": {
                     "connectedNodeId": 0

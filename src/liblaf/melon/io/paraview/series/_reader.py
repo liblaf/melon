@@ -26,8 +26,8 @@ class SeriesReader[T](Sequence[T]):
     @overload
     def __getitem__(self, index: slice) -> Sequence[T]: ...
     @override
-    @grapes.logging.helper
     def __getitem__(self, index: int | slice) -> T | Sequence[T]:
+        __tracebackhide__ = True
         files: File | list[File] = self.series.files[index]
         if isinstance(files, File):
             return self.loader(self.folder / files.name)

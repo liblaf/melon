@@ -93,10 +93,10 @@ class SeriesWriter(Sequence[File], contextlib.AbstractContextManager):
             return 0.0
         return self.series.files[-1].time
 
-    @grapes.logging.helper
     def append(
         self, data: Any, *, time: float | None = None, timestep: float | None = None
     ) -> None:
+        __tracebackhide__ = True
         filename: str = f"{self.name}_{len(self):06d}{self.ext}"
         filepath: Path = self.folder / filename
         save(filepath, data)

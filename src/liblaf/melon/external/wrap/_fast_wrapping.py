@@ -1,16 +1,17 @@
-import importlib.resources
 import os
-import string
 import subprocess as sp
 import tempfile
 from pathlib import Path
 from typing import Any
 
+import jinja2
 import pyvista as pv
 from jaxtyping import Float, Integer
 from numpy.typing import ArrayLike
 
 from liblaf.melon import io
+
+from ._templates import environment
 
 
 def fast_wrapping(
@@ -41,20 +42,15 @@ def fast_wrapping(
         io.save_landmarks(source_landmarks_file, source_landmarks)
         io.save_landmarks(target_landmarks_file, target_landmarks)
         io.save_polygons(free_polygons_floating_file, free_polygons_floating)
-        template = string.Template(
-            (
-                importlib.resources.files("liblaf.melon.external.wrap")
-                / "fast-wrapping.wrap"
-            ).read_text()
-        )
-        project: str = template.substitute(
+        template: jinja2.Template = environment.get_template("fast-wrapping.wrap")
+        project: str = template.render(
             {
-                "SOURCE_FILE": str(source_file),
-                "TARGET_FILE": str(target_file),
-                "OUTPUT_FILE": str(output_file),
-                "SOURCE_LANDMARKS_FILE": str(source_landmarks_file),
-                "TARGET_LANDMARKS_FILE": str(target_landmarks_file),
-                "FREE_POLYGONS_FLOATING_FILE": str(free_polygons_floating_file),
+                "source": str(source_file),
+                "target": str(target_file),
+                "output": str(output_file),
+                "source_landmarks": str(source_landmarks_file),
+                "target_landmarks": str(target_landmarks_file),
+                "free_polygons_floating": str(free_polygons_floating_file),
             }
         )
         project_file.write_text(project)

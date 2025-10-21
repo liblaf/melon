@@ -33,7 +33,7 @@
             "params": {
                 "fileName": {
                     "expression": "\n",
-                    "value": "$LEFT_FILE"
+                    "value": "{{ left }}"
                 },
                 "rotation": {
                     "value": {
@@ -86,7 +86,7 @@
             "params": {
                 "fileName": {
                     "expression": "\n",
-                    "value": "$RIGHT_FILE"
+                    "value": "{{ right }}"
                 },
                 "rotation": {
                     "value": {
@@ -139,11 +139,11 @@
             "params": {
                 "fileNameLeft": {
                     "expression": "\n",
-                    "value": "$LEFT_LANDMARKS_FILE"
+                    "value": "{{ left_landmarks }}"
                 },
                 "fileNameRight": {
                     "expression": "\n",
-                    "value": "$RIGHT_LANDMARKS_FILE"
+                    "value": "{{ right_landmarks }}"
                 },
                 "geomLeft": {
                     "connectedNodeId": 0

@@ -1,15 +1,16 @@
-import importlib.resources
-import string
 import subprocess as sp
 import tempfile
 from pathlib import Path
 from typing import Any
 
+import jinja2
 import numpy as np
 from jaxtyping import Float
 from numpy.typing import ArrayLike
 
 from liblaf.melon import io
+
+from ._templates import environment
 
 
 def annotate_landmarks(
@@ -20,9 +21,9 @@ def annotate_landmarks(
     right_landmarks: Float[ArrayLike, "L 3"] | None = None,
 ) -> tuple[Float[np.ndarray, "L 3"], Float[np.ndarray, "L 3"]]:
     if left_landmarks is None:
-        left_landmarks = np.zeros((0, 3), dtype=np.float32)
+        left_landmarks = np.zeros((0, 3))
     if right_landmarks is None:
-        right_landmarks = np.zeros((0, 3), dtype=np.float32)
+        right_landmarks = np.zeros((0, 3))
     with tempfile.TemporaryDirectory() as tmpdir_str:
         tmpdir: Path = Path(tmpdir_str).absolute()
         project_file: Path = tmpdir / "annotate-landmarks.wrap"
@@ -34,18 +35,13 @@ def annotate_landmarks(
         io.save(right_file, right)
         io.save_landmarks(left_landmarks_file, left_landmarks)
         io.save_landmarks(right_landmarks_file, right_landmarks)
-        template = string.Template(
-            (
-                importlib.resources.files("liblaf.melon.external.wrap")
-                / "annotate-landmarks.wrap"
-            ).read_text()
-        )
-        project: str = template.safe_substitute(
+        template: jinja2.Template = environment.get_template("annotate-landmarks.wrap")
+        project: str = template.render(
             {
-                "LEFT_FILE": left_file,
-                "RIGHT_FILE": right_file,
-                "LEFT_LANDMARKS_FILE": left_landmarks_file,
-                "RIGHT_LANDMARKS_FILE": right_landmarks_file,
+                "left": left_file,
+                "right": right_file,
+                "left_landmarks": left_landmarks_file,
+                "right_landmarks": right_landmarks_file,
             }
         )
         project_file.write_text(project)

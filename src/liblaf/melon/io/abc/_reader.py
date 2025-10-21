@@ -5,7 +5,6 @@ from typing import Protocol
 import attrs
 from loguru import logger
 
-from liblaf import grapes
 from liblaf.melon.typing import PathLike
 
 
@@ -27,16 +26,14 @@ class ReaderDispatcher[T]:
     to_type: type[T]
     registry: dict[str, Reader[T]] = attrs.field(factory=dict)
 
-    @grapes.logging.helper
     def __call__(self, path: PathLike, /, **kwargs) -> T:
+        __tracebackhide__ = True
         path = Path(path)
         reader: Reader[T] | None = self.registry.get(path.suffix)
         if reader is None:
             raise UnsupportedReaderError(path, self.to_type)
         obj: T = reader(path, **kwargs)
-        logger.opt(depth=grapes.logging.helper.depth).debug(
-            f"Loaded '{path}' as {type(obj)}."
-        )
+        logger.debug(f"Loaded '{path}' as {type(obj)}.")
         return obj
 
     def register(self, *suffixes: str) -> Callable[[Reader[T]], Reader[T]]:
