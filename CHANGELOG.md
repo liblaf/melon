@@ -1,5 +1,34 @@
 # Changelog
 
+## [0.8.0](https://github.com/liblaf/melon/compare/v0.7.0...v0.8.0) (2025-10-21)
+
+
+### ⚠ BREAKING CHANGES
+
+* 
+
+### ✨ Features
+
+* **exp:** Add human head anatomy dataset and component groupings ([83c029a](https://github.com/liblaf/melon/commit/83c029a85adea3d126d341994776beebd45e4123))
+* **io:** Add ParaView series I/O and StructuredGrid support ([1938c8c](https://github.com/liblaf/melon/commit/1938c8c8da2ca58cc152f09e7c9b7c0bdea22142))
+* Standardize mesh group data keys and enhance data transfer ([640628d](https://github.com/liblaf/melon/commit/640628dbd746ea62d42466bb7b92c38fdb4e094c))
+
+
+### 🐛 Bug Fixes
+
+* **deps:** update dependency cyclopts to v4 ([#71](https://github.com/liblaf/melon/issues/71)) ([9941750](https://github.com/liblaf/melon/commit/9941750e67921421fd603e2db7f0827180a10853))
+
+
+### ♻️ Code Refactoring
+
+* **external, io:** Migrate to Jinja2 templates and streamline I/O logging ([e204882](https://github.com/liblaf/melon/commit/e204882cad5704bcb2212b5ecb3e4731a0159a7a))
+* **typing, linter:** Adjust type hints and suppress Pyright warnings ([2c9f1a8](https://github.com/liblaf/melon/commit/2c9f1a8086d4026ec5d4cef06bbacce597053026))
+
+
+### 🛠 Builds
+
+* **lfs:** Configure Git LFS for large data files ([87ae687](https://github.com/liblaf/melon/commit/87ae687e0884d85d736ebc1ac66696c14f598cb5))
+
 ## [0.7.0](https://github.com/liblaf/melon/compare/v0.6.1..v0.7.0) - 2025-10-07
 
 ### 💥 BREAKING CHANGES
