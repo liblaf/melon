@@ -1,5 +1,35 @@
 # Changelog
 
+## [0.8.0](https://github.com/liblaf/melon/compare/v0.7.0..v0.8.0) - 2025-10-21
+
+### 💥 BREAKING CHANGES
+
+- Standardize mesh group data keys and enhance data transfer - ([640628d](https://github.com/liblaf/melon/commit/640628dbd746ea62d42466bb7b92c38fdb4e094c))
+
+### ✨ Features
+
+- **exp:** Add human head anatomy dataset and component groupings - ([83c029a](https://github.com/liblaf/melon/commit/83c029a85adea3d126d341994776beebd45e4123))
+- **io:** Add ParaView series I/O and StructuredGrid support - ([1938c8c](https://github.com/liblaf/melon/commit/1938c8c8da2ca58cc152f09e7c9b7c0bdea22142))
+
+### ⬆️ Dependencies
+
+- **deps:** update dependency cyclopts to v4 (#71) - ([9941750](https://github.com/liblaf/melon/commit/9941750e67921421fd603e2db7f0827180a10853))
+
+### ♻ Code Refactoring
+
+- **external, io:** Migrate to Jinja2 templates and streamline I/O logging - ([e204882](https://github.com/liblaf/melon/commit/e204882cad5704bcb2212b5ecb3e4731a0159a7a))
+- **typing, linter:** Adjust type hints and suppress Pyright warnings - ([2c9f1a8](https://github.com/liblaf/melon/commit/2c9f1a8086d4026ec5d4cef06bbacce597053026))
+
+### 👷 Build System
+
+- **lfs:** Configure Git LFS for large data files - ([87ae687](https://github.com/liblaf/melon/commit/87ae687e0884d85d736ebc1ac66696c14f598cb5))
+
+### ❤️ New Contributors
+
+- [@liblaf](https://github.com/liblaf) made their first contribution
+- [@renovate[bot]](https://github.com/apps/renovate) made their first contribution in [#71](https://github.com/liblaf/melon/pull/71)
+- [@liblaf[bot]](https://github.com/apps/liblaf) made their first contribution
+
 ## [0.7.0](https://github.com/liblaf/melon/compare/v0.6.1..v0.7.0) - 2025-10-07
 
 ### 💥 BREAKING CHANGES
@@ -15,12 +45,6 @@
 
 - **deps:** Update liblaf-grapes to v5 and add Python 3.13 support - ([263a19a](https://github.com/liblaf/melon/commit/263a19a83f0c44a9754246ac56317acdb58dece8))
 - update lockfile - ([971a3ae](https://github.com/liblaf/melon/commit/971a3ae9afaea8538971d7d12e103b83131c792e))
-
-### ❤️ New Contributors
-
-- [@liblaf](https://github.com/liblaf) made their first contribution
-- [@renovate[bot]](https://github.com/apps/renovate) made their first contribution in [#67](https://github.com/liblaf/melon/pull/67)
-- [@liblaf-bot[bot]](https://github.com/apps/liblaf-bot) made their first contribution
 
 ## [0.6.1](https://github.com/liblaf/melon/compare/v0.6.0..v0.6.1) - 2025-09-15
 
@@ -232,7 +256,7 @@
 
 ### ❤️ New Contributors
 
-- [@liblaf-bot[bot]](https://github.com/apps/liblaf-bot) made their first contribution in [#14](https://github.com/liblaf/melon/pull/14)
+- [@liblaf[bot]](https://github.com/apps/liblaf) made their first contribution in [#14](https://github.com/liblaf/melon/pull/14)
 
 ## [0.1.5](https://github.com/liblaf/melon/compare/v0.1.4..v0.1.5) - 2025-03-23
 
