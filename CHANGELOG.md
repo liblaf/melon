@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.8.1](https://github.com/liblaf/melon/compare/v0.8.0...v0.8.1) (2025-10-28)
+
+
+### 🐛 Bug Fixes
+
+* **tri-selection:** Make group ID and name retrieval robust in mesh selection ([4565f0f](https://github.com/liblaf/melon/commit/4565f0f1c3acd941fc78345fa1bad45f553a932c))
+
 ## [0.8.0](https://github.com/liblaf/melon/compare/v0.7.0..v0.8.0) - 2025-10-21
 
 ### 💥 BREAKING CHANGES
