@@ -1,11 +1,16 @@
 # Changelog
 
-## [0.8.1](https://github.com/liblaf/melon/compare/v0.8.0...v0.8.1) (2025-10-28)
-
+## [0.8.1](https://github.com/liblaf/melon/compare/v0.8.0..v0.8.1) - 2025-10-28
 
 ### 🐛 Bug Fixes
 
-* **tri-selection:** Make group ID and name retrieval robust in mesh selection ([4565f0f](https://github.com/liblaf/melon/commit/4565f0f1c3acd941fc78345fa1bad45f553a932c))
+- **tri-selection:** Make group ID and name retrieval robust in mesh selection - ([4565f0f](https://github.com/liblaf/melon/commit/4565f0f1c3acd941fc78345fa1bad45f553a932c))
+
+### ❤️ New Contributors
+
+- [@liblaf](https://github.com/liblaf) made their first contribution
+- [@renovate[bot]](https://github.com/apps/renovate) made their first contribution in [#73](https://github.com/liblaf/melon/pull/73)
+- [@liblaf[bot]](https://github.com/apps/liblaf) made their first contribution
 
 ## [0.8.0](https://github.com/liblaf/melon/compare/v0.7.0..v0.8.0) - 2025-10-21
 
@@ -30,12 +35,6 @@
 ### 👷 Build System
 
 - **lfs:** Configure Git LFS for large data files - ([87ae687](https://github.com/liblaf/melon/commit/87ae687e0884d85d736ebc1ac66696c14f598cb5))
-
-### ❤️ New Contributors
-
-- [@liblaf](https://github.com/liblaf) made their first contribution
-- [@renovate[bot]](https://github.com/apps/renovate) made their first contribution in [#71](https://github.com/liblaf/melon/pull/71)
-- [@liblaf[bot]](https://github.com/apps/liblaf) made their first contribution
 
 ## [0.7.0](https://github.com/liblaf/melon/compare/v0.6.1..v0.7.0) - 2025-10-07
 
