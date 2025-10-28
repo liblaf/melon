@@ -1,6 +1,7 @@
 import concurrent
 import concurrent.futures
 import itertools
+import multiprocessing
 from pathlib import Path
 
 import attrs
@@ -28,17 +29,18 @@ def main(cfg: Config) -> None:
     full: pv.PolyData = melon.load_polydata(cfg.full)
     tetmesh: pv.UnstructuredGrid = melon.load_unstructured_grid(cfg.tetgen)
 
-    # groups: list[str] = grapes.load(cfg.groups)["Muscles"]
-    groups: list[str] = [
-        "Levator_labii_superioris001",
-        "Zygomaticus_major001",
-        "Zygomaticus_minor001",
-    ]
+    groups: list[str] = grapes.load(cfg.groups)["Muscles"]
+    # groups: list[str] = [
+    #     "Levator_labii_superioris001",
+    #     "Zygomaticus_main001",
+    #     "Zygomaticus_minor001",
+    # ]
     muscles: list[pv.PolyData] = []
     for group in groups:
         muscle: pv.PolyData = melon.tri.extract_groups(full, group)
         blocks: pv.MultiBlock = muscle.split_bodies(label=True).as_polydata_blocks()
         for block in blocks:
+            block: pv.PolyData
             fixed: pv.PolyData = melon.mesh_fix(block)
             fixed.user_dict["name"] = f"{group}.{block.point_data['RegionId'][0]}"
             ic(fixed.user_dict["name"])
@@ -56,7 +58,9 @@ def main(cfg: Config) -> None:
     tetmesh.cell_data["muscle-id"] = np.full((tetmesh.n_cells,), -1, dtype=int)
     tetmesh.cell_data["muscle-fraction"] = np.zeros((tetmesh.n_cells,))
     tetmesh.cell_data["muscle-orientation"] = np.zeros((tetmesh.n_cells, 3, 3))
-    with concurrent.futures.ProcessPoolExecutor() as executor:
+    with concurrent.futures.ProcessPoolExecutor(
+        mp_context=multiprocessing.get_context("fork")
+    ) as executor:
         for result in grapes.track(
             executor.map(
                 process_muscle,
@@ -64,13 +68,13 @@ def main(cfg: Config) -> None:
                 itertools.repeat(muscles),
                 range(tetmesh.n_cells),
                 itertools.repeat(cfg.n_samples),
-                chunksize=tetmesh.n_cells // 256,
+                chunksize=1,
             ),
             total=tetmesh.n_cells,
         ):
             tetmesh.cell_data["muscle-id"][result.cid] = (
-                muscle_name_to_id[result.major_muscle_name]
-                if result.major_muscle_name is not None
+                muscle_name_to_id[result.main_muscle_name]
+                if result.main_muscle_name is not None
                 else -1
             )
             tetmesh.cell_data["muscle-fraction"][result.cid] = result.muscle_fraction
@@ -83,55 +87,9 @@ def main(cfg: Config) -> None:
 
 
 @attrs.frozen(kw_only=True)
-class Result:
-    cid: int
-    major_muscle: str | None = None
-    muscle_direction: Float[np.ndarray, " 3"]
-    muscle_fraction: float
-
-
-def compute_muscle_fraction(
-    tetmesh: pv.UnstructuredGrid, muscles: pv.MultiBlock, n_samples: int, cid: int
-) -> Result:
-    cell: pv.Cell = tetmesh.get_cell(cid)
-    barycentric: Float[np.ndarray, "N 3"] = melon.sample_barycentric_coords(
-        (n_samples, 4)
-    )
-    samples: Float[np.ndarray, "N 3"] = melon.barycentric_to_points(
-        einops.repeat(cell.points, "B D -> N B D", N=n_samples), barycentric
-    )
-    is_in: Bool[np.ndarray, " N"] = np.zeros((n_samples,), dtype=bool)
-    muscle_direction: Float[np.ndarray, " 3"] = np.zeros((3,))
-    muscle_fraction: float = 0.0
-    major_muscle: pv.PolyData | None = None
-    major_muscle_fraction: float = 0.0
-    for muscle in muscles:
-        muscle: pv.PolyData
-        contains: Bool[np.ndarray, " N"] = melon.tri.contains(muscle, samples)
-        n_contains: int = np.count_nonzero(contains)  # pyright: ignore[reportAssignmentType]
-        if n_contains == 0:
-            continue
-        if n_contains / n_samples > major_muscle_fraction:
-            major_muscle_fraction = n_contains / n_samples
-            major_muscle = muscle
-        is_in |= contains
-        muscle_direction = muscle.field_data["muscle-direction"]
-    muscle_fraction = np.count_nonzero(is_in) / n_samples  # pyright: ignore[reportAssignmentType]
-
-    return Result(
-        cid=cid,
-        major_muscle=major_muscle.user_dict["name"]
-        if major_muscle is not None
-        else None,
-        muscle_direction=muscle_direction,
-        muscle_fraction=muscle_fraction,
-    )
-
-
-@attrs.frozen(kw_only=True)
 class TaskResult:
     cid: int
-    major_muscle_name: str | None
+    main_muscle_name: str | None
     muscle_fraction: float
     muscle_orientation: Float[np.ndarray, "3 3"]
 
@@ -147,28 +105,30 @@ def process_muscle(
         einops.repeat(cell.points, "B D -> n_samples B D", n_samples=n_samples),
         barycentric,
     )
+    samples_pv: pv.PointSet = melon.as_pointset(samples)
     is_in: Bool[np.ndarray, " N"] = np.zeros((n_samples,), dtype=bool)
     muscle_orientation: Float[np.ndarray, "3 3"] = np.zeros((3, 3))
     muscle_fraction: float = 0.0
-    major_muscle_fraction: float = 0.0
-    major_muscle_name: str | None = None
+    main_muscle_fraction: float = 0.0
+    main_muscle_name: str | None = None
     for muscle in muscles:
-        contains: Bool[np.ndarray, " N"] = melon.tri.contains(muscle, samples)
+        muscle: pv.PolyData
+        contains: Bool[np.ndarray, " N"] = melon.tri.contains(muscle, samples_pv)
         n_contains: int = np.count_nonzero(contains)  # pyright: ignore[reportAssignmentType]
         if n_contains == 0:
             continue
-        if n_contains / n_samples > major_muscle_fraction:
-            major_muscle_fraction = n_contains / n_samples
-            major_muscle_name = muscle.user_dict["name"]
         is_in |= contains
-        muscle_orientation = np.reshape(
-            muscle.field_data["muscle-orientation"], shape=(3, 3)
-        )
+        if n_contains / n_samples > main_muscle_fraction:
+            main_muscle_fraction = n_contains / n_samples
+            main_muscle_name = muscle.user_dict["name"]
+            muscle_orientation = np.reshape(
+                muscle.field_data["muscle-orientation"], shape=(3, 3)
+            )
     muscle_fraction = np.count_nonzero(is_in) / n_samples  # pyright: ignore[reportAssignmentType]
 
     return TaskResult(
         cid=cid,
-        major_muscle_name=major_muscle_name,
+        main_muscle_name=main_muscle_name,
         muscle_fraction=muscle_fraction,
         muscle_orientation=muscle_orientation,
     )

@@ -32,7 +32,7 @@ def transfer_point_data(
     fill = fill if isinstance(fill, Mapping) else collections.defaultdict(lambda: fill)
     nearest = NearestPoint() if nearest is None else nearest
     prepared: NearestPointPrepared = nearest.prepare(src)
-    query: NearestPointResult = prepared.query(dst.points)
+    query: NearestPointResult = prepared.query(dst)
     missing: Bool[np.ndarray, " N"] = query["missing"]
     point_id: Integer[np.ndarray, " N"] = query["vertex_id"]
     for name in data:

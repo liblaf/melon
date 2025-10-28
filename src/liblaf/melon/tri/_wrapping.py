@@ -7,7 +7,7 @@ from jaxtyping import Float, Integer
 from loguru import logger
 from numpy.typing import ArrayLike
 
-from liblaf.melon import external, io
+from liblaf.melon import io
 
 
 def fast_wrapping(
@@ -19,6 +19,8 @@ def fast_wrapping(
     free_polygons_floating: Integer[ArrayLike, " F"] | None = None,
     verbose: bool = True,
 ) -> pv.PolyData:
+    from liblaf.melon.external import wrap
+
     if source_landmarks is not None and target_landmarks is not None:
         matrix: Float[np.ndarray, "4 4"]
         transformed: Float[np.ndarray, "L 3"]
@@ -30,7 +32,7 @@ def fast_wrapping(
         source: pv.PolyData = io.as_polydata(source)
         source = source.transform(matrix)  # pyright: ignore[reportAssignmentType]
         source_landmarks = transformed
-    result: pv.PolyData = external.wrap.fast_wrapping(
+    result: pv.PolyData = wrap.fast_wrapping(
         source,
         target,
         source_landmarks=source_landmarks,

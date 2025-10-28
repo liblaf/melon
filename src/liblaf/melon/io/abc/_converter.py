@@ -3,7 +3,6 @@ from collections.abc import Callable
 from typing import Any
 
 import attrs
-from loguru import logger
 
 from ._typing import RegType, SingleDispatchCallable
 
@@ -39,7 +38,7 @@ class ConverterDispatcher[T]:
         if isinstance(obj, self.to_type):
             return obj
         result: T = self.dispatch(obj, **kwargs)
-        logger.trace(f"Converted {type(obj)} to {type(result)}.")
+        # logger.trace(f"Converted {type(obj)} to {type(result)}.")
         return result
 
     def register(self, cls: RegType) -> Callable[[Callable[..., T]], Callable[..., T]]:

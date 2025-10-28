@@ -36,9 +36,10 @@ def dataset_to_pointset(obj: pv.DataSet, **kwargs) -> pv.PointSet:
 def polydata_to_pointset(
     obj: pv.PolyData, *, point_normals: bool = False, **kwargs
 ) -> pv.PointSet:
+    result: pv.PointSet = obj.cast_to_pointset(**kwargs)
     if point_normals:
-        obj.point_data["Normals"] = obj.point_normals
-    return obj.cast_to_pointset(**kwargs)
+        result.point_data["Normals"] = obj.point_normals
+    return result
 
 
 @as_pointset.register(tm.Trimesh)

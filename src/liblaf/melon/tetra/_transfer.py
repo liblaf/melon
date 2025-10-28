@@ -24,7 +24,7 @@ def transfer_point_data_from_surface(
     dst: pv.UnstructuredGrid = io.as_unstructured_grid(dst).copy()
     dst.point_data["__point_id"] = np.arange(dst.n_points)
     data = src.point_data.keys() if data is None else grapes.as_iterable(data)
-    fill = fill if isinstance(fill, Mapping) else collections.defaultdict(lambda: fill)
+    fill = _make_fill(fill)
     surface: pv.PolyData = dst.extract_surface()  # pyright: ignore[reportAssignmentType]
     surface = transfer_point_data(src, surface, data=data, fill=fill, nearest=nearest)
     surface_point_id: Integer[np.ndarray, " N"] = surface.point_data["__point_id"]
@@ -37,3 +37,9 @@ def transfer_point_data_from_surface(
         dst.point_data[name][surface_point_id] = surface_data
     del dst.point_data["__point_id"]
     return dst
+
+
+def _make_fill(fill: Any) -> Mapping[str, Any]:
+    if isinstance(fill, Mapping):
+        return fill
+    return collections.defaultdict(lambda: fill)
