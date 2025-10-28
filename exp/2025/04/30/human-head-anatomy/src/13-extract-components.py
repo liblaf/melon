@@ -12,6 +12,7 @@ class Config(cherries.BaseConfig):
 
     cranium: Path = cherries.output("02-intermediate/13-cranium.vtp")
     mandible: Path = cherries.output("02-intermediate/13-mandible.vtp")
+    muscles: Path = cherries.output("01-raw/muscles.vtp")
 
 
 def main(cfg: Config) -> None:
@@ -24,8 +25,14 @@ def main(cfg: Config) -> None:
     mandible: pv.PolyData = melon.tri.extract_groups(
         full, groups["mandible"] + groups["lower-teeth"]
     )
+    muscles: pv.PolyData = melon.tri.extract_groups(full, groups["Muscles"])
+    edges = muscles.extract_feature_edges(
+        non_manifold_edges=False, feature_edges=False, manifold_edges=False
+    )
+    melon.save("edges.vtp", edges)
     melon.save(cfg.cranium, cranium)
     melon.save(cfg.mandible, mandible)
+    melon.save(cfg.muscles, muscles)
 
 
 if __name__ == "__main__":
