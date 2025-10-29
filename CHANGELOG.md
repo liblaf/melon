@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.8.2](https://github.com/liblaf/melon/compare/v0.8.1...v0.8.2) (2025-10-29)
+
+
+### 🐛 Bug Fixes
+
+* **mesh:** Correct data handling in mesh conversions and transfers ([eefa194](https://github.com/liblaf/melon/commit/eefa194bc65082b7697c26b44c10887e44981466))
+
 ## [0.8.1](https://github.com/liblaf/melon/compare/v0.8.0..v0.8.1) - 2025-10-28
 
 ### 🐛 Bug Fixes
