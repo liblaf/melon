@@ -72,7 +72,7 @@ dev = [
   "scipy-stubs>=1,<2"
 ]
 docs = ["liblaf-mkdocs-preset>=0.2,<0.3", "mkdocs>=1,<2"]
-test = ["liblaf-pytest-preset>=0.1,<0.2,<7", "pytest>=8,<9"]
+test = ["liblaf-pytest-preset>=0.1,<0.2,<7", "pytest>=9,<10"]
 
 [build-system]
 requires = ["hatch-vcs", "hatchling"]
