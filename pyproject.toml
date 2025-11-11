@@ -27,20 +27,15 @@ dependencies = [
   "attrs>=25,<26",
   "cyclopts>=4,<5",
   "einops>=0.8,<0.9",
-  "glom>=24,<25",
-  "h5py>=3,<4",
-  "jax>=0.8,<0.9",
   "jaxtyping>=0.3,<0.4",
   "jinja2>=3,<4",
-  "joblib>=1,<2",
   "lazy-loader>=0.4,<0.5",
   "liblaf-grapes>=8,<9",
   "loguru>=0.7,<0.8",
   "meshio>=5,<6",
-  "more-itertools>=10.8.0,<11.0.0",
+  "more-itertools>=10,<11",
   "networkx>=3,<4",
   "numpy>=2,<3",
-  "plum-dispatch>=2,<3",
   "polars>=1,<2",
   "pydantic>=2,<3",
   "pydicom>=3,<4",
@@ -48,7 +43,6 @@ dependencies = [
   "pyvista>=0.46,<0.47",
   "rich>=14,<15",
   "scipy>=1,<2",
-  "sortedcontainers>=2,<3",
   "trimesh[easy]>=4,<5"
 ]
 dynamic = ["version"]
@@ -67,7 +61,6 @@ melon = "liblaf.melon.cli:app.meta"
 [dependency-groups]
 dev = [
   "icecream>=2,<3",
-  "jax[cuda12]",
   "liblaf-cherries>=0.6,<0.7",
   "pygltflib>=1,<2",
   "scipy-stubs>=1,<2",
