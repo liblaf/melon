@@ -17,6 +17,6 @@ def load_polydata_obj(path: Path, **kwargs) -> pv.PolyData:
     from ._read_obj import load_polydata_obj as _load_polydata_obj
 
     mesh: pv.PolyData = _load_polydata_obj(path, **kwargs)
-    if kwargs.pop("clean", True):
+    if kwargs.pop("clean", False):
         mesh.clean(inplace=True, **kwargs)
     return mesh

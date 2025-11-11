@@ -12,8 +12,8 @@ def save_polydata(path: Path, obj: pv.PolyData, /, **kwargs) -> None:
 
 @save.register(pv.PolyData, [".obj"])
 def save_polydata_obj(path: Path, obj: pv.PolyData, /, **kwargs) -> None:
-    obj = obj.copy()
     # `.obj` writer is buggy with materials
     if "MaterialNames" in obj.field_data:
+        obj = obj.copy()
         del obj.field_data["MaterialNames"]
     obj.save(path, **kwargs)
