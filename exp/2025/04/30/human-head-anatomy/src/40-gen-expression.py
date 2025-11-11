@@ -56,15 +56,18 @@ def main(cfg: Config) -> None:
     source = melon.fast_wrapping(source, surface)
     source.compute_normals(auto_orient_normals=True, inplace=True)
     surface.compute_normals(auto_orient_normals=True, inplace=True)
+    data_names: list[str] = [
+        name for name in source.point_data if name.startswith("expression")
+    ]
     surface = melon.transfer_tri_point(
         source,
         surface,
-        data=["displacement"],
+        data=data_names,
         fill=0.0,
-        nearest=melon.NearestPointOnSurface(normal_threshold=0.0),
+        nearest=melon.NearestPointOnSurface(normal_threshold=-0.5),
     )
     tetmesh = melon.transfer_tri_point_to_tet(
-        surface, tetmesh, data=["displacement"], fill=0.0, point_id="point-id"
+        surface, tetmesh, data=data_names, fill=0.0, point_id="point-id"
     )
 
     full: pv.PolyData = melon.load_polydata(cfg.full)
