@@ -10,24 +10,15 @@ from liblaf import grapes
 from liblaf.melon import io
 
 
-def group_selection_mask(
-    mesh: pv.PolyData, groups: int | str | Iterable[int | str]
-) -> Bool[np.ndarray, " C"]:
-    mesh: pv.PolyData = io.as_polydata(mesh)
-    group_ids: list[int] = as_group_ids(mesh, groups)
-    mask: Bool[np.ndarray, " C"] = np.isin(_get_group_id(mesh), group_ids)
-    return mask
-
-
 def select_groups(
-    mesh: Any, groups: int | str | Iterable[int | str]
-) -> Integer[np.ndarray, " N"]:
+    mesh: Any, groups: int | str | Iterable[int | str], *, invert: bool = False
+) -> Bool[np.ndarray, " cells"]:
     mesh: pv.PolyData = io.as_polydata(mesh)
     group_ids: list[int] = as_group_ids(mesh, groups)
-    mask: Bool[np.ndarray, " C"] = np.isin(_get_group_id(mesh), group_ids)
-    indices: Integer[np.ndarray, " N"]
-    (indices,) = np.nonzero(mask)
-    return indices
+    mask: Bool[np.ndarray, " C"] = np.isin(
+        _get_group_id(mesh), group_ids, invert=invert
+    )
+    return mask
 
 
 def as_group_ids(

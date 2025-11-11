@@ -1,14 +1,11 @@
 from pathlib import Path
 
-import einops
 import numpy as np
 import pyvista as pv
-import scipy
-import trimesh as tm
-from jaxtyping import Bool, Float, Integer
+from jaxtyping import Bool, Integer
 
 import liblaf.melon as melon  # noqa: PLR0402
-from liblaf import cherries
+from liblaf import cherries, grapes
 
 
 def classify(
@@ -41,186 +38,49 @@ def transfer_trimesh_point_data_to_tetmesh(
 
 
 class Config(cherries.BaseConfig):
-    skin: Path = cherries.input("02-intermediate/12-skin.vtp")
-    cranium: Path = cherries.input("02-intermediate/14-cranium.ply")
-    mandible: Path = cherries.input("02-intermediate/14-mandible.ply")
-
-    tetgen: Path = cherries.input("02-intermediate/34-tetgen.vtu")
     source: Path = cherries.input("40-expression-flame.vtp")
+    tetgen: Path = cherries.input("02-intermediate/34-tetgen.vtu")
+
+    full: Path = cherries.input("01-raw/Full human head anatomy.obj")
+    groups: Path = cherries.input("02-intermediate/groups.toml")
+    skin: Path = cherries.input("02-intermediate/12-skin.vtp")
 
     output: Path = cherries.output("40-expression.vtu")
 
 
-def transfer_point_data_with_normal_threshold(
-    source: pv.PolyData,
-    target: pv.PolyData,
-    data_name: str,
-    normal_threshold: float = 0.5,
-) -> pv.PolyData:
-    tree = scipy.spatial.KDTree(source.points)
-    neighbors = tree.query_ball_point(
-        target.points, r=source.length * 1e-1, return_sorted=True, workers=-1
-    )
-    target.point_data[data_name] = np.zeros_like(target.points)
-    for i in range(target.n_points):
-        nbrs = neighbors[i]
-        if len(nbrs) == 0:
-            ic(i, "no neighbors found")
-            continue
-        target_normal = target.point_data["Normals"][i]
-        source_normals = source.point_data["Normals"][nbrs]
-        normal_dots = np.einsum("j,ij->i", target_normal, source_normals)
-        valid_mask = normal_dots >= normal_threshold
-        valid_nbrs = np.asarray(nbrs)[valid_mask]
-        if len(valid_nbrs) == 0:
-            ic(i, "no valid neighbors found")
-            continue
-        if len(valid_nbrs) < 3:
-            ic(i, "too few valid neighbors found", len(valid_nbrs))
-            continue
-        barycentric = tm.triangles.points_to_barycentric(
-            triangles=source.points[valid_nbrs[:3]][None],
-            points=target.points[i][None],
-        )
-        transferred = einops.einsum(
-            barycentric,
-            source.point_data[data_name][valid_nbrs[:3]][None],
-            "P B, P B ... -> P ...",
-        )
-        target.point_data[data_name][i] = transferred[0]
-    return target
-
-
-def transfer_point_data_with_normal_threshold_v2(
-    source: pv.PolyData,
-    target: pv.PolyData,
-    data_name: str,
-    normal_threshold: float = 0.5,
-) -> pv.PolyData:
-    target.point_data[data_name] = np.zeros_like(target.points)
-    for i in range(target.n_points):
-        target_normal = target.point_data["Normals"][i]
-        source_face_mask = (
-            np.vecdot(target_normal, source.face_normals) >= normal_threshold
-        )
-        source_valid = source.extract_cells(source_face_mask).extract_surface()
-        source_valid_tm = melon.as_trimesh(source_valid)
-        closest, _, triangle_id = source_valid_tm.nearest.on_surface(
-            target.points[i][None]
-        )
-        barycentric = tm.triangles.points_to_barycentric(
-            triangles=source_valid_tm.triangles[triangle_id],
-            points=closest,
-        )
-        transferred = einops.einsum(
-            barycentric,
-            source_valid.point_data[data_name][source_valid_tm.faces[triangle_id]],
-            "P B, P B ... -> P ...",
-        )
-        ic(target.point_data["__point-id"][i], transferred[0])
-        target.point_data[data_name][i] = transferred[0]
-    return target
-
-
-def transfer_point_data(
-    source: pv.PolyData, target: pv.PolyData, data_name: str
-) -> pv.PolyData:
-    source = source.connectivity("largest")
-    source_raw = source
-    source.compute_normals(inplace=True, auto_orient_normals=True)
-    target.compute_normals(inplace=True, auto_orient_normals=True)
-    source_raw.point_data["point-id"] = np.arange(source.n_points)
-    melon.save("source.vtp", source_raw)
-    data: np.ndarray = source.point_data[data_name]
-    # points = tm.registration.nricp_amberg(
-    #     melon.as_trimesh(source_raw), melon.as_trimesh(target)
-    # )
-    melon.save("source.obj", source)
-    del source.point_data["Normals"]
-    source.save("source.obj", recompute_normals=False)
-    source: pv.PolyData = melon.fast_wrapping(source, target)
-    source.copy_attributes(source_raw)
-    # source.points = points
-    source.compute_normals(inplace=True, auto_orient_normals=True)
-    melon.save("wrapped.vtp", source)
-    source_tm: tm.Trimesh = melon.io.as_trimesh(source)
-    closest: Float[np.ndarray, "P 3"]
-    distance: Float[np.ndarray, " P"]
-    triangle_id: Integer[np.ndarray, " P"]
-    closest, distance, triangle_id = source_tm.nearest.on_surface(target.points)
-    barycentric: Float[np.ndarray, "P 3"] = tm.triangles.points_to_barycentric(
-        triangles=source_tm.triangles[triangle_id], points=closest
-    )
-    transferred: Float[np.ndarray, "P ..."] = einops.einsum(
-        barycentric, data[source_tm.faces[triangle_id]], "P B, P B ... -> P ..."
-    )
-    target.point_data[data_name] = transferred
-    source_normal = source.face_normals[triangle_id]
-    target_normal = target.point_normals
-    normal_dot = np.einsum("ij,ij->i", source_normal, target_normal)
-    normal_threshold = -0.5
-    not_found_mask = (distance > 1e-2 * source_tm.scale) | (
-        normal_dot < normal_threshold
-    )
-    not_found_mask &= (
-        target.point_data["is-lip-bottom"] | target.point_data["is-lip-top"]
-    )
-    target.point_data[data_name][not_found_mask] = 0.0
-
-    remaining_mask = (
-        (distance < 1e-2 * source_tm.scale)
-        & (normal_dot < normal_threshold)
-        & (target.point_data["is-lip-bottom"] | target.point_data["is-lip-top"])
-    )
-    target.point_data["remaining-mask"] = remaining_mask
-    if np.any(not_found_mask):
-        target.point_data["__point-id"] = np.arange(target.n_points)
-        remaining: pv.PolyData = pv.PointSet(target.points[remaining_mask])
-        remaining.point_data["__point-id"] = target.point_data["__point-id"][
-            remaining_mask
-        ]
-        remaining.point_data["Normals"] = target.point_normals[remaining_mask]
-        remaining = transfer_point_data_with_normal_threshold_v2(
-            source, remaining, data_name=data_name, normal_threshold=normal_threshold
-        )
-        target.point_data[data_name][remaining.point_data["__point-id"]] = (
-            remaining.point_data[data_name]
-        )
-    target.point_data["not-found"] = not_found_mask
-    return target
-
-
 def main(cfg: Config) -> None:
-    tetmesh: pv.UnstructuredGrid = melon.io.load_unstructured_grid(cfg.tetgen)
-    source: pv.PolyData = melon.io.load_polydata(cfg.source)
-
+    tetmesh: pv.UnstructuredGrid = melon.load_unstructured_grid(cfg.tetgen)
+    source: pv.PolyData = melon.load_polydata(cfg.source)
+    tetmesh.point_data["point-id"] = np.arange(tetmesh.n_points)
     surface: pv.PolyData = tetmesh.extract_surface()  # pyright: ignore[reportAssignmentType]
-
-    # surface = surface.sample(
-    #     source,
-    #     tolerance=0.01 * surface.length,
-    #     snap_to_closest_point=True,
-    # )  # pyright: ignore[reportAssignmentType]
+    source = melon.fast_wrapping(source, surface)
     source.compute_normals(auto_orient_normals=True, inplace=True)
     surface.compute_normals(auto_orient_normals=True, inplace=True)
-    surface = melon.transfer.transfer_tri_point_to_point(
+    surface = melon.transfer_tri_point(
         source,
         surface,
         data=["displacement"],
         fill=0.0,
-        nearest=melon.proximity.NearestPointOnSurface(normal_threshold=-0.5),
+        nearest=melon.NearestPointOnSurface(normal_threshold=0.0),
     )
-    melon.save("surface.vtp", surface)
-    ic(surface.point_data["displacement"])
-    tetmesh = melon.tetra.transfer_point_data_from_surface(
-        surface,
-        tetmesh,
-        data=["displacement"],
-        fill=0.0,
-        # nearest=melon.proximity.NearestPoint(normal_threshold=0.0),
+    tetmesh = melon.transfer_tri_point_to_tet(
+        surface, tetmesh, data=["displacement"], fill=0.0, point_id="point-id"
     )
 
+    full: pv.PolyData = melon.load_polydata(cfg.full)
+    groups: dict[str, list[str]] = grapes.load(cfg.groups)
+    cranium: pv.PolyData = melon.tri.extract_groups(full, groups["cranium"])
+    mandible: pv.PolyData = melon.tri.extract_groups(full, groups["mandible"])
     skin: pv.PolyData = melon.load_polydata(cfg.skin)
+    cranium.cell_data["is-cranium"] = np.ones((cranium.n_cells,), dtype=np.bool)
+    cranium.cell_data["is-face"] = np.zeros((cranium.n_cells,), dtype=np.bool)
+    cranium.cell_data["is-mandible"] = np.zeros((cranium.n_cells,), dtype=np.bool)
+    mandible.cell_data["is-cranium"] = np.zeros((mandible.n_cells,), dtype=np.bool)
+    mandible.cell_data["is-face"] = np.zeros((mandible.n_cells,), dtype=np.bool)
+    mandible.cell_data["is-mandible"] = np.ones((mandible.n_cells,), dtype=np.bool)
+    skin.cell_data["is-cranium"] = np.zeros((skin.n_cells,), dtype=np.bool)
+    skin.cell_data["is-face"] = np.ones((skin.n_cells,), dtype=np.bool)
+    skin.cell_data["is-mandible"] = np.zeros((skin.n_cells,), dtype=np.bool)
     exclude_groups: list[str] = [
         "Ear",
         "EarNeckBack",
@@ -236,19 +96,29 @@ def main(cfg: Config) -> None:
         "NeckFront",
         "Nostril",
     ]
-    face: pv.PolyData = melon.tri.extract_groups(skin, exclude_groups, invert=True)
-    not_face: pv.PolyData = pv.merge(
-        [
-            melon.io.load_polydata(cfg.cranium),
-            melon.io.load_polydata(cfg.mandible),
-            melon.tri.extract_groups(skin, exclude_groups),
-        ]
+    face_mask: Bool[np.ndarray, " face_cells"] = melon.tri.select_groups(
+        skin, exclude_groups, invert=True
     )
-    surface.point_data["is-face"] = classify(surface, face, not_face)
-
-    tetmesh.point_data["is-skin"] = tetmesh.point_data["is-face"]
-    tetmesh = transfer_trimesh_point_data_to_tetmesh(tetmesh, surface, "is-face")
-    melon.io.save(cfg.output, tetmesh)
+    skin.cell_data["is-face"] &= face_mask
+    source: pv.PolyData = pv.merge([cranium, mandible, skin])
+    surface = melon.transfer_tri_cell_to_point_category(
+        source,
+        surface,
+        data=["is-cranium", "is-mandible", "is-face"],
+        fill=False,
+        nearest=melon.NearestPointOnSurface(normal_threshold=-np.inf),
+    )
+    tetmesh = melon.transfer_tri_point_to_tet(
+        surface,
+        tetmesh,
+        data=["is-cranium", "is-mandible", "is-face"],
+        fill=False,
+        point_id="point-id",
+    )
+    tetmesh.point_data["is-skull"] = (
+        tetmesh.point_data["is-cranium"] | tetmesh.point_data["is-mandible"]
+    )
+    melon.save(cfg.output, tetmesh)
 
 
 if __name__ == "__main__":

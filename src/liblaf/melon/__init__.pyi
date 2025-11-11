@@ -37,7 +37,11 @@ from .proximity import (
     nearest,
     nearest_point_on_surface,
 )
-from .transfer import transfer_tri_point_to_point
+from .transfer import (
+    transfer_tri_cell_to_point_category,
+    transfer_tri_point,
+    transfer_tri_point_to_tet,
+)
 
 __all__ = [
     "NearestAlgorithm",
@@ -86,7 +90,9 @@ __all__ = [
     "tetra",
     "tetwild",
     "transfer",
-    "transfer_tri_point_to_point",
+    "transfer_tri_cell_to_point_category",
+    "transfer_tri_point",
+    "transfer_tri_point_to_tet",
     "tri",
     "typing",
     "utils",

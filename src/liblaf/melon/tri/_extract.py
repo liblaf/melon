@@ -6,7 +6,7 @@ from pyvista import VectorLike
 
 from liblaf.melon import io
 
-from ._selection import select_groups
+from ._group import select_groups
 
 
 def extract_cells(

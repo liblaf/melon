@@ -9,7 +9,7 @@ import pyvista as pv
 import trimesh as tm
 from jaxtyping import Bool, Float, Integer
 
-from liblaf.melon import ext, io
+from liblaf.melon import io
 from liblaf.melon.proximity import (
     NearestPointOnSurface,
     NearestPointOnSurfacePrepared,
@@ -17,7 +17,7 @@ from liblaf.melon.proximity import (
 )
 
 
-def transfer_tri_point_to_point(
+def transfer_tri_point(
     source: Any,
     target: Any,
     *,
@@ -25,7 +25,7 @@ def transfer_tri_point_to_point(
     fill: Any | Mapping[str, Any] | None = None,
     nearest: NearestPointOnSurface | None = None,
 ) -> Any:
-    source: pv.PolyData = ext.fast_wrapping(source, target)
+    source: pv.PolyData = io.as_polydata(source)
     target: pv.PolyData = io.as_polydata(target)
     data: Iterable[str] = _make_data_names(data, source)
     fill = _make_fill_mapping(fill)
