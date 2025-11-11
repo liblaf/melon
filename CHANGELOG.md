@@ -7,6 +7,31 @@ All notable changes to this project will be documented in this file.
 The format is based on [Conventional Changelog](https://github.com/conventional-changelog/conventional-changelog-config-spec/blob/master/versions/2.2.0/README.md),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.8.4](https://github.com/liblaf/melon/releases/tag/v0.8.4) - 2025-11-11
+
+### ✨ Features
+
+- **ext:** add mesh processing extensions with Wrap and TetWild integration - [9e26822](https://github.com/liblaf/melon/commit/9e26822d6f6391751805fcde7108652a9a40cce8) by [@liblaf](https://github.com/liblaf)
+- **io:** preserve point order in OBJ I/O with texture coordinates - [05cd4b2](https://github.com/liblaf/melon/commit/05cd4b2795057412d25991c0d93dd21e01b9571a) by [@liblaf](https://github.com/liblaf)
+- **transfer:** add triangle-to-point data transfer functionality - [f1b4dbb](https://github.com/liblaf/melon/commit/f1b4dbb677ae76f13875ca29226fe86dd16477ea) by [@liblaf](https://github.com/liblaf)
+- **transfer:** implement triangle-to-tetrahedron data transfer functions - [cfd34ab](https://github.com/liblaf/melon/commit/cfd34abf78a0a62dd50bb1ec4f95f41d19cdc439) by [@liblaf](https://github.com/liblaf)
+
+### 🐛 Bug Fixes
+
+- **io:** preserve mesh processing flags in trimesh conversion - [6ec7c33](https://github.com/liblaf/melon/commit/6ec7c332e9927c3d4f1ffffebdd17789fc5cd688) by [@liblaf](https://github.com/liblaf)
+
+### ✅ Tests
+
+- add tests for mesh I/O functionality - [4a186d7](https://github.com/liblaf/melon/commit/4a186d7cbcc096ae53ebffccfd723a504b6df972) by [@liblaf](https://github.com/liblaf)
+
+### 🛠 Builds
+
+- **deps:** Remove unused and simplify existing dependencies - [1f07fd5](https://github.com/liblaf/melon/commit/1f07fd55e53c1ca2e34a9567bd2a94b3b5942144) by [@liblaf](https://github.com/liblaf)
+
+### ❤️ Contributors
+
+- [@liblaf](https://github.com/liblaf) made their first contribution
+
 ## [0.8.3](https://github.com/liblaf/melon/releases/tag/v0.8.3) - 2025-11-11
 
 ### 🛠 Builds
@@ -15,7 +40,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### ❤️ Contributors
 
-- [@liblaf](https://github.com/liblaf) made their first contribution
+- [@liblaf[bot]](https://github.com/apps/liblaf)
+- [@liblaf](https://github.com/liblaf)
 
 ## [0.8.2](https://github.com/liblaf/melon/releases/tag/v0.8.2) - 2025-11-02
 
