@@ -39,6 +39,7 @@ def fast_wrapping(
         free_polygons_floating_file: Path = tmpdir / "free-polygons-floating.json"
         io.save(source_file, source)
         io.save(target_file, target)
+        ic(source.points[0], io.load_polydata(source_file).points[0])
         io.save_landmarks(source_landmarks_file, source_landmarks)
         io.save_landmarks(target_landmarks_file, target_landmarks)
         io.save_polygons(free_polygons_floating_file, free_polygons_floating)
@@ -58,4 +59,5 @@ def fast_wrapping(
         if verbose:
             args.append("--verbose")
         sp.run(args, check=True)
+        ic(io.load_polydata(output_file).points[0])
         return io.load_polydata(output_file)

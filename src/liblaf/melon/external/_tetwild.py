@@ -63,7 +63,7 @@ def copy_structure(surface: Any) -> str | Mapping[str, Any] | pv.PolyData:
     return structure
 
 
-@grapes.cache
+@grapes.memorize
 def _tetwild_exe(
     surface: Any, *, csg: bool = False, **kwargs: Unpack[TetwildKwargs]
 ) -> pv.UnstructuredGrid:

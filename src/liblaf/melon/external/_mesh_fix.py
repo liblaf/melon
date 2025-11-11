@@ -1,9 +1,9 @@
+import importlib.util
 import shutil
 from typing import Any
 
 import pyvista as pv
 
-from liblaf import grapes
 from liblaf.melon import io, tri
 
 
@@ -15,7 +15,7 @@ def mesh_fix(
     joincomp: bool = False,
     remove_smallest_components: bool = False,
 ) -> pv.PolyData:
-    if grapes.has_module("pymeshfix"):
+    if importlib.util.find_spec("pymeshfix") is not None:
         result: pv.PolyData = _pymeshfix(
             mesh,
             verbose=verbose,

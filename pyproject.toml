@@ -33,7 +33,7 @@ dependencies = [
   "jinja2>=3,<4",
   "joblib>=1,<2",
   "lazy-loader>=0.4,<0.5",
-  "liblaf-grapes>=6,<7",
+  "liblaf-grapes>=8,<9",
   "loguru>=0.7,<0.8",
   "meshio>=5,<6",
   "networkx>=3,<4",
@@ -47,7 +47,6 @@ dependencies = [
   "rich>=14,<15",
   "scipy>=1,<2",
   "sortedcontainers>=2,<3",
-  "sortedcontainers-stubs>=2,<3",
   "trimesh[easy]>=4,<5"
 ]
 dynamic = ["version"]
@@ -64,15 +63,16 @@ dynamic = ["version"]
 melon = "liblaf.melon.cli:app.meta"
 
 [dependency-groups]
-build = ["check-wheel-contents>=0.6,<0.7", "hatch>=1,<2", "twine>=6,<7"]
 dev = [
   "icecream>=2,<3",
   "liblaf-cherries>=0.6,<0.7",
   "pygltflib>=1,<2",
-  "scipy-stubs>=1,<2"
+  "scipy-stubs>=1,<2",
+  "sortedcontainers-stubs>=2,<3",
 ]
+build = ["check-wheel-contents>=0.6,<0.7", "hatch>=1,<2", "twine>=6,<7"]
 docs = ["liblaf-mkdocs-preset>=0.2,<0.3", "mkdocs>=1,<2"]
-test = ["liblaf-pytest-preset>=0.1,<0.2,<7", "pytest>=8,<9"]
+test = ["liblaf-pytest-preset>=0.1,<0.2,<7", "pytest>=9,<10"]
 
 [build-system]
 requires = ["hatch-vcs", "hatchling"]
@@ -100,7 +100,8 @@ source = "vcs"
 [tool.pyright]
 extends = ".config/linters/pyrightconfig.json"
 
-[tool.pytest.ini_options]
+[tool.pytest]
+strict = true
 addopts = [
   "--doctest-modules",
   "--hypothesis-show-statistics",
