@@ -5,6 +5,7 @@ from ._nearest_point_on_surface import (
     NearestPointOnSurface,
     NearestPointOnSurfacePrepared,
     NearestPointOnSurfaceResult,
+    nearest_point_on_surface,
 )
 
 __all__ = [
@@ -18,4 +19,5 @@ __all__ = [
     "NearestPointResult",
     "NearestResult",
     "nearest",
+    "nearest_point_on_surface",
 ]

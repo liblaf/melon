@@ -33,8 +33,8 @@ def transfer_point_data(
     nearest = NearestPoint() if nearest is None else nearest
     prepared: NearestPointPrepared = nearest.prepare(src)
     query: NearestPointResult = prepared.query(dst)
-    missing: Bool[np.ndarray, " N"] = query["missing"]
-    point_id: Integer[np.ndarray, " N"] = query["vertex_id"]
+    missing: Bool[np.ndarray, " N"] = query.missing
+    point_id: Integer[np.ndarray, " N"] = query.vertex_id
     for name in data:
         dst.point_data[name] = src.point_data[name][point_id]
         if np.any(missing):
@@ -58,8 +58,8 @@ def transfer_cell_data_to_point(
     nearest = NearestPointOnSurface() if nearest is None else nearest
     prepared: NearestPointOnSurfacePrepared = nearest.prepare(src)
     query: NearestPointOnSurfaceResult = prepared.query(dst.points)
-    missing: Bool[np.ndarray, " N"] = query["missing"]
-    triangle_id: Integer[np.ndarray, " N"] = query["triangle_id"]
+    missing: Bool[np.ndarray, " N"] = query.missing
+    triangle_id: Integer[np.ndarray, " N"] = query.triangle_id
     for name, arr in src.cell_data.items():
         dst.point_data[name] = arr[triangle_id]
         if np.any(missing):

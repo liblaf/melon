@@ -1,11 +1,13 @@
 import abc
-from typing import Any, TypedDict
+from typing import Any
 
+import attrs
 import numpy as np
 from jaxtyping import Bool, Float
 
 
-class NearestResult(TypedDict):
+@attrs.define
+class NearestResult:
     distance: Float[np.ndarray, " Q"]
     missing: Bool[np.ndarray, " Q"]
     nearest: Float[np.ndarray, "Q 3"]

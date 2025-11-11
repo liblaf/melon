@@ -16,7 +16,6 @@ def classify(
 ) -> Bool[np.ndarray, " N"]:
     nearest_algo: melon.NearestAlgorithm = melon.NearestPointOnSurface(
         distance_threshold=np.inf,
-        fallback_to_nearest_vertex=False,
         normal_threshold=-np.inf,
     )
     nearest_include: melon.NearestResult = melon.nearest(
@@ -26,7 +25,7 @@ def classify(
         exclude, surface, algo=nearest_algo
     )
     is_include: Bool[np.ndarray, " N"] = (
-        nearest_include["distance"] <= nearest_exclude["distance"]
+        nearest_include.distance <= nearest_exclude.distance
     )
     return is_include
 
@@ -202,7 +201,15 @@ def main(cfg: Config) -> None:
     #     tolerance=0.01 * surface.length,
     #     snap_to_closest_point=True,
     # )  # pyright: ignore[reportAssignmentType]
-    surface = transfer_point_data(source, surface, "displacement")
+    source.compute_normals(auto_orient_normals=True, inplace=True)
+    surface.compute_normals(auto_orient_normals=True, inplace=True)
+    surface = melon.transfer.transfer_tri_point_to_point(
+        source,
+        surface,
+        data=["displacement"],
+        fill=0.0,
+        nearest=melon.proximity.NearestPointOnSurface(normal_threshold=-0.5),
+    )
     melon.save("surface.vtp", surface)
     ic(surface.point_data["displacement"])
     tetmesh = melon.tetra.transfer_point_data_from_surface(

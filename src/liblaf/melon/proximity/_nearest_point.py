@@ -11,6 +11,7 @@ from liblaf.melon import io
 from ._abc import NearestAlgorithm, NearestAlgorithmPrepared, NearestResult
 
 
+@attrs.define
 class NearestPointResult(NearestResult):
     vertex_id: Integer[np.ndarray, " N"]
 
@@ -55,10 +56,10 @@ class NearestPointPrepared(NearestAlgorithmPrepared):
         query: pv.PointSet = io.as_pointset(query, point_normals=True)
         query_normals: Float[np.ndarray, "N 3"] = query.point_data["Normals"]
         result: NearestPointResult = self._nearest_vertex(query)
-        distance: Float[np.ndarray, " N"] = result["distance"]
-        missing: Bool[np.ndarray, " N"] = result["missing"]
-        nearest: Float[np.ndarray, " N 3"] = result["nearest"]
-        vertex_id: Integer[np.ndarray, " N"] = result["vertex_id"]
+        distance: Float[np.ndarray, " N"] = result.distance
+        missing: Bool[np.ndarray, " N"] = result.missing
+        nearest: Float[np.ndarray, " N 3"] = result.nearest
+        vertex_id: Integer[np.ndarray, " N"] = result.vertex_id
         remaining_vertex_id: Integer[np.ndarray, " R"] = missing.nonzero()[0]
         k: int = 2
         while k <= self.max_k and remaining_vertex_id.size > 0:

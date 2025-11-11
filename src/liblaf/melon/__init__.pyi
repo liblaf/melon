@@ -1,4 +1,4 @@
-from . import barycentric, ext, io, mesh, proximity, tetra, tri, typing, utils
+from . import barycentric, ext, io, mesh, proximity, tetra, transfer, tri, typing, utils
 from ._version import __version__, __version_tuple__, version, version_tuple
 from .barycentric import barycentric_to_points, sample_barycentric_coords
 from .ext import annotate_landmarks, fast_wrapping, mesh_fix, tetwild
@@ -35,7 +35,9 @@ from .proximity import (
     NearestPointResult,
     NearestResult,
     nearest,
+    nearest_point_on_surface,
 )
+from .transfer import transfer_tri_point_to_point
 
 __all__ = [
     "NearestAlgorithm",
@@ -75,6 +77,7 @@ __all__ = [
     "mesh",
     "mesh_fix",
     "nearest",
+    "nearest_point_on_surface",
     "proximity",
     "sample_barycentric_coords",
     "save",
@@ -82,6 +85,8 @@ __all__ = [
     "save_polygons",
     "tetra",
     "tetwild",
+    "transfer",
+    "transfer_tri_point_to_point",
     "tri",
     "typing",
     "utils",
