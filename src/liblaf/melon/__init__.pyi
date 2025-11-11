@@ -1,7 +1,7 @@
-from . import barycentric, external, io, mesh, proximity, tetra, tri, typing, utils
+from . import barycentric, ext, io, mesh, proximity, tetra, tri, typing, utils
 from ._version import __version__, __version_tuple__, version, version_tuple
 from .barycentric import barycentric_to_points, sample_barycentric_coords
-from .external import annotate_landmarks, fast_wrapping, mesh_fix, tetwild
+from .ext import annotate_landmarks, fast_wrapping, mesh_fix, tetwild
 from .io import (
     PVDWriter,
     SeriesReader,
@@ -61,7 +61,7 @@ __all__ = [
     "as_unstructured_grid",
     "barycentric",
     "barycentric_to_points",
-    "external",
+    "ext",
     "fast_wrapping",
     "get_landmarks_path",
     "get_polygons_path",

@@ -5,9 +5,9 @@ from pathlib import Path
 from typing import Any, Protocol
 
 import attrs
+import more_itertools as mit
 from loguru import logger
 
-from liblaf import grapes
 from liblaf.melon.typing import PathLike
 
 from ._typing import RegType, SingleDispatchCallable
@@ -55,7 +55,7 @@ class WriterDispatcher:
         self, cls: RegType, suffix: str | Iterable[str]
     ) -> Callable[[Writer], Writer]:
         def wrapper(func: Writer) -> Writer:
-            for s in grapes.as_iterable(suffix):
+            for s in mit.always_iterable(suffix):
                 self.writers[s].register(cls)(func)
             return func
 

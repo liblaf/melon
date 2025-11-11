@@ -6,7 +6,7 @@ import numpy as np
 import pyvista as pv
 from jaxtyping import Float
 
-from liblaf.melon import external, io
+from liblaf.melon import ext, io
 
 
 def annotate_landmarks(
@@ -33,7 +33,7 @@ def annotate_landmarks(
     right_landmarks: Float[np.ndarray, "landmarks 3"] = io.load_landmarks(
         right_landmarks_path
     )
-    left_landmarks, right_landmarks = external.annotate_landmarks(
+    left_landmarks, right_landmarks = ext.annotate_landmarks(
         left, right, left_landmarks=left_landmarks, right_landmarks=right_landmarks
     )
     io.save_landmarks(left_landmarks_path, left_landmarks)

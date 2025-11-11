@@ -19,7 +19,7 @@ def fast_wrapping(
     free_polygons_floating: Integer[ArrayLike, " F"] | None = None,
     verbose: bool = True,
 ) -> pv.PolyData:
-    from liblaf.melon.external import wrap
+    from liblaf.melon.ext import wrap
 
     if source_landmarks is not None and target_landmarks is not None:
         matrix: Float[np.ndarray, "4 4"]
