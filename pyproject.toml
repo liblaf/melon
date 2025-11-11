@@ -68,7 +68,7 @@ dev = [
   "liblaf-cherries>=0.6,<0.7",
   "pygltflib>=1,<2",
   "scipy-stubs>=1,<2",
-  "sortedcontainers-stubs>=2,<3",
+  "sortedcontainers-stubs>=2,<3"
 ]
 build = ["check-wheel-contents>=0.6,<0.7", "hatch>=1,<2", "twine>=6,<7"]
 docs = ["liblaf-mkdocs-preset>=0.2,<0.3", "mkdocs>=1,<2"]
@@ -101,7 +101,6 @@ source = "vcs"
 extends = ".config/linters/pyrightconfig.json"
 
 [tool.pytest]
-strict = true
 addopts = [
   "--doctest-modules",
   "--hypothesis-show-statistics",
@@ -110,6 +109,7 @@ addopts = [
   "--strict-config",
   "--strict-markers"
 ]
+strict = true
 testpaths = ["benches", "src", "tests"]
 
 [tool.ruff]
