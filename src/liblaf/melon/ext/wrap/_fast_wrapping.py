@@ -1,10 +1,10 @@
-import os
 import subprocess as sp
 import tempfile
 from pathlib import Path
 from typing import Any
 
 import jinja2
+import numpy as np
 import pyvista as pv
 from jaxtyping import Float, Integer
 from numpy.typing import ArrayLike
@@ -21,14 +21,21 @@ def fast_wrapping(
     source_landmarks: Float[ArrayLike, "L 3"] | None = None,
     target_landmarks: Float[ArrayLike, "L 3"] | None = None,
     free_polygons_floating: Integer[ArrayLike, " F"] | None = None,
-    verbose: bool = True,
+    verbose: bool = False,
 ) -> pv.PolyData:
     source_landmarks = source_landmarks if source_landmarks is not None else []
     target_landmarks = target_landmarks if target_landmarks is not None else []
     free_polygons_floating = (
         free_polygons_floating if free_polygons_floating is not None else []
     )
-    with tempfile.TemporaryDirectory(delete=False) as tmpdir_str:
+    # ! dirty hack
+    # ! PyVista OBJ I/O does not always perserve point order, so we use texture coordinates to store the original point indices.
+    source: pv.PolyData = io.as_polydata(source).copy()
+    source.point_data.active_texture_coordinates = np.stack(
+        (np.arange(source.n_points) / source.n_points, np.zeros(source.n_points)),
+        axis=-1,
+    )
+    with tempfile.TemporaryDirectory() as tmpdir_str:
         tmpdir: Path = Path(tmpdir_str).absolute()
         project_file: Path = tmpdir / "fast-wrapping.wrap"
         source_file: Path = tmpdir / "source.obj"
@@ -39,7 +46,6 @@ def fast_wrapping(
         free_polygons_floating_file: Path = tmpdir / "free-polygons-floating.json"
         io.save(source_file, source)
         io.save(target_file, target)
-        ic(source.points[0], io.load_polydata(source_file).points[0])
         io.save_landmarks(source_landmarks_file, source_landmarks)
         io.save_landmarks(target_landmarks_file, target_landmarks)
         io.save_polygons(free_polygons_floating_file, free_polygons_floating)
@@ -55,9 +61,15 @@ def fast_wrapping(
             }
         )
         project_file.write_text(project)
-        args: list[str | os.PathLike] = ["WrapCmd.sh", "compute", project_file]
+        args: list[str | Path] = ["WrapCmd.sh", "compute", project_file]
         if verbose:
             args.append("--verbose")
         sp.run(args, check=True)
-        ic(io.load_polydata(output_file).points[0])
-        return io.load_polydata(output_file)
+        result: pv.PolyData = io.load_polydata(output_file)
+        assert result.active_texture_coordinates is not None
+        point_id: Integer[np.ndarray, " V"] = np.argsort(
+            result.active_texture_coordinates[:, 0]
+        )
+        result = pv.PolyData(result.points[point_id], source.faces)
+        result.copy_attributes(source)
+        return result
