@@ -4,7 +4,6 @@ from pathlib import Path
 from typing import Any
 
 import jinja2
-import numpy as np
 import pyvista as pv
 from jaxtyping import Float, Integer
 from numpy.typing import ArrayLike
@@ -27,13 +26,6 @@ def fast_wrapping(
     target_landmarks = target_landmarks if target_landmarks is not None else []
     free_polygons_floating = (
         free_polygons_floating if free_polygons_floating is not None else []
-    )
-    # ! dirty hack
-    # ! PyVista OBJ I/O does not always perserve point order, so we use texture coordinates to store the original point indices.
-    source: pv.PolyData = io.as_polydata(source).copy()
-    source.point_data.active_texture_coordinates = np.stack(
-        (np.arange(source.n_points) / source.n_points, np.zeros(source.n_points)),
-        axis=-1,
     )
     with tempfile.TemporaryDirectory() as tmpdir_str:
         tmpdir: Path = Path(tmpdir_str).absolute()
@@ -66,10 +58,5 @@ def fast_wrapping(
             args.append("--verbose")
         sp.run(args, check=True)
         result: pv.PolyData = io.load_polydata(output_file)
-        assert result.active_texture_coordinates is not None
-        point_id: Integer[np.ndarray, " V"] = np.argsort(
-            result.active_texture_coordinates[:, 0]
-        )
-        result = pv.PolyData(result.points[point_id], source.faces)
         result.copy_attributes(source)
         return result
