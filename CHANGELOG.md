@@ -7,6 +7,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Conventional Changelog](https://github.com/conventional-changelog/conventional-changelog-config-spec/blob/master/versions/2.2.0/README.md),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.8.5](https://github.com/liblaf/melon/releases/tag/v0.8.5) - 2025-11-12
+
+### 🐛 Bug Fixes
+
+- **io:** preserve mesh data integrity during OBJ/PLY save/load operations - [55b63ec](https://github.com/liblaf/melon/commit/55b63ecaaebdd59169f33b958928bd9c9f5d428b) by [@liblaf](https://github.com/liblaf)
+
+### ♻ Code Refactoring
+
+- **ext/wrap:** Remove point order preservation hack in fast_wrapping - [33aad99](https://github.com/liblaf/melon/commit/33aad99f394a757cfb1f3a6d3aa18ef1c3676b6b) by [@liblaf](https://github.com/liblaf)
+
+### ❤️ Contributors
+
+- [@liblaf](https://github.com/liblaf) made their first contribution
+
 ## [0.8.4](https://github.com/liblaf/melon/releases/tag/v0.8.4) - 2025-11-11
 
 ### ✨ Features
@@ -30,7 +44,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### ❤️ Contributors
 
-- [@liblaf](https://github.com/liblaf) made their first contribution
+- [@liblaf[bot]](https://github.com/apps/liblaf)
+- [@liblaf](https://github.com/liblaf)
 
 ## [0.8.3](https://github.com/liblaf/melon/releases/tag/v0.8.3) - 2025-11-11
 
