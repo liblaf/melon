@@ -61,7 +61,7 @@ melon = "liblaf.melon.cli:app.meta"
 [dependency-groups]
 dev = [
   "icecream>=2,<3",
-  "liblaf-cherries>=0.6,<0.7",
+  "liblaf-cherries>=0.7,<0.8",
   "pygltflib>=1,<2",
   "scipy-stubs>=1,<2",
   "sortedcontainers-stubs>=2,<3"
