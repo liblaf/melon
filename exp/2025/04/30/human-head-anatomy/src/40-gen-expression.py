@@ -9,7 +9,7 @@ from liblaf import cherries
 
 class Config(cherries.BaseConfig):
     source: Path = cherries.input("40-expression-flame.vtp")
-    tetmesh: Path = cherries.input("21-tetmesh.vtu")
+    tetmesh: Path = cherries.input("31-muscle-fraction.vtu")
 
     output: Path = cherries.output("40-expression.vtu")
 

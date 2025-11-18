@@ -7,7 +7,7 @@ import pyvista as pv
 from jaxtyping import Bool, Integer
 
 from liblaf import grapes
-from liblaf.melon import io
+from liblaf.melon import io, utils
 
 logger: logging.Logger = logging.getLogger(__name__)
 
@@ -40,30 +40,22 @@ def as_group_ids(
 
 
 def _get_group_id(mesh: pv.PolyData) -> Integer[np.ndarray, " cell"]:
-    key: str = "GroupIds"
-    if key in mesh.cell_data:
-        return mesh.cell_data[key]
-    for key in ["group_id", "group_ids", "group-id", "group-ids", "GroupId"]:
-        if key in mesh.cell_data:
-            logger.warning(
-                "'%s' is deprecated. Use 'GroupIds' instead.", key, extra={"once": True}
-            )
-            return mesh.cell_data[key]
-    key = "GroupIds"
-    raise KeyError(key)
+    return utils.get_array(
+        mesh.cell_data,
+        "GroupIds",
+        deprecated_keys=["group_id", "group_ids", "group-id", "group-ids", "GroupId"],
+    )
 
 
 def _get_group_name(mesh: pv.PolyData) -> np.ndarray:
-    key: str = "GroupNames"
-    if key in mesh.field_data:
-        return mesh.field_data[key]
-    for key in ["group_name", "group_names", "group-name", "group-names", "GroupName"]:
-        if key in mesh.field_data:
-            logger.warning(
-                "'%s' is deprecated. Use 'GroupNames' instead.",
-                key,
-                extra={"once": True},
-            )
-            return mesh.field_data[key]
-    key = "GroupNames"
-    raise KeyError(key)
+    return utils.get_array(
+        mesh.field_data,
+        "GroupNames",
+        deprecated_keys=[
+            "group_name",
+            "group_names",
+            "group-name",
+            "group-names",
+            "GroupName",
+        ],
+    )

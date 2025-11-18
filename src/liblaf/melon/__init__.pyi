@@ -44,6 +44,7 @@ from .transfer import (
     transfer_tri_point,
     transfer_tri_point_to_tet,
 )
+from .utils import get_array
 
 __all__ = [
     "NearestAlgorithm",
@@ -72,6 +73,7 @@ __all__ = [
     "barycentric_to_points",
     "ext",
     "fast_wrapping",
+    "get_array",
     "get_landmarks_path",
     "get_polygons_path",
     "io",
