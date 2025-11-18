@@ -1,25 +1,21 @@
 from pathlib import Path
 from typing import Annotated
 
-import cyclopts
 import numpy as np
 import pyvista as pv
+from cyclopts import Parameter
 from jaxtyping import Float
 
 from liblaf.melon import ext, io
 
 
 def annotate_landmarks(
-    left_path: Annotated[Path, cyclopts.Parameter("left")],
-    right_path: Annotated[Path, cyclopts.Parameter("right")],
+    left_path: Annotated[Path, Parameter("left")],
+    right_path: Annotated[Path, Parameter("right")],
     /,
     *,
-    left_landmarks_path: Annotated[
-        Path | None, cyclopts.Parameter("left-landmarks")
-    ] = None,
-    right_landmarks_path: Annotated[
-        Path | None, cyclopts.Parameter("right-landmarks")
-    ] = None,
+    left_landmarks_path: Annotated[Path | None, Parameter("left-landmarks")] = None,
+    right_landmarks_path: Annotated[Path | None, Parameter("right-landmarks")] = None,
 ) -> None:
     if left_landmarks_path is None:
         left_landmarks_path = left_path

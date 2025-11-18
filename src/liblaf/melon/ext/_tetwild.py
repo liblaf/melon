@@ -1,3 +1,5 @@
+import logging
+import os
 import shutil
 import subprocess as sp
 import tempfile
@@ -6,11 +8,13 @@ from pathlib import Path
 from typing import Any, TypedDict, Unpack
 
 import pyvista as pv
-from loguru import logger
 
 from liblaf import grapes
 from liblaf.melon import io, tetra
-from liblaf.melon.typing import PathLike
+
+type PathLike = str | os.PathLike[str]
+
+logger: logging.Logger = logging.getLogger(__name__)
 
 
 class TetwildKwargs(TypedDict, total=False):
@@ -103,7 +107,7 @@ def _tetwild_exe_csg(csg: Any, **kwargs: Unpack[TetwildKwargs]) -> pv.Unstructur
         output: Path = tmpdir / "output.msh"
         args: list[PathLike] = ["fTetWild", "--output", output, "--csg", csg_file]
         args.extend(_tetwild_exe_args(**kwargs))
-        logger.debug(args)
+        logger.debug("%s", args)
         sp.run(args, check=True)
         return io.load_unstructured_grid(output)
 

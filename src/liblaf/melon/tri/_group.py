@@ -1,13 +1,15 @@
+import logging
 from collections.abc import Iterable
 from typing import Any
 
 import numpy as np
 import pyvista as pv
 from jaxtyping import Bool, Integer
-from loguru import logger
 
 from liblaf import grapes
 from liblaf.melon import io
+
+logger: logging.Logger = logging.getLogger(__name__)
 
 
 def select_groups(
@@ -43,8 +45,8 @@ def _get_group_id(mesh: pv.PolyData) -> Integer[np.ndarray, " cell"]:
         return mesh.cell_data[key]
     for key in ["group_id", "group_ids", "group-ids", "GroupId", "GroupIds"]:
         if key in mesh.cell_data:
-            logger.bind(once=True).warning(
-                "'{}' is deprecated. Use 'group-id' instead.", key
+            logger.warning(
+                "'%s' is deprecated. Use 'group-id' instead.", key, extra={"once": True}
             )
             return mesh.cell_data[key]
     key = "group-id"
@@ -57,8 +59,10 @@ def _get_group_name(mesh: pv.PolyData) -> np.ndarray:
         return mesh.field_data[key]
     for key in ["group_name", "group_names", "group-names", "GroupName", "GroupNames"]:
         if key in mesh.field_data:
-            logger.bind(once=True).warning(
-                "'{}' is deprecated. Use 'group-name' instead.", key
+            logger.warning(
+                "'%s' is deprecated. Use 'group-name' instead.",
+                key,
+                extra={"once": True},
             )
             return mesh.field_data[key]
     key = "group-name"
