@@ -7,7 +7,26 @@ All notable changes to this project will be documented in this file.
 The format is based on [Conventional Changelog](https://github.com/conventional-changelog/conventional-changelog-config-spec/blob/master/versions/2.2.0/README.md),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [0.8.5](https://github.com/liblaf/melon/releases/tag/v0.8.5) - 2025-11-12
+## [0.9.0](https://github.com/liblaf/melon/releases/tag/v0.9.0) - 2025-11-18
+
+### 💥 BREAKING CHANGES
+
+- **(tet)** Renamed `tetra` module to `tet` for consistency with other module naming conventions - [97e9075](https://github.com/liblaf/melon/commit/97e90753daee465531032f5da32336846671678e) by [@liblaf](https://github.com/liblaf)
+
+### ✨ Features
+
+- **tet:** add tetrahedral mesh winding fix functionality - [97e9075](https://github.com/liblaf/melon/commit/97e90753daee465531032f5da32336846671678e) by [@liblaf](https://github.com/liblaf)
+
+### 🛠 Builds
+
+- remove loguru dependency and update logging usage - [5c75af8](https://github.com/liblaf/melon/commit/5c75af8a98f19ac249b85a5c693efa5616f38981) by [@liblaf](https://github.com/liblaf)
+
+### ❤️ Contributors
+
+- [@liblaf](https://github.com/liblaf) made their first contribution
+- [@renovate[bot]](https://github.com/apps/renovate) made their first contribution in [#82](https://github.com/liblaf/melon/pull/82)
+
+## [0.8.5](https://github.com/liblaf/melon/releases/tag/v0.8.5) - 2025-11-16
 
 ### 🐛 Bug Fixes
 
@@ -19,7 +38,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### ❤️ Contributors
 
-- [@liblaf](https://github.com/liblaf) made their first contribution
+- [@liblaf[bot]](https://github.com/apps/liblaf)
+- [@liblaf](https://github.com/liblaf)
 
 ## [0.8.4](https://github.com/liblaf/melon/releases/tag/v0.8.4) - 2025-11-11
 
