@@ -39,6 +39,11 @@ def main(cfg: Config) -> None:
     del tetmesh.point_data["PointIds"]
     melon.save(cfg.output, tetmesh)
 
+    face: pv.PolyData = surface.extract_points(
+        surface.point_data["IsFace"]
+    ).extract_surface()
+    melon.save(cherries.temp("40-expression-face.vtp"), face)
+
 
 if __name__ == "__main__":
     cherries.main(main)

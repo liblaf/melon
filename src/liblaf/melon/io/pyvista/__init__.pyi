@@ -1,5 +1,6 @@
-from . import pointset, polydata, structured_grid, unstructured_grid
+from . import multi_block, pointset, polydata, structured_grid, unstructured_grid
 from ._convert import as_mesh
+from .multi_block import as_multi_block, load_multi_block
 from .pointset import as_pointset
 from .polydata import (
     as_polydata,
@@ -20,13 +21,16 @@ from .unstructured_grid import (
 
 __all__ = [
     "as_mesh",
+    "as_multi_block",
     "as_pointset",
     "as_polydata",
     "as_structured_grid",
     "as_unstructured_grid",
+    "load_multi_block",
     "load_polydata",
     "load_structured_grid",
     "load_unstructured_grid",
+    "multi_block",
     "pointset",
     "polydata",
     "save_polydata",

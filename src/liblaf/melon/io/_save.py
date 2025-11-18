@@ -15,6 +15,7 @@ class WriterDispatcher(_WriterDispatcher):
 
     def init(self) -> None:
         # ruff: noqa: F401
+        from .pyvista.multi_block._write import save_multi_block
         from .pyvista.polydata._write import save_polydata, save_polydata_obj
         from .pyvista.structured_grid._write import save_structured_grid
         from .pyvista.unstructured_grid._write import save_unstructured_grid

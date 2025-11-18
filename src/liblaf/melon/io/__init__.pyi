@@ -3,10 +3,12 @@ from ._save import save
 from .paraview import PVDWriter, SeriesReader, SeriesWriter
 from .pyvista import (
     as_mesh,
+    as_multi_block,
     as_pointset,
     as_polydata,
     as_structured_grid,
     as_unstructured_grid,
+    load_multi_block,
     load_polydata,
     load_structured_grid,
     load_unstructured_grid,
@@ -27,6 +29,7 @@ __all__ = [
     "SeriesWriter",
     "abc",
     "as_mesh",
+    "as_multi_block",
     "as_pointset",
     "as_polydata",
     "as_structured_grid",
@@ -35,6 +38,7 @@ __all__ = [
     "get_landmarks_path",
     "get_polygons_path",
     "load_landmarks",
+    "load_multi_block",
     "load_polydata",
     "load_polygons",
     "load_structured_grid",
