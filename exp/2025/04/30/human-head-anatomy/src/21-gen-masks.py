@@ -26,13 +26,13 @@ def main(cfg: Config) -> None:
     cranium: pv.PolyData = melon.tri.extract_groups(full, groups["Cranium"])
     mandible: pv.PolyData = melon.tri.extract_groups(full, groups["Mandible"])
 
-    cranium.cell_data["is-cranium"] = np.ones((cranium.n_cells,), np.bool)
-    mandible.cell_data["is-cranium"] = np.zeros((mandible.n_cells,), np.bool)
-    skin.cell_data["is-cranium"] = np.zeros((skin.n_cells,), np.bool)
+    cranium.cell_data["IsCranium"] = np.ones((cranium.n_cells,), np.bool)
+    mandible.cell_data["IsCranium"] = np.zeros((mandible.n_cells,), np.bool)
+    skin.cell_data["IsCranium"] = np.zeros((skin.n_cells,), np.bool)
 
-    cranium.cell_data["is-face"] = np.zeros((cranium.n_cells,), np.bool)
-    mandible.cell_data["is-face"] = np.zeros((mandible.n_cells,), np.bool)
-    skin.cell_data["is-face"] = melon.tri.select_groups(
+    cranium.cell_data["IsFace"] = np.zeros((cranium.n_cells,), np.bool)
+    mandible.cell_data["IsFace"] = np.zeros((mandible.n_cells,), np.bool)
+    skin.cell_data["IsFace"] = melon.tri.select_groups(
         skin,
         [
             "Ear",
@@ -52,20 +52,20 @@ def main(cfg: Config) -> None:
         invert=True,
     )
 
-    cranium.cell_data["is-mandible"] = np.zeros((cranium.n_cells,), np.bool)
-    mandible.cell_data["is-mandible"] = np.ones((mandible.n_cells,), np.bool)
-    skin.cell_data["is-mandible"] = np.zeros((skin.n_cells,), np.bool)
+    cranium.cell_data["IsMandible"] = np.zeros((cranium.n_cells,), np.bool)
+    mandible.cell_data["IsMandible"] = np.ones((mandible.n_cells,), np.bool)
+    skin.cell_data["IsMandible"] = np.zeros((skin.n_cells,), np.bool)
 
-    cranium.cell_data["is-skin"] = np.zeros((cranium.n_cells,), np.bool)
-    mandible.cell_data["is-skin"] = np.zeros((mandible.n_cells,), np.bool)
-    skin.cell_data["is-skin"] = np.ones((skin.n_cells,), np.bool)
+    cranium.cell_data["IsSkin"] = np.zeros((cranium.n_cells,), np.bool)
+    mandible.cell_data["IsSkin"] = np.zeros((mandible.n_cells,), np.bool)
+    skin.cell_data["IsSkin"] = np.ones((skin.n_cells,), np.bool)
 
     mesh.point_data["PointIds"] = np.arange(mesh.n_points)
     surface: pv.PolyData = mesh.extract_surface()  # pyright: ignore[reportAssignmentType]
     surface = melon.transfer_tri_cell_to_point_category(
         pv.merge([cranium, mandible, skin]),
         surface,
-        data=["is-cranium", "is-face", "is-mandible", "is-skin"],
+        data=["IsCranium", "IsFace", "IsMandible", "IsSkin"],
         fill=False,
         nearest=melon.NearestPointOnSurface(
             ignore_orientation=True, normal_threshold=-np.inf
@@ -76,7 +76,7 @@ def main(cfg: Config) -> None:
     mesh = melon.transfer_tri_point_to_tet(
         surface,
         mesh,
-        data=["is-cranium", "is-face", "is-mandible", "is-skin"],
+        data=["IsCranium", "IsFace", "IsMandible", "IsSkin"],
         fill=False,
         point_id="PointIds",
     )
