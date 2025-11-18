@@ -5,7 +5,7 @@ from typing import Any
 
 import jinja2
 import pyvista as pv
-from jaxtyping import Float, Integer
+from jaxtyping import Bool, Float, Integer
 from numpy.typing import ArrayLike
 
 from liblaf.melon import io
@@ -19,7 +19,9 @@ def fast_wrapping(
     *,
     source_landmarks: Float[ArrayLike, "L 3"] | None = None,
     target_landmarks: Float[ArrayLike, "L 3"] | None = None,
-    free_polygons_floating: Integer[ArrayLike, " F"] | None = None,
+    free_polygons_floating: Bool[ArrayLike, " full"]
+    | Integer[ArrayLike, " free"]
+    | None = None,
     verbose: bool = False,
 ) -> pv.PolyData:
     source_landmarks = source_landmarks if source_landmarks is not None else []
@@ -27,7 +29,7 @@ def fast_wrapping(
     free_polygons_floating = (
         free_polygons_floating if free_polygons_floating is not None else []
     )
-    with tempfile.TemporaryDirectory() as tmpdir_str:
+    with tempfile.TemporaryDirectory(delete=False) as tmpdir_str:
         tmpdir: Path = Path(tmpdir_str).absolute()
         project_file: Path = tmpdir / "fast-wrapping.wrap"
         source_file: Path = tmpdir / "source.obj"

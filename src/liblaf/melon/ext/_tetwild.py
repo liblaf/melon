@@ -10,7 +10,7 @@ from typing import Any, TypedDict, Unpack
 import pyvista as pv
 
 from liblaf import grapes
-from liblaf.melon import io, tetra
+from liblaf.melon import io, tet
 
 type PathLike = str | os.PathLike[str]
 
@@ -52,7 +52,7 @@ def tetwild(
     else:
         raise NotImplementedError
     if fix_winding:
-        mesh = tetra.fix_winding(mesh)
+        mesh = tet.fix_winding(mesh)
     return mesh
 
 

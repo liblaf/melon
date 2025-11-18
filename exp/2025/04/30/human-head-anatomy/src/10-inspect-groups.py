@@ -1,4 +1,5 @@
 import collections
+import logging
 from collections.abc import Generator
 from pathlib import Path
 from typing import Self, cast
@@ -8,17 +9,18 @@ import pygltflib
 import pyvista as pv
 import rich
 import rich.tree
-from loguru import logger
 
 from liblaf import cherries, grapes
 from liblaf.melon import io
 
+logger: logging.Logger = logging.getLogger(__name__)
+
 
 class Config(cherries.BaseConfig):
-    glb: Path = cherries.input("01-raw/complete_human_head_anatomy.glb")
-    obj: Path = cherries.input("01-raw/Full human head anatomy.obj")
+    glb: Path = cherries.input("00-complete_human_head_anatomy.glb")
+    obj: Path = cherries.input("00-Full human head anatomy.obj")
 
-    output: Path = cherries.output("01-raw/groups.toml")
+    output: Path = cherries.output("10-groups.toml")
 
 
 @attrs.define
@@ -85,21 +87,21 @@ def main(cfg: Config) -> None:
     obj: pv.PolyData = io.load_polydata(cfg.obj)
     obj.clean(inplace=True)
     subgroups: dict[str, list[str]] = collections.defaultdict(list)
-    for group_name_np in obj.field_data["group-name"]:
+    for group_name_np in obj.field_data["GroupNames"]:
         group_name = str(group_name_np)
         if group_name not in name_to_tree:
-            logger.warning("Node not found in glTF: {}", group_name)
+            logger.warning("Node not found in glTF: %s", group_name)
             continue
         subtree: Tree = name_to_tree[group_name]
         subgroup: Tree | None = subtree.find_subgroup()
         if subgroup is None:
-            logger.warning("Subgroup not found for: {}", group_name)
+            logger.warning("Subgroup not found for: %s", group_name)
             continue
         subgroup_name: str = subgroup.name.split(maxsplit=1)[0]
         subgroups[subgroup_name].append(group_name)
-        logger.success("{} > {}", subgroup_name, group_name)
+        logger.info("%s > %s", subgroup_name, group_name)
     grapes.save(cfg.output, subgroups)
 
 
 if __name__ == "__main__":
-    cherries.run(main)
+    cherries.main(main)

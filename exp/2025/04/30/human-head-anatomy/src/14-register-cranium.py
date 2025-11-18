@@ -9,20 +9,13 @@ from liblaf import cherries
 
 
 class Config(cherries.BaseConfig):
-    source: Path = cherries.input(
-        "01-raw/sculptor/cranium.ply", extra=melon.io.get_landmarks_path
-    )
-    target: Path = cherries.input(
-        "02-intermediate/13-cranium.vtp", extra=melon.io.get_landmarks_path
-    )
-    output: Path = cherries.output(
-        "02-intermediate/14-cranium.ply", extra=melon.io.get_landmarks_path
-    )
+    source: Path = cherries.input("00-sculptor-cranium.ply")
+    target: Path = cherries.input("13-cranium.vtp")
+    output: Path = cherries.output("14-cranium.ply")
 
 
 def main(cfg: Config) -> None:
     source: pv.PolyData = melon.load_polydata(cfg.source)
-    source.clean(inplace=True)
     target: pv.PolyData = melon.load_polydata(cfg.target)
     source_landmarks: Float[np.ndarray, "L 3"] = melon.load_landmarks(cfg.source)
     target_landmarks: Float[np.ndarray, "L 3"] = melon.load_landmarks(cfg.target)
@@ -39,4 +32,4 @@ def main(cfg: Config) -> None:
 
 
 if __name__ == "__main__":
-    cherries.run(main)
+    cherries.main(main)

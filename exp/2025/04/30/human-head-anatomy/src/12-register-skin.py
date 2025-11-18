@@ -1,5 +1,5 @@
-from collections.abc import Sequence
 from pathlib import Path
+from typing import cast
 
 import numpy as np
 import pyvista as pv
@@ -10,35 +10,38 @@ from liblaf import cherries
 
 
 class Config(cherries.BaseConfig):
-    floting: Sequence[int | str] = [
-        "Caruncle",
-        "EarSocket EyeSocketTop",
-        "EyeSocketBottom",
-        "EyeSocketTop",
-        "LipInnerBottom",
-        "LipInnerTop",
-        "MouthSocketBottom",
-        "MouthSocketTop",
-    ]
-    source: Path = cherries.input(
-        "01-raw/XYZ_ReadyToSculpt_eyesOpen_PolyGroups_GEO.obj"
-    )
-    target: Path = cherries.input("02-intermediate/11-skin.ply")
+    source: Path = cherries.input("00-XYZ_ReadyToSculpt_eyesOpen_PolyGroups_GEO.obj")
+    target: Path = cherries.input("11-skin.ply")
 
-    output: Path = cherries.output("02-intermediate/12-skin.vtp")
+    output: Path = cherries.output("12-skin.vtp")
 
 
 def main(cfg: Config) -> None:
     source: pv.PolyData = melon.load_polydata(cfg.source)
     source.clean(inplace=True)
+    source.field_data["GroupNames"] = [
+        cast("str", name).split(maxsplit=1)[0]
+        for name in source.field_data["GroupNames"]
+    ]
+
     target: pv.PolyData = melon.load_polydata(cfg.target)
     source_landmarks: Float[np.ndarray, "L 3"] = melon.load_landmarks(cfg.source)
     target_landmarks: Float[np.ndarray, "L 3"] = melon.load_landmarks(cfg.target)
 
     free_polygons_floating: Integer[np.ndarray, " F"] = melon.tri.select_groups(
-        source, cfg.floting
+        source,
+        [
+            "Caruncle",
+            "EarSocket",
+            "EyeSocketBottom",
+            "EyeSocketTop",
+            "LipInnerBottom",
+            "LipInnerTop",
+            "MouthSocketBottom",
+            "MouthSocketTop",
+        ],
     )
-    result: pv.PolyData = melon.fast_wrapping(
+    result: pv.PolyData = melon.tri.fast_wrapping(
         source,
         target,
         source_landmarks=source_landmarks,
@@ -46,10 +49,9 @@ def main(cfg: Config) -> None:
         free_polygons_floating=free_polygons_floating,
         verbose=True,
     )
-    result.copy_attributes(source)
     melon.save(cfg.output, result)
     melon.save_landmarks(cfg.output, target_landmarks)
 
 
 if __name__ == "__main__":
-    cherries.run(main)
+    cherries.main(main)

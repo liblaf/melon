@@ -7,11 +7,11 @@ from liblaf import cherries
 
 
 class Config(cherries.BaseConfig):
-    cranium: Path = cherries.input("02-intermediate/14-cranium.ply")
-    mandible: Path = cherries.input("02-intermediate/14-mandible.ply")
-    skin: Path = cherries.input("02-intermediate/12-skin.vtp")
+    cranium: Path = cherries.input("14-cranium.ply")
+    mandible: Path = cherries.input("14-mandible.ply")
+    skin: Path = cherries.input("12-skin.vtp")
 
-    output: Path = cherries.output("02-intermediate/20-tetgen.vtu")
+    output: Path = cherries.output("20-tetgen.vtu")
 
     lr: float = 0.05 * 0.5
     epsr: float = 1e-3 * 0.5
@@ -25,10 +25,11 @@ def main(cfg: Config) -> None:
     tetmesh: pv.UnstructuredGrid = melon.tetwild(
         pv.merge([skull.flip_faces(), skin]), lr=cfg.lr, epsr=cfg.epsr
     )
-    cherries.log_metric("n_points", tetmesh.n_points)
-    cherries.log_metric("n_cells", tetmesh.n_cells)
+    tetmesh.cell_data.clear()
+    ic(tetmesh.n_points)
+    ic(tetmesh.n_cells)
     melon.save(cfg.output, tetmesh)
 
 
 if __name__ == "__main__":
-    cherries.run(main)
+    cherries.main(main)

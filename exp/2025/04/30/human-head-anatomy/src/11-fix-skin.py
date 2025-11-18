@@ -9,8 +9,8 @@ from liblaf import cherries
 
 
 class Config(cherries.BaseConfig):
-    input: Path = cherries.input("01-raw/Full human head anatomy.obj")
-    output: Path = cherries.output("02-intermediate/11-skin.ply")
+    input: Path = cherries.input("00-Full human head anatomy.obj")
+    output: Path = cherries.output("11-skin.ply")
 
 
 def main(cfg: Config) -> None:
@@ -28,4 +28,4 @@ def main(cfg: Config) -> None:
 
 
 if __name__ == "__main__":
-    cherries.run(main)
+    cherries.main(main)

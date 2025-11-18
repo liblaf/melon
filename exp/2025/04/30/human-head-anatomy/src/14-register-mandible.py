@@ -9,15 +9,9 @@ from liblaf import cherries
 
 
 class Config(cherries.BaseConfig):
-    source: Path = cherries.input(
-        "01-raw/sculptor/mandible.ply", extra=melon.io.get_landmarks_path
-    )
-    target: Path = cherries.input(
-        "02-intermediate/13-mandible.vtp", extra=melon.io.get_landmarks_path
-    )
-    output: Path = cherries.output(
-        "02-intermediate/14-mandible.ply", extra=melon.io.get_landmarks_path
-    )
+    source: Path = cherries.input("00-sculptor-mandible.ply")
+    target: Path = cherries.input("13-mandible.vtp")
+    output: Path = cherries.output("14-mandible.ply")
 
 
 def main(cfg: Config) -> None:
@@ -39,4 +33,4 @@ def main(cfg: Config) -> None:
 
 
 if __name__ == "__main__":
-    cherries.run(main)
+    cherries.main(main)

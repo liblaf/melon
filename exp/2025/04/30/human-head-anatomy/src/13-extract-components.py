@@ -7,33 +7,30 @@ from liblaf import cherries, grapes
 
 
 class Config(cherries.BaseConfig):
-    full: Path = cherries.input("01-raw/Full human head anatomy.obj")
-    groups: Path = cherries.input("02-intermediate/groups.toml")
+    full: Path = cherries.input("00-Full human head anatomy.obj")
+    groups: Path = cherries.input("13-groups.toml")
 
-    cranium: Path = cherries.output("02-intermediate/13-cranium.vtp")
-    mandible: Path = cherries.output("02-intermediate/13-mandible.vtp")
-    muscles: Path = cherries.output("01-raw/muscles.vtp")
+    cranium: Path = cherries.output("13-cranium.vtp")
+    mandible: Path = cherries.output("13-mandible.vtp")
+    muscles: Path = cherries.output("13-muscles.vtp")
 
 
 def main(cfg: Config) -> None:
     full: pv.PolyData = melon.load_polydata(cfg.full)
     full.clean(inplace=True)
+    full.point_data.clear()
     groups: dict = grapes.load(cfg.groups)
     cranium: pv.PolyData = melon.tri.extract_groups(
-        full, groups["cranium"] + groups["upper-teeth"]
+        full, groups["Cranium"] + groups["UpperTeeth"]
     )
     mandible: pv.PolyData = melon.tri.extract_groups(
-        full, groups["mandible"] + groups["lower-teeth"]
+        full, groups["Mandible"] + groups["LowerTeeth"]
     )
     muscles: pv.PolyData = melon.tri.extract_groups(full, groups["Muscles"])
-    edges = muscles.extract_feature_edges(
-        non_manifold_edges=False, feature_edges=False, manifold_edges=False
-    )
-    melon.save("edges.vtp", edges)
     melon.save(cfg.cranium, cranium)
     melon.save(cfg.mandible, mandible)
     melon.save(cfg.muscles, muscles)
 
 
 if __name__ == "__main__":
-    cherries.run(main)
+    cherries.main(main)

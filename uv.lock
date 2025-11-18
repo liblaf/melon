@@ -2155,7 +2155,7 @@ wheels = [
 
 [[package]]
 name = "liblaf-grapes"
-version = "8.4.0"
+version = "8.4.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "about-time" },
@@ -2179,9 +2179,9 @@ dependencies = [
     { name = "wadler-lindig" },
     { name = "wrapt" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/49/70/a85e89f0983440578d1579130e7724079c9a08d77f5b4dba2704a5f35664/liblaf_grapes-8.4.0.tar.gz", hash = "sha256:8263b255fc231ece69582d7b873ec35571cf1d6fc7515b595508845254f07081", size = 36380, upload-time = "2025-11-17T12:44:12.605Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/2d/23/0b3b16d8d0b804d367c9047d591d2ac908ca7584ad121bbff3bc7f9ac021/liblaf_grapes-8.4.1.tar.gz", hash = "sha256:abcb1d1375b4c656d6ecf934cf78f6e695e3c2a596cce1f274090fd358b24517", size = 36381, upload-time = "2025-11-18T09:31:31.947Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/71/aa/6d51639a77f13a59f10542f99c282aeeeb89cf7c6195c7c6fac5acdbf347/liblaf_grapes-8.4.0-py3-none-any.whl", hash = "sha256:92a5df11f3e5cc621cac3ff5ccec94dc8c24f16d0c248484415db886a306c42a", size = 80053, upload-time = "2025-11-17T12:44:11.181Z" },
+    { url = "https://files.pythonhosted.org/packages/e7/3c/b03af9791b72889aacf3b30d59fad6f0705c31d52389a7dad7a8c5eb7e9e/liblaf_grapes-8.4.1-py3-none-any.whl", hash = "sha256:9f5c671c8f854416f0bd0a5a86969562ae99ab7e874d583eb14112d8e710be8d", size = 80054, upload-time = "2025-11-18T09:31:30.458Z" },
 ]
 
 [[package]]
@@ -4511,11 +4511,11 @@ wheels = [
 
 [[package]]
 name = "shtab"
-version = "1.7.2"
+version = "1.8.0"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/5a/3e/837067b970c1d2ffa936c72f384a63fdec4e186b74da781e921354a94024/shtab-1.7.2.tar.gz", hash = "sha256:8c16673ade76a2d42417f03e57acf239bfb5968e842204c17990cae357d07d6f", size = 45751, upload-time = "2025-04-12T20:28:03.271Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/b0/7a/7f131b6082d8b592c32e4312d0a6da3d0b28b8f0d305ddd93e49c9d89929/shtab-1.8.0.tar.gz", hash = "sha256:75f16d42178882b7f7126a0c2cb3c848daed2f4f5a276dd1ded75921cc4d073a", size = 46062, upload-time = "2025-11-18T10:57:47.601Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/74/03/3271b7bb470fbab4adf5bd30b0d32143909d96f3608d815b447357f47f2b/shtab-1.7.2-py3-none-any.whl", hash = "sha256:858a5805f6c137bb0cda4f282d27d08fd44ca487ab4a6a36d2a400263cd0b5c1", size = 14214, upload-time = "2025-04-12T20:28:01.82Z" },
+    { url = "https://files.pythonhosted.org/packages/8e/e1/202a31727b0d096a04380f78e809074d7a1d0a22d9d5a39fea1d2353fd02/shtab-1.8.0-py3-none-any.whl", hash = "sha256:f0922a82174b4007e06ac0bac4f79abd826c5cca88e201bfd927f889803c571d", size = 14457, upload-time = "2025-11-18T10:57:45.906Z" },
 ]
 
 [[package]]

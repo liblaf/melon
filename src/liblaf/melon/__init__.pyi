@@ -1,4 +1,4 @@
-from . import barycentric, ext, io, mesh, proximity, tetra, transfer, tri, typing, utils
+from . import barycentric, ext, io, mesh, proximity, tet, transfer, tri, typing, utils
 from ._version import __version__, __version_tuple__, version, version_tuple
 from .barycentric import barycentric_to_points, sample_barycentric_coords
 from .ext import annotate_landmarks, fast_wrapping, mesh_fix, tetwild
@@ -87,7 +87,7 @@ __all__ = [
     "save",
     "save_landmarks",
     "save_polygons",
-    "tetra",
+    "tet",
     "tetwild",
     "transfer",
     "transfer_tri_cell_to_point_category",
