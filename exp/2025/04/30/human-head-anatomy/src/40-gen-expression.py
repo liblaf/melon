@@ -31,12 +31,17 @@ def main(cfg: Config) -> None:
         surface,
         data=data_names,
         fill=0.0,
-        nearest=melon.NearestPointOnSurface(normal_threshold=-0.5),
+        nearest=melon.NearestPointOnSurface(
+            distance_threshold=0.05, normal_threshold=-0.5
+        ),
     )
     tetmesh = melon.transfer_tri_point_to_tet(
         surface, tetmesh, data=data_names, fill=0.0, point_id="PointIds"
     )
     del tetmesh.point_data["PointIds"]
+    skull_mask = tetmesh.point_data["IsCranium"] | tetmesh.point_data["IsMandible"]
+    for name in data_names:
+        tetmesh.point_data[name][skull_mask] = 0.0
     melon.save(cfg.output, tetmesh)
 
     face: pv.PolyData = surface.extract_points(

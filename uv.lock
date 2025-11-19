@@ -1841,14 +1841,14 @@ wheels = [
 
 [[package]]
 name = "hypothesis"
-version = "6.148.1"
+version = "6.148.2"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "sortedcontainers" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/fd/5f/b08ad8dc0a79c3828dd137b4f55243f5d0342b02e963f5298dcb3bec7021/hypothesis-6.148.1.tar.gz", hash = "sha256:98851429bd89b0c8835e8ebca6705c28dec56517576e5606fc3b841ddb0dc1c7", size = 468664, upload-time = "2025-11-16T07:58:37.959Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/4a/99/a3c6eb3fdd6bfa01433d674b0f12cd9102aa99630689427422d920aea9c6/hypothesis-6.148.2.tar.gz", hash = "sha256:07e65d34d687ddff3e92a3ac6b43966c193356896813aec79f0a611c5018f4b1", size = 469984, upload-time = "2025-11-18T20:21:17.047Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/a4/39/a4f6a711970e6c23be35b967907f766064e27945f5b44855a00fa14af3bb/hypothesis-6.148.1-py3-none-any.whl", hash = "sha256:2cca1a20e8fcd230da86bb6d9f3e940a052caef0d4327c12b5694d164ea0f89e", size = 535684, upload-time = "2025-11-16T07:58:36.175Z" },
+    { url = "https://files.pythonhosted.org/packages/b1/d2/c2673aca0127e204965e0e9b3b7a0e91e9b12993859ac8758abd22669b89/hypothesis-6.148.2-py3-none-any.whl", hash = "sha256:bf8ddc829009da73b321994b902b1964bcc3e5c3f0ed9a1c1e6a1631ab97c5fa", size = 536986, upload-time = "2025-11-18T20:21:15.212Z" },
 ]
 
 [[package]]
@@ -2155,7 +2155,7 @@ wheels = [
 
 [[package]]
 name = "liblaf-grapes"
-version = "8.4.1"
+version = "8.6.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "about-time" },
@@ -2179,9 +2179,9 @@ dependencies = [
     { name = "wadler-lindig" },
     { name = "wrapt" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/2d/23/0b3b16d8d0b804d367c9047d591d2ac908ca7584ad121bbff3bc7f9ac021/liblaf_grapes-8.4.1.tar.gz", hash = "sha256:abcb1d1375b4c656d6ecf934cf78f6e695e3c2a596cce1f274090fd358b24517", size = 36381, upload-time = "2025-11-18T09:31:31.947Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/e6/cb/6c301c326347cfcdd3c5f7290555a22381b99c47facf5651918f3b33d5b6/liblaf_grapes-8.6.1.tar.gz", hash = "sha256:0e33dd541862f35448273f86493064137820cd5f1412d6c6b76590cecefe3938", size = 36788, upload-time = "2025-11-18T19:33:11.355Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/e7/3c/b03af9791b72889aacf3b30d59fad6f0705c31d52389a7dad7a8c5eb7e9e/liblaf_grapes-8.4.1-py3-none-any.whl", hash = "sha256:9f5c671c8f854416f0bd0a5a86969562ae99ab7e874d583eb14112d8e710be8d", size = 80054, upload-time = "2025-11-18T09:31:30.458Z" },
+    { url = "https://files.pythonhosted.org/packages/89/72/af373b57a6c826f8b23d79bee55b8f4a99968cdf2c54e822896df31bf970/liblaf_grapes-8.6.1-py3-none-any.whl", hash = "sha256:2644727cb517fb681391261e5e1e5de9b9854ce31709e1dd69e7ff584fbb687b", size = 81205, upload-time = "2025-11-18T19:33:09.684Z" },
 ]
 
 [[package]]
@@ -4359,7 +4359,7 @@ wheels = [
 
 [[package]]
 name = "scmrepo"
-version = "3.5.4"
+version = "3.5.5"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "aiohttp-retry" },
@@ -4373,9 +4373,9 @@ dependencies = [
     { name = "pygtrie" },
     { name = "tqdm" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/4a/4b/67facc7dd0590e7fbb022f1ad679fe96478eca6ce790ef1f0551222eb0ad/scmrepo-3.5.4.tar.gz", hash = "sha256:41c62ca66241ed265a132f8b2c7bb12abf7a00f1ade399f6019bee2ec326c4ee", size = 96836, upload-time = "2025-11-17T04:53:17.073Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/09/29/3be9bd304887acb9596c28c52d8e6e350683649a78478be3bbf6572838bf/scmrepo-3.5.5.tar.gz", hash = "sha256:51a2cdae283d5b378dd94275caac5db2c6b0d4dd9876531d27c68466b8e387af", size = 96848, upload-time = "2025-11-19T03:22:56.119Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/e4/8c/f846228cea4333e3c6c34b12500e5e6022ec939cece47a3cbf626e1e8d90/scmrepo-3.5.4-py3-none-any.whl", hash = "sha256:c18eca86fab75ee3251e149e85cc93ba54bce9d57e6695fbf4ef46c972a18911", size = 74091, upload-time = "2025-11-17T04:53:15.403Z" },
+    { url = "https://files.pythonhosted.org/packages/bb/82/269b65e67e585d6181cb3c2e96f73cd6d438b634e92fefc96996b916d495/scmrepo-3.5.5-py3-none-any.whl", hash = "sha256:17b660ddf4880e60b89d985a82300024cf3a49d4d2f95541acb41db4df960327", size = 74096, upload-time = "2025-11-19T03:22:54.858Z" },
 ]
 
 [[package]]
