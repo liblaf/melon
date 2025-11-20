@@ -32,7 +32,7 @@ def fast_wrapping(
         )
         logger.debug("procrustes cost: %g", cost)
         source: pv.PolyData = io.as_polydata(source)
-        source = source.transform(matrix)  # pyright: ignore[reportAssignmentType]
+        source = source.transform(matrix, inplace=False)  # pyright: ignore[reportAssignmentType]
         source_landmarks = transformed
     result: pv.PolyData = wrap.fast_wrapping(
         source,

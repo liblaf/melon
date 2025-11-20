@@ -1,7 +1,7 @@
 from . import barycentric, ext, io, mesh, proximity, tet, transfer, tri, typing, utils
 from ._version import __version__, __version_tuple__, version, version_tuple
 from .barycentric import barycentric_to_points, sample_barycentric_coords
-from .ext import annotate_landmarks, fast_wrapping, mesh_fix, tetwild
+from .ext import annotate_landmarks, mesh_fix, tetwild
 from .io import (
     PVDWriter,
     SeriesReader,
@@ -44,6 +44,7 @@ from .transfer import (
     transfer_tri_point,
     transfer_tri_point_to_tet,
 )
+from .tri import fast_wrapping
 from .utils import get_array
 
 __all__ = [
