@@ -1,15 +1,14 @@
 import einops
-import numpy as np
-from jaxtyping import Float
-from numpy.typing import ArrayLike
+import jax.numpy as jnp
+from jaxtyping import Array, ArrayLike, Float
 
 
 def barycentric_to_points(
     cells: Float[ArrayLike, "*N B D"], barycentric: Float[ArrayLike, "*N B"]
-) -> Float[np.ndarray, "*N D"]:
-    cells: Float[np.ndarray, "*N B D"] = np.asarray(cells)
-    barycentric: Float[np.ndarray, "*N B"] = np.asarray(barycentric)
-    points: Float[np.ndarray, "*N D"] = einops.einsum(
+) -> Float[Array, "*N D"]:
+    cells: Float[Array, "*N B D"] = jnp.asarray(cells)
+    barycentric: Float[Array, "*N B"] = jnp.asarray(barycentric)
+    points: Float[Array, "*N D"] = einops.einsum(
         barycentric, cells, "... B, ... B D -> ... D"
     )
     return points

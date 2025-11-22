@@ -27,6 +27,7 @@ dependencies = [
   "attrs>=25,<26",
   "cyclopts>=4,<5",
   "einops>=0.8,<0.9",
+  "jax>=0.8,<0.9",
   "jaxtyping>=0.3,<0.4",
   "jinja2>=3,<4",
   "lazy-loader>=0.4,<0.5",
@@ -60,7 +61,7 @@ melon = "liblaf.melon.cli:app.meta"
 
 [dependency-groups]
 dev = [
-  "icecream>=2,<3",
+  "jax[cuda12]",
   "liblaf-cherries>=0.7,<0.8",
   "pygltflib>=1,<2",
   "scipy-stubs>=1,<2",

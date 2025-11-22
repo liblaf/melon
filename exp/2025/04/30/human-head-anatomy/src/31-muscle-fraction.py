@@ -1,8 +1,9 @@
 from pathlib import Path
 
+import jax.numpy as jnp
 import numpy as np
 import pyvista as pv
-from jaxtyping import Bool, Float, Integer
+from jaxtyping import Array, Bool, Float, Integer
 
 import liblaf.melon as melon  # noqa: PLR0402
 from liblaf import cherries, grapes
@@ -16,21 +17,22 @@ class Config(cherries.BaseConfig):
 
     output: Path = cherries.output("31-muscle-fraction.vtu")
 
-    n_samples: int = 1000
+    # 1000 samples will OOM on 8GB GPU
+    n_samples: int = 700
 
 
 def main(cfg: Config) -> None:
     mesh: pv.UnstructuredGrid = melon.load_unstructured_grid(cfg.tetmesh)
     muscles: pv.MultiBlock = melon.load_multi_block(cfg.muscles)
 
-    barycentric: Float[np.ndarray, "cells samples 4"] = melon.sample_barycentric_coords(
+    barycentric: Float[Array, "cells samples 4"] = melon.sample_barycentric_coords(
         (mesh.n_cells, cfg.n_samples, 4)
     )
     cells: Integer[np.ndarray, "cells 4"] = mesh.cells_dict[pv.CellType.TETRA]  # pyright: ignore[reportArgumentType]
-    samples: Float[np.ndarray, "cells samples 3"] = melon.barycentric_to_points(
-        mesh.points[cells][:, np.newaxis, :, :], barycentric
+    samples: Float[Array, "cells samples 3"] = melon.barycentric_to_points(
+        mesh.points[cells][:, jnp.newaxis, :, :], barycentric
     )
-    samples: Float[np.ndarray, "cells*samples 3"] = samples.reshape(
+    samples: Float[Array, "cells*samples 3"] = samples.reshape(
         mesh.n_cells * cfg.n_samples, 3
     )
 
@@ -43,14 +45,12 @@ def main(cfg: Config) -> None:
         muscle_id: int = muscle.field_data["MuscleId"].item()
         muscle_name: str = muscle.field_data["MuscleName"].item()
         ic(muscle_id, muscle_name)
-        contains: Bool[np.ndarray, " cells*samples"] = melon.tri.contains(
-            muscle, samples
-        )
-        contains: Bool[np.ndarray, "cells samples"] = contains.reshape(
+        contains: Bool[Array, " cells*samples"] = melon.tri.contains(muscle, samples)
+        contains: Bool[Array, "cells samples"] = contains.reshape(
             mesh.n_cells, cfg.n_samples
         )
-        fraction: Float[np.ndarray, " cells"] = (
-            np.count_nonzero(contains, axis=-1) / cfg.n_samples
+        fraction: Float[Array, " cells"] = (
+            jnp.count_nonzero(contains, axis=-1) / cfg.n_samples
         )
         muscle_names[muscle_id] = muscle_name
         muscle_fractions[:, muscle_id] = fraction

@@ -1,5 +1,6 @@
 from collections.abc import Mapping, Sequence
 
+import jax
 import numpy as np
 import pyvista as pv
 import trimesh as tm
@@ -18,8 +19,9 @@ def mapping_to_pointset(obj: Mapping, **kwargs) -> pv.PointSet:
     return pv.PointSet(points, **kwargs)
 
 
-@as_pointset.register(Sequence)
+@as_pointset.register(jax.Array)
 @as_pointset.register(np.ndarray)
+@as_pointset.register(Sequence)
 def numpy_to_pointset(obj: ArrayLike, **kwargs) -> pv.PointSet:
     kwargs.pop("point_normals", None)
     points: Float[np.ndarray, "P 3"] = np.asarray(obj)
