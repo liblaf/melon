@@ -42,7 +42,8 @@ dependencies = [
   "pyvista>=0.46,<0.47",
   "rich>=14,<15",
   "scipy>=1,<2",
-  "trimesh[easy]>=4,<5"
+  "trimesh[easy]>=4,<5",
+  "warp-lang>=1,<2"
 ]
 dynamic = ["version"]
 
@@ -75,6 +76,9 @@ build-backend = "hatchling.build"
 
 [tool.check-wheel-contents]
 ignore = ["W002"]
+
+[tool.coverage.report]
+exclude_also = ["@wp.kernel"]
 
 [tool.coverage.run]
 branch = true

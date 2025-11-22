@@ -102,6 +102,7 @@ words:
   - retopo
   - rhomboideus
   - risorius
+  - rtol
   - scipy
   - sdist
   - septi
@@ -121,7 +122,6 @@ words:
   - trimesh
   - unshallow
   - uuidgen
-  - vecdot
   - veli
   - venv
   - vestibulocochlear

@@ -1,10 +1,10 @@
-from typing import Any, override
+from typing import Any, no_type_check, override
 
 import attrs
 import numpy as np
 import pyvista as pv
-import trimesh as tm
-from jaxtyping import Bool, Float, Integer
+import warp as wp
+from jaxtyping import Float, Integer
 
 from liblaf.melon import io
 
@@ -13,113 +13,111 @@ from ._abc import NearestAlgorithm, NearestAlgorithmPrepared, NearestResult
 
 @attrs.define
 class NearestPointOnSurfaceResult(NearestResult):
+    barycentric: Float[np.ndarray, "N 3"]
     triangle_id: Integer[np.ndarray, " N"]
 
 
 @attrs.frozen(kw_only=True)
 class NearestPointOnSurfacePrepared(NearestAlgorithmPrepared):
-    source: tm.Trimesh
+    source_pv: pv.PolyData
+    source: wp.Mesh
 
     distance_threshold: float
-    fallback: bool
     ignore_orientation: bool
-    normal_threshold: float
+    normal_threshold: float | None
+
+    @property
+    def face_normals(self) -> Float[np.ndarray, "M 3"]:
+        return self.source_pv.face_normals
+
+    @property
+    def length(self) -> float:
+        return self.source_pv.length
 
     @override
     def query(self, query: Any) -> NearestPointOnSurfaceResult:
-        need_normals: bool = self.normal_threshold > -1.0
-        query: pv.PointSet = io.as_pointset(query, point_normals=need_normals)
-        nearest: Float[np.ndarray, "N 3"]
-        distance: Float[np.ndarray, " N"]
-        triangle_id: Integer[np.ndarray, " N"]
-        nearest, distance, triangle_id = self.source.nearest.on_surface(query.points)
-        missing_distance: Bool[np.ndarray, " N"] = (
-            distance > self.distance_threshold * self.source.scale
-        )
-        distance[missing_distance] = np.inf
-        nearest[missing_distance] = np.nan
-        triangle_id[missing_distance] = -1
-        result: NearestPointOnSurfaceResult = NearestPointOnSurfaceResult(
-            distance=distance,
-            missing=missing_distance,
-            nearest=nearest,
-            triangle_id=triangle_id,
-        )
-        if need_normals:
-            source_normals: Float[np.ndarray, "N 3"] = self.source.face_normals[
-                triangle_id
-            ]
-            target_normals: Float[np.ndarray, "N 3"] = query.point_data["Normals"]
-            cosine_similarity: Float[np.ndarray, " N"] = np.vecdot(
-                source_normals, target_normals
-            )
-            if self.ignore_orientation:
-                cosine_similarity = np.abs(cosine_similarity)
-            missing_normal: Bool[np.ndarray, " N"] = (
-                cosine_similarity < self.normal_threshold
-            )
-            result.distance[missing_normal] = np.inf
-            result.missing |= missing_normal
-            result.nearest[missing_normal] = np.nan
-            result.triangle_id[missing_normal] = -1
-            if self.fallback:
-                result = self._fallback(
-                    query, result, ~missing_distance & missing_normal
-                )
-        return result
+        if self.normal_threshold is None:
+            return self._query_without_normal_threshold(query)
+        return self._query_with_normal_threshold(query)
 
-    def _fallback(
-        self,
-        query: pv.PointSet,
-        result: NearestPointOnSurfaceResult,
-        missing: Bool[np.ndarray, " M"],
+    def _query_without_normal_threshold(
+        self, query: Any
     ) -> NearestPointOnSurfaceResult:
-        indices: Integer[np.ndarray, " M"] = np.flatnonzero(missing)
-        for idx in indices:
-            point: Float[np.ndarray, " 3"] = query.points[idx]
-            point_normal: Float[np.ndarray, " 3"] = query.point_data["Normals"][idx]
-            cosine_similarity: Float[np.ndarray, " S"] = np.vecdot(
-                self.source.face_normals, point_normal[np.newaxis]
-            )
-            if self.ignore_orientation:
-                cosine_similarity = np.abs(cosine_similarity)
-            face_mask: Bool[np.ndarray, " S"] = (
-                cosine_similarity >= self.normal_threshold
-            )
-            submesh: tm.Trimesh
-            (submesh,) = self.source.submesh([face_mask])  # pyright: ignore[reportGeneralTypeIssues]
-            nearest: Float[np.ndarray, " 1 3"]
-            distance: Float[np.ndarray, " 1"]
-            triangle_id: Integer[np.ndarray, " 1"]
-            nearest, distance, triangle_id = submesh.nearest.on_surface(
-                point[np.newaxis, :]
-            )
-            if distance[0] <= self.distance_threshold * self.source.scale:
-                result.distance[idx] = distance[0]
-                result.missing[idx] = False
-                result.nearest[idx] = nearest[0]
-                result.triangle_id[idx] = triangle_id[0]
-        return result
+        query: pv.PointSet = io.as_pointset(query)
+        n_points: int = query.n_points
+        points_wp: wp.array = wp.from_numpy(query.points, wp.vec3f)
+        barycentric: wp.array = wp.full((n_points,), wp.nan, wp.vec3f)  # pyright: ignore[reportArgumentType]
+        distance: wp.array = wp.full((n_points,), wp.inf, wp.float32)  # pyright: ignore[reportArgumentType]
+        missing: wp.array = wp.ones((n_points,), wp.bool)
+        nearest: wp.array = wp.full((n_points,), wp.nan, wp.vec3f)  # pyright: ignore[reportArgumentType]
+        triangle_id: wp.array = wp.full((n_points,), -1, wp.int32)  # pyright: ignore[reportArgumentType]
+        wp.launch(
+            _nearest_point_on_surface_kernel,
+            dim=(n_points,),
+            inputs=[self.source.id, points_wp, self.distance_threshold * self.length],
+            outputs=[barycentric, distance, missing, nearest, triangle_id],
+        )
+        return NearestPointOnSurfaceResult(
+            barycentric=barycentric.numpy(),
+            distance=distance.numpy(),
+            missing=missing.numpy(),
+            nearest=nearest.numpy(),
+            triangle_id=triangle_id.numpy(),
+        )
+
+    def _query_with_normal_threshold(self, query: Any) -> NearestPointOnSurfaceResult:
+        query: pv.PointSet = io.as_pointset(query, point_normals=True)
+        n_points: int = query.n_points
+        points_wp: wp.array = wp.from_numpy(query.points, wp.vec3f)
+        point_normals_wp: wp.array = wp.from_numpy(
+            query.point_data["Normals"], wp.vec3f
+        )
+        barycentric: wp.array = wp.full((n_points,), wp.nan, wp.vec3f)  # pyright: ignore[reportArgumentType]
+        distance: wp.array = wp.full((n_points,), wp.inf, wp.float32)  # pyright: ignore[reportArgumentType]
+        missing: wp.array = wp.ones((n_points,), wp.bool)
+        nearest: wp.array = wp.full((n_points,), wp.nan, wp.vec3f)  # pyright: ignore[reportArgumentType]
+        triangle_id: wp.array = wp.full((n_points,), -1, wp.int32)  # pyright: ignore[reportArgumentType]
+        wp.launch(
+            _nearest_point_on_surface_with_normal_threshold_kernel,
+            dim=(n_points,),
+            inputs=[
+                self.source.id,
+                points_wp,
+                point_normals_wp,
+                self.distance_threshold * self.length,
+                self.ignore_orientation,
+                self.normal_threshold,
+            ],
+            outputs=[barycentric, distance, missing, nearest, triangle_id],
+        )
+        return NearestPointOnSurfaceResult(
+            barycentric=barycentric.numpy(),
+            distance=distance.numpy(),
+            missing=missing.numpy(),
+            nearest=nearest.numpy(),
+            triangle_id=triangle_id.numpy(),
+        )
 
 
 @attrs.define(kw_only=True, on_setattr=attrs.setters.validate)
 class NearestPointOnSurface(NearestAlgorithm):
     distance_threshold: float = 0.1
-    fallback: bool = True
     ignore_orientation: bool = False
-    normal_threshold: float = attrs.field(
-        default=0.8, validator=attrs.validators.le(1.0)
+    normal_threshold: float | None = attrs.field(
+        default=0.8,
+        validator=attrs.validators.optional(
+            [attrs.validators.ge(-1.0), attrs.validators.le(1.0)]
+        ),
     )
 
     @override
     def prepare(self, source: Any) -> NearestPointOnSurfacePrepared:
-        source: tm.Trimesh = io.as_trimesh(source)
         return NearestPointOnSurfacePrepared(
+            source=io.as_warp_mesh(source),
+            source_pv=io.as_polydata(source),
             distance_threshold=self.distance_threshold,
-            fallback=self.fallback,
             ignore_orientation=self.ignore_orientation,
             normal_threshold=self.normal_threshold,
-            source=source,
         )
 
 
@@ -128,15 +126,81 @@ def nearest_point_on_surface(
     target: Any,
     *,
     distance_threshold: float = 0.1,
-    fallback: bool = True,
     ignore_orientation: bool = True,
-    normal_threshold: float = 0.8,
+    normal_threshold: float | None = 0.8,
 ) -> NearestPointOnSurfaceResult:
     algorithm = NearestPointOnSurface(
         distance_threshold=distance_threshold,
-        fallback=fallback,
         ignore_orientation=ignore_orientation,
         normal_threshold=normal_threshold,
     )
     prepared: NearestPointOnSurfacePrepared = algorithm.prepare(source)
     return prepared.query(target)
+
+
+@wp.kernel
+@no_type_check
+def _nearest_point_on_surface_kernel(
+    mesh_id: wp.uint64,
+    points: wp.array(dtype=wp.vec3f),
+    distance_threshold: wp.float32,
+    # outputs
+    barycentric: wp.array(dtype=wp.vec3f),
+    distance: wp.array(dtype=wp.float32),
+    missing: wp.array(dtype=wp.bool),
+    nearest: wp.array(dtype=wp.vec3f),
+    triangle_id: wp.array(dtype=wp.int32),
+) -> None:
+    tid = wp.tid()
+    point = points[tid]
+    query = wp.mesh_query_point(mesh_id, point, distance_threshold)
+    if query.result:
+        missing[tid] = False
+        barycentric[tid] = wp.vector(
+            query.u, query.v, type(query.u)(1.0) - query.u - query.v
+        )
+        nearest[tid] = wp.mesh_eval_position(mesh_id, query.face, query.u, query.v)
+        distance[tid] = wp.length(nearest[tid] - point)
+        triangle_id[tid] = query.face
+    else:
+        missing[tid] = True
+
+
+@wp.kernel
+@no_type_check
+def _nearest_point_on_surface_with_normal_threshold_kernel(  # noqa: PLR0913
+    mesh_id: wp.uint64,
+    points: wp.array(dtype=wp.vec3f),
+    point_normals: wp.array(dtype=wp.vec3f),
+    distance_threshold: wp.float32,
+    ignore_orientation: wp.bool,
+    normal_threshold: wp.float32,
+    # outputs
+    barycentric: wp.array(dtype=wp.vec3f),
+    distance: wp.array(dtype=wp.float32),
+    missing: wp.array(dtype=wp.bool),
+    nearest: wp.array(dtype=wp.vec3f),
+    triangle_id: wp.array(dtype=wp.int32),
+) -> None:
+    tid = wp.tid()
+    point = points[tid]
+    query = wp.mesh_query_point(mesh_id, point, distance_threshold)
+    if query.result:
+        face_normal = wp.mesh_eval_face_normal(mesh_id, query.face)
+        cosine_similarity = wp.dot(face_normal, point_normals[tid]) / (
+            wp.length(face_normal) * wp.length(point_normals[tid])
+        )
+        if ignore_orientation:
+            cosine_similarity = wp.abs(cosine_similarity)
+        if cosine_similarity >= normal_threshold:
+            missing[tid] = False
+            barycentric[tid] = wp.vector(
+                query.u, query.v, type(query.u)(1.0) - query.u - query.v
+            )
+            nearest[tid] = wp.mesh_eval_position(mesh_id, query.face, query.u, query.v)
+            distance[tid] = wp.length(nearest[tid] - point)
+            triangle_id[tid] = query.face
+        else:
+            missing[tid] = True
+    else:
+        missing[tid] = True

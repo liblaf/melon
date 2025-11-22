@@ -1,4 +1,4 @@
-from . import abc, paraview, pyvista, trimesh
+from . import abc, paraview, pyvista, trimesh, warp
 from ._save import save
 from .paraview import PVDWriter, SeriesReader, SeriesWriter
 from .pyvista import (
@@ -14,6 +14,7 @@ from .pyvista import (
     load_unstructured_grid,
 )
 from .trimesh import as_trimesh, load_trimesh
+from .warp import as_warp_mesh
 from .wrap import (
     get_landmarks_path,
     get_polygons_path,
@@ -35,6 +36,7 @@ __all__ = [
     "as_structured_grid",
     "as_trimesh",
     "as_unstructured_grid",
+    "as_warp_mesh",
     "get_landmarks_path",
     "get_polygons_path",
     "load_landmarks",
@@ -50,4 +52,5 @@ __all__ = [
     "save_landmarks",
     "save_polygons",
     "trimesh",
+    "warp",
 ]
