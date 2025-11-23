@@ -7,6 +7,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Conventional Changelog](https://github.com/conventional-changelog/conventional-changelog-config-spec/blob/master/versions/2.2.0/README.md),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.9.1](https://github.com/liblaf/melon/releases/tag/v0.9.1) - 2025-11-22
+
+### ✨ Features
+
+- **proximity:** add Warp-based nearest point on surface and contains algorithms - [4fc2580](https://github.com/liblaf/melon/commit/4fc2580a23d25fbb7d85b0665da4fe967434b7b1) by [@liblaf](https://github.com/liblaf)
+- **tri:** Add `contains` function for point-in-mesh testing - [f7bf2a7](https://github.com/liblaf/melon/commit/f7bf2a736666b660ea1707b1a33c734a8d44017a) by [@liblaf](https://github.com/liblaf)
+- **utils:** Add `get_array` for robust data retrieval with deprecation warnings - [2b699dd](https://github.com/liblaf/melon/commit/2b699dd9e81490cc95a4a268fba1465940640d45) by [@liblaf](https://github.com/liblaf)
+
+### 🐛 Bug Fixes
+
+- **tri:** Prevent unintended in-place modification of source mesh - [d8a3b19](https://github.com/liblaf/melon/commit/d8a3b19fe0182c509d0f713b58a369841b2e49aa) by [@liblaf](https://github.com/liblaf)
+
+### ❤️ Contributors
+
+- [@renovate[bot]](https://github.com/apps/renovate) made their first contribution in [#85](https://github.com/liblaf/melon/pull/85)
+- [@liblaf](https://github.com/liblaf) made their first contribution
+
 ## [0.9.0](https://github.com/liblaf/melon/releases/tag/v0.9.0) - 2025-11-18
 
 ### 💥 BREAKING CHANGES
@@ -23,8 +40,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### ❤️ Contributors
 
-- [@liblaf](https://github.com/liblaf) made their first contribution
-- [@renovate[bot]](https://github.com/apps/renovate) made their first contribution in [#82](https://github.com/liblaf/melon/pull/82)
+- [@liblaf[bot]](https://github.com/apps/liblaf)
+- [@liblaf](https://github.com/liblaf)
+- [@renovate[bot]](https://github.com/apps/renovate)
 
 ## [0.8.5](https://github.com/liblaf/melon/releases/tag/v0.8.5) - 2025-11-16
 
