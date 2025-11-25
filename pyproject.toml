@@ -37,6 +37,7 @@ dependencies = [
   "networkx>=3,<4",
   "numpy>=2,<3",
   "polars>=1,<2",
+  "potpourri3d>=1,<2",
   "pydantic>=2,<3",
   "pydicom>=3,<4",
   "pymeshfix>=0.17,<0.18",

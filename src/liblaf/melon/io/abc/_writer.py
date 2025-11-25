@@ -6,7 +6,7 @@ from typing import Any, Protocol
 
 import attrs
 import more_itertools as mit
-from liblaf.grapes.logging import depth_logger
+from liblaf.grapes.logging import autolog
 
 from liblaf.melon.typing import PathLike
 
@@ -49,7 +49,7 @@ class WriterDispatcher:
         if impl is _dummy:
             raise UnsupportedWriterError(type(obj), path)
         impl(path, obj, **kwargs)
-        depth_logger.debug("Saved %s to '%s'.", type(obj), path)
+        autolog.debug("Saved %s to '%s'.", type(obj), path)
 
     def register(
         self, cls: RegType, suffix: str | Iterable[str]

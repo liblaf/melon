@@ -1,3 +1,4 @@
+import logging
 from collections.abc import Generator
 from typing import no_type_check
 
@@ -7,10 +8,11 @@ import numpy as np
 import pyvista as pv
 import trimesh as tm
 import warp as wp
-from jaxtyping import Float, Integer
+from jaxtyping import Array, Float, Integer
 from liblaf.grapes.bench import Bencher, BenchResults
 
-from liblaf import melon
+import liblaf.melon as melon  # noqa: PLR0402
+from liblaf import grapes
 
 
 @attrs.define
@@ -89,6 +91,8 @@ def contains_warp(
 
 
 def main() -> None:
+    grapes.logging.init()
+    logging.getLogger("liblaf.grapes").setLevel(logging.DEBUG)
     mesh: pv.PolyData = pv.examples.download_bunny()  # pyright: ignore[reportAssignmentType]
     mesh.clean(inplace=True)
     mesh = melon.mesh_fix(mesh)
@@ -121,20 +125,24 @@ def main() -> None:
     for label, outputs in results.outputs.items():
         if label == "trimesh":
             continue
-        for size, actual, expected in zip(
-            results.sizes, outputs, results.outputs["trimesh"], strict=True
-        ):
-            if actual is None or expected is None:
+        for actual, desired in zip(outputs, results.outputs["trimesh"], strict=True):
+            if actual is None or desired is None:
                 continue
             actual: OnSurfaceResults
-            expected: OnSurfaceResults
-            ic(
-                size,
-                np.count_nonzero(actual.triangle_id != expected.triangle_id) / size,
+            desired: OnSurfaceResults
+            atol: float = 1e-2 * mesh.length
+            np.testing.assert_allclose(
+                actual.closest, desired.closest, rtol=0.0, atol=atol
             )
-            np.testing.assert_allclose(actual.barycentric, expected.barycentric)
-            np.testing.assert_allclose(actual.closest, expected.closest)
-            np.testing.assert_allclose(actual.distance, expected.distance)
+            np.testing.assert_allclose(
+                actual.distance, desired.distance, rtol=0.0, atol=atol
+            )
+            actual_nearest: Float[Array, "N 3"] = melon.barycentric_to_points(
+                mesh.points[mesh.regular_faces[actual.triangle_id]], actual.barycentric
+            )
+            np.testing.assert_allclose(
+                actual_nearest, desired.closest, rtol=0.0, atol=atol
+            )
 
     results.plot()
     plt.show()

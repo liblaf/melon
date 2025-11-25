@@ -3,7 +3,7 @@ from typing import Any
 import numpy as np
 import pyvista as pv
 import trimesh as tm
-from jaxtyping import Float, Integer
+from jaxtyping import Array, Float, Integer
 
 from liblaf import melon
 
@@ -34,7 +34,7 @@ def test_on_surface() -> None:
     atol: float = 1e-2 * mesh.length
     np.testing.assert_allclose(actual.nearest, desired_closest, rtol=0.0, atol=atol)
     np.testing.assert_allclose(actual.distance, desired_distance, rtol=0.0, atol=atol)
-    actual_nearest: Float[np.ndarray, "N 3"] = melon.barycentric_to_points(
+    actual_nearest: Float[Array, "N 3"] = melon.barycentric_to_points(
         mesh.points[mesh.regular_faces[actual.triangle_id]], actual.barycentric
     )
     np.testing.assert_allclose(actual_nearest, desired_closest, rtol=0.0, atol=atol)

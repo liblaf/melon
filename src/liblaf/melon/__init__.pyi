@@ -1,4 +1,5 @@
 from . import barycentric, ext, io, mesh, proximity, tet, transfer, tri, typing, utils
+from ._src import bounds_contains, geodesic_distance, geodesic_path
 from ._version import __version__, __version_tuple__, version, version_tuple
 from .barycentric import barycentric_to_points, sample_barycentric_coords
 from .ext import annotate_landmarks, mesh_fix, tetwild
@@ -45,7 +46,6 @@ from .transfer import (
     transfer_tri_point_to_tet,
 )
 from .tri import fast_wrapping
-from .utils import get_array
 
 __all__ = [
     "NearestAlgorithm",
@@ -72,9 +72,11 @@ __all__ = [
     "as_unstructured_grid",
     "barycentric",
     "barycentric_to_points",
+    "bounds_contains",
     "ext",
     "fast_wrapping",
-    "get_array",
+    "geodesic_distance",
+    "geodesic_path",
     "get_landmarks_path",
     "get_polygons_path",
     "io",

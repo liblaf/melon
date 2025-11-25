@@ -24,7 +24,6 @@ def main(cfg: Config) -> None:
         target,
         source_landmarks=source_landmarks,
         target_landmarks=target_landmarks,
-        verbose=True,
     )
 
     melon.save(cfg.output, result)

@@ -153,7 +153,7 @@ def _nearest_point_on_surface_kernel(
 ) -> None:
     tid = wp.tid()
     point = points[tid]
-    query = wp.mesh_query_point(mesh_id, point, distance_threshold)
+    query = wp.mesh_query_point_no_sign(mesh_id, point, distance_threshold)
     if query.result:
         missing[tid] = False
         barycentric[tid] = wp.vector(
@@ -184,7 +184,7 @@ def _nearest_point_on_surface_with_normal_threshold_kernel(  # noqa: PLR0913
 ) -> None:
     tid = wp.tid()
     point = points[tid]
-    query = wp.mesh_query_point(mesh_id, point, distance_threshold)
+    query = wp.mesh_query_point_no_sign(mesh_id, point, distance_threshold)
     if query.result:
         face_normal = wp.mesh_eval_face_normal(mesh_id, query.face)
         cosine_similarity = wp.dot(face_normal, point_normals[tid]) / (

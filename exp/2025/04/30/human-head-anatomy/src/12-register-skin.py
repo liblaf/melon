@@ -19,9 +19,9 @@ class Config(cherries.BaseConfig):
 def main(cfg: Config) -> None:
     source: pv.PolyData = melon.load_polydata(cfg.source)
     source.clean(inplace=True)
-    source.field_data["GroupNames"] = [
+    source.field_data["GroupName"] = [
         cast("str", name).split(maxsplit=1)[0]
-        for name in source.field_data["GroupNames"]
+        for name in source.field_data["GroupName"]
     ]
 
     target: pv.PolyData = melon.load_polydata(cfg.target)
@@ -35,8 +35,8 @@ def main(cfg: Config) -> None:
             "EarSocket",
             "EyeSocketBottom",
             "EyeSocketTop",
-            "LipInnerBottom",
-            "LipInnerTop",
+            # "LipInnerBottom",
+            # "LipInnerTop",
             "MouthSocketBottom",
             "MouthSocketTop",
         ],

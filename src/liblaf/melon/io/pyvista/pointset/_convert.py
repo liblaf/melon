@@ -38,6 +38,8 @@ def dataset_to_pointset(obj: pv.DataSet, **kwargs) -> pv.PointSet:
 def polydata_to_pointset(
     obj: pv.PolyData, *, point_normals: bool = False, **kwargs
 ) -> pv.PointSet:
+    if obj.active_scalars_info.association is pv.FieldAssociation.CELL:
+        obj.active_scalars_name = None
     result: pv.PointSet = obj.cast_to_pointset(**kwargs)
     if point_normals:
         result.point_data["Normals"] = obj.point_normals

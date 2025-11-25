@@ -29,7 +29,7 @@ def fast_wrapping(
     free_polygons_floating = (
         free_polygons_floating if free_polygons_floating is not None else []
     )
-    with tempfile.TemporaryDirectory(delete=False) as tmpdir_str:
+    with tempfile.TemporaryDirectory() as tmpdir_str:
         tmpdir: Path = Path(tmpdir_str).absolute()
         project_file: Path = tmpdir / "fast-wrapping.wrap"
         source_file: Path = tmpdir / "source.obj"

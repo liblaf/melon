@@ -37,6 +37,7 @@ def load_polydata_obj(path: Path, **_kwargs) -> pv.PolyData:
     if np.all(old_ids == 0) and len(group_id_to_name) == 0:
         return mesh
     new_ids: Integer[np.ndarray, " C"] = np.asarray(old_id_to_new_id)[old_ids]
-    mesh.cell_data["GroupIds"] = new_ids
-    mesh.field_data["GroupNames"] = group_id_to_name
+    mesh.cell_data["GroupId"] = new_ids
+    mesh.field_data["GroupName"] = group_id_to_name
+    del mesh.cell_data["GroupIds"]
     return mesh

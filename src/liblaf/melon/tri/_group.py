@@ -7,7 +7,7 @@ import pyvista as pv
 from jaxtyping import Bool, Integer
 
 from liblaf import grapes
-from liblaf.melon import io, utils
+from liblaf.melon import io
 
 logger: logging.Logger = logging.getLogger(__name__)
 
@@ -40,22 +40,22 @@ def as_group_ids(
 
 
 def _get_group_id(mesh: pv.PolyData) -> Integer[np.ndarray, " cell"]:
-    return utils.get_array(
+    return grapes.getitem(
         mesh.cell_data,
-        "GroupIds",
-        deprecated_keys=["group_id", "group_ids", "group-id", "group-ids", "GroupId"],
+        "GroupId",
+        deprecated_keys=["group_id", "group_ids", "group-id", "group-ids", "GroupIds"],
     )
 
 
 def _get_group_name(mesh: pv.PolyData) -> np.ndarray:
-    return utils.get_array(
+    return grapes.getitem(
         mesh.field_data,
-        "GroupNames",
+        "GroupName",
         deprecated_keys=[
             "group_name",
             "group_names",
             "group-name",
             "group-names",
-            "GroupName",
+            "GroupNames",
         ],
     )

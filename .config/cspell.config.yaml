@@ -30,6 +30,7 @@ words:
   - colli
   - cricoarytenoid
   - cricothyroid
+  - cuda
   - dicom
   - digastiric
   - direnv
@@ -60,6 +61,7 @@ words:
   - ligamenta
   - lumborum
   - mandibula
+  - matmul
   - mentalis
   - meshio
   - mkdocs

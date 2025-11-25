@@ -1,4 +1,3 @@
-from ._get_array import get_array
 from ._typing import (
     is_array_like,
     is_data_set,
@@ -13,7 +12,6 @@ from ._typing import (
 )
 
 __all__ = [
-    "get_array",
     "is_array_like",
     "is_data_set",
     "is_image_data",

@@ -2,7 +2,7 @@ import collections
 import logging
 from collections.abc import Generator
 from pathlib import Path
-from typing import Self, cast
+from typing import Self
 
 import attrs
 import pygltflib
@@ -71,7 +71,7 @@ class Tree:
 
 
 def main(cfg: Config) -> None:
-    gltf: pygltflib.GLTF2 = cast("pygltflib.GLTF2", pygltflib.GLTF2.load(cfg.glb))
+    gltf: pygltflib.GLTF2 = pygltflib.GLTF2.load(cfg.glb)  # pyright: ignore[reportAssignmentType]
     scene: pygltflib.Scene = gltf.scenes[gltf.scene]
     assert scene.nodes is not None
     assert len(scene.nodes) == 1

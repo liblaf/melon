@@ -3,7 +3,7 @@ from pathlib import Path
 from typing import Protocol
 
 import attrs
-from liblaf.grapes.logging import depth_logger
+from liblaf.grapes.logging import autolog
 
 from liblaf.melon.typing import PathLike
 
@@ -33,7 +33,7 @@ class ReaderDispatcher[T]:
         if reader is None:
             raise UnsupportedReaderError(path, self.to_type)
         obj: T = reader(path, **kwargs)
-        depth_logger.debug("Loaded '%s' as %s.", path, type(obj))
+        autolog.debug("Loaded '%s' as %s.", path, type(obj))
         return obj
 
     def register(self, *suffixes: str) -> Callable[[Reader[T]], Reader[T]]:
