@@ -19,8 +19,6 @@ def cell_neighbors_pyvista(mesh: pv.UnstructuredGrid) -> Integer[np.ndarray, "C 
 
 def test_cell_neighbors() -> None:
     mesh: pv.UnstructuredGrid = pv.examples.download_letter_a()  # pyright: ignore[reportAssignmentType]
-    actual: Integer[Array, "N 2"] = melon.cell_neighbors(
-        mesh.cells_dict[pv.CellType.TETRA]  # pyright: ignore[reportArgumentType]
-    )
+    actual: Integer[Array, "N 2"] = melon.cell_neighbors(mesh)
     expected: Integer[np.ndarray, "N 2"] = cell_neighbors_pyvista(mesh)
     np.testing.assert_array_equal(actual, expected)

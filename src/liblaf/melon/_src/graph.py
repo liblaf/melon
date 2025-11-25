@@ -1,12 +1,15 @@
+import functools
 import itertools
+from typing import Any
 
 import einops
 import jax.numpy as jnp
-from jaxtyping import Array, ArrayLike, Integer
+import pyvista as pv
+from jaxtyping import Array, Integer
 
 
-def cell_neighbors(cells: Integer[ArrayLike, "C V"]) -> Integer[Array, "N 2"]:
-    cells: Integer[Array, "C V"] = jnp.asarray(cells, dtype=jnp.int32)
+def cell_neighbors(mesh_or_cells: Any) -> Integer[Array, "N 2"]:
+    cells: Integer[Array, "C V"] = _as_cells(mesh_or_cells)
     n_cells: int = cells.shape[0]
     combinations: Integer[Array, "4 3"] = jnp.asarray(
         list(itertools.combinations(range(4), 3))
@@ -27,3 +30,17 @@ def cell_neighbors(cells: Integer[ArrayLike, "C V"]) -> Integer[Array, "N 2"]:
     neighbors = jnp.sort(neighbors, axis=-1)
     neighbors = jnp.unique(neighbors, axis=0)
     return neighbors
+
+
+@functools.singledispatch
+def _as_cells(
+    mesh_or_cells: Any,
+) -> Integer[Array, "C V"]:
+    return jnp.asarray(mesh_or_cells, dtype=jnp.int32)
+
+
+@_as_cells.register(pv.UnstructuredGrid)
+def _as_cells_from_pyvista(
+    mesh: pv.UnstructuredGrid,
+) -> Integer[Array, "C V"]:
+    return _as_cells(mesh.cells_dict[pv.CellType.TETRA])  # pyright: ignore[reportArgumentType]
