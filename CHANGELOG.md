@@ -7,7 +7,27 @@ All notable changes to this project will be documented in this file.
 The format is based on [Conventional Changelog](https://github.com/conventional-changelog/conventional-changelog-config-spec/blob/master/versions/2.2.0/README.md),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [0.9.1](https://github.com/liblaf/melon/releases/tag/v0.9.1) - 2025-11-22
+## [0.9.2](https://github.com/liblaf/melon/releases/tag/v0.9.2) - 2025-11-25
+
+### ✨ Features
+
+- **core:** Introduce geodesic algorithms and refactor mesh utilities - [a78f9db](https://github.com/liblaf/melon/commit/a78f9db0a6171f27e429888ca9270ea857851fda) by [@liblaf](https://github.com/liblaf)
+- **melon:** add cell_neighbors function for efficient tetrahedral mesh neighbor detection - [d65e157](https://github.com/liblaf/melon/commit/d65e1578294e5e0dce372ff7a21040de99b024ab) by [@liblaf](https://github.com/liblaf)
+
+### ♻ Code Refactoring
+
+- **src/graph:** Make `cell_neighbors` accept mesh directly - [53c6c6e](https://github.com/liblaf/melon/commit/53c6c6ed043d056af487aa78b38da139511bce59) by [@liblaf](https://github.com/liblaf)
+- Improve variable naming consistency in cell_neighbors - [a770e0b](https://github.com/liblaf/melon/commit/a770e0b8e9ab3164023c10c527a697ebcf34ee80) by [@liblaf](https://github.com/liblaf)
+
+### ✅ Tests
+
+- initialize Warp at test suite startup - [e63a4c0](https://github.com/liblaf/melon/commit/e63a4c0465a7dcb1448e8fb172db329383b36b46) by [@liblaf](https://github.com/liblaf)
+
+### ❤️ Contributors
+
+- [@liblaf](https://github.com/liblaf) made their first contribution
+
+## [0.9.1](https://github.com/liblaf/melon/releases/tag/v0.9.1) - 2025-11-23
 
 ### ✨ Features
 
@@ -21,8 +41,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### ❤️ Contributors
 
-- [@renovate[bot]](https://github.com/apps/renovate) made their first contribution in [#85](https://github.com/liblaf/melon/pull/85)
-- [@liblaf](https://github.com/liblaf) made their first contribution
+- [@liblaf[bot]](https://github.com/apps/liblaf)
+- [@renovate[bot]](https://github.com/apps/renovate)
+- [@liblaf](https://github.com/liblaf)
 
 ## [0.9.0](https://github.com/liblaf/melon/releases/tag/v0.9.0) - 2025-11-18
 
