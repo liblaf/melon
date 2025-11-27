@@ -34,11 +34,14 @@ def main(cfg: Config) -> None:
     melon.save(cherries.temp("21-cranium-clip.vtp"), cranium)
 
     skull: pv.PolyData = pv.merge([cranium, mandible])
-    muscles: pv.MultiBlock = pv.read(cfg.muscles)  # pyright: ignore[reportAssignmentType]
-    muscles_combine: pv.PolyData = muscles.combine().extract_surface()
+    # muscles: pv.MultiBlock = pv.read(cfg.muscles)  # pyright: ignore[reportAssignmentType]
+    # muscles_combine: pv.PolyData = muscles.combine().extract_surface()
 
+    # tetmesh: pv.UnstructuredGrid = melon.tetwild(
+    #     pv.merge([muscles_combine, skin, skull.flip_faces()]), lr=cfg.lr, epsr=cfg.epsr
+    # )
     tetmesh: pv.UnstructuredGrid = melon.tetwild(
-        pv.merge([muscles_combine, skin, skull.flip_faces()]), lr=cfg.lr, epsr=cfg.epsr
+        pv.merge([skin, skull.flip_faces()]), lr=cfg.lr, epsr=cfg.epsr
     )
     tetmesh.cell_data.clear()
     ic(tetmesh.n_points)

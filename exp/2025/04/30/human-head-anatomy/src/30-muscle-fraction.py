@@ -19,7 +19,7 @@ class Config(cherries.BaseConfig):
     full: Path = cherries.input("00-Full human head anatomy.obj")
     groups: Path = cherries.input("13-groups.toml")
     muscles: Path = cherries.input("20-muscles.vtm")
-    tetmesh: Path = cherries.input("21-tetmesh.vtu")
+    tetmesh: Path = cherries.input("21-tetgen.vtu")
 
     output: Path = cherries.output("30-muscle-fraction.vtu")
 
