@@ -7,6 +7,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Conventional Changelog](https://github.com/conventional-changelog/conventional-changelog-config-spec/blob/master/versions/2.2.0/README.md),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.9.3](https://github.com/liblaf/melon/releases/tag/v0.9.3) - 2025-11-29
+
+### ✨ Features
+
+- **tri:** Add ICP mesh registration - [f9c6e26](https://github.com/liblaf/melon/commit/f9c6e26713fb7eb5e13bc9fe262cb37f39aa33e6) by [@liblaf](https://github.com/liblaf)
+- **tri:** add procrustes registration options to fast_wrapping - [2039e04](https://github.com/liblaf/melon/commit/2039e04553b4fede966db574d43f64d4c4d49b07) by [@liblaf](https://github.com/liblaf)
+
+### 🐛 Bug Fixes
+
+- **tri:** Allow boolean arrays for cell extraction - [47a7602](https://github.com/liblaf/melon/commit/47a76022afa2a173d036df3fdc02af39da1e55c2) by [@liblaf](https://github.com/liblaf)
+
+### ❤️ Contributors
+
+- [@liblaf](https://github.com/liblaf) made their first contribution
+
 ## [0.9.2](https://github.com/liblaf/melon/releases/tag/v0.9.2) - 2025-11-25
 
 ### ✨ Features
@@ -25,7 +40,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### ❤️ Contributors
 
-- [@liblaf](https://github.com/liblaf) made their first contribution
+- [@liblaf[bot]](https://github.com/apps/liblaf)
+- [@liblaf](https://github.com/liblaf)
 
 ## [0.9.1](https://github.com/liblaf/melon/releases/tag/v0.9.1) - 2025-11-23
 
