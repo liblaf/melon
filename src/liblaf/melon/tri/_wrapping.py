@@ -4,7 +4,7 @@ from typing import Any
 import numpy as np
 import pyvista as pv
 import trimesh as tm
-from jaxtyping import Float, Integer
+from jaxtyping import Bool, Float, Integer
 from numpy.typing import ArrayLike
 
 from liblaf.melon import io
@@ -18,8 +18,10 @@ def fast_wrapping(
     *,
     source_landmarks: Float[ArrayLike, "L 3"] | None = None,
     target_landmarks: Float[ArrayLike, "L 3"] | None = None,
-    free_polygons_floating: Integer[ArrayLike, " F"] | None = None,
-    verbose: bool = True,
+    free_polygons_floating: Bool[ArrayLike, " full"]
+    | Integer[ArrayLike, " free"]
+    | None = None,
+    verbose: bool = False,
 ) -> pv.PolyData:
     from liblaf.melon.ext import wrap
 
