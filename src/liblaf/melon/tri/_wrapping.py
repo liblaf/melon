@@ -16,6 +16,11 @@ def fast_wrapping(
     source: Any,
     target: Any,
     *,
+    # procrustes options
+    reflection: bool = True,
+    translation: bool = True,
+    scale: bool = True,
+    # FastWrapping options
     source_landmarks: Float[ArrayLike, "L 3"] | None = None,
     target_landmarks: Float[ArrayLike, "L 3"] | None = None,
     free_polygons_floating: Bool[ArrayLike, " full"]
@@ -30,7 +35,11 @@ def fast_wrapping(
         transformed: Float[np.ndarray, "L 3"]
         cost: float
         matrix, transformed, cost = tm.registration.procrustes(
-            source_landmarks, target_landmarks
+            source_landmarks,
+            target_landmarks,
+            reflection=reflection,
+            translation=translation,
+            scale=scale,
         )
         logger.debug("procrustes cost: %g", cost)
         source: pv.PolyData = io.as_polydata(source)
