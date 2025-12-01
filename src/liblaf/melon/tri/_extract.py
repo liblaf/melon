@@ -10,6 +10,12 @@ from liblaf.melon import io
 from ._group import select_groups
 
 
+def extract_all_edges(mesh: Any) -> pv.PolyData:
+    mesh: pv.PolyData = io.as_polydata(mesh)
+    result: pv.PolyData = mesh.extract_all_edges()  # pyright: ignore[reportAssignmentType]
+    return result
+
+
 def extract_cells(
     mesh: Any, ind: int | VectorLike[int] | VectorLike[bool], *, invert: bool = False
 ) -> pv.PolyData:
