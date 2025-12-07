@@ -7,6 +7,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Conventional Changelog](https://github.com/conventional-changelog/conventional-changelog-config-spec/blob/master/versions/2.2.0/README.md),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.9.4](https://github.com/liblaf/melon/releases/tag/v0.9.4) - 2025-12-02
+
+### ✨ Features
+
+- **mesh:** Add mesh computation and extraction utilities - [cb4c667](https://github.com/liblaf/melon/commit/cb4c667feecdbf87f46140a95cc226b653d21ab1) by [@liblaf](https://github.com/liblaf)
+- **tet:** Add cell extraction for unstructured grids - [d084895](https://github.com/liblaf/melon/commit/d084895b139a7f152b408241c3d32dfdd1ef6ee9) by [@liblaf](https://github.com/liblaf)
+
+### ✅ Tests
+
+- **conftest:** Configure Warp for test debug output - [73b6e35](https://github.com/liblaf/melon/commit/73b6e35d0c67f4bec7464f3b94ecec6d0d1bd82c) by [@liblaf](https://github.com/liblaf)
+
+### ❤️ Contributors
+
+- [@liblaf](https://github.com/liblaf) made their first contribution
+
 ## [0.9.3](https://github.com/liblaf/melon/releases/tag/v0.9.3) - 2025-11-29
 
 ### ✨ Features
@@ -20,7 +35,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### ❤️ Contributors
 
-- [@liblaf](https://github.com/liblaf) made their first contribution
+- [@liblaf[bot]](https://github.com/apps/liblaf)
+- [@liblaf](https://github.com/liblaf)
 
 ## [0.9.2](https://github.com/liblaf/melon/releases/tag/v0.9.2) - 2025-11-25
 
