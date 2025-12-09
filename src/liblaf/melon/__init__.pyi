@@ -1,6 +1,12 @@
 from . import barycentric, ext, io, mesh, proximity, tet, transfer, tri, typing, utils
-from ._src import bounds_contains, cell_neighbors, geodesic_distance, geodesic_path
-from ._version import __version__, __version_tuple__, version, version_tuple
+from ._src import (
+    bounds_contains,
+    cell_neighbors,
+    compute_edges_length,
+    geodesic_distance,
+    geodesic_path,
+)
+from ._version import __version__, __version_tuple__
 from .barycentric import barycentric_to_points, sample_barycentric_coords
 from .ext import annotate_landmarks, mesh_fix, tetwild
 from .io import (
@@ -74,6 +80,7 @@ __all__ = [
     "barycentric_to_points",
     "bounds_contains",
     "cell_neighbors",
+    "compute_edges_length",
     "ext",
     "fast_wrapping",
     "geodesic_distance",
@@ -106,6 +113,4 @@ __all__ = [
     "tri",
     "typing",
     "utils",
-    "version",
-    "version_tuple",
 ]

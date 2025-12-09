@@ -57,6 +57,7 @@ def main(cfg: Config) -> None:
     tetmesh.point_data["_PointId"] = np.arange(tetmesh.n_points)
     surface: pv.PolyData = tetmesh.extract_surface()  # pyright: ignore[reportAssignmentType]
     source = melon.fast_wrapping(source, surface)
+    melon.save(cherries.temp("40-expression-wrapped.vtp"), source)
     source.compute_normals(auto_orient_normals=True, inplace=True)
     surface.compute_normals(auto_orient_normals=True, inplace=True)
     data_names: list[str] = [

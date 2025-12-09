@@ -42,8 +42,8 @@ def main(cfg: Config) -> None:
             "EyeSocketBottom",
             "EyeSocketTop",
             "HeadBack",
-            "LipInnerBottom",
-            "LipInnerTop",
+            # "LipInnerBottom",
+            # "LipInnerTop",
             "MouthSocketBottom",
             "MouthSocketTop",
             "NeckBack",
@@ -93,6 +93,7 @@ def main(cfg: Config) -> None:
             distance_threshold=0.01, normal_threshold=None
         ),
     )
+    ic(np.count_nonzero(surface.point_data["IsFace"]))
 
     # fix skull mask around mouth
     orbicularis_oris: pv.PolyData = melon.tri.extract_groups(
