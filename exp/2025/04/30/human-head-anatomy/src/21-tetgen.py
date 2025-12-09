@@ -14,8 +14,8 @@ class Config(cherries.BaseConfig):
 
     output: Path = cherries.output("21-tetgen.vtu")
 
-    lr: float = 0.05 * 0.3
-    epsr: float = 1e-3 * 0.3
+    lr: float = 0.05 * 0.2
+    epsr: float = 1e-3 * 0.2
 
 
 def main(cfg: Config) -> None:

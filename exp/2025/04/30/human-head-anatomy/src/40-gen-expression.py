@@ -52,6 +52,7 @@ def transfer_by_geodestic(
 
 def main(cfg: Config) -> None:
     source: pv.PolyData = melon.load_polydata(cfg.source)
+    source.extract_largest(inplace=True)  # remove eyeballs
     tetmesh: pv.UnstructuredGrid = melon.load_unstructured_grid(cfg.tetmesh)
 
     tetmesh.point_data["_PointId"] = np.arange(tetmesh.n_points)

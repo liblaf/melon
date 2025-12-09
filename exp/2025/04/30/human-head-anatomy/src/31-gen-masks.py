@@ -2,7 +2,7 @@ from pathlib import Path
 
 import numpy as np
 import pyvista as pv
-from jaxtyping import Array, Bool
+from jaxtyping import Array, Bool, Float
 
 import liblaf.melon as melon  # noqa: PLR0402
 from liblaf import cherries, grapes
@@ -99,8 +99,13 @@ def main(cfg: Config) -> None:
     orbicularis_oris: pv.PolyData = melon.tri.extract_groups(
         full, "Orbicularis_oris001"
     )
+    bounds: Float[np.ndarray, " 6"] = np.asarray(orbicularis_oris.bounds)
+    bounds[0] -= 0.2 * (bounds[1] - bounds[0])
+    bounds[1] += 0.2 * (bounds[1] - bounds[0])
+    bounds[2] -= 0.5 * (bounds[3] - bounds[2])
+    bounds[3] += 0.5 * (bounds[3] - bounds[2])
     orbicularis_oris_mask: Bool[Array, " p"] = melon.bounds_contains(
-        orbicularis_oris.bounds, surface.points
+        bounds, surface.points
     )
     surface.point_data["IsCranium"][orbicularis_oris_mask] = False  # pyright: ignore[reportArgumentType]
     surface.point_data["IsMandible"][orbicularis_oris_mask] = False  # pyright: ignore[reportArgumentType]

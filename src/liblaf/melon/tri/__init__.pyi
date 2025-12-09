@@ -1,5 +1,5 @@
 from ._boolean import intersection
-from ._compute import compute_area
+from ._compute import compute_area, compute_point_area
 from ._contains import MeshContainsPoints, contains
 from ._extract import extract_cells, extract_groups, extract_points
 from ._group import select_groups
@@ -11,6 +11,7 @@ from ._wrapping import fast_wrapping
 __all__ = [
     "MeshContainsPoints",
     "compute_area",
+    "compute_point_area",
     "contains",
     "extract_cells",
     "extract_groups",
