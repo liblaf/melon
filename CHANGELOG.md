@@ -7,6 +7,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Conventional Changelog](https://github.com/conventional-changelog/conventional-changelog-config-spec/blob/master/versions/2.2.0/README.md),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.9.6](https://github.com/liblaf/melon/releases/tag/v0.9.6) - 2025-12-13
+
+### ✨ Features
+
+- **tet, tri:** Add point-wise volume and area computation - [80dce1a](https://github.com/liblaf/melon/commit/80dce1a00d5339d0999f31a95427f454b0216cde) by [@liblaf](https://github.com/liblaf)
+
+### ❤️ Contributors
+
+- [@renovate[bot]](https://github.com/apps/renovate) made their first contribution in [#93](https://github.com/liblaf/melon/pull/93)
+- [@liblaf](https://github.com/liblaf) made their first contribution
+
 ## [0.9.5](https://github.com/liblaf/melon/releases/tag/v0.9.5) - 2025-12-09
 
 ### ✨ Features
@@ -15,7 +26,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### ❤️ Contributors
 
-- [@liblaf](https://github.com/liblaf) made their first contribution
+- [@liblaf[bot]](https://github.com/apps/liblaf)
+- [@liblaf](https://github.com/liblaf)
 
 ## [0.9.4](https://github.com/liblaf/melon/releases/tag/v0.9.4) - 2025-12-07
 
