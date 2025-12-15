@@ -125,11 +125,12 @@ def main(cfg: Config) -> None:
     mesh.point_data["InFaceConvex"] = (  # pyright: ignore[reportArgumentType]
         face_convex_query.signed_distance(mesh) < 1e-3 * mesh.length
     )
+    ic(np.count_nonzero(mesh.point_data["InFaceConvex"]))
     mesh.cell_data["InFaceConvex"] = (  # pyright: ignore[reportArgumentType]
         face_convex_query.signed_distance(mesh.cell_centers().points)
         < 1e-3 * mesh.length
     )
-    ic(np.count_nonzero(mesh.point_data["InFaceConvex"]))
+    ic(np.count_nonzero(mesh.cell_data["InFaceConvex"]))
     melon.save(cfg.output, mesh)
 
 
