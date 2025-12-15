@@ -60,11 +60,11 @@ def main(cfg: Config) -> None:
         return result
 
     tetgen(coarsen=True, conform=False, epsr=4e-4, lr=0.05)
-    tetgen(coarsen=False, conform=False, lr=0.05)
+    tetgen(coarsen=False, conform=False, epsr=5e-4, lr=0.05)
     # tetgen(coarsen=False, conform=False, lr=0.03)
     # tetgen(coarsen=False, conform=False, lr=0.02)
-    tetgen(coarsen=False, conform=False, lr=0.015)
-    tetgen(coarsen=False, conform=False, lr=0.01)
+    tetgen(coarsen=False, conform=False, epsr=3e-4, lr=0.015)
+    tetgen(coarsen=False, conform=False, epsr=2e-4, lr=0.01)
 
     # tetgen(coarsen=True, conform=True, epsr=4e-4, lr=0.05)
     # tetgen(coarsen=False, conform=True, lr=0.05)
