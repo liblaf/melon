@@ -1,6 +1,6 @@
 import os
 
-os.environ["XLA_PYTHON_CLIENT_MEM_FRACTION"] = ".75"
+os.environ["XLA_PYTHON_CLIENT_MEM_FRACTION"] = ".50"
 
 
 import math
@@ -14,7 +14,7 @@ from jaxtyping import Array, Bool, Float, Integer
 import liblaf.melon as melon  # noqa: PLR0402
 from liblaf import cherries, grapes
 
-SUFFIX: str = "-123k"
+SUFFIX: str = "-232k"
 
 
 class Config(cherries.BaseConfig):
