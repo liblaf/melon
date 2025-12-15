@@ -27,7 +27,7 @@ def mesh_fix(
         result = _mesh_fix_exe(mesh, verbose=verbose)
     else:
         raise NotImplementedError
-    result.compute_normals(auto_orient_normals=True, inplace=True)
+    result = tri.fix_inversion(result)
     if check:
         assert tri.is_volume(result)
     mesh: pv.PolyData = io.as_polydata(mesh)

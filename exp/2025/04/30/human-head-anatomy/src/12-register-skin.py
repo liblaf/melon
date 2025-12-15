@@ -7,6 +7,7 @@ from jaxtyping import Float, Integer
 
 import liblaf.melon as melon  # noqa: PLR0402
 from liblaf import cherries
+from liblaf.melon import compat
 
 
 class Config(cherries.BaseConfig):
@@ -20,8 +21,7 @@ def main(cfg: Config) -> None:
     source: pv.PolyData = melon.load_polydata(cfg.source)
     source.clean(inplace=True)
     source.field_data["GroupName"] = [
-        cast("str", name).split(maxsplit=1)[0]
-        for name in source.field_data["GroupName"]
+        cast("str", name).split(maxsplit=1)[0] for name in compat.get_group_name(source)
     ]
 
     target: pv.PolyData = melon.load_polydata(cfg.target)
@@ -47,7 +47,6 @@ def main(cfg: Config) -> None:
         source_landmarks=source_landmarks,
         target_landmarks=target_landmarks,
         free_polygons_floating=free_polygons_floating,
-        verbose=True,
     )
     melon.save(cfg.output, result)
     melon.save_landmarks(cfg.output, target_landmarks)

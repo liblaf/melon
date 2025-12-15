@@ -1,3 +1,4 @@
+import logging
 from pathlib import Path
 
 import pyvista as pv
@@ -5,6 +6,8 @@ import trimesh as tm
 
 import liblaf.melon as melon  # noqa: PLR0402
 from liblaf import cherries, grapes
+
+logger: logging.Logger = logging.getLogger(__name__)
 
 
 class Config(cherries.BaseConfig):
@@ -50,12 +53,12 @@ def main(cfg: Config) -> None:
         blocks: pv.MultiBlock = muscle.split_bodies().as_polydata_blocks()
         for i, block in enumerate(blocks):
             block: pv.PolyData = melon.mesh_fix(block)  # noqa: PLW2901
-            if not face_convex.contains(block.points).any():
-                continue
             block_id: int = len(muscles)
             block_name: str = (
                 f"{muscle_name}_{i:02d}" if len(blocks) > 1 else muscle_name
             )
+            if not face_convex.contains(block.points).any():
+                continue
             ic(block_id, block_name)
             block.field_data["MuscleId"] = block_id  # pyright: ignore[reportArgumentType]
             block.field_data["MuscleName"] = block_name

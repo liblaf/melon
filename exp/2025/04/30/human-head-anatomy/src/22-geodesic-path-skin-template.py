@@ -8,17 +8,15 @@ from liblaf import cherries
 
 
 class Config(cherries.BaseConfig):
-    tetgen: Path = cherries.temp("21-tetgen-68k.vtu")
+    skin: Path = cherries.input("12-skin.vtp")
     output: Path = cherries.temp("22-geodesic-path-skin.vtp")
 
 
 def main(cfg: Config) -> None:
-    tetgen: pv.UnstructuredGrid = melon.load_unstructured_grid(cfg.tetgen)
-    surface: pv.PolyData = tetgen.extract_surface()  # pyright: ignore[reportAssignmentType]
-    surface.clean(inplace=True)
+    skin: pv.PolyData = melon.load_polydata(cfg.skin)
 
     nearest_result: melon.NearestPointResult = melon.nearest(
-        surface,
+        skin,
         np.asarray(
             [
                 [0.724907, 25.935352, 9.666245],  # midpoint below lips
@@ -29,8 +27,7 @@ def main(cfg: Config) -> None:
     source: int
     target: int
     source, target = nearest_result.vertex_id
-    # output: pv.PolyData = melon.geodesic_path(surface, source, target)
-    output: pv.PolyData = surface.geodesic(source, target)  # pyright: ignore[reportAssignmentType]
+    output: pv.PolyData = melon.geodesic_path(skin, source, target)
 
     melon.save(cfg.output, output)
 

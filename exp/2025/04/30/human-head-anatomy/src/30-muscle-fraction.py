@@ -19,9 +19,9 @@ class Config(cherries.BaseConfig):
     full: Path = cherries.input("00-Full human head anatomy.obj")
     groups: Path = cherries.input("13-groups.toml")
     muscles: Path = cherries.input("20-muscles.vtm")
-    tetmesh: Path = cherries.input("21-tetgen.vtu")
+    tetmesh: Path = cherries.input("21-tetgen-68k-coarse.vtu")
 
-    output: Path = cherries.output("30-muscle-fraction.vtu")
+    output: Path = cherries.output("30-muscle-fraction-68k-coarse.vtu")
 
     n_samples: int = 1000
 

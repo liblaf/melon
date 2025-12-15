@@ -8,6 +8,7 @@ import attrs
 import more_itertools as mit
 from liblaf.grapes.logging import autolog
 
+from liblaf.melon import utils
 from liblaf.melon.typing import PathLike
 
 from ._typing import RegType, SingleDispatchCallable
@@ -49,7 +50,7 @@ class WriterDispatcher:
         if impl is _dummy:
             raise UnsupportedWriterError(type(obj), path)
         impl(path, obj, **kwargs)
-        autolog.debug("Saved %s to '%s'.", type(obj), path)
+        autolog.debug("Saved <%s> to '%s'.", utils.abbr_type_name(obj), path)
 
     def register(
         self, cls: RegType, suffix: str | Iterable[str]

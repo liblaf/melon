@@ -1,15 +1,12 @@
-import logging
 from collections.abc import Iterable
 from typing import Any
 
+import more_itertools as mit
 import numpy as np
 import pyvista as pv
-from jaxtyping import Bool, Integer
+from jaxtyping import Bool
 
-from liblaf import grapes
-from liblaf.melon import io
-
-logger: logging.Logger = logging.getLogger(__name__)
+from liblaf.melon import compat, io
 
 
 def select_groups(
@@ -17,8 +14,8 @@ def select_groups(
 ) -> Bool[np.ndarray, " cells"]:
     mesh: pv.PolyData = io.as_polydata(mesh)
     group_ids: list[int] = as_group_ids(mesh, groups)
-    mask: Bool[np.ndarray, " C"] = np.isin(
-        _get_group_id(mesh), group_ids, invert=invert
+    mask: Bool[np.ndarray, " cells"] = np.isin(
+        compat.get_group_id(mesh), group_ids, invert=invert
     )
     return mask
 
@@ -26,36 +23,13 @@ def select_groups(
 def as_group_ids(
     mesh: pv.PolyData, groups: int | str | Iterable[int | str]
 ) -> list[int]:
-    groups = grapes.as_iterable(groups)
     group_ids: list[int] = []
-    for group in groups:
+    for group in mit.always_iterable(groups, base_type=(int, str)):
         if isinstance(group, int):
             group_ids.append(group)
         elif isinstance(group, str):
-            group_names: list[str] = _get_group_name(mesh).tolist()
+            group_names: list[str] = compat.get_group_name(mesh)
             group_ids.append(group_names.index(group))
         else:
             raise NotImplementedError
     return group_ids
-
-
-def _get_group_id(mesh: pv.PolyData) -> Integer[np.ndarray, " cell"]:
-    return grapes.getitem(
-        mesh.cell_data,
-        "GroupId",
-        deprecated_keys=["group_id", "group_ids", "group-id", "group-ids", "GroupIds"],
-    )
-
-
-def _get_group_name(mesh: pv.PolyData) -> np.ndarray:
-    return grapes.getitem(
-        mesh.field_data,
-        "GroupName",
-        deprecated_keys=[
-            "group_name",
-            "group_names",
-            "group-name",
-            "group-names",
-            "GroupNames",
-        ],
-    )

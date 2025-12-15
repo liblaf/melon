@@ -47,6 +47,8 @@ from .proximity import (
     nearest_point_on_surface,
 )
 from .transfer import (
+    transfer_tet_cell,
+    transfer_tet_cell_to_point,
     transfer_tri_cell_to_point_category,
     transfer_tri_point,
     transfer_tri_point_to_tet,
@@ -107,6 +109,8 @@ __all__ = [
     "tet",
     "tetwild",
     "transfer",
+    "transfer_tet_cell",
+    "transfer_tet_cell_to_point",
     "transfer_tri_cell_to_point_category",
     "transfer_tri_point",
     "transfer_tri_point_to_tet",
