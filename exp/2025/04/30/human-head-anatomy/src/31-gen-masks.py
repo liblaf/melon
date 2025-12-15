@@ -35,19 +35,14 @@ class Config(cherries.BaseConfig):
     output: Path = cherries.output(f"31-masks{SUFFIX}.vtu")
 
 
-def main(cfg: Config) -> None:
-    full: pv.PolyData = melon.load_polydata(cfg.full)
-    full.clean(inplace=True)
-    groups: dict[str, list[str]] = grapes.load(cfg.groups)
-    mesh: pv.UnstructuredGrid = melon.load_unstructured_grid(cfg.tetmesh)
-    skin: pv.PolyData = melon.load_polydata(cfg.skin)
-    ic(mesh)
-
+def gen_surface_masks(
+    surface: pv.PolyData,
+    full: pv.PolyData,
+    groups: dict[str, list[str]],
+    skin: pv.PolyData,
+) -> pv.PolyData:
     cranium: pv.PolyData = melon.tri.extract_groups(full, groups["Cranium"])
     mandible: pv.PolyData = melon.tri.extract_groups(full, groups["Mandible"])
-    face: pv.PolyData = melon.tri.extract_groups(skin, GROUPS_NOT_FACE, invert=True)
-    face_convex: tm.Trimesh = tm.convex.convex_hull(face.points)
-    face_convex_query = melon.tri.MeshQuery(face_convex)
 
     cranium.cell_data["IsCranium"] = np.ones((cranium.n_cells,), np.bool)
     mandible.cell_data["IsCranium"] = np.zeros((mandible.n_cells,), np.bool)
@@ -79,27 +74,22 @@ def main(cfg: Config) -> None:
     mandible.cell_data["IsSkin"] = np.zeros((mandible.n_cells,), np.bool)
     skin.cell_data["IsSkin"] = np.ones((skin.n_cells,), np.bool)
 
-    data_names: list[str] = [
-        "IsCranium",
-        "IsFace",
-        "IsLipBottom",
-        "IsLipTop",
-        "IsMandible",
-        "IsSkin",
-    ]
-
-    mesh.point_data["_PointId"] = np.arange(mesh.n_points)
-    surface: pv.PolyData = mesh.extract_surface()  # pyright: ignore[reportAssignmentType]
     surface = melon.transfer_tri_cell_to_point_category(
         pv.merge([cranium, mandible, skin]),
         surface,
-        data=data_names,
+        data=[
+            "IsCranium",
+            "IsFace",
+            "IsLipBottom",
+            "IsLipTop",
+            "IsMandible",
+            "IsSkin",
+        ],
         fill=False,
         nearest=melon.NearestPointOnSurface(
             distance_threshold=0.01, normal_threshold=None
         ),
     )
-    ic(np.count_nonzero(surface.point_data["IsFace"]))
 
     # fix skull mask around mouth
     orbicularis_oris: pv.PolyData = melon.tri.extract_groups(
@@ -116,12 +106,40 @@ def main(cfg: Config) -> None:
     surface.point_data["IsCranium"][orbicularis_oris_mask] = False  # pyright: ignore[reportArgumentType]
     surface.point_data["IsMandible"][orbicularis_oris_mask] = False  # pyright: ignore[reportArgumentType]
     melon.save(cherries.temp("21-surface.vtp"), surface)
+    return surface
 
+
+def main(cfg: Config) -> None:
+    full: pv.PolyData = melon.load_polydata(cfg.full)
+    full.clean(inplace=True)
+    groups: dict[str, list[str]] = grapes.load(cfg.groups)
+    mesh: pv.UnstructuredGrid = melon.load_unstructured_grid(cfg.tetmesh)
+    skin: pv.PolyData = melon.load_polydata(cfg.skin)
+    ic(mesh)
+
+    mesh.point_data["_PointId"] = np.arange(mesh.n_points)
+    surface: pv.PolyData = mesh.extract_surface()  # pyright: ignore[reportAssignmentType]
+    surface = gen_surface_masks(surface, full, groups, skin)
+    ic(np.count_nonzero(surface.point_data["IsFace"]))
     mesh = melon.transfer_tri_point_to_tet(
-        surface, mesh, data=data_names, fill=False, point_id="_PointId"
+        surface,
+        mesh,
+        data=[
+            "IsCranium",
+            "IsFace",
+            "IsLipBottom",
+            "IsLipTop",
+            "IsMandible",
+            "IsSkin",
+        ],
+        fill=False,
+        point_id="_PointId",
     )
     del mesh.point_data["_PointId"]
 
+    face: pv.PolyData = melon.tri.extract_groups(skin, GROUPS_NOT_FACE, invert=True)
+    face_convex: tm.Trimesh = tm.convex.convex_hull(face.points)
+    face_convex_query = melon.tri.MeshQuery(face_convex)
     mesh.point_data["InFaceConvex"] = (  # pyright: ignore[reportArgumentType]
         face_convex_query.signed_distance(mesh) < 1e-3 * mesh.length
     )
