@@ -14,14 +14,16 @@ from jaxtyping import Array, Bool, Float, Integer
 import liblaf.melon as melon  # noqa: PLR0402
 from liblaf import cherries, grapes
 
+SUFFIX: str = "-123k"
+
 
 class Config(cherries.BaseConfig):
     full: Path = cherries.input("00-Full human head anatomy.obj")
     groups: Path = cherries.input("13-groups.toml")
     muscles: Path = cherries.input("20-muscles.vtm")
-    tetmesh: Path = cherries.input("21-tetgen-68k-coarse.vtu")
+    tetmesh: Path = cherries.input(f"21-tetgen{SUFFIX}.vtu")
 
-    output: Path = cherries.output("30-muscle-fraction-68k-coarse.vtu")
+    output: Path = cherries.output(f"30-muscle-fraction{SUFFIX}.vtu")
 
     n_samples: int = 1000
 
