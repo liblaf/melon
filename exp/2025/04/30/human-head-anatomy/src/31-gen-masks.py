@@ -23,7 +23,7 @@ GROUPS_NOT_FACE: list[str] = [
     "NeckFront",
     "Nostril",
 ]
-SUFFIX: str = "-232k"
+SUFFIX: str = "-515k"
 
 
 class Config(cherries.BaseConfig):
