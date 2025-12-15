@@ -14,7 +14,7 @@ from jaxtyping import Array, Bool, Float, Integer
 import liblaf.melon as melon  # noqa: PLR0402
 from liblaf import cherries, grapes
 
-SUFFIX: str = "-232k"
+SUFFIX: str = "-515k"
 
 
 class Config(cherries.BaseConfig):
@@ -45,7 +45,7 @@ def main(cfg: Config) -> None:
         ic(muscle_id, muscle_name)
         muscle_names[muscle_id] = muscle_name
 
-        solver = melon.tri.MeshContainsPoints(muscle)
+        solver = melon.tri.MeshQuery(muscle)
 
         point_contains: Bool[Array, " points"] = solver.contains(mesh.points)
         cell_all_in: Bool[Array, " cells"] = jnp.all(point_contains[cells], axis=-1)

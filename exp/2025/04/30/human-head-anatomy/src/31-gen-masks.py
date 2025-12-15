@@ -2,19 +2,37 @@ from pathlib import Path
 
 import numpy as np
 import pyvista as pv
+import trimesh as tm
 from jaxtyping import Array, Bool, Float
 
 import liblaf.melon as melon  # noqa: PLR0402
 from liblaf import cherries, grapes
+
+GROUPS_NOT_FACE: list[str] = [
+    "Ear",
+    "EarNeckBack",
+    "EarSocket",
+    "EyeSocketBottom",
+    "EyeSocketTop",
+    "HeadBack",
+    # "LipInnerBottom",
+    # "LipInnerTop",
+    "MouthSocketBottom",
+    "MouthSocketTop",
+    "NeckBack",
+    "NeckFront",
+    "Nostril",
+]
+SUFFIX: str = "-123k"
 
 
 class Config(cherries.BaseConfig):
     full: Path = cherries.input("00-Full human head anatomy.obj")
     groups: Path = cherries.input("13-groups.toml")
     skin: Path = cherries.input("12-skin.vtp")
-    tetmesh: Path = cherries.input("30-muscle-fraction.vtu")
+    tetmesh: Path = cherries.input(f"30-muscle-fraction{SUFFIX}.vtu")
 
-    output: Path = cherries.output("31-masks.vtu")
+    output: Path = cherries.output(f"31-masks{SUFFIX}.vtu")
 
 
 def main(cfg: Config) -> None:
@@ -23,9 +41,13 @@ def main(cfg: Config) -> None:
     groups: dict[str, list[str]] = grapes.load(cfg.groups)
     mesh: pv.UnstructuredGrid = melon.load_unstructured_grid(cfg.tetmesh)
     skin: pv.PolyData = melon.load_polydata(cfg.skin)
+    ic(mesh)
 
     cranium: pv.PolyData = melon.tri.extract_groups(full, groups["Cranium"])
     mandible: pv.PolyData = melon.tri.extract_groups(full, groups["Mandible"])
+    face: pv.PolyData = melon.tri.extract_groups(skin, GROUPS_NOT_FACE, invert=True)
+    face_convex: tm.Trimesh = tm.convex.convex_hull(face.points)
+    face_convex_query = melon.tri.MeshQuery(face_convex)
 
     cranium.cell_data["IsCranium"] = np.ones((cranium.n_cells,), np.bool)
     mandible.cell_data["IsCranium"] = np.zeros((mandible.n_cells,), np.bool)
@@ -34,23 +56,7 @@ def main(cfg: Config) -> None:
     cranium.cell_data["IsFace"] = np.zeros((cranium.n_cells,), np.bool)
     mandible.cell_data["IsFace"] = np.zeros((mandible.n_cells,), np.bool)
     skin.cell_data["IsFace"] = melon.tri.select_groups(
-        skin,
-        [
-            "Ear",
-            "EarNeckBack",
-            "EarSocket",
-            "EyeSocketBottom",
-            "EyeSocketTop",
-            "HeadBack",
-            # "LipInnerBottom",
-            # "LipInnerTop",
-            "MouthSocketBottom",
-            "MouthSocketTop",
-            "NeckBack",
-            "NeckFront",
-            "Nostril",
-        ],
-        invert=True,
+        skin, GROUPS_NOT_FACE, invert=True
     )
 
     cranium.cell_data["IsLipTop"] = np.zeros((cranium.n_cells,), np.bool)
@@ -100,10 +106,10 @@ def main(cfg: Config) -> None:
         full, "Orbicularis_oris001"
     )
     bounds: Float[np.ndarray, " 6"] = np.asarray(orbicularis_oris.bounds)
-    bounds[0] -= 0.2 * (bounds[1] - bounds[0])
-    bounds[1] += 0.2 * (bounds[1] - bounds[0])
-    bounds[2] -= 0.5 * (bounds[3] - bounds[2])
-    bounds[3] += 0.5 * (bounds[3] - bounds[2])
+    bounds[0] -= 0.1 * (bounds[1] - bounds[0])
+    bounds[1] += 0.1 * (bounds[1] - bounds[0])
+    bounds[2] -= 0.1 * (bounds[3] - bounds[2])
+    bounds[3] += 0.1 * (bounds[3] - bounds[2])
     orbicularis_oris_mask: Bool[Array, " p"] = melon.bounds_contains(
         bounds, surface.points
     )
@@ -115,6 +121,15 @@ def main(cfg: Config) -> None:
         surface, mesh, data=data_names, fill=False, point_id="_PointId"
     )
     del mesh.point_data["_PointId"]
+
+    mesh.point_data["InFaceConvex"] = (  # pyright: ignore[reportArgumentType]
+        face_convex_query.signed_distance(mesh) < 1e-3 * mesh.length
+    )
+    mesh.cell_data["InFaceConvex"] = (  # pyright: ignore[reportArgumentType]
+        face_convex_query.signed_distance(mesh.cell_centers().points)
+        < 1e-3 * mesh.length
+    )
+    ic(np.count_nonzero(mesh.point_data["InFaceConvex"]))
     melon.save(cfg.output, mesh)
 
 

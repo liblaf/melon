@@ -31,6 +31,7 @@ def numpy_to_pointset(obj: ArrayLike, **kwargs) -> pv.PointSet:
 @as_pointset.register(pv.DataSet)
 def dataset_to_pointset(obj: pv.DataSet, **kwargs) -> pv.PointSet:
     kwargs.pop("point_normals", None)
+    obj.cell_data.active_scalars_name = None
     return obj.cast_to_pointset(**kwargs)
 
 
