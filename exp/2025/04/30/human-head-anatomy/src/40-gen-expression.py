@@ -1,18 +1,23 @@
 from pathlib import Path
 
 import numpy as np
+import potpourri3d as pp3d
 import pyvista as pv
+import scipy
+import trimesh as tm
 from jaxtyping import Bool, Float, Integer
 
 import liblaf.melon as melon  # noqa: PLR0402
 from liblaf import cherries
 
+SUFFIX: str = "-515k"
+
 
 class Config(cherries.BaseConfig):
     source: Path = cherries.input("40-expression-flame.vtp")
-    tetmesh: Path = cherries.input("31-masks.vtu")
+    tetmesh: Path = cherries.input(f"31-masks{SUFFIX}.vtu")
 
-    output: Path = cherries.output("40-expression.vtu")
+    output: Path = cherries.output(f"40-expression{SUFFIX}.vtu")
 
 
 def geodestic_transform(mesh: pv.PolyData) -> pv.PolyData:
@@ -31,11 +36,56 @@ def geodestic_transform(mesh: pv.PolyData) -> pv.PolyData:
     return geo_mesh
 
 
+def inpaint_by_heat(
+    mesh: pv.PolyData, data_names: list[str], mask: Bool[np.ndarray, " points"]
+) -> pv.PolyData:
+    ic(mesh.is_manifold)
+    mesh = melon.tri.extract_points(mesh, mask, adjacent_cells=True)
+    ic(mesh.is_manifold)
+    # mesh = melon.tri.fix_inversion(mesh)
+    ic(np.count_nonzero(mesh.regular_faces[:, 0] == mesh.regular_faces[:, 1]))
+    ic(np.count_nonzero(mesh.regular_faces[:, 0] == mesh.regular_faces[:, 2]))
+    ic(np.count_nonzero(mesh.regular_faces[:, 1] == mesh.regular_faces[:, 2]))
+    solver = pp3d.MeshVectorHeatSolver(mesh.points, mesh.regular_faces)
+    for name in data_names:
+        data: Float[np.ndarray, "points dim"] = mesh.point_data[name]
+        for dim in range(data.shape[1]):
+            data[:, dim] = solver.extend_scalar(~np.isnan(data[:, dim]), data[:, dim])  # pyright: ignore[reportArgumentType]
+        mesh.point_data[name] = data
+    return mesh
+
+
+def inpaint_by_smoothing(mesh: pv.PolyData, data_names: list[str]) -> pv.PolyData:
+    mesh = mesh.copy()
+    mesh_tm: tm.Trimesh = melon.as_trimesh(mesh)
+    for name in data_names:
+        pinned_vertices: Integer[np.ndarray, " p"] = np.flatnonzero(
+            np.all(np.isfinite(mesh.point_data[name]), axis=-1)
+        )
+        laplacian: scipy.sparse.coo_matrix = tm.smoothing.laplacian_calculation(
+            mesh_tm, pinned_vertices=pinned_vertices
+        )  # pyright: ignore[reportAssignmentType]
+        deformed: tm.Trimesh = tm.Trimesh(
+            mesh_tm.vertices + np.nan_to_num(mesh.point_data[name], nan=0.0),
+            mesh_tm.faces,
+        )
+        smoothed: tm.Trimesh = tm.smoothing.filter_taubin(
+            deformed, iterations=100, laplacian_operator=laplacian
+        )
+        mesh.point_data[name] = smoothed.vertices - mesh.points
+    return mesh
+
+
 def transfer_by_geodestic(
     source: pv.PolyData, target: pv.PolyData, data_names: list[str]
 ) -> pv.PolyData:
+    max_tri_area: float = 5e-5 * source.length**2
+    ic(source)
+    source = source.subdivide_adaptive(max_tri_area=max_tri_area)  # pyright: ignore[reportAssignmentType]
+    ic(source)
+    target_dense: pv.PolyData = target.subdivide_adaptive(max_tri_area=max_tri_area)  # pyright: ignore[reportAssignmentType]
     source_geo: pv.PolyData = geodestic_transform(source)
-    target_geo: pv.PolyData = geodestic_transform(target)
+    target_geo: pv.PolyData = geodestic_transform(target_dense)
     target_geo = melon.transfer_tri_point(
         source_geo,
         target_geo,
@@ -45,8 +95,11 @@ def transfer_by_geodestic(
             distance_threshold=0.01, normal_threshold=None
         ),
     )
-    target = target.copy()
-    target.copy_attributes(target_geo)
+    original_point_id: Integer[np.ndarray, " p"] = melon.nearest(
+        target_dense, target
+    ).vertex_id
+    for name in data_names:
+        target.point_data[name] = target_geo.point_data[name][original_point_id]
     return target
 
 
@@ -74,13 +127,26 @@ def main(cfg: Config) -> None:
         ),
     )
     melon.save(cherries.temp("40-expression-transfer-nearest.vtp"), surface)
-    surface_geo: pv.PolyData = transfer_by_geodestic(source, surface, data_names)
-    melon.save(cherries.temp("40-expression-transfer-geo.vtp"), surface_geo)
+    nearest: melon.NearestPointOnSurfaceResult = melon.nearest_point_on_surface(
+        source, surface, distance_threshold=0.01, normal_threshold=None
+    )
+    inpaint_mask: Bool[np.ndarray, " p"] = np.any(
+        ~nearest.missing[:, np.newaxis], axis=-1
+    )
+    surface_inpaint: pv.PolyData = inpaint_by_smoothing(surface, data_names)
+    melon.save(cherries.temp("40-expression-transfer-inpaint.vtp"), surface_inpaint)
+    # surface_geo: pv.PolyData = transfer_by_geodestic(source, surface, data_names)
+    # melon.save(cherries.temp("40-expression-transfer-geo.vtp"), surface_geo)
     for name in data_names:
-        data: np.ndarray = surface.point_data[name]
-        missing: Bool[np.ndarray, " ..."] = np.isnan(data)
+        data: Float[np.ndarray, "points dim"] = surface.point_data[name]
+        missing: Bool[np.ndarray, " points"] = np.any(np.isnan(data), axis=-1)
         surface.point_data[name] = np.nan_to_num(
-            np.where(missing, surface_geo.point_data[name], data), nan=0.0
+            np.where(
+                np.expand_dims(missing & inpaint_mask, axis=-1),
+                surface_inpaint.point_data[name],
+                data,
+            ),
+            nan=0.0,
         )
 
     tetmesh = melon.transfer_tri_point_to_tet(

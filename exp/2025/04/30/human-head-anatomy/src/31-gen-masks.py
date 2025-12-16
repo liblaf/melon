@@ -23,7 +23,7 @@ GROUPS_NOT_FACE: list[str] = [
     "NeckFront",
     "Nostril",
 ]
-SUFFIX: str = "-515k"
+SUFFIX: str = "-232k"
 
 
 class Config(cherries.BaseConfig):
@@ -144,9 +144,9 @@ def main(cfg: Config) -> None:
         face_convex_query.signed_distance(mesh) < 1e-3 * mesh.length
     )
     ic(np.count_nonzero(mesh.point_data["InFaceConvex"]))
-    mesh.cell_data["InFaceConvex"] = (  # pyright: ignore[reportArgumentType]
-        face_convex_query.signed_distance(mesh.cell_centers().points)
-        < 1e-3 * mesh.length
+    mesh.cell_data["InFaceConvex"] = np.any(
+        mesh.point_data["InFaceConvex"][mesh.cells_dict[pv.CellType.TETRA]],  # pyright: ignore[reportArgumentType]
+        axis=-1,
     )
     ic(np.count_nonzero(mesh.cell_data["InFaceConvex"]))
     melon.save(cfg.output, mesh)

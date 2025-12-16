@@ -7,13 +7,14 @@ cache:
 caseSensitive: false
 enableGlobDot: true
 ignorePaths:
-  - .cspell.*
   - .git/
-  - "*-lock.*"
   - "*.lock"
+  - "*.vtm"
+  - "*.vtp"
+  - "*.vtu"
   - cspell.*
-  - go.sum
 ignoreRandomStrings: true
+maxFileSize: 500KB
 useGitignore: true
 words:
   - anguli
@@ -51,6 +52,7 @@ words:
   - inferioris
   - inferor
   - inlinehilite
+  - inpaint
   - interansversarii
   - intertransversarii
   - isdtype
@@ -122,6 +124,7 @@ words:
   - thyrohyoid
   - tombi
   - trimesh
+  - uchar
   - unshallow
   - uuidgen
   - veli
