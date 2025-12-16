@@ -70,7 +70,7 @@ def inpaint_by_smoothing(mesh: pv.PolyData, data_names: list[str]) -> pv.PolyDat
             mesh_tm.faces,
         )
         smoothed: tm.Trimesh = tm.smoothing.filter_taubin(
-            deformed, iterations=100, laplacian_operator=laplacian
+            deformed, iterations=10**4, laplacian_operator=laplacian
         )
         mesh.point_data[name] = smoothed.vertices - mesh.points
     return mesh
