@@ -7,7 +7,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Conventional Changelog](https://github.com/conventional-changelog/conventional-changelog-config-spec/blob/master/versions/2.2.0/README.md),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [0.9.6](https://github.com/liblaf/melon/releases/tag/v0.9.6) - 2025-12-13
+## [0.9.7](https://github.com/liblaf/melon/releases/tag/v0.9.7) - 2025-12-16
+
+### ✨ Features
+
+- **transfer:** add tetrahedral mesh data transfer functions - [5d46f0d](https://github.com/liblaf/melon/commit/5d46f0defd8f43c8cc8cc669cf3617f8b08ed821) by [@liblaf](https://github.com/liblaf)
+
+### ❤️ Contributors
+
+- [@liblaf](https://github.com/liblaf) made their first contribution
+
+## [0.9.6](https://github.com/liblaf/melon/releases/tag/v0.9.6) - 2025-12-14
 
 ### ✨ Features
 
@@ -15,8 +25,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### ❤️ Contributors
 
-- [@renovate[bot]](https://github.com/apps/renovate) made their first contribution in [#93](https://github.com/liblaf/melon/pull/93)
-- [@liblaf](https://github.com/liblaf) made their first contribution
+- [@liblaf[bot]](https://github.com/apps/liblaf)
+- [@renovate[bot]](https://github.com/apps/renovate)
+- [@liblaf](https://github.com/liblaf)
 
 ## [0.9.5](https://github.com/liblaf/melon/releases/tag/v0.9.5) - 2025-12-09
 
