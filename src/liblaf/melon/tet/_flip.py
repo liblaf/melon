@@ -1,9 +1,8 @@
 from typing import Any
 
 import numpy as np
-import numpy.typing as npt
 import pyvista as pv
-from jaxtyping import Bool, Integer
+from jaxtyping import ArrayLike, Bool, Integer
 
 from liblaf.melon import io
 
@@ -20,7 +19,7 @@ def fix_winding(mesh: Any, *, check: bool = True) -> pv.UnstructuredGrid:
     return mesh
 
 
-def flip(mesh: Any, mask: Bool[npt.ArrayLike, " C"]) -> pv.UnstructuredGrid:
+def flip(mesh: Any, mask: Bool[ArrayLike, " C"]) -> pv.UnstructuredGrid:
     mesh: pv.UnstructuredGrid = io.as_unstructured_grid(mesh)
     mask: Bool[np.ndarray, " C"] = np.asarray(mask)
     if not np.any(mask):

@@ -5,8 +5,7 @@ from typing import Any
 
 import jinja2
 import numpy as np
-from jaxtyping import Float
-from numpy.typing import ArrayLike
+from jaxtyping import ArrayLike, Float
 
 from liblaf.melon import io
 

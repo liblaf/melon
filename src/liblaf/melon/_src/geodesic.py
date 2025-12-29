@@ -1,16 +1,15 @@
 from typing import Any
 
 import numpy as np
-import numpy.typing as npt
 import potpourri3d as pp3d
 import pyvista as pv
-from jaxtyping import Float, Integer
+from jaxtyping import ArrayLike, Float, Integer
 
 from liblaf.melon import io
 
 
 def geodesic_distance(
-    mesh: Any, v_ind: Integer[npt.ArrayLike, "*v"]
+    mesh: Any, v_ind: Integer[ArrayLike, "*v"]
 ) -> Float[np.ndarray, " p *v"]:
     mesh: pv.PolyData = io.as_polydata(mesh).triangulate(inplace=False)  # pyright: ignore[reportAssignmentType]
     v_ind: Integer[np.ndarray, "*v"] = np.asarray(v_ind)

@@ -4,8 +4,7 @@ import jax
 import numpy as np
 import pyvista as pv
 import trimesh as tm
-from jaxtyping import Float
-from numpy.typing import ArrayLike
+from jaxtyping import ArrayLike, Float
 
 from liblaf.melon.io.abc import ConverterDispatcher
 

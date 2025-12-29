@@ -2,8 +2,7 @@ from typing import Any
 
 import numpy as np
 import trimesh as tm
-from jaxtyping import Float
-from numpy.typing import ArrayLike
+from jaxtyping import ArrayLike, Float
 
 from liblaf.melon import io
 

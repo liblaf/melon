@@ -2,8 +2,7 @@ import os
 from pathlib import Path
 
 import numpy as np
-from jaxtyping import Bool, Integer
-from numpy.typing import ArrayLike
+from jaxtyping import ArrayLike, Bool, Integer
 
 from liblaf import grapes
 

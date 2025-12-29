@@ -4,9 +4,9 @@ from pathlib import Path
 from typing import Any
 
 import jinja2
+import numpy as np
 import pyvista as pv
-from jaxtyping import Bool, Float, Integer
-from numpy.typing import ArrayLike
+from jaxtyping import ArrayLike, Bool, Float, Integer
 
 from liblaf.melon import io
 
@@ -24,10 +24,14 @@ def fast_wrapping(
     | None = None,
     verbose: bool = False,
 ) -> pv.PolyData:
-    source_landmarks = source_landmarks if source_landmarks is not None else []
-    target_landmarks = target_landmarks if target_landmarks is not None else []
+    source_landmarks = (
+        source_landmarks if source_landmarks is not None else np.empty((0, 3))
+    )
+    target_landmarks = (
+        target_landmarks if target_landmarks is not None else np.empty((0, 3))
+    )
     free_polygons_floating = (
-        free_polygons_floating if free_polygons_floating is not None else []
+        free_polygons_floating if free_polygons_floating is not None else np.empty((0,))
     )
     with tempfile.TemporaryDirectory() as tmpdir_str:
         tmpdir: Path = Path(tmpdir_str).absolute()

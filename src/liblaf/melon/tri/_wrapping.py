@@ -4,8 +4,7 @@ from typing import Any
 import numpy as np
 import pyvista as pv
 import trimesh as tm
-from jaxtyping import Bool, Float, Integer
-from numpy.typing import ArrayLike
+from jaxtyping import ArrayLike, Bool, Float, Integer
 
 from liblaf.melon import io
 
