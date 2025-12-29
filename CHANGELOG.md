@@ -7,6 +7,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Conventional Changelog](https://github.com/conventional-changelog/conventional-changelog-config-spec/blob/master/versions/2.2.0/README.md),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.9.8](https://github.com/liblaf/melon/releases/tag/v0.9.8) - 2025-12-29
+
+### 🐛 Bug Fixes
+
+- **ext/wrap:** Initialize optional array arguments with empty NumPy arrays - [a0dd66b](https://github.com/liblaf/melon/commit/a0dd66b3a53af08c67e0d617e70b8ce980182b6e) by [@liblaf](https://github.com/liblaf)
+
+### ❤️ Contributors
+
+- [@liblaf](https://github.com/liblaf) made their first contribution
+
 ## [0.9.7](https://github.com/liblaf/melon/releases/tag/v0.9.7) - 2025-12-16
 
 ### ✨ Features
@@ -15,7 +25,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### ❤️ Contributors
 
-- [@liblaf](https://github.com/liblaf) made their first contribution
+- [@liblaf[bot]](https://github.com/apps/liblaf)
+- [@liblaf](https://github.com/liblaf)
 
 ## [0.9.6](https://github.com/liblaf/melon/releases/tag/v0.9.6) - 2025-12-14
 
