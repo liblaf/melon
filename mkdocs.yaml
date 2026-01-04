@@ -1,3 +1,11 @@
 INHERIT: .config/copier/mkdocs.yaml
 site_name: Melon
 site_description: 🍉 A comprehensive Python library for 3D mesh processing with advanced I/O capabilities, proximity analysis, and integration with external mesh processing tools.
+
+plugins:
+  mkdocstrings:
+    handlers:
+      python:
+        options:
+          preload_modules:
+            - environs # I don't know why, but this makes mkdocstrings work
