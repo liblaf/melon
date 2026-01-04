@@ -6,7 +6,7 @@ from liblaf import grapes
 
 
 def get_group_id(obj: pv.DataSet) -> Integer[np.ndarray, " cells"]:
-    __warnings_hide = True
+    _warnings_hide = True
     return grapes.getitem(
         obj.cell_data,
         "GroupId",
@@ -23,7 +23,7 @@ def get_group_id(obj: pv.DataSet) -> Integer[np.ndarray, " cells"]:
 
 
 def get_group_name(obj: pv.DataSet) -> list[str]:
-    __warnings_hide = True
+    _warnings_hide = True
     return grapes.getitem(
         obj.field_data,
         "GroupName",

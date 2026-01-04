@@ -60,14 +60,12 @@ dynamic = ["version"]
 [project.scripts]
 melon = "liblaf.melon.cli:app.meta"
 
+[project.optional-dependencies]
+cuda12 = ["jax[cuda12]>=0.8,<0.9"]
+cuda13 = ["jax[cuda13]>=0.8,<0.9"]
+
 [dependency-groups]
-dev = [
-  "jax[cuda12]",
-  "liblaf-cherries>=0.7,<0.8",
-  "pygltflib>=1,<2",
-  "scipy-stubs>=1,<2",
-  "sortedcontainers-stubs>=2,<3"
-]
+dev = ["liblaf-cherries>=1,<2", "pygltflib>=1,<2", "scipy-stubs>=1,<2"]
 build = ["check-wheel-contents>=0.6,<0.7", "hatch>=1,<2", "twine>=6,<7"]
 docs = ["liblaf-mkdocs-preset>=0.2,<0.3", "mkdocs>=1,<2"]
 test = ["liblaf-pytest-preset>=0.1,<0.2,<7", "pytest>=9,<10"]
@@ -119,4 +117,5 @@ extend = ".config/linters/.ruff.toml"
 ignore = ["F722"]
 
 [tool.uv]
+conflicts = [[{ extra = "cuda12" }, { extra = "cuda13" }]]
 default-groups = "all"

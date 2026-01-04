@@ -8,11 +8,16 @@ caseSensitive: false
 enableGlobDot: true
 ignorePaths:
   - .git/
+  - cspell.*
   - "*.lock"
+  - "*.png"
+  - "*.glb"
+  - "*.landmarks.json"
+  - "*.obj"
+  - "*.ply"
   - "*.vtm"
   - "*.vtp"
   - "*.vtu"
-  - cspell.*
 ignoreRandomStrings: true
 maxFileSize: 500KB
 useGitignore: true
@@ -101,7 +106,6 @@ words:
   - pyproject
   - pyrightconfig
   - pytest
-  - pyvenv
   - pyvista
   - retopo
   - rhomboideus
@@ -124,8 +128,6 @@ words:
   - thyrohyoid
   - tombi
   - trimesh
-  - uchar
-  - unshallow
   - uuidgen
   - veli
   - venv

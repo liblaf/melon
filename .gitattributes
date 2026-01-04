@@ -14,7 +14,6 @@
 *.series filter=lfs diff=lfs merge=lfs -text
 *.stl filter=lfs diff=lfs merge=lfs -text
 *.vti filter=lfs diff=lfs merge=lfs -text
-*.vti filter=lfs diff=lfs merge=lfs -text
 *.vtkhdf filter=lfs diff=lfs merge=lfs -text
 *.vtm filter=lfs diff=lfs merge=lfs -text
 *.vtp filter=lfs diff=lfs merge=lfs -text
