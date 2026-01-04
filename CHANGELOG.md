@@ -7,6 +7,25 @@ All notable changes to this project will be documented in this file.
 The format is based on [Conventional Changelog](https://github.com/conventional-changelog/conventional-changelog-config-spec/blob/master/versions/2.2.0/README.md),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.0](https://github.com/liblaf/melon/releases/tag/v1.0.0) - 2026-01-04
+
+### 💥 BREAKING CHANGES
+
+- release 1.0.0 - [4a58585](https://github.com/liblaf/melon/commit/4a5858514cd9518dd6c6da6197da5020e7fbfa9f) by [@liblaf](https://github.com/liblaf)
+
+### ✨ Features
+
+- **cli:** add `convert` command for mesh format conversion - [651001c](https://github.com/liblaf/melon/commit/651001c677f48dc26ccaea8e76419ea58906d81c) by [@liblaf](https://github.com/liblaf)
+- release 1.0.0 - [4a58585](https://github.com/liblaf/melon/commit/4a5858514cd9518dd6c6da6197da5020e7fbfa9f) by [@liblaf](https://github.com/liblaf)
+
+### 🛠 Builds
+
+- **deps:** refactor JAX CUDA optional dependencies and cleanup - [20ee1ed](https://github.com/liblaf/melon/commit/20ee1edba030a8035241875403d8e669019b62b3) by [@liblaf](https://github.com/liblaf)
+
+### ❤️ Contributors
+
+- [@liblaf](https://github.com/liblaf) made their first contribution
+
 ## [0.9.8](https://github.com/liblaf/melon/releases/tag/v0.9.8) - 2025-12-29
 
 ### 🐛 Bug Fixes
@@ -15,7 +34,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### ❤️ Contributors
 
-- [@liblaf](https://github.com/liblaf) made their first contribution
+- [@liblaf[bot]](https://github.com/apps/liblaf)
+- [@liblaf](https://github.com/liblaf)
 
 ## [0.9.7](https://github.com/liblaf/melon/releases/tag/v0.9.7) - 2025-12-16
 
