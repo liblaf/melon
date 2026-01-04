@@ -1,17 +1,21 @@
+from __future__ import annotations
+
 import collections
 import functools
 from collections.abc import Callable, Iterable
 from pathlib import Path
-from typing import Any, Protocol
+from typing import TYPE_CHECKING, Any, Protocol
 
 import attrs
 import more_itertools as mit
 from liblaf.grapes.logging import autolog
 
 from liblaf.melon import utils
-from liblaf.melon.typing import PathLike
 
 from ._typing import RegType, SingleDispatchCallable
+
+if TYPE_CHECKING:
+    from _typeshed import StrPath
 
 
 @attrs.define
@@ -39,7 +43,7 @@ class WriterDispatcher:
         )
     )
 
-    def __call__(self, path: PathLike, obj: Any, /, **kwargs) -> None:
+    def __call__(self, path: StrPath, obj: Any, /, **kwargs) -> None:
         __tracebackhide__ = True
         path = Path(path)
         writer: SingleDispatchCallable[None] | None = self.writers.get(path.suffix)

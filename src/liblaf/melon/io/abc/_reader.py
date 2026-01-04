@@ -1,12 +1,16 @@
+from __future__ import annotations
+
 from collections.abc import Callable
 from pathlib import Path
-from typing import Protocol
+from typing import TYPE_CHECKING, Protocol
 
 import attrs
 from liblaf.grapes.logging import autolog
 
 from liblaf.melon import utils
-from liblaf.melon.typing import PathLike
+
+if TYPE_CHECKING:
+    from _typeshed import StrPath
 
 
 @attrs.define
@@ -27,7 +31,7 @@ class ReaderDispatcher[T]:
     to_type: type[T]
     registry: dict[str, Reader[T]] = attrs.field(factory=dict)
 
-    def __call__(self, path: PathLike, /, **kwargs) -> T:
+    def __call__(self, path: StrPath, /, **kwargs) -> T:
         __tracebackhide__ = True
         path = Path(path)
         reader: Reader[T] | None = self.registry.get(path.suffix)

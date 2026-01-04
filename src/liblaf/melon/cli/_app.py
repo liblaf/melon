@@ -8,6 +8,7 @@ from liblaf.melon._version import __version__
 app = cyclopts.App(name="melon", version=__version__)
 app.register_install_completion_command(add_to_startup=False)
 app.command("liblaf.melon.cli:annotate_landmarks")
+app.command("liblaf.melon.cli:convert")
 app.command("liblaf.melon.cli:info")
 
 

@@ -1,15 +1,19 @@
+from __future__ import annotations
+
 import functools
 from collections.abc import Callable, Sequence
 from pathlib import Path
-from typing import overload, override
+from typing import TYPE_CHECKING, overload, override
 
 import attrs
 import pyvista as pv
 
 from liblaf import grapes
-from liblaf.melon.typing import PathLike
 
 from ._shared import File, Series
+
+if TYPE_CHECKING:
+    from _typeshed import StrPath
 
 
 @attrs.define
@@ -17,7 +21,7 @@ class SeriesReader[T](Sequence[T]):
     file: Path
     loader: Callable[[Path], T]
 
-    def __init__(self, file: PathLike, loader: Callable[[Path], T]) -> None:
+    def __init__(self, file: StrPath, loader: Callable[[Path], T]) -> None:
         file = Path(file)
         self.__attrs_init__(file=file, loader=loader)  # pyright: ignore[reportAttributeAccessIssue]
 

@@ -1,16 +1,20 @@
+from __future__ import annotations
+
 import contextlib
 import shutil
 import types
 from collections.abc import Sequence
 from pathlib import Path
-from typing import Any, Literal, Self, overload
+from typing import TYPE_CHECKING, Any, Literal, Self, overload
 
 import attrs
 import pydantic
 
 from liblaf import grapes
 from liblaf.melon.io._save import save
-from liblaf.melon.typing import PathLike
+
+if TYPE_CHECKING:
+    from _typeshed import StrPath
 
 
 def snake_to_kebab(snake: str) -> str:
@@ -36,7 +40,7 @@ class SeriesWriter(Sequence[File], contextlib.AbstractContextManager):
 
     def __init__(
         self,
-        file: PathLike,
+        file: StrPath,
         /,
         *,
         clear: bool = False,
