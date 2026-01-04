@@ -7,6 +7,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Conventional Changelog](https://github.com/conventional-changelog/conventional-changelog-config-spec/blob/master/versions/2.2.0/README.md),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.0](https://github.com/liblaf/melon/releases/tag/v1.1.0) - 2026-01-04
+
+### ✨ Features
+
+- **tet:** implement compute_volume_fraction for tetrahedral meshes - [0d2f47c](https://github.com/liblaf/melon/commit/0d2f47c92ed556934135014f5ad47cc30089d6d1) by [@liblaf](https://github.com/liblaf)
+
+### ❤️ Contributors
+
+- [@liblaf](https://github.com/liblaf) made their first contribution
+
 ## [1.0.0](https://github.com/liblaf/melon/releases/tag/v1.0.0) - 2026-01-04
 
 ### 💥 BREAKING CHANGES
@@ -24,7 +34,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### ❤️ Contributors
 
-- [@liblaf](https://github.com/liblaf) made their first contribution
+- [@liblaf[bot]](https://github.com/apps/liblaf)
+- [@liblaf](https://github.com/liblaf)
 
 ## [0.9.8](https://github.com/liblaf/melon/releases/tag/v0.9.8) - 2025-12-29
 
