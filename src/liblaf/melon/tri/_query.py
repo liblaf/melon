@@ -33,24 +33,29 @@ class MeshQuery:
     def scale(self) -> float:
         return self.mesh_tm.scale
 
+    def bounds_contains(self, pcl: Any) -> Bool[Array, " N"]:
+        pcl: pv.PointSet = io.as_pointset(pcl)
+        points_jax: Float[Array, " N 3"] = jnp.asarray(pcl.points, jnp.float32)
+        return bounds_contains(self.bounds, points_jax)
+
     def contains(self, pcl: Any) -> Bool[Array, " N"]:
         pcl: pv.PointSet = io.as_pointset(pcl)
         points_jax: Float[Array, " N 3"] = jnp.asarray(pcl.points, jnp.float32)
         output_jax: Bool[Array, " N"] = bounds_contains(self.bounds, points_jax)
-        points: wp.array = wp.from_jax(points_jax[output_jax], dtype=wp.vec3f)
-        output: wp.array = wp.zeros(points.shape, dtype=wp.bool)
+        points_wp: wp.array = wp.from_jax(points_jax[output_jax], dtype=wp.vec3f)
+        output_wp: wp.array = wp.zeros(points_wp.shape, dtype=wp.bool)
         wp.launch(
             _contains_kernel,
-            dim=points.shape,
-            inputs=[self.mesh_wp.id, points, self.scale],
-            outputs=[output],
+            dim=points_wp.shape,
+            inputs=[self.mesh_wp.id, points_wp, self.scale],
+            outputs=[output_wp],
         )
-        output_jax = output_jax.at[output_jax].set(wp.to_jax(output))
+        output_jax = output_jax.at[output_jax].set(wp.to_jax(output_wp))
         return output_jax
 
     def signed_distance(self, pcl: Any) -> Float[Array, " N"]:
         pcl: pv.PointSet = io.as_pointset(pcl)
-        points_jax: Float[Array, " N 3"] = jnp.asarray(pcl.points, jnp.float32)
+        points_jax: Float[Array, "N 3"] = jnp.asarray(pcl.points, jnp.float32)
         points_wp: wp.array = wp.from_jax(points_jax, wp.vec3f)
         output_wp: wp.array = wp.zeros(points_wp.shape, wp.float32)
         wp.launch(

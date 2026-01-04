@@ -22,6 +22,7 @@ ignoreRandomStrings: true
 maxFileSize: 500KB
 useGitignore: true
 words:
+  - aabb
   - anguli
   - arithmatex
   - atlanto
@@ -53,6 +54,7 @@ words:
   - griseum
   - hynek
   - hyoglossus
+  - icosphere
   - illiocostalis
   - inferioris
   - inferor
