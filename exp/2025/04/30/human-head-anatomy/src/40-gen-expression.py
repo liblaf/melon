@@ -5,19 +5,22 @@ import potpourri3d as pp3d
 import pyvista as pv
 import scipy
 import trimesh as tm
+from environs import env
 from jaxtyping import Bool, Float, Integer
 
 import liblaf.melon as melon  # noqa: PLR0402
 from liblaf import cherries
 
-SUFFIX: str = "-515k"
+SUFFIX: str = env.str("SUFFIX", "-515k")
 
 
 class Config(cherries.BaseConfig):
+    suffix: str = SUFFIX
     source: Path = cherries.input("40-expression-flame.vtp")
     tetmesh: Path = cherries.input(f"31-masks{SUFFIX}.vtu")
 
     output: Path = cherries.output(f"40-expression{SUFFIX}.vtu")
+    output_face: Path = cherries.output(f"40-expression-face{SUFFIX}.vtp")
 
 
 def geodestic_transform(mesh: pv.PolyData) -> pv.PolyData:
@@ -69,8 +72,11 @@ def inpaint_by_smoothing(mesh: pv.PolyData, data_names: list[str]) -> pv.PolyDat
             mesh_tm.vertices + np.nan_to_num(mesh.point_data[name], nan=0.0),
             mesh_tm.faces,
         )
-        smoothed: tm.Trimesh = tm.smoothing.filter_taubin(
-            deformed, iterations=10**5, laplacian_operator=laplacian
+        smoothed: tm.Trimesh = tm.smoothing.filter_laplacian(
+            deformed,
+            iterations=10**3,
+            volume_constraint=False,
+            laplacian_operator=laplacian,
         )
         mesh.point_data[name] = smoothed.vertices - mesh.points
     return mesh
@@ -158,10 +164,8 @@ def main(cfg: Config) -> None:
         tetmesh.point_data[name][skull_mask] = 0.0
     melon.save(cfg.output, tetmesh)
 
-    face: pv.PolyData = surface.extract_points(
-        surface.point_data["IsFace"]
-    ).extract_surface()
-    melon.save(cherries.temp("40-expression-face.vtp"), face)
+    face: pv.PolyData = melon.tri.extract_points(surface, surface.point_data["IsFace"])
+    melon.save(cfg.output_face, face)
 
 
 if __name__ == "__main__":

@@ -65,6 +65,7 @@ def main(cfg: Config) -> None:
     # tetgen(coarsen=False, conform=False, lr=0.02)
     tetgen(coarsen=False, conform=False, epsr=3e-4, lr=0.015)
     tetgen(coarsen=False, conform=False, epsr=2e-4, lr=0.01)
+    tetgen(coarsen=False, conform=False, epsr=1e-4, lr=0.005)
 
     # tetgen(coarsen=True, conform=True, epsr=4e-4, lr=0.05)
     # tetgen(coarsen=False, conform=True, lr=0.05)

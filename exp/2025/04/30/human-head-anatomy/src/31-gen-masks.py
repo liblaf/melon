@@ -23,7 +23,7 @@ GROUPS_NOT_FACE: list[str] = [
     "NeckFront",
     "Nostril",
 ]
-SUFFIX: str = "-232k"
+SUFFIX: str = "-515k"
 
 
 class Config(cherries.BaseConfig):
@@ -43,6 +43,20 @@ def gen_surface_masks(
 ) -> pv.PolyData:
     cranium: pv.PolyData = melon.tri.extract_groups(full, groups["Cranium"])
     mandible: pv.PolyData = melon.tri.extract_groups(full, groups["Mandible"])
+
+    cranium.cell_data["IsSliding"] = melon.tri.select_groups(
+        cranium,
+        [
+            "Maxilla_left_skull001",
+            "Maxilla_right_skull001",
+            "Os_temporale_left_skull001",
+            "Os_temporale_right_skull001",
+            "Zygomatic_left_skull001",
+            "Zygomatic_right_skull001",
+        ],
+    )
+    mandible.cell_data["IsSliding"] = np.zeros((mandible.n_cells,), np.bool)
+    skin.cell_data["IsSliding"] = np.zeros((skin.n_cells,), np.bool)
 
     cranium.cell_data["IsCranium"] = np.ones((cranium.n_cells,), np.bool)
     mandible.cell_data["IsCranium"] = np.zeros((mandible.n_cells,), np.bool)
@@ -84,6 +98,7 @@ def gen_surface_masks(
             "IsLipTop",
             "IsMandible",
             "IsSkin",
+            "IsSliding",
         ],
         fill=False,
         nearest=melon.NearestPointOnSurface(
@@ -131,6 +146,7 @@ def main(cfg: Config) -> None:
             "IsLipTop",
             "IsMandible",
             "IsSkin",
+            "IsSliding",
         ],
         fill=False,
         point_id="_PointId",

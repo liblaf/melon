@@ -11,7 +11,7 @@ from liblaf import cherries
 class Config(cherries.BaseConfig):
     source: Path = cherries.input("00-sculptor-mandible.ply")
     target: Path = cherries.input("13-mandible.vtp")
-    output: Path = cherries.output("14-mandible.ply")
+    output: Path = cherries.output("14-mandible.vtp")
 
 
 def main(cfg: Config) -> None:
@@ -26,6 +26,15 @@ def main(cfg: Config) -> None:
         source_landmarks=source_landmarks,
         target_landmarks=target_landmarks,
     )
+
+    result = melon.transfer.transfer_tri_cell_to_point_category(
+        target,
+        result,
+        data="GroupId",
+        fill=-1,
+        nearest=melon.proximity.NearestPointOnSurface(normal_threshold=None),
+    )
+    result.field_data["GroupName"] = target.field_data["GroupName"]
 
     melon.save(cfg.output, result)
     melon.save_landmarks(cfg.output, target_landmarks)
