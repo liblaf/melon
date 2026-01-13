@@ -3,6 +3,7 @@ from pathlib import Path
 import numpy as np
 import pyvista as pv
 import trimesh as tm
+from environs import env
 from jaxtyping import Array, Bool, Float
 
 import liblaf.melon as melon  # noqa: PLR0402
@@ -23,10 +24,11 @@ GROUPS_NOT_FACE: list[str] = [
     "NeckFront",
     "Nostril",
 ]
-SUFFIX: str = "-515k"
+SUFFIX: str = env.str("SUFFIX", default="-515k")
 
 
 class Config(cherries.BaseConfig):
+    suffix: str = SUFFIX
     full: Path = cherries.input("00-Full human head anatomy.obj")
     groups: Path = cherries.input("13-groups.toml")
     skin: Path = cherries.input("12-skin.vtp")
