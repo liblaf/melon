@@ -2292,7 +2292,7 @@ wheels = [
 
 [[package]]
 name = "liblaf-cherries"
-version = "1.0.0"
+version = "1.1.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "attrs" },
@@ -2309,14 +2309,14 @@ dependencies = [
     { name = "rich" },
     { name = "wrapt" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/9d/2c/0d9ab23f532d91138842287645317b365540e7e8c22a06edab05cbb5717e/liblaf_cherries-1.0.0.tar.gz", hash = "sha256:2f1c2573128d896a1d4f60b8daa4b44d228bd9be12ea32391e82c7c1b9e420e2", size = 14355, upload-time = "2026-01-04T08:28:38.649Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/e7/7a/a4e2b8b9e341c1119da8e9ccc0d4ceabae66053a02fbe995fbe69f51d832/liblaf_cherries-1.1.0.tar.gz", hash = "sha256:083be1af71219795aa40fe7f009ff9946d051e8c75c09394fa905144c00e0032", size = 14390, upload-time = "2026-01-16T11:05:30.975Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/9f/54/94e60ffc0291caaf712eba4091c230aa4b17614356e156dd7c69a8fd6d1d/liblaf_cherries-1.0.0-py3-none-any.whl", hash = "sha256:64c40c928a5cdbf94c2ace9d32290181d31580878f3789b87deacefe5eaa8fda", size = 26989, upload-time = "2026-01-04T08:28:37.071Z" },
+    { url = "https://files.pythonhosted.org/packages/91/27/e01c1a0c01b5cac5175eca0f6adaa709d932290852961e8b19de9dd2c686/liblaf_cherries-1.1.0-py3-none-any.whl", hash = "sha256:707d3f4f9f675945772f64a08ace9ef48d5da81002c5ea5bd6524973b1049aa2", size = 27029, upload-time = "2026-01-16T11:05:29.491Z" },
 ]
 
 [[package]]
 name = "liblaf-grapes"
-version = "8.11.0"
+version = "9.0.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "about-time" },
@@ -2336,15 +2336,16 @@ dependencies = [
     { name = "pendulum" },
     { name = "platformdirs" },
     { name = "pydantic" },
+    { name = "quantiphy" },
     { name = "rich" },
     { name = "toolz" },
     { name = "typing-extensions" },
     { name = "wadler-lindig" },
     { name = "wrapt" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/1c/57/78599f3109026e072989f4cf887b65a3343ae6b1e29dc63f641be0c5d8fb/liblaf_grapes-8.11.0.tar.gz", hash = "sha256:7c1d7b117fe837ccd02e8cf3f548bf0b71f188affd096afe8f028cc624e576d3", size = 43459, upload-time = "2026-01-13T06:26:42.427Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/41/d5/9804a5404d4042734e4cec33f769e1e59b06a2e830b24f78753cdf9df5dc/liblaf_grapes-9.0.0.tar.gz", hash = "sha256:9d45c584a14e40dd4eaf2ba2605d649a8225394b5bc2d923b3ccd08a62a981c3", size = 42269, upload-time = "2026-01-16T07:02:24.977Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/21/2c/a28578d8e2ea25699b2a013225d2e5dcea0ce890421a20caaab325e903a6/liblaf_grapes-8.11.0-py3-none-any.whl", hash = "sha256:1695b7e9a26dbd23cb97d61055dcf761927a8b9b844ed594f02120406eaf8bd7", size = 93911, upload-time = "2026-01-13T06:26:40.853Z" },
+    { url = "https://files.pythonhosted.org/packages/42/c2/3b961177ab63e649db9cd8cf611398a77d872b7707e4c061d976750715b1/liblaf_grapes-9.0.0-py3-none-any.whl", hash = "sha256:2cec7cf1c722c1a4865c98edd17dabb0a30043af9d61163e3239fd39947ee6d9", size = 90274, upload-time = "2026-01-16T07:02:23.098Z" },
 ]
 
 [[package]]
@@ -2414,7 +2415,7 @@ requires-dist = [
     { name = "jaxtyping", specifier = ">=0.3,<0.4" },
     { name = "jinja2", specifier = ">=3,<4" },
     { name = "lazy-loader", specifier = ">=0.4,<0.5" },
-    { name = "liblaf-grapes", specifier = ">=8,<9" },
+    { name = "liblaf-grapes", specifier = ">=9,<10" },
     { name = "meshio", specifier = ">=5,<6" },
     { name = "more-itertools", specifier = ">=10,<11" },
     { name = "networkx", specifier = ">=3,<4" },
@@ -4624,6 +4625,15 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/eb/2e/79c822141bfd05a853236b504869ebc6b70159afc570e1d5a20641782eaa/pyyaml_env_tag-1.1.tar.gz", hash = "sha256:2eb38b75a2d21ee0475d6d97ec19c63287a7e140231e4214969d0eac923cd7ff", size = 5737, upload-time = "2025-05-13T15:24:01.64Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/04/11/432f32f8097b03e3cd5fe57e88efb685d964e2e5178a48ed61e841f7fdce/pyyaml_env_tag-1.1-py3-none-any.whl", hash = "sha256:17109e1a528561e32f026364712fee1264bc2ea6715120891174ed1b980d2e04", size = 4722, upload-time = "2025-05-13T15:23:59.629Z" },
+]
+
+[[package]]
+name = "quantiphy"
+version = "2.21"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/34/26/5a14317a74bdd3311963fa45aff8553592117e988a697ccf0d0adfc5be5c/quantiphy-2.21.tar.gz", hash = "sha256:bf8d06ffa7150f69a5c7e3fb4a7a0a535109df85e7c0ab0f39fb317c5c9cafe0", size = 43514, upload-time = "2025-12-26T05:22:52.237Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/27/55/d979f5c13dfd3418c650befc045ada747facb2393be2f39a2744c23032de/quantiphy-2.21-py3-none-any.whl", hash = "sha256:7d145d89a908de38d63c8dc0a8883bc668c85d84ed37fe6535d26cf7c077f69f", size = 43299, upload-time = "2025-12-26T05:22:50.82Z" },
 ]
 
 [[package]]
