@@ -27,7 +27,7 @@ dependencies = [
   "attrs>=25,<26",
   "cyclopts>=4,<5",
   "einops>=0.8,<0.9",
-  "jax>=0.8,<0.9",
+  "jax>=0.9,<0.10",
   "jaxtyping>=0.3,<0.4",
   "jinja2>=3,<4",
   "lazy-loader>=0.4,<0.5",
@@ -61,8 +61,8 @@ dynamic = ["version"]
 melon = "liblaf.melon.cli:app.meta"
 
 [project.optional-dependencies]
-cuda12 = ["jax[cuda12]>=0.8,<0.9"]
-cuda13 = ["jax[cuda13]>=0.8,<0.9"]
+cuda12 = ["jax[cuda12]>=0.9,<0.10"]
+cuda13 = ["jax[cuda13]>=0.9,<0.10"]
 
 [dependency-groups]
 dev = ["liblaf-cherries>=1,<2", "pygltflib>=1,<2", "scipy-stubs>=1,<2"]
