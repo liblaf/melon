@@ -7,6 +7,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Conventional Changelog](https://github.com/conventional-changelog/conventional-changelog-config-spec/blob/master/versions/2.2.0/README.md),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.1](https://github.com/liblaf/melon/releases/tag/v1.1.1) - 2026-01-21
+
+### 🐛 Bug Fixes
+
+- **deps:** update dependency jax to >=0.9,<0.10 (#99) - [5ad2cab](https://github.com/liblaf/melon/commit/5ad2cab8519361771e07d3e4c8b815797447a9c9) by [@renovate[bot]](https://github.com/apps/renovate) in [#99](https://github.com/liblaf/melon/pull/99)
+- **deps:** update dependency liblaf-grapes to v9 (#98) - [5ea05c2](https://github.com/liblaf/melon/commit/5ea05c2f39920b2bb13147be56d73511f3ab0689) by [@renovate[bot]](https://github.com/apps/renovate) in [#98](https://github.com/liblaf/melon/pull/98)
+
+### ❤️ Contributors
+
+- [@renovate[bot]](https://github.com/apps/renovate) made their first contribution in [#98](https://github.com/liblaf/melon/pull/98)
+- [@liblaf](https://github.com/liblaf) made their first contribution
+
 ## [1.1.0](https://github.com/liblaf/melon/releases/tag/v1.1.0) - 2026-01-04
 
 ### ✨ Features
@@ -15,7 +27,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### ❤️ Contributors
 
-- [@liblaf](https://github.com/liblaf) made their first contribution
+- [@liblaf[bot]](https://github.com/apps/liblaf)
+- [@liblaf](https://github.com/liblaf)
 
 ## [1.0.0](https://github.com/liblaf/melon/releases/tag/v1.0.0) - 2026-01-04
 
