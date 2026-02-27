@@ -2424,7 +2424,7 @@ requires-dist = [
     { name = "potpourri3d", specifier = ">=1,<2" },
     { name = "pydantic", specifier = ">=2,<3" },
     { name = "pydicom", specifier = ">=3,<4" },
-    { name = "pymeshfix", specifier = ">=0.17,<0.18" },
+    { name = "pymeshfix", specifier = ">=0.18,<0.19" },
     { name = "pyvista", specifier = ">=0.47,<0.48" },
     { name = "rich", specifier = ">=14,<15" },
     { name = "scipy", specifier = ">=1,<2" },
@@ -4386,19 +4386,18 @@ wheels = [
 
 [[package]]
 name = "pymeshfix"
-version = "0.17.2"
+version = "0.18.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "numpy" },
-    { name = "pyvista" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/6a/08/4c2f6391fe3ed013aa0ceefae0bd729cde7bad3095b729bdf93f7d2d2aad/pymeshfix-0.17.2.tar.gz", hash = "sha256:d87c8bc51f85d9f45353a434d52f5041c5b8e65b533b338d7e04889254da6543", size = 1514469, upload-time = "2025-12-13T17:01:29.269Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/52/e0/1bcf152040239f78c215dbabfb2f773570bf8b1660c39f1441b3bd31ef86/pymeshfix-0.18.0.tar.gz", hash = "sha256:c92dcccba6921fed6bdab0b6b8d232f4167407e7acbba959895c8340be7cf3a6", size = 1409548, upload-time = "2026-01-28T21:48:13.819Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/40/f8/10f2296bf7fb529a02da4e4ee70202d43d5f75fb85e948dc9205d21de7ae/pymeshfix-0.17.2-cp311-abi3-macosx_10_9_x86_64.whl", hash = "sha256:703c25043ec43732f0fbf490e6d95ec9c63267cd9e2ccf8b4e0754e5c0cd8420", size = 1438607, upload-time = "2025-12-13T17:01:15.9Z" },
-    { url = "https://files.pythonhosted.org/packages/67/19/135387044bac9381954aac8028aec8e780ec500de19875c22bfa1b05fe69/pymeshfix-0.17.2-cp311-abi3-macosx_11_0_arm64.whl", hash = "sha256:150d2a7161d424de17ae66631759f670351c3dc879f2737a0c3cab5d434a77af", size = 1428856, upload-time = "2025-12-13T17:01:17.714Z" },
-    { url = "https://files.pythonhosted.org/packages/48/04/86735a7e4e6d8ebddbd66ad383ea147efcac4477a2c6c224ceea3506e41d/pymeshfix-0.17.2-cp311-abi3-manylinux_2_24_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:e4942c78addd1ded91f577e30443b25aa6898bd7f638f4e0a4faac004bb3c52b", size = 2459899, upload-time = "2025-12-13T17:01:18.949Z" },
-    { url = "https://files.pythonhosted.org/packages/af/15/896c602c95330c19f58daf3d49d99586957912a88036362e9003da60c833/pymeshfix-0.17.2-cp311-abi3-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:ad53f1d21e4611c4f430e1127331e875e296a5c22b5278d12ff3379e840d9490", size = 2527244, upload-time = "2025-12-13T17:01:20.156Z" },
-    { url = "https://files.pythonhosted.org/packages/e4/af/85b7c477cbdc094cb3d77787351af1baf7e37db5cd07d5dfeb6bffbf6453/pymeshfix-0.17.2-cp311-abi3-win_amd64.whl", hash = "sha256:40cc8003f1d422dfc8f640b6934a21c4d80a6761f168b16367db582ab3f6efd5", size = 1538881, upload-time = "2025-12-13T17:01:21.429Z" },
+    { url = "https://files.pythonhosted.org/packages/bb/95/f1ee0461611b44e2266e597216e8b49a5d56876b452bbf823ff12c024bdc/pymeshfix-0.18.0-cp312-abi3-macosx_10_13_x86_64.whl", hash = "sha256:36685ac6a54226b7198f8b56e35f22f87771e7281d6aea865955c54ba8cac244", size = 1327299, upload-time = "2026-01-28T21:48:03.952Z" },
+    { url = "https://files.pythonhosted.org/packages/d4/5c/3fd4f42e985eb53a603f03c717071f61deeaadc0bbe42433187947d517dd/pymeshfix-0.18.0-cp312-abi3-macosx_11_0_arm64.whl", hash = "sha256:fa0905d6256c4694af38d7e8baa304e3f54c0553781758dfe63ca6a55cbd72ea", size = 1318155, upload-time = "2026-01-28T21:48:06.181Z" },
+    { url = "https://files.pythonhosted.org/packages/a2/62/edba76fc9d6d71acad881a3c9250594c71fa04ffd156a486ffc42a117bb9/pymeshfix-0.18.0-cp312-abi3-manylinux_2_26_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:821991d8b3f6bf58fb3eeeadd8599bd69d3e6cee4191e137b90a0587894f96a9", size = 1340175, upload-time = "2026-01-28T21:48:07.754Z" },
+    { url = "https://files.pythonhosted.org/packages/02/cf/f5c895d01457ba3aa218ff2408ae4d1b0cbff7efd891ce671cf6ac51cbd9/pymeshfix-0.18.0-cp312-abi3-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:8d99c508b9fcd39732d7b617994ccb9a0eda4c5c329639bd9d02bd988b0d5288", size = 1351517, upload-time = "2026-01-28T21:48:10.085Z" },
+    { url = "https://files.pythonhosted.org/packages/52/1a/d3bb42b886419209b45f18ccba3c434ef988050b5ec0579a06d9200d133b/pymeshfix-0.18.0-cp312-abi3-win_amd64.whl", hash = "sha256:e66a3c45b2364097c5ef8e1039d01077856aa6ff831e433806451471d6f073a8", size = 1507575, upload-time = "2026-01-28T21:48:11.787Z" },
 ]
 
 [[package]]
