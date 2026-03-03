@@ -117,6 +117,7 @@ words:
   - sdist
   - septi
   - serratus
+  - smas
   - sphenomandibular
   - spinalis
   - sternocleidomastoid
@@ -130,6 +131,7 @@ words:
   - thyrohyoid
   - tombi
   - trimesh
+  - unshallow
   - uuidgen
   - veli
   - venv

@@ -22,8 +22,8 @@ def main(cfg: Config) -> None:
     blocks: pv.MultiBlock = muscles_union.split_bodies().as_polydata_blocks()
     for muscle in blocks:
         muscle: pv.PolyData
-        muscle.user_dict["name"] = muscle.field_data["group-name"][
-            muscle.cell_data["group-id"][0]
+        muscle.user_dict["Name"] = muscle.field_data["GroupName"][
+            muscle.cell_data["GroupId"][0]
         ]
     muscles: list[pv.PolyData] = [melon.mesh_fix(muscle) for muscle in blocks]
 
@@ -35,29 +35,29 @@ def main(cfg: Config) -> None:
             muscle
         ).principal_inertia_vectors
         index: Integer[np.ndarray, " 3"] = np.argsort(components)
-        muscle.field_data["moment-inertia"] = melon.as_trimesh(muscle).moment_inertia
-        muscle.field_data["principal-inertia-vectors"] = vectors[index]
-        muscle.field_data["principal-inertia-components"] = components[index]
-        ic(muscle.user_dict["name"])
+        muscle.field_data["MomentInertia"] = melon.as_trimesh(muscle).moment_inertia
+        muscle.field_data["PrincipalInertiaVectors"] = vectors[index]
+        muscle.field_data["PrincipalInertiaComponents"] = components[index]
+        ic(muscle.user_dict["Name"])
 
-    pv.set_plot_theme("document_pro")
-    plotter = pv.Plotter()
-    for muscle in muscles:
-        plotter.add_mesh(muscle)
-        plotter.add_arrows(
-            muscle.center_of_mass(),
-            muscle.field_data["principal-inertia-vectors"][0],
-            mag=2,
-            color="red",
-        )
-        plotter.add_arrows(
-            muscle.center_of_mass(),
-            muscle.field_data["principal-inertia-vectors"][1],
-            mag=1,
-            color="green",
-        )
-    plotter.show()
+    # pv.set_plot_theme("document_pro")
+    # plotter = pv.Plotter()
+    # for muscle in muscles:
+    #     plotter.add_mesh(muscle)
+    #     plotter.add_arrows(
+    #         muscle.center_of_mass(),
+    #         muscle.field_data["PrincipalInertiaVectors"][0],
+    #         mag=2,
+    #         color="red",
+    #     )
+    #     plotter.add_arrows(
+    #         muscle.center_of_mass(),
+    #         muscle.field_data["PrincipalInertiaVectors"][1],
+    #         mag=1,
+    #         color="green",
+    #     )
+    # plotter.show()
 
 
 if __name__ == "__main__":
-    cherries.main(main, profile="playground")
+    cherries.main(main, profile="debug")
