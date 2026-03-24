@@ -26,7 +26,7 @@ def compute_point_normals(
     point_id_name: str = utils.random_name("_PointId_")
     mesh: pv.UnstructuredGrid = io.as_unstructured_grid(mesh)
     mesh.point_data[point_id_name] = np.arange(mesh.n_points)
-    surface: pv.PolyData = mesh.extract_surface()  # pyright: ignore[reportAssignmentType]
+    surface: pv.PolyData = mesh.extract_surface(algorithm=None)  # pyright: ignore[reportAssignmentType]
     surface.compute_normals(
         cell_normals=False,
         point_normals=True,

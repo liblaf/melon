@@ -10,7 +10,7 @@ def test_tri_point_to_tet() -> None:
     target: pv.UnstructuredGrid = pv.examples.download_letter_a()  # pyright: ignore[reportAssignmentType]
     target.point_data["OrderedPointId"] = np.arange(target.n_points)
     target.point_data["UnorderedPointId"] = rng.permutation(np.arange(target.n_points))
-    source: pv.PolyData = target.extract_surface()  # pyright: ignore[reportAssignmentType]
+    source: pv.PolyData = target.extract_surface(algorithm=None)  # pyright: ignore[reportAssignmentType]
     result: pv.UnstructuredGrid = transfer.transfer_tri_point_to_tet(
         source, target, data=["OrderedPointId"], fill=0, point_id="UnorderedPointId"
     )

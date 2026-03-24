@@ -21,31 +21,33 @@ classifiers = [
   "Programming Language :: Python :: 3",
   "Programming Language :: Python :: 3.12",
   "Programming Language :: Python :: 3.13",
+  # potpourri3d does not provide wheels for Python 3.14
+  # "Programming Language :: Python :: 3.14",
   "Typing :: Typed"
 ]
 dependencies = [
-  "attrs>=25,<26",
-  "cyclopts>=4,<5",
-  "einops>=0.8,<0.9",
-  "jax>=0.9,<0.10",
-  "jaxtyping>=0.3,<0.4",
-  "jinja2>=3,<4",
-  "lazy-loader>=0.4,<0.5",
-  "liblaf-grapes>=9,<10",
-  "meshio>=5,<6",
-  "more-itertools>=10,<11",
-  "networkx>=3,<4",
-  "numpy>=2,<3",
-  "polars>=1,<2",
-  "potpourri3d>=1,<2",
-  "pydantic>=2,<3",
-  "pydicom>=3,<4",
-  "pymeshfix>=0.17,<0.18",
-  "pyvista>=0.47,<0.48",
-  "rich>=14,<15",
-  "scipy>=1,<2",
-  "trimesh[easy]>=4,<5",
-  "warp-lang>=1,<2"
+  "attrs>=25",
+  "cyclopts>=4",
+  "einops>=0.8",
+  "jax>=0.9",
+  "jaxtyping>=0.3",
+  "jinja2>=3",
+  "lazy-loader>=0.1",
+  "liblaf-grapes>=9",
+  "meshio>=5.3.5",
+  "more-itertools>=10",
+  "networkx>=3",
+  "numpy>=2",
+  "polars>=1",
+  "potpourri3d>=1.3",
+  "pydantic>=2.12",
+  "pydicom>=3",
+  "pymeshfix>=0.18",
+  "pyvista>=0.47",
+  "rich>=14",
+  "scipy>=1.17",
+  "trimesh[easy]>=4.11",
+  "warp-lang>=1.12"
 ]
 dynamic = ["version"]
 
@@ -61,14 +63,17 @@ dynamic = ["version"]
 melon = "liblaf.melon.cli:app.meta"
 
 [project.optional-dependencies]
-cuda12 = ["jax[cuda12]>=0.9,<0.10"]
-cuda13 = ["jax[cuda13]>=0.9,<0.10"]
+cuda12 = ["jax[cuda12]>=0.9"]
+cuda13 = ["jax[cuda13]>=0.9"]
 
 [dependency-groups]
-dev = ["liblaf-cherries>=1,<2", "pygltflib>=1,<2", "scipy-stubs>=1,<2"]
-build = ["check-wheel-contents>=0.6,<0.7", "hatch>=1,<2", "twine>=6,<7"]
-docs = ["liblaf-mkdocs-preset>=0.3,<0.4", "mkdocs>=1,<2"]
-test = ["liblaf-pytest-preset>=0.1,<0.2,<7", "pytest>=9,<10"]
+dev = ["liblaf-cherries>=1", "pygltflib>=1"]
+build = ["check-wheel-contents>=0.6", "hatch>=1", "twine>=6"]
+docs = ["liblaf-mkdocs-preset>=0.3", "mkdocs>=1,<2"]
+lint = ["import-linter[ui]>=2", "ruff>=0.15"]
+nox = ["liblaf-nox-recipes>=0.1", "nox>=2026"]
+test = ["hypothesis>=6", "pytest>=9", "pytest-cov>=7", "pytest-randomly>=4"]
+typing = ["scipy-stubs>=1"]
 
 [build-system]
 requires = ["hatch-vcs", "hatchling"]
@@ -96,17 +101,26 @@ packages = ["src/liblaf"]
 [tool.hatch.version]
 source = "vcs"
 
+[tool.importlinter]
+root_package = "liblaf.melon"
+
+[[tool.importlinter.contracts]]
+ancestors = ["liblaf.melon"]
+name = "Acyclic siblings"
+type = "acyclic_siblings"
+
 [tool.pyright]
 extends = ".config/linters/pyrightconfig.json"
 
 [tool.pytest]
 addopts = [
   "--doctest-modules",
-  "--hypothesis-show-statistics",
   "--import-mode=importlib",
+  "--junitxml=junit.xml",
   "--showlocals"
 ]
 consider_namespace_packages = true
+junit_family = "legacy"
 strict = true
 testpaths = ["benches", "src", "tests"]
 

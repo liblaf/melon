@@ -11,7 +11,6 @@ def mesh_fix(
     mesh: Any,
     *,
     check: bool = True,
-    verbose: bool = False,
     joincomp: bool = False,
     remove_smallest_components: bool = True,
 ) -> pv.PolyData:
@@ -19,12 +18,11 @@ def mesh_fix(
     if importlib.util.find_spec("pymeshfix") is not None:
         result = _pymeshfix(
             mesh,
-            verbose=verbose,
             joincomp=joincomp,
             remove_smallest_components=remove_smallest_components,
         )
     elif shutil.which("MeshFix"):
-        result = _mesh_fix_exe(mesh, verbose=verbose)
+        result = _mesh_fix_exe(mesh)
     else:
         raise NotImplementedError
     result = tri.fix_inversion(result)
@@ -36,18 +34,13 @@ def mesh_fix(
 
 
 def _pymeshfix(
-    mesh: Any,
-    *,
-    verbose: bool = False,
-    joincomp: bool = False,
-    remove_smallest_components: bool = True,
+    mesh: Any, *, joincomp: bool = False, remove_smallest_components: bool = True
 ) -> pv.PolyData:
     import pymeshfix
 
     mesh: pv.PolyData = io.as_polydata(mesh)
     fix = pymeshfix.MeshFix(mesh)
     fix.repair(
-        verbose=verbose,
         joincomp=joincomp,
         remove_smallest_components=remove_smallest_components,
     )

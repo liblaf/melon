@@ -32,7 +32,7 @@ def transfer_tri_cell_to_point_category(
         nearest = NearestPointOnSurface()
     prepared: NearestPointOnSurfacePrepared = nearest.prepare(source)
     result: NearestPointOnSurfaceResult = prepared.query(target)
-    any_missing: bool = np.any(result.missing)  # pyright: ignore[reportAssignmentType]
+    any_missing: np.bool = np.any(result.missing)
     valid: Bool[np.ndarray, " T"] = ~result.missing
     indices: Integer[np.ndarray, "V 3"] = result.triangle_id[valid]
     for name in data:

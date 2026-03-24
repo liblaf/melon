@@ -12,6 +12,4 @@ def as_names(
         return attributes.keys()
     if isinstance(names, str):
         return [names]
-    if isinstance(names, Collection):
-        return names
     return list(names)
