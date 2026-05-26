@@ -720,7 +720,7 @@ wheels = [
 
 [[package]]
 name = "cyclopts"
-version = "4.15.0"
+version = "4.16.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "attrs" },
@@ -728,9 +728,9 @@ dependencies = [
     { name = "rich" },
     { name = "rich-rst" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/bb/fe/da593db56d872f53fd1abfeb0c801310d3b7629a3b50873c2e13c5a3cac4/cyclopts-4.15.0.tar.gz", hash = "sha256:3b5655581bcb759880abf1aeebf6fd370a3a4da8cf1248dd71061e357a525a34", size = 177765, upload-time = "2026-05-21T12:23:22.413Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/34/07/bf61d13de86d96a4c46aff00c9ca0eced44bcc8c3e16280605c1253e5720/cyclopts-4.16.1.tar.gz", hash = "sha256:8aa47bf92a5fb33abca5af05e576eecdb0d2f79893ad29238046df78370fc4a8", size = 181196, upload-time = "2026-05-25T15:29:08.518Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/03/85/72020c6d9c185ea36742e005d9e8f3b47ff8a4181ced8ff03d66e655de6b/cyclopts-4.15.0-py3-none-any.whl", hash = "sha256:0eb784abb4ea8893099429e903193ff31edcb5fe17a619fa93c6eaf60bf51f1f", size = 215341, upload-time = "2026-05-21T12:23:23.549Z" },
+    { url = "https://files.pythonhosted.org/packages/00/8d/7f362c2fb8ef4decd2160bc24d4292c6ca658cc6d9a161b89ca5122bbdbf/cyclopts-4.16.1-py3-none-any.whl", hash = "sha256:617795392c4113a2c2cc7af716f20244900e87f23daa05442d1268d81472a592", size = 219020, upload-time = "2026-05-25T15:29:09.646Z" },
 ]
 
 [[package]]
@@ -852,15 +852,16 @@ wheels = [
 
 [[package]]
 name = "dataclasses-json"
-version = "0.6.7"
+version = "0.2.5"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "marshmallow" },
+    { name = "marshmallow-enum" },
     { name = "typing-inspect" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/64/a4/f71d9cf3a5ac257c993b5ca3f93df5f7fb395c725e7f1e6479d2514173c3/dataclasses_json-0.6.7.tar.gz", hash = "sha256:b6b3e528266ea45b9535223bc53ca645f5208833c29229e847b3f26a1cc55fc0", size = 32227, upload-time = "2024-06-09T16:20:19.103Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/49/61/0845db183672af4912bc47537f640d152565b1249127df6253cad508b794/dataclasses-json-0.2.5.tar.gz", hash = "sha256:d4868863649be39d0fd223b18e1335c87b50d2ed1a4876f494c8603052ec889e", size = 15275, upload-time = "2019-06-15T03:55:33.593Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/c3/be/d0d44e092656fe7a06b55e6103cbce807cdbdee17884a5367c68c9860853/dataclasses_json-0.6.7-py3-none-any.whl", hash = "sha256:0dbf33f26c8d5305befd61b39d2b3414e8a407bedc2834dea9b8d642666fb40a", size = 28686, upload-time = "2024-06-09T16:20:16.715Z" },
+    { url = "https://files.pythonhosted.org/packages/48/a7/18386cb46ba0f4b6b78793b9f8d5338069b9646a1f4fe5536b1bd830b205/dataclasses_json-0.2.5-py3-none-any.whl", hash = "sha256:c8e53f9ed65849751b27e60ac0048d1609a114b326de93ea3e2338f3853f2933", size = 13451, upload-time = "2019-06-15T03:55:28.436Z" },
 ]
 
 [[package]]
@@ -986,15 +987,15 @@ wheels = [
 
 [[package]]
 name = "environs"
-version = "14.6.0"
+version = "15.0.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "marshmallow" },
     { name = "python-dotenv" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/fb/c7/94f97e6e74482a50b5fc798856b6cc06e8d072ab05a0b74cb5d87bd0d065/environs-14.6.0.tar.gz", hash = "sha256:ed2767588deb503209ffe4dd9bb2b39311c2e4e7e27ce2c64bf62ca83328d068", size = 35563, upload-time = "2026-02-20T04:02:08.869Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/c5/f4/0273d36ab287a00866b69d4008e2ed2e479e4bc1eef4f8be2708f30ad15f/environs-15.0.1.tar.gz", hash = "sha256:638106bfb5d8c9a13ee51c23a9f2416baf9a748c8e537fec771102927cd02aa8", size = 36385, upload-time = "2026-04-06T14:15:12.676Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/97/a8/c070e1340636acb38d4e6a7e45c46d168a462b48b9b3257e14ca0e5af79b/environs-14.6.0-py3-none-any.whl", hash = "sha256:f8fb3d6c6a55872b0c6db077a28f5a8c7b8984b7c32029613d44cef95cfc0812", size = 17205, upload-time = "2026-02-20T04:02:07.299Z" },
+    { url = "https://files.pythonhosted.org/packages/49/fb/11e461eb609792f9f439398eb5f400fb4130ff2b9b59e0ceb346bb830a17/environs-15.0.1-py3-none-any.whl", hash = "sha256:a6aeb3e18d5649a4e74f62984f0d84ec869269cff588a43685272c72b5b8979b", size = 17357, upload-time = "2026-04-06T14:15:11.118Z" },
 ]
 
 [[package]]
@@ -1374,14 +1375,14 @@ wheels = [
 
 [[package]]
 name = "hypothesis"
-version = "6.152.9"
+version = "6.153.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "sortedcontainers" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/3b/fb/a5651eb0cd03ecee644e8f4d8cd2027b40a08bf1488f46201e794aebe9b5/hypothesis-6.152.9.tar.gz", hash = "sha256:de4711d69ce3a18009047c3b44882810fd0c0348c1558e920a4b0d2c45f59e1e", size = 472009, upload-time = "2026-05-19T17:10:19.586Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/b1/92/918fb03318c7ff9a271d7cad8eceb359d1069f17e84f5191d52c2970f18f/hypothesis-6.153.0.tar.gz", hash = "sha256:11616e5158fc485d62bae19d9cc69333237faa8050ad44a45218254a1ef272bb", size = 474030, upload-time = "2026-05-26T05:19:05.468Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/79/d9/40ef7ed22f0c45c2316467edb9afb8fc172cd089cb329c0ee6da6b74416c/hypothesis-6.152.9-py3-none-any.whl", hash = "sha256:9c4fdccb1eac0b12ec740c12290d0e6a0bea3526a3f0bf812b7643bb563c2d8b", size = 538148, upload-time = "2026-05-19T17:10:16.131Z" },
+    { url = "https://files.pythonhosted.org/packages/2e/20/96dc2387cf29a0ec75b427d62d3dde1f44c924719503babaac4c96806223/hypothesis-6.153.0-py3-none-any.whl", hash = "sha256:2aeda9bbb44ae0ee0bfa67ef744a25be05c1f804dca4eb6479c63518dc9f2900", size = 540326, upload-time = "2026-05-26T05:19:02.861Z" },
 ]
 
 [[package]]
@@ -1617,14 +1618,14 @@ wheels = [
 
 [[package]]
 name = "jaxtyping"
-version = "0.3.9"
+version = "0.3.10"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "wadler-lindig" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/c2/be/00294e369938937e31b094437d5ea040e4fd1a20b998ebe572c4a1dcfa68/jaxtyping-0.3.9.tar.gz", hash = "sha256:f8c02d1b623d5f1b6665d4f3ddaec675d70004f16a792102c2fc51264190951d", size = 45857, upload-time = "2026-02-16T10:35:13.263Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/5d/b3/e0be221f95bbf92ea9dd34b04393130ce79fc11357add40bdd0fd4db72c8/jaxtyping-0.3.10.tar.gz", hash = "sha256:7e79b050257bb1c757ee2c3d4ba246bd54422dc785b25f24797a8ce014f6daca", size = 46251, upload-time = "2026-05-24T15:22:22.996Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/94/05/3e39d416fb92b2738a76e8265e6bfc5d10542f90a7c32ad1eb831eea3fa3/jaxtyping-0.3.9-py3-none-any.whl", hash = "sha256:a00557a9d616eff157491f06ed2e21ed94886fad3832399273eb912b345da378", size = 56274, upload-time = "2026-02-16T10:35:11.795Z" },
+    { url = "https://files.pythonhosted.org/packages/61/61/91ffc93953cb2d4ea18db4cf4f3654690a9482443ae3c4c49ca7dc3d2de2/jaxtyping-0.3.10-py3-none-any.whl", hash = "sha256:e611a2b0a2fc3f867f01ceb3769dee6909a6d2075625dad07d3877e9e1297188", size = 56413, upload-time = "2026-05-24T15:22:21.828Z" },
 ]
 
 [[package]]
@@ -1801,25 +1802,38 @@ wheels = [
 
 [[package]]
 name = "liblaf-cherries"
-version = "1.1.2"
+version = "2.0.2"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "attrs" },
-    { name = "cachebox" },
+    { name = "autoregistry" },
     { name = "comet-ml" },
     { name = "environs" },
     { name = "gitpython" },
     { name = "giturlparse" },
-    { name = "lazy-loader" },
-    { name = "liblaf-grapes" },
+    { name = "liblaf-logging" },
+    { name = "msgspec", extra = ["yaml"] },
     { name = "pydantic" },
     { name = "pydantic-settings" },
-    { name = "rich" },
-    { name = "wrapt" },
+    { name = "toolz" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/d5/b3/010d4e488dfed4ecd6c5506cec32a49a9cb68e4e423cf08023932c39d25d/liblaf_cherries-1.1.2.tar.gz", hash = "sha256:1f4aad8217fef97b955d2cacb79eefd8403e876cd00afa04ac5ed04deac3eb12", size = 14129, upload-time = "2026-03-29T01:28:10.909Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/9c/0a/c2294b87e8cb2e6065b17d93b84fbff4143ff3ccc63784a2d9aa81da29ec/liblaf_cherries-2.0.2.tar.gz", hash = "sha256:3befbb97f3bd73257da35770a65092f3865888c8886a19034349386884b548e1", size = 18943, upload-time = "2026-05-26T14:01:23.237Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/4c/b7/eb7848acf51aafd364227387295fb53f9beeed4f060432793462a4f3a1e7/liblaf_cherries-1.1.2-py3-none-any.whl", hash = "sha256:37f066177aa02bc31b7ed3617c4aec2c84e0b30659752101d271941a5dfae0f6", size = 26762, upload-time = "2026-03-29T01:28:09.529Z" },
+    { url = "https://files.pythonhosted.org/packages/7d/d5/f8c8980e591d360c981b084fc114ca934269137d76f0a20e9313384978d2/liblaf_cherries-2.0.2-py3-none-any.whl", hash = "sha256:7942cf18676b333254eed29bc509b91b366dfa2c821cf99cd885f08381e17ca2", size = 30829, upload-time = "2026-05-26T14:01:21.926Z" },
+]
+
+[[package]]
+name = "liblaf-conf"
+version = "0.1.2"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "lazy-loader" },
+    { name = "pydantic" },
+    { name = "pydantic-extra-types", extra = ["pendulum"] },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/87/6c/8554064e2a0c4fb24928fd93dae15cb130f186afa6a5282e7efe106642a0/liblaf_conf-0.1.2.tar.gz", hash = "sha256:6914b38717af82731b10c12c27bd0df66a06ed5624c4ca2541ca0c589bccab37", size = 12056, upload-time = "2026-05-05T08:25:23.523Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/76/25/1d96d12fc79a38938b9f193b66e8d40f920492cf17c085b3d59bf3b3a4fd/liblaf_conf-0.1.2-py3-none-any.whl", hash = "sha256:95d04fd766c2307ddc85c39dc77cb550dc919e0f20712aedc1bd17d573ef57d2", size = 16464, upload-time = "2026-05-05T08:25:22.043Z" },
 ]
 
 [[package]]
@@ -1853,6 +1867,22 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/cb/48/9635f35e7372d7a324d4733ecfb1afcc40868a3946d5510dbab96484957b/liblaf_grapes-9.3.5.tar.gz", hash = "sha256:54b6fe9ccd7728af184b75fd71db8e4f42bcf5aa730df9e800c279d0a7f9f916", size = 45100, upload-time = "2026-03-31T10:08:03.787Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/71/94/43f071a2f3e8002d06e5668eaa69ffc2e93c74d5b38af2c254e9eefe80fe/liblaf_grapes-9.3.5-py3-none-any.whl", hash = "sha256:6099774a31e72eee17b3e21ba0181c4c517b98763a0d0424f9a5625fbd05ef23", size = 95520, upload-time = "2026-03-31T10:08:02.167Z" },
+]
+
+[[package]]
+name = "liblaf-logging"
+version = "0.1.2"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "attrs" },
+    { name = "liblaf-conf" },
+    { name = "limits" },
+    { name = "packaging" },
+    { name = "rich" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/0a/03/45fad6b08cb70e14f4f672a73740dd61442452595aac5c5d31c9c5570ef9/liblaf_logging-0.1.2.tar.gz", hash = "sha256:7c6ec09a15be6fe4b7b3f9453cbdcc460a320b51f14a498a451af5c9313bf55d", size = 16644, upload-time = "2026-05-26T13:11:37.653Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/7d/27/0a3632fd22362264a250aeaac884c501354f415743b02060802c426361e6/liblaf_logging-0.1.2-py3-none-any.whl", hash = "sha256:62886ddd85af289961c492f5b21238e34dddfc1512d5b5862acbc2a0cfd25f98", size = 25119, upload-time = "2026-05-26T13:11:36.38Z" },
 ]
 
 [[package]]
@@ -2284,14 +2314,23 @@ wheels = [
 
 [[package]]
 name = "marshmallow"
-version = "3.26.2"
+version = "4.3.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/25/7e/1dbd4096eb7c148cd2841841916f78820bb85a4d80a0c25c02d30815a7fb/marshmallow-4.3.0.tar.gz", hash = "sha256:fb43c53b3fe240b8f6af37223d6ef1636f927ad9bea8ab323afad95dff090880", size = 224485, upload-time = "2026-04-03T21:46:32.72Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/f4/e0/ff24e25218bb59eb6290a530cea40651b14068b6e3659b20f9c175179632/marshmallow-4.3.0-py3-none-any.whl", hash = "sha256:46c4fe6984707e3cbd485dfebbf0a59874f58d695aad05c1668d15e8c6e13b46", size = 49148, upload-time = "2026-04-03T21:46:31.241Z" },
+]
+
+[[package]]
+name = "marshmallow-enum"
+version = "1.5.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "packaging" },
+    { name = "marshmallow" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/55/79/de6c16cc902f4fc372236926b0ce2ab7845268dcc30fb2fbb7f71b418631/marshmallow-3.26.2.tar.gz", hash = "sha256:bbe2adb5a03e6e3571b573f42527c6fe926e17467833660bebd11593ab8dfd57", size = 222095, upload-time = "2025-12-22T06:53:53.309Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/8e/8c/ceecdce57dfd37913143087fffd15f38562a94f0d22823e3c66eac0dca31/marshmallow-enum-1.5.1.tar.gz", hash = "sha256:38e697e11f45a8e64b4a1e664000897c659b60aa57bfa18d44e226a9920b6e58", size = 4013, upload-time = "2019-08-21T01:07:46.254Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/be/2f/5108cb3ee4ba6501748c4908b908e55f42a5b66245b4cfe0c99326e1ef6e/marshmallow-3.26.2-py3-none-any.whl", hash = "sha256:013fa8a3c4c276c24d26d84ce934dc964e2aa794345a0f8c7e5a7191482c8a73", size = 50964, upload-time = "2025-12-22T06:53:51.801Z" },
+    { url = "https://files.pythonhosted.org/packages/c6/59/ef3a3dc499be447098d4a89399beb869f813fee1b5a57d5d79dee2c1bf51/marshmallow_enum-1.5.1-py2.py3-none-any.whl", hash = "sha256:57161ab3dbfde4f57adeb12090f39592e992b9c86d206d02f6bd03ebec60f072", size = 4186, upload-time = "2019-08-21T01:07:44.814Z" },
 ]
 
 [[package]]
@@ -3598,6 +3637,24 @@ wheels = [
 ]
 
 [[package]]
+name = "pydantic-extra-types"
+version = "2.11.1"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "pydantic" },
+    { name = "typing-extensions" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/66/71/dba38ee2651f84f7842206adbd2233d8bbdb59fb85e9fa14232486a8c471/pydantic_extra_types-2.11.1.tar.gz", hash = "sha256:46792d2307383859e923d8fcefa82108b1a141f8a9c0198982b3832ab5ef1049", size = 172002, upload-time = "2026-03-16T08:08:03.92Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/17/c1/3226e6d7f5a4f736f38ac11a6fbb262d701889802595cdb0f53a885ac2e0/pydantic_extra_types-2.11.1-py3-none-any.whl", hash = "sha256:1722ea2bddae5628ace25f2aa685b69978ef533123e5638cfbddb999e0100ec1", size = 79526, upload-time = "2026-03-16T08:08:02.533Z" },
+]
+
+[package.optional-dependencies]
+pendulum = [
+    { name = "pendulum" },
+]
+
+[[package]]
 name = "pydantic-settings"
 version = "2.14.1"
 source = { registry = "https://pypi.org/simple" }
@@ -3935,15 +3992,15 @@ wheels = [
 
 [[package]]
 name = "rich"
-version = "14.3.4"
+version = "15.0.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "markdown-it-py" },
     { name = "pygments" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/e9/67/cae617f1351490c25a4b8ac3b8b63a4dda609295d8222bad12242dfdc629/rich-14.3.4.tar.gz", hash = "sha256:817e02727f2b25b40ef56f5aa2217f400c8489f79ca8f46ea2b70dd5e14558a9", size = 230524, upload-time = "2026-04-11T02:57:45.419Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/c0/8f/0722ca900cc807c13a6a0c696dacf35430f72e0ec571c4275d2371fca3e9/rich-15.0.0.tar.gz", hash = "sha256:edd07a4824c6b40189fb7ac9bc4c52536e9780fbbfbddf6f1e2502c31b068c36", size = 230680, upload-time = "2026-04-12T08:24:00.75Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/b3/76/6d163cfac87b632216f71879e6b2cf17163f773ff59c00b5ff4900a80fa3/rich-14.3.4-py3-none-any.whl", hash = "sha256:07e7adb4690f68864777b1450859253bed81a99a31ac321ac1817b2313558952", size = 310480, upload-time = "2026-04-11T02:57:47.484Z" },
+    { url = "https://files.pythonhosted.org/packages/82/3b/64d4899d73f91ba49a8c18a8ff3f0ea8f1c1d75481760df8c68ef5235bf5/rich-15.0.0-py3-none-any.whl", hash = "sha256:33bd4ef74232fb73fe9279a257718407f169c09b78a87ad3d296f548e27de0bb", size = 310654, upload-time = "2026-04-12T08:24:02.83Z" },
 ]
 
 [[package]]
@@ -4144,14 +4201,14 @@ wheels = [
 
 [[package]]
 name = "scipy-stubs"
-version = "1.17.1.4"
+version = "1.17.1.5"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "optype", extra = ["numpy"] },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/d1/75/d944a11fca64aa84fbb4bfcf613b758319c6103cb30a304a0e9727009d62/scipy_stubs-1.17.1.4.tar.gz", hash = "sha256:cae00c5207aa62ceb4bcadea202d9fbbf002e958f9e4de981720436b8d5c1802", size = 396980, upload-time = "2026-04-13T11:46:54.528Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/02/30/7a2e621918d1317ab972f797161131f2635648ad5d92baf0695dd009e4f9/scipy_stubs-1.17.1.5.tar.gz", hash = "sha256:284b1dd1dd46107a614971d170030d310cd88b2ac6b483f85285ee0ff87720bd", size = 399933, upload-time = "2026-05-25T21:34:33.6Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/92/f8/334aa5a7a482ea89cb14d92f6a4d9ffa1e193e733144d4d14c7ffcb33583/scipy_stubs-1.17.1.4-py3-none-any.whl", hash = "sha256:e6e5c390fb864745bc3d5f591de81f5cb4f84403857d4f660acb5b6339956f5b", size = 604752, upload-time = "2026-04-13T11:46:53.135Z" },
+    { url = "https://files.pythonhosted.org/packages/e1/26/d4bc2ba3427a623f79a6c10c8f427c7a55b56eb8b3eddc369319d97f741b/scipy_stubs-1.17.1.5-py3-none-any.whl", hash = "sha256:58ebf054a86c000c72e8982e121c4ead0d3d9ba7a6c38aa5fa71b07f96a427fd", size = 607388, upload-time = "2026-05-25T21:34:32.073Z" },
 ]
 
 [[package]]
