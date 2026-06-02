@@ -15,7 +15,7 @@ load_polydata: ReaderDispatcher[pv.PolyData] = ReaderDispatcher(pv.PolyData)
 @load_polydata.register_fallback
 def _load_polydata(path: Path, /, **kwargs) -> pv.PolyData:
     kwargs: Mapping[str, Any] = filter_kwargs(pv.read, kwargs)
-    return cast("pv.PolyData", pv.read(path, cls=pv.PolyData, **kwargs))
+    return pv.read(path, **kwargs)
 
 
 @load_polydata.register((".obj",))
