@@ -1,5 +1,5 @@
 from collections.abc import Iterable
-from typing import Any
+from typing import Any, cast
 
 import more_itertools as mit
 import numpy as np
@@ -29,12 +29,18 @@ def extract_groups(
 
 
 def select_groups(
-    mesh: Any, groups: int | str | Iterable[int | str], *, invert: bool = False
+    mesh: Any,
+    groups: int | str | Iterable[int | str],
+    *,
+    invert: bool = False,
+    preference: pv.FieldAssociation = pv.FieldAssociation.CELL,
 ) -> Bool[np.ndarray, " cells"]:
     mesh: pv.PolyData = io.as_polydata(mesh)
     group_ids: list[int] = _as_group_ids(mesh, groups)
     mask: Bool[np.ndarray, " cells"] = np.isin(
-        mesh.cell_data["GroupId"], group_ids, invert=invert
+        mesh.get_array("GroupId", preference),  # ty:ignore[invalid-argument-type]
+        group_ids,
+        invert=invert,
     )
     return mask
 

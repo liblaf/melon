@@ -9,25 +9,10 @@ class Config(cherries.BaseConfig):
     input: Path = cherries.input("00-complete_human_head_anatomy.glb")
     cranium: Path = cherries.output("11-cranium.ply")
     mandible: Path = cherries.output("11-mandible.ply")
+    teeth: Path = cherries.output("11-teeth.ply")
 
 
-CRANIUM_GEOMETRIES: list[str] = [
-    "Ethmoid_skull001_Head_skeleton_mtl_0",
-    "Frontal_skull001_Head_skeleton_mtl_0",
-    "Lacrimal_001left_skull001_Head_skeleton_mtl_0",
-    "Lacrimal_right_skull001_Head_skeleton_mtl_0",
-    "Maxilla hard palate_skull001_Head_skeleton_mtl_0",
-    "Maxilla_left_skull001_Head_skeleton_mtl_0",
-    "Maxilla_right_skull001_Head_skeleton_mtl_0",
-    "Nasal_L_skull001_Head_skeleton_mtl_0",
-    "Nasal_R_skull001_Head_skeleton_mtl_0",
-    "Occipital_skull001_Head_skeleton_mtl_0",
-    "Os temporale_left_skull001_Head_skeleton_mtl_0",
-    "Os temporale_right_skull001_Head_skeleton_mtl_0",
-    "Palatine_skull001_Head_skeleton_mtl_0",
-    "Parietal_left_skull001_Head_skeleton_mtl_0",
-    "Parietal_right_skull001_Head_skeleton_mtl_0",
-    "Sphenoid_skull001_Head_skeleton_mtl_0",
+UPPER_TEETH_GEOMETRIES: list[str] = [
     "Teeth Canine_029_Teeth_MTL_0",
     "Teeth Canine_030_Teeth_MTL_0",
     "Teeth Incisor central_027_Teeth_MTL_0",
@@ -44,12 +29,8 @@ CRANIUM_GEOMETRIES: list[str] = [
     "Teeth Premolar first_030_Teeth_MTL_0",
     "Teeth Premolar second_030_Teeth_MTL_0",
     "Teeth Premolar second_031_Teeth_MTL_0",
-    "Vomer_skull001_Head_skeleton_mtl_0",
-    "Zygomatic_left_skull001_Head_skeleton_mtl_0",
-    "Zygomatic_right_skull001_Head_skeleton_mtl_0",
 ]
-MANDIBLE_GEOMETRIES: list[str] = [
-    "Mandibula_skull001_Head_skeleton_mtl_0",
+LOWER_TEETH_GEOMETRIES: list[str] = [
     "Teeth Canine_028_Teeth_MTL_0",
     "Teeth Canine_031_Teeth_MTL_0",
     "Teeth Incisor central_026_Teeth_MTL_0",
@@ -67,6 +48,32 @@ MANDIBLE_GEOMETRIES: list[str] = [
     "Teeth Premolar second_032_Teeth_MTL_0",
     "Teeth Premolar second_033_Teeth_MTL_0",
 ]
+CRANIUM_GEOMETRIES: list[str] = [
+    "Ethmoid_skull001_Head_skeleton_mtl_0",
+    "Frontal_skull001_Head_skeleton_mtl_0",
+    "Lacrimal_001left_skull001_Head_skeleton_mtl_0",
+    "Lacrimal_right_skull001_Head_skeleton_mtl_0",
+    "Maxilla hard palate_skull001_Head_skeleton_mtl_0",
+    "Maxilla_left_skull001_Head_skeleton_mtl_0",
+    "Maxilla_right_skull001_Head_skeleton_mtl_0",
+    "Nasal_L_skull001_Head_skeleton_mtl_0",
+    "Nasal_R_skull001_Head_skeleton_mtl_0",
+    "Occipital_skull001_Head_skeleton_mtl_0",
+    "Os temporale_left_skull001_Head_skeleton_mtl_0",
+    "Os temporale_right_skull001_Head_skeleton_mtl_0",
+    "Palatine_skull001_Head_skeleton_mtl_0",
+    "Parietal_left_skull001_Head_skeleton_mtl_0",
+    "Parietal_right_skull001_Head_skeleton_mtl_0",
+    "Sphenoid_skull001_Head_skeleton_mtl_0",
+    "Vomer_skull001_Head_skeleton_mtl_0",
+    "Zygomatic_left_skull001_Head_skeleton_mtl_0",
+    "Zygomatic_right_skull001_Head_skeleton_mtl_0",
+    *UPPER_TEETH_GEOMETRIES,
+]
+MANDIBLE_GEOMETRIES: list[str] = [
+    "Mandibula_skull001_Head_skeleton_mtl_0",
+    *LOWER_TEETH_GEOMETRIES,
+]
 
 
 def main(cfg: Config) -> None:
@@ -79,6 +86,10 @@ def main(cfg: Config) -> None:
         melon.scene.dump(scene, MANDIBLE_GEOMETRIES)
     )
     mandible.export(cfg.mandible)
+    teeth: tm.Trimesh = tm.util.concatenate(
+        melon.scene.dump(scene, UPPER_TEETH_GEOMETRIES + LOWER_TEETH_GEOMETRIES)
+    )
+    teeth.export(cfg.teeth)
 
 
 if __name__ == "__main__":
