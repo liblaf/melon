@@ -40,7 +40,7 @@ class ReaderDispatcher[T]:
         self, suffixes: Iterable[str], reader: AbstractReader[T] | None = None
     ) -> Callable[..., Any]:
         if reader is None:
-            return functools.partial(self.register, suffixes=suffixes)
+            return functools.partial(self.register, suffixes)
         for s in suffixes:
             self.registry[s] = reader
         return reader

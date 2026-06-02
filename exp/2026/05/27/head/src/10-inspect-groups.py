@@ -22,7 +22,7 @@ class SceneTree:
             if geometry is None:
                 self.data[node] = Tree(node)
             elif node == geometry:
-                self.data[node] = Tree(f"[{geometry}]", style="green")
+                self.data[node] = Tree(Text.assemble((f"[{geometry}]", "green")))
             else:
                 self.data[node] = Tree(
                     Text.assemble(node, " ", (f"[{geometry}]", "green"))

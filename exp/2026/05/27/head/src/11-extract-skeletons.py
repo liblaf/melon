@@ -71,16 +71,12 @@ MANDIBLE_GEOMETRIES: list[str] = [
 
 def main(cfg: Config) -> None:
     scene: tm.Scene = tm.load_scene(cfg.input)
-    skeletons: tm.Scene = melon.scene.subscene(scene, "Skeletons Subgroup_004")
-    geometries: dict[str, tm.Geometry] = {
-        g.metadata["name"]: g for g in skeletons.dump()
-    }
     cranium: tm.Trimesh = tm.util.concatenate(
-        [geometries[name] for name in CRANIUM_GEOMETRIES]
+        melon.scene.extract_geometries(scene, CRANIUM_GEOMETRIES)
     )
     cranium.export(cfg.cranium)
     mandible: tm.Trimesh = tm.util.concatenate(
-        [geometries[name] for name in MANDIBLE_GEOMETRIES]
+        melon.scene.extract_geometries(scene, MANDIBLE_GEOMETRIES)
     )
     mandible.export(cfg.mandible)
 

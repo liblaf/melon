@@ -1,3 +1,3 @@
-from ._subscene import subscene
+from ._subscene import extract_geometries
 
-__all__ = ["subscene"]
+__all__ = ["extract_geometries"]
