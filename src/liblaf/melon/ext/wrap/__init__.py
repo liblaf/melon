@@ -1,4 +1,5 @@
 from ._annotate_landmarks import annotate_landmarks
+from ._fast_wrapping import fast_wrapping
 from ._template import get_environment
 
-__all__ = ["annotate_landmarks", "get_environment"]
+__all__ = ["annotate_landmarks", "fast_wrapping", "get_environment"]
