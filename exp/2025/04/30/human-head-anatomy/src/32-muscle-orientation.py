@@ -46,9 +46,7 @@ def inertia_orientation(muscle: pv.PolyData) -> Float[np.ndarray, "3 3"]:
     components: Float[np.ndarray, " 3"] = np.asarray(
         muscle_tm.principal_inertia_components
     )
-    vectors: Float[np.ndarray, "3 3"] = np.asarray(
-        muscle_tm.principal_inertia_vectors
-    )
+    vectors: Float[np.ndarray, "3 3"] = np.asarray(muscle_tm.principal_inertia_vectors)
     axes: Float[np.ndarray, "3 3"] = np.asarray(
         vectors[np.argsort(components)], dtype=np.float64
     )
@@ -93,9 +91,7 @@ def activation_voigt_world(
     orientation: Float[np.ndarray, "3 3"] | Float[np.ndarray, " 9"],
     activation: Float[np.ndarray, " 6"],
 ) -> Float[np.ndarray, " 6"]:
-    tensor: Float[np.ndarray, "3 3"] = activation_tensor_world(
-        orientation, activation
-    )
+    tensor: Float[np.ndarray, "3 3"] = activation_tensor_world(orientation, activation)
     return tensor_to_voigt(tensor)
 
 

@@ -1,38 +1,39 @@
 {
     "commonDir": "",
-    "formatVersion": 67,
+    "formatVersion": 69,
     "layout": {
         "items": [{
             "itemId": 0,
             "itemType": "node",
             "nodeId": 0,
             "x": -139,
-            "y": 89
+            "y": -24
         }, {
             "itemId": 1,
             "itemType": "node",
             "nodeId": 1,
-            "x": 144,
-            "y": 89
+            "x": 114,
+            "y": -24
         }, {
-            "itemId": 2,
+            "itemId": 4,
             "itemType": "node",
-            "nodeId": 2,
-            "x": -9,
-            "y": 200
+            "nodeId": 4,
+            "x": 114,
+            "y": 89
         }],
-        "layoutFormatVersion": 2
+        "layoutFormatVersion": 0,
+        "shown2d": [],
+        "shown3d": [],
+        "timelineAudio": []
     },
     "metadata": {},
     "nodes": {
         "LeftGeom": {
-            "isAlwaysVisible": true,
             "isEnabled": true,
             "nodeId": 0,
             "nodeType": "LoadGeom",
             "params": {
                 "fileName": {
-                    "expression": "\n",
                     "value": "{{ left }}"
                 },
                 "rotation": {
@@ -62,8 +63,8 @@
                         },
                         "colorFront": {
                             "b": 255,
-                            "g": 56,
-                            "r": 12
+                            "g": 55,
+                            "r": 11
                         },
                         "colorWire": {
                             "b": 34,
@@ -79,13 +80,11 @@
             }
         },
         "RightGeom": {
-            "isAlwaysVisible": true,
             "isEnabled": true,
             "nodeId": 1,
             "nodeType": "LoadGeom",
             "params": {
                 "fileName": {
-                    "expression": "\n",
                     "value": "{{ right }}"
                 },
                 "rotation": {
@@ -115,8 +114,8 @@
                         },
                         "colorFront": {
                             "b": 255,
-                            "g": 56,
-                            "r": 12
+                            "g": 55,
+                            "r": 11
                         },
                         "colorWire": {
                             "b": 34,
@@ -125,24 +124,21 @@
                         },
                         "isLightingEnabled": true,
                         "isSurfaceEnabled": true,
-                        "isWireframeEnabled": true,
+                        "isWireframeEnabled": false,
                         "surfaceFillType": 1
                     }
                 }
             }
         },
         "SelectPointPairs": {
-            "isAlwaysVisible": true,
             "isEnabled": true,
-            "nodeId": 2,
+            "nodeId": 4,
             "nodeType": "SelectPointPairs",
             "params": {
                 "fileNameLeft": {
-                    "expression": "\n",
                     "value": "{{ left_landmarks }}"
                 },
                 "fileNameRight": {
-                    "expression": "\n",
                     "value": "{{ right_landmarks }}"
                 },
                 "geomLeft": {
@@ -197,12 +193,21 @@
                     }
                 },
                 "syncViews": {
-                    "value": false
+                    "value": true
                 }
             }
         }
     },
     "pythonCode": "",
+    "settings": {
+        "fps": 60,
+        "playbackRepeat": false,
+        "playbackSkip": true,
+        "playbackStep": 1,
+        "playbackVolume": 1,
+        "syncAudioSec": 0,
+        "syncTimelineFrame": 0
+    },
     "timeline": {
         "current": 0,
         "max": 25,

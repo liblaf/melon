@@ -1,50 +1,50 @@
 from __future__ import annotations
 
-from collections.abc import Callable
+import functools
+from collections.abc import Callable, Iterable
 from pathlib import Path
-from typing import TYPE_CHECKING, Protocol
+from typing import TYPE_CHECKING, Any, Protocol, overload
 
 import attrs
-from liblaf.grapes.logging import autolog
-
-from liblaf.melon import utils
 
 if TYPE_CHECKING:
     from _typeshed import StrPath
 
 
-@attrs.define
-class UnsupportedReaderError(ValueError):
-    path: Path = attrs.field(converter=Path)
-    to_type: type
-
-    def __str__(self) -> str:
-        return f"Cannot load '{self.path}' as {self.to_type}."
-
-
-class Reader[T](Protocol):
+class AbstractReader[T](Protocol):
     def __call__(self, path: Path, /, **kwargs) -> T: ...
 
 
 @attrs.define
 class ReaderDispatcher[T]:
     to_type: type[T]
-    registry: dict[str, Reader[T]] = attrs.field(factory=dict)
+    fallback: AbstractReader[T] | None = None
+    registry: dict[str, AbstractReader[T]] = attrs.field(factory=dict)
 
     def __call__(self, path: StrPath, /, **kwargs) -> T:
-        __tracebackhide__ = True
-        path = Path(path)
-        reader: Reader[T] | None = self.registry.get(path.suffix)
+        path: Path = Path(path)
+        reader: AbstractReader[T] | None = self.registry.get(path.suffix, self.fallback)
         if reader is None:
-            raise UnsupportedReaderError(path, self.to_type)
-        obj: T = reader(path, **kwargs)
-        autolog.debug("Loaded '%s' as <%s>.", path, utils.abbr_type_name(obj))
-        return obj
+            raise KeyError(path.suffix)
+        return reader(path, **kwargs)
 
-    def register(self, *suffixes: str) -> Callable[[Reader[T]], Reader[T]]:
-        def wrapper(reader: Reader[T]) -> Reader[T]:
-            for s in suffixes:
-                self.registry[s] = reader
-            return reader
+    @overload
+    def register(
+        self, suffixes: Iterable[str], reader: AbstractReader[T]
+    ) -> AbstractReader[T]: ...
+    @overload
+    def register(
+        self, suffixes: Iterable[str], reader: None = None
+    ) -> Callable[[AbstractReader[T]], AbstractReader[T]]: ...
+    def register(
+        self, suffixes: Iterable[str], reader: AbstractReader[T] | None = None
+    ) -> Callable[..., Any]:
+        if reader is None:
+            return functools.partial(self.register, suffixes=suffixes)
+        for s in suffixes:
+            self.registry[s] = reader
+        return reader
 
-        return wrapper
+    def register_fallback(self, reader: AbstractReader[T]) -> AbstractReader[T]:
+        self.fallback = reader
+        return reader

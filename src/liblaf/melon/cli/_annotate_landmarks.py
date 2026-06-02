@@ -18,9 +18,9 @@ def annotate_landmarks(
     right_landmarks_path: Annotated[Path | None, Parameter("right-landmarks")] = None,
 ) -> None:
     if left_landmarks_path is None:
-        left_landmarks_path = left_path
+        left_landmarks_path: Path = left_path
     if right_landmarks_path is None:
-        right_landmarks_path = right_path
+        right_landmarks_path: Path = right_path
     left: pv.PolyData = io.load_polydata(left_path)
     left_landmarks: Float[np.ndarray, "landmarks 3"] = io.load_landmarks(
         left_landmarks_path
@@ -32,5 +32,5 @@ def annotate_landmarks(
     left_landmarks, right_landmarks = ext.annotate_landmarks(
         left, right, left_landmarks=left_landmarks, right_landmarks=right_landmarks
     )
-    io.save_landmarks(left_landmarks_path, left_landmarks)
-    io.save_landmarks(right_landmarks_path, right_landmarks)
+    io.save_landmarks(left_landmarks, left_landmarks_path)
+    io.save_landmarks(right_landmarks, right_landmarks_path)

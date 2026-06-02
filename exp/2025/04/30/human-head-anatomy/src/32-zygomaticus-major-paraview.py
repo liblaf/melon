@@ -73,9 +73,7 @@ def inertia_orientation(muscle: pv.PolyData) -> Float[np.ndarray, "3 3"]:
     components: Float[np.ndarray, " 3"] = np.asarray(
         muscle_tm.principal_inertia_components
     )
-    vectors: Float[np.ndarray, "3 3"] = np.asarray(
-        muscle_tm.principal_inertia_vectors
-    )
+    vectors: Float[np.ndarray, "3 3"] = np.asarray(muscle_tm.principal_inertia_vectors)
     axes: Float[np.ndarray, "3 3"] = np.asarray(
         vectors[np.argsort(components)], dtype=np.float64
     )
@@ -157,7 +155,9 @@ def add_axis_arrows(
         )
         arrow.cell_data["AxisId"] = np.full(arrow.n_cells, axis_id, dtype=np.int32)
         arrow.cell_data["StateId"] = np.full(arrow.n_cells, state_id, dtype=np.int32)
-        scene.append(arrow, name=f"{axis_name}_axis_{state}_{muscle_name(source_muscle)}")
+        scene.append(
+            arrow, name=f"{axis_name}_axis_{state}_{muscle_name(source_muscle)}"
+        )
 
 
 if __name__ == "__main__":

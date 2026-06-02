@@ -1,45 +1,57 @@
+from __future__ import annotations
+
 import functools
 from collections.abc import Callable
-from typing import Any
+from typing import TYPE_CHECKING, Any, Never, Protocol, overload
 
 import attrs
 
-from ._typing import RegType, SingleDispatchCallable
+if TYPE_CHECKING:
+    from functools import _RegType, _SingleDispatchCallable
 
 
-@attrs.define
-class UnsupportedConverterError(ValueError):
-    from_type: type
-    to_type: type
+class AbstractConverter[F, T](Protocol):
+    def __call__(self, obj: F, /, **kwargs) -> T: ...
 
-    def __init__(self, obj_or_cls: Any, to_type: type, /) -> None:
-        from_type: type = (
-            obj_or_cls if isinstance(obj_or_cls, type) else type(obj_or_cls)
-        )
-        self.__attrs_init__(from_type=from_type, to_type=to_type)  # pyright: ignore[reportAttributeAccessIssue]
 
-    def __str__(self) -> str:
-        return f"Cannot convert {self.from_type} to {self.to_type}."
+def _default_converter(obj: Any, /, **kwargs) -> Never:
+    raise NotImplementedError
+
+
+def _identity[T](obj: T, /, **kwargs) -> T:
+    del kwargs
+    return obj
 
 
 @attrs.define
 class ConverterDispatcher[T]:
+    def _default_registry(self) -> _SingleDispatchCallable[T]:
+        registry: _SingleDispatchCallable[T] = functools.singledispatch(
+            _default_converter
+        )
+        registry.register(self.to_type, _identity)
+        return registry
+
     to_type: type[T]
-    dispatch: SingleDispatchCallable[T]
-
-    def __init__(self, to_type: type[T]) -> None:
-        @functools.singledispatch
-        def dispatch(obj: Any, /, **kwargs) -> T:  # noqa: ARG001
-            raise UnsupportedConverterError(obj, to_type)
-
-        self.__attrs_init__(to_type=to_type, dispatch=dispatch)  # pyright: ignore[reportAttributeAccessIssue]
+    registry: _SingleDispatchCallable[T] = attrs.field(
+        default=attrs.Factory(_default_registry, takes_self=True)
+    )
 
     def __call__(self, obj: Any, /, **kwargs) -> T:
-        if isinstance(obj, self.to_type):
-            return obj
-        result: T = self.dispatch(obj, **kwargs)
-        # logger.trace(f"Converted {type(obj)} to {type(result)}.")
-        return result
+        return self.registry(obj, **kwargs)
 
-    def register(self, cls: RegType) -> Callable[[Callable[..., T]], Callable[..., T]]:
-        return self.dispatch.register(cls)
+    @overload
+    def register[F](
+        self, cls: _RegType, converter: AbstractConverter[F, T]
+    ) -> AbstractConverter[F, T]: ...
+    @overload
+    def register[F](
+        self, cls: _RegType, converter: None = None
+    ) -> Callable[[AbstractConverter[F, T]], AbstractConverter[F, T]]: ...
+    def register[F](
+        self, cls: _RegType, converter: AbstractConverter[F, T] | None = None
+    ) -> Callable[..., Any]:
+        if converter is None:
+            return functools.partial(self.register, cls)
+        self.registry.register(cls, converter)
+        return converter

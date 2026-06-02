@@ -288,7 +288,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### 💥 BREAKING CHANGES
 
-- - `pyvista.PolyData` objects loaded from OBJ files or processed by `tri._selection` now use `cell_data["group-id"]` and `field_data["group-name"]` instead of `cell_data["GroupIds"]` and `field_data["GroupNames"]`. Update code accessing these keys.
+- `pyvista.PolyData` objects loaded from OBJ files or processed by `tri._selection` now use `cell_data["group-id"]` and `field_data["group-name"]` instead of `cell_data["GroupIds"]` and `field_data["GroupNames"]`. Update code accessing these keys.
 - `proximity.NearestPoint` no longer performs normal-based filtering by default. Its `normal_threshold` now defaults to `-np.inf`. For normal-aware queries, use `proximity.NearestPointOnSurface` or explicitly set `normal_threshold` in `NearestPoint`. - [640628d](https://github.com/liblaf/melon/commit/640628dbd746ea62d42466bb7b92c38fdb4e094c) by [@liblaf](https://github.com/liblaf)
 
 ### ✨ Features

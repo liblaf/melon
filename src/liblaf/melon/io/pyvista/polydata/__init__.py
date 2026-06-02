@@ -1,4 +1,5 @@
-import lazy_loader as lazy
+from . import _writer  # noqa: F401
+from ._converter import as_polydata
+from ._reader import load_polydata
 
-__getattr__, __dir__, __all__ = lazy.attach_stub(__name__, __file__)
-del lazy
+__all__ = ["as_polydata", "load_polydata"]

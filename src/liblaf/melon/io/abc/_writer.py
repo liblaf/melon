@@ -1,67 +1,57 @@
 from __future__ import annotations
 
-import collections
 import functools
 from collections.abc import Callable, Iterable
 from pathlib import Path
-from typing import TYPE_CHECKING, Any, Protocol
+from typing import TYPE_CHECKING, Any, Protocol, overload
 
 import attrs
-import more_itertools as mit
-from liblaf.grapes.logging import autolog
-
-from liblaf.melon import utils
-
-from ._typing import RegType, SingleDispatchCallable
 
 if TYPE_CHECKING:
+    from functools import _RegType, _SingleDispatchCallable
+
     from _typeshed import StrPath
 
 
-@attrs.define
-class UnsupportedWriterError(ValueError):
-    from_type: type
-    path: Path = attrs.field(converter=Path)
-
-    def __str__(self) -> str:
-        return f"Cannot save {self.from_type} to '{self.path}'."
+class AbstractWriter[T](Protocol):
+    def __call__(self, obj: T, path: Path, /, **kwargs) -> None: ...
 
 
-class Writer(Protocol):
-    def __call__(self, path: Path, obj: Any, /, **kwargs) -> None: ...
-
-
-def _dummy(path: Path, obj: Any, /, **_kwargs) -> None:
-    raise UnsupportedWriterError(type(obj), path)
+def _default_writer(obj: Any, path: Path, /, **kwargs) -> None:
+    raise NotImplementedError
 
 
 @attrs.define
-class WriterDispatcher:
-    writers: dict[str, SingleDispatchCallable[None]] = attrs.field(
-        factory=lambda: collections.defaultdict(
-            lambda: functools.singledispatch(_dummy)
-        )
-    )
+class WriterDispatcher[T]:
+    registry: dict[str, _SingleDispatchCallable[None]] = attrs.field(factory=dict)
 
-    def __call__(self, path: StrPath, obj: Any, /, **kwargs) -> None:
-        __tracebackhide__ = True
-        path = Path(path)
-        writer: SingleDispatchCallable[None] | None = self.writers.get(path.suffix)
-        if writer is None:
-            raise UnsupportedWriterError(type(obj), path)
+    def __call__(self, obj: T, path: StrPath, /, **kwargs) -> None:
+        path: Path = Path(path)
+        writer: _SingleDispatchCallable[None] = self.registry[path.suffix]
         path.parent.mkdir(parents=True, exist_ok=True)
-        impl: Writer = writer.dispatch(type(obj))
-        if impl is _dummy:
-            raise UnsupportedWriterError(type(obj), path)
-        impl(path, obj, **kwargs)
-        autolog.debug("Saved <%s> to '%s'.", utils.abbr_type_name(obj), path)
+        return writer(obj, path, **kwargs)
 
+    @overload
     def register(
-        self, cls: RegType, suffix: str | Iterable[str]
-    ) -> Callable[[Writer], Writer]:
-        def wrapper(func: Writer) -> Writer:
-            for s in mit.always_iterable(suffix):
-                self.writers[s].register(cls)(func)
-            return func
+        self, cls: _RegType, suffixes: Iterable[str], writer: AbstractWriter[T]
+    ) -> AbstractWriter[T]: ...
+    @overload
+    def register(
+        self, cls: _RegType, suffixes: Iterable[str], writer: None = None
+    ) -> Callable[[AbstractWriter[T]], AbstractWriter[T]]: ...
+    def register(
+        self,
+        cls: _RegType,
+        suffixes: Iterable[str],
+        writer: AbstractWriter[T] | None = None,
+    ) -> Callable[..., Any]:
+        if writer is None:
+            return functools.partial(self.register, cls, suffixes)
+        for suffix in suffixes:
+            if suffix not in self.registry:
+                self.registry[suffix] = functools.singledispatch(_default_writer)
+            self.registry[suffix].register(cls, writer)
+        return writer
 
-        return wrapper
+
+save: WriterDispatcher[Any] = WriterDispatcher()

@@ -1,4 +1,13 @@
-import lazy_loader as lazy
+from . import multiblock, polydata, unstructured_grid
+from .polydata import as_polydata, load_polydata
+from .unstructured_grid import as_unstructured_grid
 
-__getattr__, __dir__, __all__ = lazy.attach_stub(__name__, __file__)
-del lazy
+__all__ = [
+    "as_multiblock",
+    "as_polydata",
+    "as_unstructured_grid",
+    "load_polydata",
+    "multiblock",
+    "polydata",
+    "unstructured_grid",
+]

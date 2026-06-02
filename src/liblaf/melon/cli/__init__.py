@@ -1,4 +1,4 @@
-import lazy_loader as lazy
+from ._annotate_landmarks import annotate_landmarks
+from ._app import app
 
-__getattr__, __dir__, __all__ = lazy.attach_stub(__name__, __file__)
-del lazy
+__all__ = ["annotate_landmarks", "app"]

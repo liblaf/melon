@@ -1,4 +1,3 @@
-import lazy_loader as lazy
+from ._landmarks import load_landmarks, save_landmarks
 
-__getattr__, __dir__, __all__ = lazy.attach_stub(__name__, __file__)
-del lazy
+__all__ = ["load_landmarks", "save_landmarks"]

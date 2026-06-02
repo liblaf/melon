@@ -1,7 +1,6 @@
 import jax.numpy as jnp
 import pyvista as pv
 from jaxtyping import Array, Float
-
 from liblaf.melon.tet import compute_volume_fraction
 
 
