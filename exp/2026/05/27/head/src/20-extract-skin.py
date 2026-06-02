@@ -29,17 +29,13 @@ SKIN_GEOMETRIES: list[str] = [
 
 def main(cfg: Config) -> None:
     scene: tm.Scene = tm.load_scene(cfg.input)
-    eye: tm.Trimesh = tm.util.concatenate(
-        melon.scene.extract_geometries(scene, EYE_GEOMETRIES)
-    )
+    eye: tm.Trimesh = tm.util.concatenate(melon.scene.dump(scene, EYE_GEOMETRIES))
     eye.export(cfg.eye)
     gingiva: tm.Trimesh = tm.util.concatenate(
-        melon.scene.extract_geometries(scene, GINGIVA_GEOMETRIES)
+        melon.scene.dump(scene, GINGIVA_GEOMETRIES)
     )
     gingiva.export(cfg.gingiva)
-    skin: tm.Trimesh = tm.util.concatenate(
-        melon.scene.extract_geometries(scene, SKIN_GEOMETRIES)
-    )
+    skin: tm.Trimesh = tm.util.concatenate(melon.scene.dump(scene, SKIN_GEOMETRIES))
     skin_pv: pv.PolyData = melon.io.as_polydata(skin)
     # trimesh.Trimesh.merge_vertices() does not work well
     skin_pv.clean(tolerance=0.5 * melon.tri.edge_length(skin_pv).min(), inplace=True)

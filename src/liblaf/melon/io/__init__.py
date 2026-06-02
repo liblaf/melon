@@ -8,7 +8,7 @@ from .abc import (
     WriterDispatcher,
     save,
 )
-from .pyvista import as_polydata, as_unstructured_grid, load_polydata
+from .pyvista import as_multiblock, as_polydata, as_unstructured_grid, load_polydata
 from .trimesh import as_trimesh
 from .wrap import load_landmarks, save_landmarks, save_polygons
 
@@ -20,6 +20,7 @@ __all__ = [
     "ReaderDispatcher",
     "WriterDispatcher",
     "abc",
+    "as_multiblock",
     "as_polydata",
     "as_trimesh",
     "as_unstructured_grid",
