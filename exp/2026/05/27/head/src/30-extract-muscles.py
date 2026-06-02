@@ -2,8 +2,11 @@ import logging
 from pathlib import Path
 from typing import cast
 
+import einops
+import numpy as np
 import pyvista as pv
 import trimesh as tm
+from jaxtyping import Float
 
 from liblaf import cherries, melon
 
@@ -13,6 +16,17 @@ logger: logging.Logger = logging.getLogger(__name__)
 class Config(cherries.BaseConfig):
     input: Path = cherries.input("00-complete_human_head_anatomy.glb")
     output: Path = cherries.output("30-muscles.m.vtkhdf")
+
+
+def compute_inertia_orientation(muscle: pv.PolyData) -> None:
+    muscle_tm: tm.Trimesh = pv.to_trimesh(muscle)
+    # assert is sorted in ascending order
+    assert np.all(
+        muscle_tm.principal_inertia_components[:-1]
+        <= muscle_tm.principal_inertia_components[1:]
+    )
+    orientation: Float[np.ndarray, "3 3"] = muscle_tm.principal_inertia_vectors
+    muscle.field_data["Orientation"] = orientation
 
 
 def main(cfg: Config) -> None:
@@ -33,9 +47,17 @@ def main(cfg: Config) -> None:
                 body_name: str = f"{muscle_name}_{idx:01d}"
             body_pv: pv.PolyData = cast("pv.PolyData", body_pv_)
             body_pv: pv.PolyData = melon.ext.meshfix(body_pv)
+            compute_inertia_orientation(body_pv)
             muscles.append(body_pv, name=body_name)
-
     melon.save(muscles, cfg.output)
+
+    for muscle_ in muscles:
+        muscle: pv.PolyData = cast("pv.PolyData", muscle_)
+        for i in range(3):
+            muscle.point_data[f"Orientation_{i}"] = einops.repeat(
+                muscle.field_data["Orientation"][i], "i -> p i", p=muscle.n_points
+            )
+    melon.save(muscles, cherries.temp("30-muscles-with-orientation.m.vtkhdf"))
 
 
 if __name__ == "__main__":
