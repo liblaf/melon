@@ -1358,11 +1358,11 @@ wheels = [
 
 [[package]]
 name = "idna"
-version = "3.17"
+version = "3.18"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/b9/28/99c51f664567218d824af024c0251650fb27e4ca066df188dab0769c5b91/idna-3.17.tar.gz", hash = "sha256:5eb0cb53bc467c12eadcf6de83163ad8527cec9416f44b9b61b19caedad2b87f", size = 196048, upload-time = "2026-05-28T14:32:38.55Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/cd/63/9496c57188a2ee585e0f1db071d75089a11e98aa86eb99d9d7618fc1edce/idna-3.18.tar.gz", hash = "sha256:ffb385a7e039654cef1ab9ef32c6fafe283c0c0467bba1d9029738ce4a14a848", size = 196711, upload-time = "2026-06-02T14:34:07.794Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/de/a7/f76514cc40ad6234098ecdebda08732d75964776c51a42845b7da10649e2/idna-3.17-py3-none-any.whl", hash = "sha256:466e48829084efe2548012b855df21540b96f2e20e51bd124c851536556a592c", size = 65316, upload-time = "2026-05-28T14:32:37.035Z" },
+    { url = "https://files.pythonhosted.org/packages/1e/5e/d4e9f1a599fb8e573b7b87160658329fbf28d19eac2718f51fc3def3aa5a/idna-3.18-py3-none-any.whl", hash = "sha256:7f952cbe720b688055e3f87de14f5c3e5fdaa8bc3928985c4077ca689de849a2", size = 65455, upload-time = "2026-06-02T14:34:06.319Z" },
 ]
 
 [[package]]
@@ -1459,6 +1459,15 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/df/bf/f7da0350254c0ed7c72f3e33cef02e048281fec7ecec5f032d4aac52226b/jinja2-3.1.6.tar.gz", hash = "sha256:0137fb05990d35f1275a587e9aee6d56da821fc83491a0fb838183be43f66d6d", size = 245115, upload-time = "2025-03-05T20:05:02.478Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/62/a1/3d680cbfd5f4b8f15abc1d571870c5fc3e594bb582bc3b64ea099db13e56/jinja2-3.1.6-py3-none-any.whl", hash = "sha256:85ece4451f492d0c13c5dd7c13a64681a86afae63a5f347908daf103ce6d2f67", size = 134899, upload-time = "2025-03-05T20:05:00.369Z" },
+]
+
+[[package]]
+name = "joblib"
+version = "1.5.3"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/41/f2/d34e8b3a08a9cc79a50b2208a93dce981fe615b64d5a4d4abee421d898df/joblib-1.5.3.tar.gz", hash = "sha256:8561a3269e6801106863fd0d6d84bb737be9e7631e33aaed3fb9ce5953688da3", size = 331603, upload-time = "2025-12-15T08:41:46.427Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/7b/91/984aca2ec129e2757d1e4e3c81c3fcda9d0f85b74670a094cc443d9ee949/joblib-1.5.3-py3-none-any.whl", hash = "sha256:5fc3c5039fc5ca8c0276333a188bbd59d6b7ab37fe6632daa76bc7f9ec18e713", size = 309071, upload-time = "2025-12-15T08:41:44.973Z" },
 ]
 
 [[package]]
@@ -1605,7 +1614,7 @@ wheels = [
 
 [[package]]
 name = "liblaf-cherries"
-version = "3.0.0"
+version = "3.0.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "attrs" },
@@ -1623,9 +1632,9 @@ dependencies = [
     { name = "python-slugify" },
     { name = "toolz" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/50/ae/0364d978932243440df4bccd32fb0ec5ace3b2e4ee42b7bc39d8c3b9d317/liblaf_cherries-3.0.0.tar.gz", hash = "sha256:384e9d2b022a80a55440933fb656fdd79dd9ef39c7a9194e4a8fc9fb08ac2575", size = 23201, upload-time = "2026-06-01T07:27:45.814Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/88/fb/1a9905d61a1a8649746a7043e96e18881e554af3a97d627b6253ed46ed2f/liblaf_cherries-3.0.1.tar.gz", hash = "sha256:c843434a5ecd9f8330612fce6db00b0b1e82a659bdab01d4240a696913462305", size = 23222, upload-time = "2026-06-02T13:41:30.639Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/92/17/3e0bba7af2ad7ed6c6190d522ad1bec955fc77bed7e22d6a07f1a0cecdea/liblaf_cherries-3.0.0-py3-none-any.whl", hash = "sha256:4db425ae6a3c16b3f8f0fa2361d8387ac47e7bb24a94081ff4f20e7e828805ce", size = 40993, upload-time = "2026-06-01T07:27:44.473Z" },
+    { url = "https://files.pythonhosted.org/packages/e0/e9/c49b28598e6c17485ab13d64e12863da31ac1e9679c10341399559385ed8/liblaf_cherries-3.0.1-py3-none-any.whl", hash = "sha256:245b7621a73da17a99e1dbe2ea7e3bc58a31a77211db798a4916360ae5501297", size = 41048, upload-time = "2026-06-02T13:41:29.469Z" },
 ]
 
 [[package]]
@@ -1669,6 +1678,7 @@ dependencies = [
     { name = "h5py" },
     { name = "jaxtyping" },
     { name = "jinja2" },
+    { name = "joblib" },
     { name = "meshio" },
     { name = "more-itertools" },
     { name = "numpy" },
@@ -1731,6 +1741,7 @@ requires-dist = [
     { name = "h5py", specifier = ">=3.16.0" },
     { name = "jaxtyping", specifier = ">=0.3" },
     { name = "jinja2", specifier = ">=3" },
+    { name = "joblib", specifier = ">=1.5.3" },
     { name = "meshio", specifier = ">=5.3.5" },
     { name = "more-itertools", specifier = ">=10" },
     { name = "numpy", specifier = ">=2" },

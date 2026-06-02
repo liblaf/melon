@@ -1,0 +1,117 @@
+{
+    "commonDir": "",
+    "formatVersion": 69,
+    "layout": {
+        "items": [{
+            "itemId": 0,
+            "itemType": "node",
+            "nodeId": 0,
+            "x": -139,
+            "y": -24
+        }, {
+            "itemId": 3,
+            "itemType": "node",
+            "nodeId": 3,
+            "x": -139,
+            "y": 89
+        }],
+        "layoutFormatVersion": 0,
+        "shown2d": [],
+        "shown3d": [],
+        "timelineAudio": []
+    },
+    "metadata": {},
+    "nodes": {
+        "Basemesh": {
+            "isEnabled": true,
+            "nodeId": 0,
+            "nodeType": "LoadGeom",
+            "params": {
+                "fileName": {
+                    "value": "{{ mesh }}"
+                },
+                "rotation": {
+                    "value": {
+                        "x": 0,
+                        "y": 0,
+                        "z": 0
+                    }
+                },
+                "scale": {
+                    "value": 1
+                },
+                "texture": {},
+                "translation": {
+                    "value": {
+                        "x": 0,
+                        "y": 0,
+                        "z": 0
+                    }
+                },
+                "visualParam": {
+                    "value": {
+                        "colorBack": {
+                            "b": 23,
+                            "g": 23,
+                            "r": 23
+                        },
+                        "colorFront": {
+                            "b": 255,
+                            "g": 55,
+                            "r": 11
+                        },
+                        "colorWire": {
+                            "b": 34,
+                            "g": 26,
+                            "r": 17
+                        },
+                        "isLightingEnabled": true,
+                        "isSurfaceEnabled": true,
+                        "isWireframeEnabled": true,
+                        "surfaceFillType": 1
+                    }
+                }
+            }
+        },
+        "SelectPolygons": {
+            "isEnabled": true,
+            "nodeId": 3,
+            "nodeType": "SelectPolygons",
+            "params": {
+                "displayMode": {
+                    "value": 1
+                },
+                "fileName": {
+                    "value": "{{ polygons }}"
+                },
+                "geom": {
+                    "connectedNodeId": 0
+                },
+                "invisiblePolygonIndices": {
+                    "value": []
+                },
+                "selection": {
+                    "value": []
+                },
+                "source": {
+                    "value": 0
+                }
+            }
+        }
+    },
+    "pythonCode": "",
+    "settings": {
+        "fps": 60,
+        "playbackRepeat": false,
+        "playbackSkip": true,
+        "playbackStep": 1,
+        "playbackVolume": 1,
+        "syncAudioSec": 0,
+        "syncTimelineFrame": 0
+    },
+    "timeline": {
+        "current": 0,
+        "max": 25,
+        "min": 0
+    }
+}

@@ -60,6 +60,7 @@ words:
   - isdtype
   - itertools
   - jaxtyping
+  - kdtree
   - labii
   - liblaf
   - ligamenta
@@ -131,6 +132,7 @@ words:
   - superioris
   - taiki
   - tectorial
+  - tetrahedralize
   - thyrohyoid
   - tombi
   - toolz
@@ -142,4 +144,5 @@ words:
   - virtualenv
   - voigt
   - vtkhdf
+  - xfer
   - zygomaticus

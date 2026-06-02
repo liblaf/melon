@@ -30,6 +30,7 @@ def main(cfg: Config) -> None:
     right_landmarks: Float[np.ndarray, "L 3"] = melon.io.load_landmarks(cfg.right)
     logger.debug(left.field_data["GroupName"])
     left: pv.PolyData = melon.tri.extract_groups(left, MOUTH_SOCKET_GROUPS)
+    left.flip_faces(inplace=True)
     left_landmarks, right_landmarks = melon.ext.annotate_landmarks(
         left, right, left_landmarks=left_landmarks, right_landmarks=right_landmarks
     )
@@ -38,4 +39,4 @@ def main(cfg: Config) -> None:
 
 
 if __name__ == "__main__":
-    cherries.main(main)
+    cherries.main(main, profile="debug")

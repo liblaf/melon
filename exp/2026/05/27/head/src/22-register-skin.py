@@ -20,6 +20,7 @@ class Config(cherries.BaseConfig):
     )
     fixed_eye: Path = cherries.input("20-eye.ply")
     fixed_gingiva: Path = cherries.input("20-gingiva.ply")
+    fixed_gingiva_polygons: Path = cherries.input("21-gingiva.polygons.json")
     fixed_skin: Path = cherries.input("20-skin-smoothed.ply")
     output: Path = cherries.output("22-skin.vtp")
 
@@ -29,6 +30,8 @@ FREE_GROUPS: list[str] = [
     "EarSocket EyeSocketTop",
     "EyeSocketBottom",
     "EyeSocketTop",
+    "LipInnerBottom",
+    "LipInnerTop",
 ]
 MOUTH_SOCKET_GROUPS: list[str] = [
     "MouthSocketBottom",
@@ -54,7 +57,7 @@ def filter_mouth_socket(
     cell_centers: pv.PolyData = floating.cell_centers()
     cell_centers.compute_implicit_distance(fixed_wrapped, inplace=True)
     free_mask: Bool[np.ndarray, " N"] = (
-        np.abs(cell_centers.point_data["implicit_distance"]) > 1e-2 * floating.length
+        np.abs(cell_centers.point_data["implicit_distance"]) > 1e-3 * floating.length
     )
     floating.cell_data["implicit_distance"] = cell_centers.point_data[
         "implicit_distance"
@@ -81,6 +84,12 @@ def main(cfg: Config) -> None:
     fixed_eye: pv.PolyData = melon.io.load_polydata(cfg.fixed_eye)
     fixed_eye.flip_faces(inplace=True)
     fixed_gingiva: pv.PolyData = melon.io.load_polydata(cfg.fixed_gingiva)
+    fixed_gingiva_polygons: Integer[np.ndarray, " N"] = melon.io.load_polygons(
+        cfg.fixed_gingiva_polygons
+    )
+    fixed_gingiva: pv.PolyData = melon.tri.extract_cells(
+        fixed_gingiva, fixed_gingiva_polygons
+    )
     fixed_gingiva.flip_faces(inplace=True)
     fixed_skin: pv.PolyData = melon.io.load_polydata(cfg.fixed_skin)
     fixed: pv.PolyData = pv.merge([fixed_eye, fixed_gingiva, fixed_skin])

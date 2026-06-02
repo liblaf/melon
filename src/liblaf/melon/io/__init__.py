@@ -10,7 +10,7 @@ from .abc import (
 )
 from .pyvista import as_multiblock, as_polydata, as_unstructured_grid, load_polydata
 from .trimesh import as_trimesh
-from .wrap import load_landmarks, save_landmarks, save_polygons
+from .wrap import load_landmarks, load_polygons, save_landmarks, save_polygons
 
 __all__ = [
     "AbstractConverter",
@@ -26,6 +26,7 @@ __all__ = [
     "as_unstructured_grid",
     "load_landmarks",
     "load_polydata",
+    "load_polygons",
     "pyvista",
     "save",
     "save_landmarks",
