@@ -44,7 +44,9 @@ def save_landmarks(landmarks: Float[ArrayLike, "L 3"], path: StrPath) -> None:
     """
     landmarks: Float[np.ndarray, "L 3"] = np.asarray(landmarks)
     path: Path = _infer_path(path)
-    data: list[dict[str, float]] = [{"x": x, "y": y, "z": z} for x, y, z in landmarks]
+    data: list[dict[str, float]] = [
+        {"x": x, "y": y, "z": z} for x, y, z in landmarks.tolist()
+    ]
     with path.open("w") as fp:
         json.dump(data, fp)
 
