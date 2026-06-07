@@ -1,3 +1,5 @@
+"""Faceform Wrap project helpers."""
+
 from ._annotate_landmarks import annotate_landmarks
 from ._fast_wrapping import fast_wrapping
 from ._select_polygons import select_polygons

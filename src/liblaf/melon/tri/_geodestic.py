@@ -5,6 +5,16 @@ from jaxtyping import Float
 
 
 def geodesic_path(mesh: pv.PolyData, v_start: int, v_end: int) -> pv.PolyData:
+    """Find an edge-flip geodesic path between two surface vertices.
+
+    Args:
+        mesh: Triangular surface mesh.
+        v_start: Start vertex index.
+        v_end: End vertex index.
+
+    Returns:
+        Polyline following the computed geodesic path.
+    """
     solver = pp3d.EdgeFlipGeodesicSolver(mesh.points, mesh.regular_faces)
     points: Float[np.ndarray, "p 3"] = solver.find_geodesic_path(v_start, v_end)
     return pv.lines_from_points(points)

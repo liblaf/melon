@@ -3,18 +3,17 @@
 
 [project]
 name = "liblaf-melon"
-description = "🍉 A comprehensive Python library for 3D mesh processing with advanced I/O capabilities, proximity analysis, and integration with external mesh processing tools."
+description = "Mesh processing helpers for PyVista, Trimesh, Warp, TetWild, PyMeshFix, and Faceform Wrap workflows."
 readme = "README.md"
 requires-python = ">=3.12"
 license = "MIT"
 authors = [
   { name = "liblaf", email = "30631553+liblaf@users.noreply.github.com" }
 ]
-keywords = []
+keywords = ["mesh", "pyvista", "tetwild", "trimesh", "warp", "wrap"]
 classifiers = [
   "Development Status :: 4 - Beta",
   "Intended Audience :: Developers",
-  "License :: OSI Approved",
   "License :: OSI Approved :: MIT License",
   "Operating System :: OS Independent",
   "Programming Language :: Python",
@@ -27,15 +26,15 @@ classifiers = [
 dependencies = [
   "attrs>=25",
   "cyclopts>=4",
-  "dracox>=0.0.1",
   "einops>=0.8",
   "h5py>=3.16.0",
-  "jaxtyping>=0.3",
+  "jaxtyping>=0.3.10",
   "jinja2>=3",
   "joblib>=1.5.3",
+  "liblaf-logging>=0.1.2",
   "meshio>=5.3.5",
   "more-itertools>=10",
-  "numpy>=2",
+  "numpy>=2.4",
   "potpourri3d>=1.3",
   "pydicom>=3",
   "pymeshfix>=0.18",
@@ -43,9 +42,10 @@ dependencies = [
   "pyvista>=0.47",
   "rich>=14",
   "scipy>=1.17",
+  "toolz>=1.1",
   "torch>=2.12.0",
   "trimesh[easy]>=4.11",
-  "warp-lang>=1.14",
+  "warp-lang>=1.14"
 ]
 dynamic = ["version"]
 
@@ -61,10 +61,7 @@ dynamic = ["version"]
 melon = "liblaf.melon.cli:app.meta"
 
 [dependency-groups]
-dev = [
-    "icecream>=2.2.0",
-    "liblaf-cherries>=3",
-]
+dev = ["icecream>=2.2.0", "liblaf-cherries>=3"]
 build = ["check-wheel-contents>=0.6", "hatch>=1", "twine>=6"]
 docs = [
   "griffe-fieldz>=0.5",
@@ -72,15 +69,12 @@ docs = [
   "griffe-pydantic>=1",
   "griffe-warnings-deprecated>=1",
   "mkdocstrings[python]>=1",
-  "zensical>=0.0.36"
+  "zensical>=0.0.44"
 ]
-lint = ["import-linter[ui]>=2", "ruff>=0.15", "ty>=0.0.32"]
+lint = ["import-linter[ui]>=2", "ruff>=0.15", "ty>=0.0.44"]
 nox = ["liblaf-nox-recipes>=0.1", "nox>=2026", "nox-uv>=0.7"]
 test = ["hypothesis>=6", "pytest>=9", "pytest-cov>=7", "pytest-randomly>=4"]
-typing = [
-    "scipy-stubs>=1",
-    "toolz-stubs>=0.4.1",
-]
+typing = ["scipy-stubs>=1", "toolz-stubs>=0.4.1"]
 
 [build-system]
 requires = ["hatch-vcs", "hatchling"]
@@ -115,9 +109,6 @@ root_package = "liblaf.melon"
 ancestors = ["liblaf.melon"]
 name = "Acyclic siblings"
 type = "acyclic_siblings"
-
-[tool.pyright]
-extends = ".config/linters/pyrightconfig.json"
 
 [tool.pytest]
 addopts = [

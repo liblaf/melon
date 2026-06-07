@@ -1,3 +1,5 @@
+"""I/O dispatchers and mesh-format conversion helpers."""
+
 from . import abc, pyvista, trimesh, warp, wrap
 from .abc import (
     AbstractConverter,

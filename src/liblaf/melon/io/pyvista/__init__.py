@@ -1,3 +1,5 @@
+"""PyVista readers, writers, and conversion dispatchers."""
+
 from . import multiblock, polydata, unstructured_grid
 from .multiblock import as_multiblock, load_multiblock
 from .polydata import as_polydata, load_polydata

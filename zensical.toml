@@ -4,11 +4,39 @@
 # Basics
 site_name = "Melon"
 site_url = "__SITE_URL__"
-site_description = ""
+site_description = "Mesh processing helpers for PyVista, Trimesh, Warp, TetWild, PyMeshFix, and Faceform Wrap workflows."
 site_author = "liblaf"
 # Navigation
 nav = [
   { "Home" = "README.md" },
+  { "API Reference" = [
+    { "<code class=\"doc-symbol doc-symbol-toc doc-symbol-module\"></code> melon" = [
+      "reference/liblaf/melon/README.md",
+      "reference/liblaf/melon/cli/README.md",
+      { "<code class=\"doc-symbol doc-symbol-toc doc-symbol-module\"></code> ext" = [
+        "reference/liblaf/melon/ext/README.md",
+        "reference/liblaf/melon/ext/wrap/README.md"
+      ] },
+      { "<code class=\"doc-symbol doc-symbol-toc doc-symbol-module\"></code> io" = [
+        "reference/liblaf/melon/io/README.md",
+        "reference/liblaf/melon/io/abc/README.md",
+        { "<code class=\"doc-symbol doc-symbol-toc doc-symbol-module\"></code> pyvista" = [
+          "reference/liblaf/melon/io/pyvista/README.md",
+          "reference/liblaf/melon/io/pyvista/multiblock/README.md",
+          "reference/liblaf/melon/io/pyvista/polydata/README.md",
+          "reference/liblaf/melon/io/pyvista/unstructured_grid/README.md"
+        ] },
+        "reference/liblaf/melon/io/trimesh/README.md",
+        "reference/liblaf/melon/io/warp/README.md",
+        "reference/liblaf/melon/io/wrap/README.md"
+      ] },
+      "reference/liblaf/melon/scene/README.md",
+      "reference/liblaf/melon/tet/README.md",
+      "reference/liblaf/melon/tri/README.md",
+      "reference/liblaf/melon/utils/README.md",
+      "reference/liblaf/melon/xfer/README.md"
+    ] }
+  ] }
 ]
 # Repository
 repo_url = "https://github.com/liblaf/melon"

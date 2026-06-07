@@ -17,6 +17,14 @@ def annotate_landmarks(
     left_landmarks_path: Annotated[Path | None, Parameter("left-landmarks")] = None,
     right_landmarks_path: Annotated[Path | None, Parameter("right-landmarks")] = None,
 ) -> None:
+    """Annotate corresponding landmarks for two mesh files.
+
+    Args:
+        left_path: Left mesh path.
+        right_path: Right mesh path.
+        left_landmarks_path: Optional explicit sidecar path for left landmarks.
+        right_landmarks_path: Optional explicit sidecar path for right landmarks.
+    """
     if left_landmarks_path is None:
         left_landmarks_path: Path = left_path
     if right_landmarks_path is None:

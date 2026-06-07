@@ -1,3 +1,5 @@
+"""Small utility helpers used by Melon internals and workflows."""
+
 from ._attributes import temporary_array
 from ._toolz import filter_kwargs, pick
 

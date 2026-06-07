@@ -13,6 +13,19 @@ if TYPE_CHECKING:
 
 
 def load_landmarks(path: StrPath) -> Float[np.ndarray, "L 3"]:
+    """Load Wrap landmark points from JSON.
+
+    Non-JSON mesh paths are mapped to a sibling `.landmarks.json` file. Missing
+    files return an empty `(0, 3)` array so annotation workflows can start from
+    an unmarked mesh.
+
+    Args:
+        path: Landmark JSON file or mesh path whose landmark sidecar should be
+            inferred.
+
+    Returns:
+        Landmark coordinates in `x`, `y`, `z` order.
+    """
     path: Path = _infer_path(path)
     if not path.exists():
         return np.zeros((0, 3))
@@ -22,6 +35,13 @@ def load_landmarks(path: StrPath) -> Float[np.ndarray, "L 3"]:
 
 
 def save_landmarks(landmarks: Float[ArrayLike, "L 3"], path: StrPath) -> None:
+    """Save landmark points in Wrap-compatible JSON format.
+
+    Args:
+        landmarks: Array-like landmark coordinates with shape `(n, 3)`.
+        path: Landmark JSON file or mesh path whose landmark sidecar should be
+            inferred.
+    """
     landmarks: Float[np.ndarray, "L 3"] = np.asarray(landmarks)
     path: Path = _infer_path(path)
     data: list[dict[str, float]] = [{"x": x, "y": y, "z": z} for x, y, z in landmarks]

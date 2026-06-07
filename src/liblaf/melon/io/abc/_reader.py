@@ -12,11 +12,24 @@ if TYPE_CHECKING:
 
 
 class AbstractReader[T](Protocol):
+    """Callable that loads an object from a path."""
+
     def __call__(self, path: Path, /, **kwargs) -> T: ...
 
 
 @attrs.define
 class ReaderDispatcher[T]:
+    """Dispatch readers by file suffix with an optional fallback reader.
+
+    Raises:
+        KeyError: If the path suffix is unknown and no fallback reader exists.
+
+    Attributes:
+        to_type: Type produced by registered readers.
+        fallback: Reader used when no suffix-specific reader is registered.
+        registry: Mapping from suffixes such as `.vtp` to reader callables.
+    """
+
     to_type: type[T]
     fallback: AbstractReader[T] | None = None
     registry: dict[str, AbstractReader[T]] = attrs.field(factory=dict)

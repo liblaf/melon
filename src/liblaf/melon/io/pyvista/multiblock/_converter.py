@@ -8,6 +8,7 @@ from liblaf.melon.io.abc import ConverterDispatcher
 from liblaf.melon.utils import filter_kwargs
 
 as_multiblock: ConverterDispatcher[pv.MultiBlock] = ConverterDispatcher(pv.MultiBlock)
+"""Convert supported scene objects to [`pyvista.MultiBlock`][pyvista.MultiBlock]."""
 
 
 @as_multiblock.register(tm.Scene)

@@ -17,9 +17,22 @@ def temporary_array(
     name: str = "",
     length: int = 8,
 ) -> Generator[str]:
+    """Attach a temporary PyVista data array and remove it on exit.
+
+    Args:
+        attributes: Point, cell, or field data container to mutate.
+        data: Optional array value to store under the generated name.
+        name: Prefix for the generated array name.
+        length: Number of random suffix characters to append.
+
+    Yields:
+        The generated array name.
+    """
     suffix: str = "".join(random.choices(_ALPHABET, k=length))  # noqa: S311
     name: str = f"{name}{suffix}"
     if data is not None:
         attributes[name] = data
-    yield name
-    attributes.pop(name, None)
+    try:
+        yield name
+    finally:
+        attributes.pop(name, None)

@@ -27,6 +27,15 @@ memory: joblib.Memory = joblib.Memory(platformdirs.user_cache_path("joblib"))
 @_wraps(pytetwild.tetrahedralize_pv)
 @memory.cache
 def tetwild(*args, **kwargs) -> pv.UnstructuredGrid:
+    """Tetrahedralize a surface with TetWild and repair winding.
+
+    Positional and keyword arguments are forwarded to
+    [`pytetwild.tetrahedralize_pv`][pytetwild.tetrahedralize_pv]. Results are
+    cached with Joblib under the user cache directory.
+
+    Returns:
+        Tetrahedral mesh with non-negative cell volumes.
+    """
     try:
         result: pv.UnstructuredGrid = pytetwild.tetrahedralize_pv(*args, **kwargs)
     finally:

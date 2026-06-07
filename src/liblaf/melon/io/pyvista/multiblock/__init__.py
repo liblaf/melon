@@ -1,3 +1,5 @@
+"""Multi-block PyVista dataset I/O helpers."""
+
 from . import _writer  # noqa: F401
 from ._converter import as_multiblock
 from ._reader import load_multiblock

@@ -1,3 +1,5 @@
+"""Triangular surface geometry helpers."""
+
 from ._edge import edge_length
 from ._geodestic import geodesic_path
 from ._group import extract_cells, extract_groups, select_groups

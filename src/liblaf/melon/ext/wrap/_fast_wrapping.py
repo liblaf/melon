@@ -26,6 +26,22 @@ def fast_wrapping(
     fixed_landmarks: Float[ArrayLike, "L 3"] | None = None,
     free_polygons_floating: Integer[ArrayLike, " F"] | None = None,
 ) -> pv.PolyData:
+    """Run Faceform Wrap fast wrapping between floating and fixed surfaces.
+
+    Args:
+        floating: Mesh to deform.
+        fixed: Target mesh.
+        floating_landmarks: Optional landmarks on the floating mesh.
+        fixed_landmarks: Optional corresponding landmarks on the fixed mesh.
+        free_polygons_floating: Optional floating-mesh polygons left free during
+            wrapping.
+
+    Returns:
+        Wrapped floating mesh with attributes copied from the aligned input.
+
+    Raises:
+        subprocess.CalledProcessError: If `WrapCmd.sh compute` fails.
+    """
     if floating_landmarks is None:
         floating_landmarks: Float[np.ndarray, "L 3"] = np.empty((0, 3))
     if fixed_landmarks is None:

@@ -12,6 +12,7 @@ from liblaf.melon.io.abc import ConverterDispatcher
 from liblaf.melon.utils import filter_kwargs
 
 as_polydata: ConverterDispatcher[pv.PolyData] = ConverterDispatcher(pv.PolyData)
+"""Convert supported mesh objects to [`pyvista.PolyData`][pyvista.PolyData]."""
 
 
 @as_polydata.register(meshio.Mesh)

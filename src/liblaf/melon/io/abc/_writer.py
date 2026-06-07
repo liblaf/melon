@@ -14,6 +14,8 @@ if TYPE_CHECKING:
 
 
 class AbstractWriter[T](Protocol):
+    """Callable that writes an object to a path."""
+
     def __call__(self, obj: T, path: Path, /, **kwargs) -> None: ...
 
 
@@ -23,6 +25,18 @@ def _default_writer(obj: Any, path: Path, /, **kwargs) -> None:
 
 @attrs.define
 class WriterDispatcher[T]:
+    """Dispatch writers first by file suffix and then by object type.
+
+    Registered writers receive a `pathlib.Path`. Parent directories are created
+    before the writer is called, which keeps concrete writer implementations
+    focused on serialization.
+
+    Raises:
+        KeyError: If no writer registry exists for the path suffix.
+        NotImplementedError: If the suffix exists but the object type is not
+            registered for that suffix.
+    """
+
     registry: dict[str, _SingleDispatchCallable[None]] = attrs.field(factory=dict)
 
     def __call__(self, obj: T, path: StrPath, /, **kwargs) -> None:
@@ -55,3 +69,4 @@ class WriterDispatcher[T]:
 
 
 save: WriterDispatcher[Any] = WriterDispatcher()
+"""Write registered mesh and scene objects to disk based on path suffix."""

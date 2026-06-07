@@ -1,3 +1,5 @@
+"""Volume-mesh I/O helpers built around `pyvista.UnstructuredGrid`."""
+
 from . import _writer  # noqa: F401
 from ._converter import as_unstructured_grid
 from ._reader import load_unstructured_grid

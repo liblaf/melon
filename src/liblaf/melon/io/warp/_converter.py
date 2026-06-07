@@ -10,6 +10,7 @@ from liblaf.melon.io.abc import ConverterDispatcher
 from liblaf.melon.utils import filter_kwargs
 
 as_warp_mesh: ConverterDispatcher[wp.Mesh] = ConverterDispatcher(wp.Mesh)
+"""Convert supported triangular meshes to [`warp.Mesh`][warp.Mesh]."""
 
 
 @as_warp_mesh.register(pv.PolyData)

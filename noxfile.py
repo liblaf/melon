@@ -22,8 +22,5 @@ PYTHON_VERSIONS: list[str] = nox.project.python_versions(PYPROJECT)
     ],
 )
 def test(s: nox.Session, resolution: Resolution | None) -> None:
-    extras: list[str] = []
-    if recipes.supports_cuda(13000):
-        extras.append("cuda13")
-    recipes.setup_uv(s, extras=extras, groups=["test"], resolution=resolution)
+    recipes.setup_uv(s, groups=["test"], resolution=resolution)
     recipes.pytest(s, suppress_no_test_exit_code=True)

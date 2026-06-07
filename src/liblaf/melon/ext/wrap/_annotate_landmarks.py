@@ -24,6 +24,24 @@ def annotate_landmarks(
     left_landmarks: Float[ArrayLike, "L 3"] | None = None,
     right_landmarks: Float[ArrayLike, "L 3"] | None = None,
 ) -> tuple[Float[np.ndarray, "L 3"], Float[np.ndarray, "L 3"]]:
+    """Open a Wrap project for editing corresponding landmarks.
+
+    The left mesh is pre-aligned to the right mesh with either landmark
+    Procrustes fitting or Trimesh mesh registration. Returned left landmarks are
+    transformed back into the original left-mesh coordinate system.
+
+    Args:
+        left: Left mesh.
+        right: Right mesh.
+        left_landmarks: Optional starting landmarks on `left`.
+        right_landmarks: Optional starting landmarks on `right`.
+
+    Returns:
+        Updated `(left_landmarks, right_landmarks)`.
+
+    Raises:
+        subprocess.CalledProcessError: If `Wrap.sh` fails.
+    """
     left: tm.Trimesh = io.as_trimesh(left, triangulate=True)
     right: tm.Trimesh = io.as_trimesh(right, triangulate=True)
     if left_landmarks is None:

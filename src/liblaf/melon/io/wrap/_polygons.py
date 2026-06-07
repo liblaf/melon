@@ -13,6 +13,15 @@ if TYPE_CHECKING:
 
 
 def load_polygons(path: StrPath) -> Integer[np.ndarray, " N"]:
+    """Load selected polygon indices from JSON.
+
+    Args:
+        path: JSON file containing polygon indices.
+
+    Returns:
+        One-dimensional `int32` array of selected polygon indices. Missing files
+        return an empty array.
+    """
     path: Path = Path(path)
     if not path.exists():
         return np.empty((0,), np.int32)
@@ -25,6 +34,14 @@ def load_polygons(path: StrPath) -> Integer[np.ndarray, " N"]:
 def save_polygons(
     polygons: Bool[ArrayLike, " full"] | Integer[ArrayLike, " selection"], path: StrPath
 ) -> None:
+    """Save selected polygon indices for Wrap projects.
+
+    Boolean masks are converted to their selected indices before serialization.
+
+    Args:
+        polygons: Boolean mask over all polygons or explicit polygon indices.
+        path: JSON file to write.
+    """
     path: Path = Path(path)
     polygons: Bool[np.ndarray, " full"] | Integer[np.ndarray, " selection"] = (
         np.asarray(polygons)

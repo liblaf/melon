@@ -1,3 +1,5 @@
+"""Wrappers around external mesh-processing tools."""
+
 from . import wrap
 from ._meshfix import meshfix
 from ._tetwild import tetwild

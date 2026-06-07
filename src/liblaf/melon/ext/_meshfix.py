@@ -13,6 +13,21 @@ def meshfix(
     remove_smallest_components: bool = True,
     verbose: bool = False,
 ) -> pv.PolyData:
+    """Repair a triangular surface with PyMeshFix.
+
+    The repaired mesh is normalized through Trimesh afterward so normals are
+    consistently oriented.
+
+    Args:
+        mesh: Surface mesh to repair.
+        check: Assert that the repaired mesh is non-empty and volumetric.
+        joincomp: Forwarded to PyMeshFix.
+        remove_smallest_components: Forwarded to PyMeshFix.
+        verbose: Enable PyMeshFix logging.
+
+    Returns:
+        Repaired surface with original field data copied back.
+    """
     fix: pymeshfix.MeshFix = pymeshfix.MeshFix(mesh, verbose=verbose)
     fix.repair(joincomp=joincomp, remove_smallest_components=remove_smallest_components)
     result_pv: pv.PolyData = fix.mesh

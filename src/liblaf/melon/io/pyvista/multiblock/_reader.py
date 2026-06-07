@@ -5,6 +5,7 @@ import pyvista as pv
 from liblaf.melon.io.abc import ReaderDispatcher
 
 load_multiblock: ReaderDispatcher[pv.MultiBlock] = ReaderDispatcher(pv.MultiBlock)
+"""Load a multi-block PyVista dataset."""
 
 
 @load_multiblock.register_fallback

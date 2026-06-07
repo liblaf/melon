@@ -10,6 +10,7 @@ from liblaf.melon.io.abc import ReaderDispatcher
 from liblaf.melon.utils import filter_kwargs
 
 load_polydata: ReaderDispatcher[pv.PolyData] = ReaderDispatcher(pv.PolyData)
+"""Load a surface mesh as [`pyvista.PolyData`][pyvista.PolyData]."""
 
 
 @load_polydata.register_fallback

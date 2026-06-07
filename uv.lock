@@ -790,37 +790,6 @@ wheels = [
 ]
 
 [[package]]
-name = "dracox"
-version = "0.0.1"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "numpy" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/cb/71/82414b07cea11b885949436050cd9964252bafb7b0274c49adf76b4e3694/dracox-0.0.1.tar.gz", hash = "sha256:ee5deecdee1cae2f7ddb80f8e48fab96ce355dbe151fcf9545f0b8c470412336", size = 70096219, upload-time = "2026-01-07T22:04:54.859Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/62/10/bbad82cb64a75db29fdefe36532fe1f819939ffa1ad83c9c62cd9c7bfe31/dracox-0.0.1-cp312-cp312-macosx_10_14_x86_64.whl", hash = "sha256:eda987fc00cce2df5eaa0a87acd489c8f48ffeca75e524c62292510a53e54721", size = 2477562, upload-time = "2026-01-07T22:04:07.453Z" },
-    { url = "https://files.pythonhosted.org/packages/f4/56/f89c560d8489e78985d2f3fb2dda7d2a3729bd699a57019bf748146a70f5/dracox-0.0.1-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:4d44feee871105cd7017b81488db8345b11cdbf197ca4c7f201d7a0f8434efad", size = 2222508, upload-time = "2026-01-07T22:04:09.558Z" },
-    { url = "https://files.pythonhosted.org/packages/75/fd/1a05cfd27d778879881f2114bd846d3ef0b2cabac0aeaf314cabfc7b5311/dracox-0.0.1-cp312-cp312-manylinux_2_24_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:71313f67203a0826f4ad08e98952e92f8e943670a866bca6ffd9cf14460ceb40", size = 3159070, upload-time = "2026-01-07T22:04:11.77Z" },
-    { url = "https://files.pythonhosted.org/packages/3e/ef/a46fb6d7826dba5a0cc7c38f67e33c43a8458196514744b1bcef9a23e344/dracox-0.0.1-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:598fecfede99782cd808a6a57b2a1c1d585e4405ae674b69b2768e2087666571", size = 3255071, upload-time = "2026-01-07T22:04:13.814Z" },
-    { url = "https://files.pythonhosted.org/packages/80/46/19231190fe769b57dd31ef959910f9f90f711a2ad6710a5ff0db9b0c91f6/dracox-0.0.1-cp312-cp312-win_amd64.whl", hash = "sha256:9c6eb428ded404258714c09ed00461a609cf9f94312268e7761efffe62a78b51", size = 2830961, upload-time = "2026-01-07T22:04:16.257Z" },
-    { url = "https://files.pythonhosted.org/packages/85/c9/6edc9c7964da836410a9e4785c5e7d014c5d98bba17d7c93327c45c44aa8/dracox-0.0.1-cp313-cp313-macosx_10_14_x86_64.whl", hash = "sha256:e3fb65b96b6b70e68838d826af5100213e0109d533b069645ca9f8abd58942eb", size = 2477524, upload-time = "2026-01-07T22:04:18.056Z" },
-    { url = "https://files.pythonhosted.org/packages/76/a2/4e51f77d61cc3483897e781c3dd29dfb8226caa8d2dc6d115b35344fdda4/dracox-0.0.1-cp313-cp313-macosx_11_0_arm64.whl", hash = "sha256:fe2521656461a64cc09413ea7db1d695d184946085d671a33cbc9b20677cb2e4", size = 2222452, upload-time = "2026-01-07T22:04:20.028Z" },
-    { url = "https://files.pythonhosted.org/packages/23/42/4ae7cb5370f0958518d8de6001b3cf7720b6babe0607916f0f99ef48b13e/dracox-0.0.1-cp313-cp313-manylinux_2_24_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:b5ccbb58c9b67e9940e23f52368b1705b1208a2f83a9966cf5b1ef54a1c788c2", size = 3158983, upload-time = "2026-01-07T22:04:22.087Z" },
-    { url = "https://files.pythonhosted.org/packages/f2/10/d99a97956ba5c8c1049d03d5f3b1a5ebd4c7e64c70978e5251e7acbeedca/dracox-0.0.1-cp313-cp313-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:c3cc9efc97dcc48f08931d4f62e908a2a65177b154344dd90c00b5e5bfaa8734", size = 3255101, upload-time = "2026-01-07T22:04:24.105Z" },
-    { url = "https://files.pythonhosted.org/packages/16/ea/1490cdb06cb7b598d96511da23c46972aa4e1fbd097dfc67ec3bd0165b5f/dracox-0.0.1-cp313-cp313-win_amd64.whl", hash = "sha256:1cb0d04bf99f890c0c76df315cf4261d41c364535be5d652efe47b8426da3cbf", size = 2830883, upload-time = "2026-01-07T22:04:26.074Z" },
-    { url = "https://files.pythonhosted.org/packages/be/c3/4a994a308da676df09abbadcbf5cc7f44992f7392152cd2835694ce58881/dracox-0.0.1-cp314-cp314-macosx_10_15_x86_64.whl", hash = "sha256:92d8173e3123435904d612895bb3bcd93b0f377be899b94fa60652c6a4d09fe2", size = 2478105, upload-time = "2026-01-07T22:04:27.662Z" },
-    { url = "https://files.pythonhosted.org/packages/58/37/5dbb3ad2f60ded300aee6f4b448fb25dc2a32f5de0d89907975acd33bb44/dracox-0.0.1-cp314-cp314-macosx_11_0_arm64.whl", hash = "sha256:65a9b65a2c5a04d2a09b517892ad23fccdd46bd3d499a9808c599765538dbd91", size = 2222535, upload-time = "2026-01-07T22:04:29.549Z" },
-    { url = "https://files.pythonhosted.org/packages/bc/1a/eafa6aee579ff00460ee5838e37c3392f6bfb4d095770a81ef99d467b7dc/dracox-0.0.1-cp314-cp314-manylinux_2_24_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:53190b6a937996e537758b515ec98ecab3a44135adfe62b79838dd936950415e", size = 3159196, upload-time = "2026-01-07T22:04:31.465Z" },
-    { url = "https://files.pythonhosted.org/packages/4c/84/219581edc4450cf219a1c6f1018541e8985161281e87465d652db8e11493/dracox-0.0.1-cp314-cp314-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:1718916ff9cd58461d845c2f4c792962eb70555e9ea4cb1ba5e3aa58120f931f", size = 3255122, upload-time = "2026-01-07T22:04:33.605Z" },
-    { url = "https://files.pythonhosted.org/packages/32/22/3c865830e83a31c7b0b8c702a451de4823961feefcb09d316b47b612f2f1/dracox-0.0.1-cp314-cp314-win_amd64.whl", hash = "sha256:762069047a151ac52a424fa5fb3bb1a9e67546876fd919119f2e87d36e3f4a6b", size = 2881456, upload-time = "2026-01-07T22:04:35.232Z" },
-    { url = "https://files.pythonhosted.org/packages/58/06/c5883b761a18d62d048626477f877a9aea91dc7b20fc4932d2ff81009bd4/dracox-0.0.1-cp314-cp314t-macosx_10_15_x86_64.whl", hash = "sha256:48b14c9fcd96ba73da1ac5ecf69c8f05da75605c3fdffc6c6d3462d438697b29", size = 2479667, upload-time = "2026-01-07T22:04:36.914Z" },
-    { url = "https://files.pythonhosted.org/packages/2b/72/d97d9503eb0e1bc055a6415e5eea00df1411b4af08e3cf14f3b527761bcc/dracox-0.0.1-cp314-cp314t-macosx_11_0_arm64.whl", hash = "sha256:48b98c9b6297e69b8c45cd09cd5104142eb278dae16c78d29dba605d46cbd943", size = 2224305, upload-time = "2026-01-07T22:04:38.851Z" },
-    { url = "https://files.pythonhosted.org/packages/b5/c6/9889050f9f5c024d5e9da18067f3bf848a44395949254fd2fffbd6821ebd/dracox-0.0.1-cp314-cp314t-manylinux_2_24_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:05b53dec94b152d9d12d0a3c9f36381f4b52afac7ed47e6fc9f25ee236af6736", size = 3160730, upload-time = "2026-01-07T22:04:40.494Z" },
-    { url = "https://files.pythonhosted.org/packages/81/59/3d8ceb6b1ca04925675d2fac2ce91d05aa4f3c9451d3ec997f60e062af1f/dracox-0.0.1-cp314-cp314t-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:e771422e68db4d243f1d415f1c6bb478b871885d9b8084801dab752df89117af", size = 3256757, upload-time = "2026-01-07T22:04:42.353Z" },
-    { url = "https://files.pythonhosted.org/packages/d1/5d/645644d7eca384c7c51b4fe18c06ce6c25e3051fdb7fc66802713cdb211c/dracox-0.0.1-cp314-cp314t-win_amd64.whl", hash = "sha256:e0b91f7fb41566273392ff4bc84ead181a0dd5e9aa22e028329bb6d3161d6ea7", size = 2885135, upload-time = "2026-01-07T22:04:44.204Z" },
-]
-
-[[package]]
 name = "dulwich"
 version = "0.25.2"
 source = { registry = "https://pypi.org/simple" }
@@ -1706,12 +1675,12 @@ source = { editable = "." }
 dependencies = [
     { name = "attrs" },
     { name = "cyclopts" },
-    { name = "dracox" },
     { name = "einops" },
     { name = "h5py" },
     { name = "jaxtyping" },
     { name = "jinja2" },
     { name = "joblib" },
+    { name = "liblaf-logging" },
     { name = "meshio" },
     { name = "more-itertools" },
     { name = "numpy" },
@@ -1722,6 +1691,7 @@ dependencies = [
     { name = "pyvista" },
     { name = "rich" },
     { name = "scipy" },
+    { name = "toolz" },
     { name = "torch" },
     { name = "trimesh", extra = ["easy"] },
     { name = "warp-lang" },
@@ -1770,15 +1740,15 @@ typing = [
 requires-dist = [
     { name = "attrs", specifier = ">=25" },
     { name = "cyclopts", specifier = ">=4" },
-    { name = "dracox", specifier = ">=0.0.1" },
     { name = "einops", specifier = ">=0.8" },
     { name = "h5py", specifier = ">=3.16.0" },
-    { name = "jaxtyping", specifier = ">=0.3" },
+    { name = "jaxtyping", specifier = ">=0.3.10" },
     { name = "jinja2", specifier = ">=3" },
     { name = "joblib", specifier = ">=1.5.3" },
+    { name = "liblaf-logging", specifier = ">=0.1.2" },
     { name = "meshio", specifier = ">=5.3.5" },
     { name = "more-itertools", specifier = ">=10" },
-    { name = "numpy", specifier = ">=2" },
+    { name = "numpy", specifier = ">=2.4" },
     { name = "potpourri3d", specifier = ">=1.3" },
     { name = "pydicom", specifier = ">=3" },
     { name = "pymeshfix", specifier = ">=0.18" },
@@ -1786,6 +1756,7 @@ requires-dist = [
     { name = "pyvista", specifier = ">=0.47" },
     { name = "rich", specifier = ">=14" },
     { name = "scipy", specifier = ">=1.17" },
+    { name = "toolz", specifier = ">=1.1" },
     { name = "torch", specifier = ">=2.12.0" },
     { name = "trimesh", extras = ["easy"], specifier = ">=4.11" },
     { name = "warp-lang", specifier = ">=1.14" },
@@ -1807,12 +1778,12 @@ docs = [
     { name = "griffe-pydantic", specifier = ">=1" },
     { name = "griffe-warnings-deprecated", specifier = ">=1" },
     { name = "mkdocstrings", extras = ["python"], specifier = ">=1" },
-    { name = "zensical", specifier = ">=0.0.36" },
+    { name = "zensical", specifier = ">=0.0.44" },
 ]
 lint = [
     { name = "import-linter", extras = ["ui"], specifier = ">=2" },
     { name = "ruff", specifier = ">=0.15" },
-    { name = "ty", specifier = ">=0.0.32" },
+    { name = "ty", specifier = ">=0.0.44" },
 ]
 nox = [
     { name = "liblaf-nox-recipes", specifier = ">=0.1" },

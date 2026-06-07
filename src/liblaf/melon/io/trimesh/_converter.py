@@ -12,6 +12,7 @@ from liblaf.melon.io.abc import ConverterDispatcher
 from liblaf.melon.utils import filter_kwargs
 
 as_trimesh: ConverterDispatcher[tm.Trimesh] = ConverterDispatcher(tm.Trimesh)
+"""Convert supported triangular mesh objects to [`trimesh.Trimesh`][trimesh.Trimesh]."""
 
 
 @as_trimesh.register(meshio.Mesh)

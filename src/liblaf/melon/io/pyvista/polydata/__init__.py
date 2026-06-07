@@ -1,3 +1,5 @@
+"""Surface-mesh I/O helpers built around `pyvista.PolyData`."""
+
 from . import _writer  # noqa: F401
 from ._converter import as_polydata
 from ._reader import load_polydata

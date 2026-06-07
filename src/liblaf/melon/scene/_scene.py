@@ -9,6 +9,17 @@ def dump(
     *,
     include_visual: bool = True,
 ) -> list[tm.Trimesh]:
+    """Dump scene geometries as transformed Trimesh copies.
+
+    Args:
+        scene: Source Trimesh scene.
+        geometry_names: Optional geometry names to include. When omitted, all
+            Trimesh geometries are dumped.
+        include_visual: Preserve visual attributes on copied geometries.
+
+    Returns:
+        Transformed meshes with `name` and `node` metadata.
+    """
     geometries: list[tm.Trimesh] = []
     if geometry_names is None:
         geometry_names: list[str] = [
@@ -30,6 +41,15 @@ def dump(
 
 
 def subscene(scene: tm.Scene, node_name: str) -> tm.Scene:
+    """Extract a subscene and apply the node transform in world coordinates.
+
+    Args:
+        scene: Source Trimesh scene.
+        node_name: Node to extract.
+
+    Returns:
+        Transformed subscene rooted at `node_name`.
+    """
     subscene: tm.Scene = scene.subscene(node_name)
     transform, _geometry_name = scene.graph[node_name]
     subscene.apply_transform(transform)

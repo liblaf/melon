@@ -26,6 +26,23 @@ def volume_fraction(
     n_samples: int = 1024,
     split_size: int = 100_000_000,
 ) -> Float[np.ndarray, " c"]:
+    """Estimate how much of each tetrahedron lies inside a closed surface.
+
+    Tetrahedra whose four vertices are all inside or all outside the surface are
+    classified exactly. Boundary tetrahedra are sampled with Sobol
+    barycentric coordinates and classified by ray intersections.
+
+    Args:
+        mesh: Tetrahedral volume mesh.
+        surface: Closed triangular surface used as the inside/outside boundary.
+        n_samples: Requested number of samples for each boundary tetrahedron.
+            The Sobol sequence rounds this up to a power of two.
+        split_size: Approximate maximum number of sampled points to process in
+            one chunk.
+
+    Returns:
+        One fraction per tetrahedral cell.
+    """
     with _torch_device():
         surface_wp: wp.Mesh = io.as_warp_mesh(surface)
         cells: Integer[np.ndarray, " c 4"] = mesh.cells_dict[pv.CellType.TETRA]  # ty:ignore[invalid-argument-type]
@@ -39,10 +56,11 @@ def volume_fraction(
         fraction[inside] = 1.0
         fraction[outside] = 0.0
 
-        remainder: Integer[Tensor, " r"] = torch.nonzero(~(inside | outside)).squeeze()
+        remainder: Integer[Tensor, " r"] = torch.nonzero(~(inside | outside)).flatten()
         barycentric: Float[Tensor, "s 4"] = _sample_barycentric_coordinates(n_samples)
         n_samples: int = barycentric.shape[0]
-        for chunk in torch.split(remainder, split_size // n_samples):
+        chunk_size: int = max(1, split_size // n_samples)
+        for chunk in torch.split(remainder, chunk_size):
             samples: Float[Tensor, "k s 3"] = _barycentric_to_points(
                 points, cells[chunk], barycentric
             )

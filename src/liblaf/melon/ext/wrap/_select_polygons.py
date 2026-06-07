@@ -16,6 +16,18 @@ from ._template import get_environment
 def select_polygons(
     mesh: Any, polygons: Integer[ArrayLike, " N"] | None = None
 ) -> Integer[np.ndarray, " N"]:
+    """Open a Wrap project that lets the user edit selected polygons.
+
+    Args:
+        mesh: Mesh to show in Wrap.
+        polygons: Initial selected polygon indices.
+
+    Returns:
+        Polygon indices saved by Wrap.
+
+    Raises:
+        subprocess.CalledProcessError: If `Wrap.sh` fails.
+    """
     if polygons is None:
         polygons: Integer[np.ndarray, " N"] = np.empty((0,), np.int32)
 

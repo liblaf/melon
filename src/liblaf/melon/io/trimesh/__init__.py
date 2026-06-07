@@ -1,3 +1,5 @@
+"""Trimesh conversion and writer registration."""
+
 from . import _writer  # noqa: F401
 from ._converter import as_trimesh
 

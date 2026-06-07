@@ -7,6 +7,7 @@ from liblaf.melon.io.abc import ReaderDispatcher
 load_unstructured_grid: ReaderDispatcher[pv.UnstructuredGrid] = ReaderDispatcher(
     pv.UnstructuredGrid
 )
+"""Load an unstructured volume mesh with PyVista."""
 
 
 @load_unstructured_grid.register_fallback

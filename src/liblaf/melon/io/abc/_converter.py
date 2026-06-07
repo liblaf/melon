@@ -11,6 +11,8 @@ if TYPE_CHECKING:
 
 
 class AbstractConverter[F, T](Protocol):
+    """Callable that converts one object into another mesh representation."""
+
     def __call__(self, obj: F, /, **kwargs) -> T: ...
 
 
@@ -25,6 +27,22 @@ def _identity[T](obj: T, /, **kwargs) -> T:
 
 @attrs.define
 class ConverterDispatcher[T]:
+    """Single-dispatch conversion registry with identity conversion built in.
+
+    The target type is registered as an identity conversion, so callers can pass
+    through objects that are already in the requested representation.
+
+    Examples:
+        >>> converter = ConverterDispatcher(str)
+        >>> converter("mesh")
+        'mesh'
+        >>> @converter.register(int)
+        ... def _from_int(obj, /, **kwargs):
+        ...     return str(obj)
+        >>> converter(42)
+        '42'
+    """
+
     def _default_registry(self) -> _SingleDispatchCallable[T]:
         registry: _SingleDispatchCallable[T] = functools.singledispatch(
             _default_converter
@@ -33,9 +51,11 @@ class ConverterDispatcher[T]:
         return registry
 
     to_type: type[T]
+    """Target type returned unchanged when the input already has that runtime type."""
     registry: _SingleDispatchCallable[T] = attrs.field(
         default=attrs.Factory(_default_registry, takes_self=True)
     )
+    """Underlying `functools.singledispatch` registry."""
 
     def __call__(self, obj: Any, /, **kwargs) -> T:
         return self.registry(obj, **kwargs)
