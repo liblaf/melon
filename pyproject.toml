@@ -130,7 +130,7 @@ extend = ".config/linters/.ruff.toml"
 ignore = ["F722"]
 
 [tool.ty.src]
-exclude = ["!exp/2026/", "exp/"]
+exclude = ["exp/2025/"]
 
 [tool.uv]
 default-groups = "all"

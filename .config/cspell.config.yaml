@@ -20,6 +20,7 @@ ignoreRandomStrings: true
 maxFileSize: 32KB
 useGitignore: true
 words:
+  - amax
   - anguli
   - arithmatex
   - atlanto
@@ -34,6 +35,7 @@ words:
   - colli
   - cricoarytenoid
   - cricothyroid
+  - cytoolz
   - digastiric
   - einops
   - epicranius
