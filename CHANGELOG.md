@@ -7,7 +7,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Conventional Changelog](https://github.com/conventional-changelog/conventional-changelog-config-spec/blob/master/versions/2.2.0/README.md),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [v1.2.0](https://github.com/liblaf/melon/releases/tag/v1.2.0) - 2026-06-07
+## [v1.2.0](https://github.com/liblaf/melon/releases/tag/v1.2.0) - 2026-06-08
 
 ### ✨ Features
 
@@ -20,13 +20,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - add tet volume fraction and SMAS workflow - [3f66922](https://github.com/liblaf/melon/commit/3f6692247ec7dd34158a143d42cb828875425a23) by [@liblaf](https://github.com/liblaf)
 - add head mesh mask generation workflow - [ad4780e](https://github.com/liblaf/melon/commit/ad4780e97c771473cd9ad1e5262280e8ca213f32) by [@liblaf](https://github.com/liblaf)
 
+### 🐛 Bug Fixes
+
+- serialize landmarks as plain Python floats - [3bbc7eb](https://github.com/liblaf/melon/commit/3bbc7eb2f94caeb6fe43f3fd7e2f6b6b8033ccae) by [@liblaf](https://github.com/liblaf)
+
 ### ♻️ Code Refactoring
 
 - refresh mesh package maintenance - [efe0509](https://github.com/liblaf/melon/commit/efe050913213455f2283cd2d0aaa16194eb12b2c) by [@liblaf](https://github.com/liblaf)
 
+### ⚙️ Continuous Integrations
+
+- update release workflow from template refresh - [eb1705f](https://github.com/liblaf/melon/commit/eb1705f366af08f4aa8c40d5e84e9f7e5a7ba20c) by [@liblaf](https://github.com/liblaf)
+
 ### ❤️ Contributors
 
 - [@liblaf](https://github.com/liblaf)
+- [@liblaf-release-please[bot]](https://github.com/apps/liblaf-release-please) made their first contribution in [#127](https://github.com/liblaf/melon/pull/127)
 - [@renovate[bot]](https://github.com/apps/renovate)
 
 ## [v1.1.3](https://github.com/liblaf/melon/releases/tag/v1.1.3) - 2026-03-24
