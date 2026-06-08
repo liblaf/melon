@@ -1675,6 +1675,7 @@ source = { editable = "." }
 dependencies = [
     { name = "attrs" },
     { name = "cyclopts" },
+    { name = "cytoolz" },
     { name = "einops" },
     { name = "h5py" },
     { name = "jaxtyping" },
@@ -1740,6 +1741,7 @@ typing = [
 requires-dist = [
     { name = "attrs", specifier = ">=25" },
     { name = "cyclopts", specifier = ">=4" },
+    { name = "cytoolz", specifier = ">=1.1.0" },
     { name = "einops", specifier = ">=0.8" },
     { name = "h5py", specifier = ">=3.16.0" },
     { name = "jaxtyping", specifier = ">=0.3.10" },
