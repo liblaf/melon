@@ -1,6 +1,7 @@
 """Triangular surface geometry helpers."""
 
 from ._edge import edge_length
+from ._fill_point import fill_point
 from ._geodestic import geodesic_path
 from ._group import extract_cells, extract_groups, select_groups
 from ._mesh_query_point import MeshQueryPointResult, mesh_query_point
@@ -11,6 +12,7 @@ __all__ = [
     "edge_length",
     "extract_cells",
     "extract_groups",
+    "fill_point",
     "fix_normals",
     "geodesic_path",
     "mesh_query_point",

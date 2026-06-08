@@ -3,7 +3,7 @@ from pathlib import Path
 
 import numpy as np
 import pyvista as pv
-from hypothesis.internal.conjecture.shrinking import Float
+from jaxtyping import Float
 
 from liblaf import cherries, melon
 
