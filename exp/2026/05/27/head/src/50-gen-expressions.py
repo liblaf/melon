@@ -34,7 +34,7 @@ def main(config: Config) -> None:
         np.isfinite(target_surface.point_data[names[0]]), axis=-1
     )
     target_surface: pv.PolyData = melon.tri.fill_point(
-        target_surface, mask, names=names
+        target_surface, mask, names=names, limit=0.01
     )
     for name in names:
         target_surface.point_data[name] = np.nan_to_num(

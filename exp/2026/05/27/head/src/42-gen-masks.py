@@ -3,7 +3,11 @@ from pathlib import Path
 
 import numpy as np
 import pyvista as pv
-from jaxtyping import Float
+import torch
+import trimesh as tm
+import warp as wp
+from jaxtyping import Bool, Float
+from torch import Tensor
 
 from liblaf import cherries, melon
 
@@ -100,7 +104,21 @@ def mask_skin(skin: pv.PolyData, surface: pv.PolyData) -> pv.PolyData:
     return surface
 
 
+def make_face_convex(mesh: pv.UnstructuredGrid, surface: pv.PolyData) -> None:
+    face_pv: pv.PolyData = surface.extract_points(
+        np.flatnonzero(surface.point_data["IsFace"]), adjacent_cells=True
+    )
+    face_tm: tm.Trimesh = pv.to_trimesh(face_pv)
+    convex_tm: tm.Trimesh = face_tm.convex_hull
+    convex_wp: wp.Mesh = melon.io.as_warp_mesh(convex_tm)
+    centers: pv.PolyData = mesh.cell_centers()
+    centers: Float[Tensor, "c 3"] = torch.tensor(centers.points, dtype=torch.float32)
+    in_convex: Bool[Tensor, " c"] = melon.tri.contains(convex_wp, centers)
+    mesh.cell_data["InFaceConvex"] = in_convex.numpy(force=True)
+
+
 def main(cfg: Config) -> None:
+    torch.set_default_device("cuda")
     teeth: pv.PolyData = melon.io.load_polydata(cfg.teeth)
     cranium: pv.PolyData = melon.io.load_polydata(cfg.cranium)
     mandible: pv.PolyData = melon.io.load_polydata(cfg.mandible)
@@ -142,6 +160,9 @@ def main(cfg: Config) -> None:
         },
     )
     mesh.field_data["GroupName"] = surface.field_data["GroupName"]
+
+    make_face_convex(mesh, surface)
+
     melon.save(mesh, cherries.output(f"42-tetmesh-{cfg.suffix}.vtu"))
 
 

@@ -1,3 +1,4 @@
+import math
 from collections.abc import Iterable
 
 import numpy as np
@@ -12,7 +13,7 @@ def fill_point(
     mask: Bool[np.ndarray, " P"],
     names: Iterable[str] | None = None,
     *,
-    limit: float = 0.01,
+    limit: float = math.inf,
 ) -> pv.PolyData:
     if names is None:
         names: list[str] = mesh.point_data.keys()
