@@ -1,6 +1,6 @@
 from collections.abc import Mapping
 from pathlib import Path
-from typing import Any, cast
+from typing import Any
 
 import numpy as np
 import pyvista as pv
@@ -22,7 +22,7 @@ def _load_polydata(path: Path, /, **kwargs) -> pv.PolyData:
 @load_polydata.register((".obj",))
 def _load_polydata_obj(path: Path, **kwargs) -> pv.PolyData:
     del kwargs
-    mesh: pv.PolyData = cast("pv.PolyData", pv.read(path, cls=pv.PolyData))
+    mesh: pv.PolyData = pv.read(path, cls=pv.PolyData)
     if "GroupIds" not in mesh.cell_data:
         return mesh
     group_id_to_name: list[str] = []

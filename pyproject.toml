@@ -62,11 +62,7 @@ dynamic = ["version"]
 melon = "liblaf.melon.cli:app.meta"
 
 [dependency-groups]
-dev = [
-    "icecream>=2.2.0",
-    "liblaf-cherries>=3",
-    "tqdm>=4.68.2",
-]
+dev = ["icecream>=2.2.0", "liblaf-cherries>=3", "tqdm>=4.68.2"]
 build = ["check-wheel-contents>=0.6", "hatch>=1", "twine>=6"]
 docs = [
   "griffe-fieldz>=0.5",

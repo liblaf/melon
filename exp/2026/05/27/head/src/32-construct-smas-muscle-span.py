@@ -14,15 +14,15 @@ from liblaf import cherries, melon
 
 
 class Config(cherries.BaseConfig):
-    cranium: Path = cherries.input("13-cranium.ply")
-    mandible: Path = cherries.input("13-mandible.ply")
+    # cranium: Path = cherries.input("13-cranium.ply")
+    # mandible: Path = cherries.input("13-mandible.ply")
     skin: Path = cherries.input("20-skin-smoothed.ply")
     muscles: Path = cherries.input("31-muscles-smas.m.vtkhdf")
     output: Path = cherries.output("32-smas.vtp")
     output_skin: Path = cherries.output("32-skin-muscle-span.vtp")
 
 
-THICKNESS_THRESHOLD: float = 0.03  # meters
+THICKNESS_THRESHOLD: float = 0.018  # meters
 
 
 def skin_to_skeletons(skin: pv.PolyData, skeletons: wp.Mesh) -> None:
@@ -37,11 +37,11 @@ def skin_to_skeletons(skin: pv.PolyData, skeletons: wp.Mesh) -> None:
 
 
 def skin_to_muscles(skin: pv.PolyData, muscles: wp.Mesh) -> None:
-    skin_to_skeletons: Float[np.ndarray, " p"] = skin.point_data["ToSkeletons"]
-    skin_to_skeletons: Float[Tensor, " p"] = torch.tensor(
-        skin_to_skeletons, dtype=torch.float32
-    )
-    skin_to_skeletons.nan_to_num_(nan=THICKNESS_THRESHOLD)
+    # skin_to_skeletons: Float[np.ndarray, " p"] = skin.point_data["ToSkeletons"]
+    # skin_to_skeletons: Float[Tensor, " p"] = torch.tensor(
+    #     skin_to_skeletons, dtype=torch.float32
+    # )
+    # skin_to_skeletons.nan_to_num_(nan=THICKNESS_THRESHOLD)
     points: Float[Tensor, "p 3"] = torch.tensor(skin.points, dtype=torch.float32)
     point_normals: Float[Tensor, "p 3"] = torch.tensor(
         skin.point_normals, dtype=torch.float32
@@ -55,9 +55,7 @@ def skin_to_muscles(skin: pv.PolyData, muscles: wp.Mesh) -> None:
         point_normals,
         max_t=THICKNESS_THRESHOLD,
     )
-    valid: Bool[Tensor, " p"] = (distance_min < distance_max) & (
-        distance_max < 1.001 * skin_to_skeletons
-    )
+    valid: Bool[Tensor, " p"] = distance_min < distance_max
     distance_min[~valid] = torch.nan
     distance_max[~valid] = torch.nan
     skin.point_data["ToMusclesMin"] = distance_min.numpy(force=True)
@@ -74,11 +72,11 @@ def extend_scalar(
 
 def main(cfg: Config) -> None:
     torch.set_default_device("cuda")
-    cranium: pv.PolyData = melon.io.load_polydata(cfg.cranium)
-    mandible: pv.PolyData = melon.io.load_polydata(cfg.mandible)
+    # cranium: pv.PolyData = melon.io.load_polydata(cfg.cranium)
+    # mandible: pv.PolyData = melon.io.load_polydata(cfg.mandible)
     skin: pv.PolyData = melon.io.load_polydata(cfg.skin)
     muscles: pv.MultiBlock = melon.io.load_multiblock(cfg.muscles)
-    skeletons: pv.PolyData = pv.merge([cranium, mandible])
+    # skeletons: pv.PolyData = pv.merge([cranium, mandible])
 
     skin.subdivide_adaptive(
         max_edge_len=0.001,  # meters
@@ -86,10 +84,10 @@ def main(cfg: Config) -> None:
     )
     muscles: pv.UnstructuredGrid = muscles.combine()
     muscles: pv.PolyData = muscles.extract_surface(algorithm=None)
-    skeletons_wp: wp.Mesh = melon.io.as_warp_mesh(skeletons)
+    # skeletons_wp: wp.Mesh = melon.io.as_warp_mesh(skeletons)
     muscles_wp: wp.Mesh = melon.io.as_warp_mesh(muscles)
 
-    skin_to_skeletons(skin, skeletons_wp)
+    # skin_to_skeletons(skin, skeletons_wp)
     skin_to_muscles(skin, muscles_wp)
 
     solver: pp3d.MeshVectorHeatSolver = pp3d.MeshVectorHeatSolver(
