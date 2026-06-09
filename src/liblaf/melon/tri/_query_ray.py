@@ -1,6 +1,7 @@
 from collections.abc import Sequence
 from typing import no_type_check
 
+import torch
 import warp as wp
 from jaxtyping import Float
 from torch import Tensor
@@ -15,11 +16,12 @@ def query_ray(
     max_t: float = wp.inf,
 ) -> Float[Tensor, "*q"]:
     shape: Sequence[int] = start.shape[:-1]
-    start: Float[Tensor, "q 3"] = start.reshape(-1, 3)
-    direction: Float[Tensor, "q 3"] = direction.reshape(-1, 3)
+    start: Float[Tensor, "q 3"] = start.reshape(-1, 3).contiguous()
+    direction: Float[Tensor, "q 3"] = direction.reshape(-1, 3).contiguous()
     start_wp: wp.array = wp.from_torch(start, wp.vec3f, return_ctype=True)
     direction_wp: wp.array = wp.from_torch(direction, wp.vec3f, return_ctype=True)
-    distance_wp: wp.array = wp.empty((start.shape[0],), wp.float32)
+    distance: Float[Tensor, " q"] = torch.empty((start.shape[0],), dtype=torch.float32)
+    distance_wp: wp.array = wp.from_torch(distance, wp.float32, return_ctype=True)
     wp.launch(
         _mesh_query_ray_kernel,
         dim=(start.shape[0],),
@@ -27,7 +29,6 @@ def query_ray(
         outputs=[distance_wp],
         stream=warp_stream_from_torch(),
     )
-    distance: Float[Tensor, " q"] = wp.to_torch(distance_wp)
     distance: Float[Tensor, "*q"] = distance.reshape(shape)
     return distance
 
@@ -46,4 +47,4 @@ def _mesh_query_ray_kernel(
     if query.result:
         distance[tid] = query.t
     else:
-        distance[tid] = wp.inf
+        distance[tid] = wp.nan

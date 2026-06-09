@@ -1669,7 +1669,7 @@ wheels = [
 
 [[package]]
 name = "liblaf-logging"
-version = "0.1.3"
+version = "0.1.4"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "attrs" },
@@ -1678,9 +1678,9 @@ dependencies = [
     { name = "packaging" },
     { name = "rich" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/d8/b8/da93c699605adaf14ed3d418d0c32fdd38e8dcffdf496c6cb3b13869aea7/liblaf_logging-0.1.3.tar.gz", hash = "sha256:bca8ecdaafc5116b7c491d5dcb265fc7f71a743d6f06b8e392bbebd99042e691", size = 17629, upload-time = "2026-06-08T17:25:43.895Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/6f/55/2c0cf9c7e40c72f353ac15b449ae048790e0ae4b80115b74ad96d2a06b98/liblaf_logging-0.1.4.tar.gz", hash = "sha256:25e9ec08cf8f3034efae9200495852e96f38dd5e43496f7c51c667d11fd63a88", size = 19100, upload-time = "2026-06-09T14:26:26.041Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/42/31/cac2a667cd8aedf47d76c474d796ed17f9643340525ca0000007430beba3/liblaf_logging-0.1.3-py3-none-any.whl", hash = "sha256:b8ec553e050cf7542812a3c3ff0a52e86278e5e41d416524f908aae7dffa7c35", size = 26536, upload-time = "2026-06-08T17:25:42.766Z" },
+    { url = "https://files.pythonhosted.org/packages/8b/43/11f7d04f21ee7b01130be4cc7b64cac727bcadd4bc408cd56d6a0a7440c1/liblaf_logging-0.1.4-py3-none-any.whl", hash = "sha256:b363df8fbd8e6a1e44c444fb1687824e1598af2c0bc082e7948ecbd6b8888fd0", size = 28729, upload-time = "2026-06-09T14:26:24.935Z" },
 ]
 
 [[package]]

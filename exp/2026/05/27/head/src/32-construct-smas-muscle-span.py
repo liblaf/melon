@@ -22,12 +22,12 @@ class Config(cherries.BaseConfig):
     output_skin: Path = cherries.output("32-skin-muscle-span.vtp")
 
 
-THICKNESS_THRESHOLD: float = 0.015  # meters
+THICKNESS_THRESHOLD: float = 0.03  # meters
 
 
 def skin_to_skeletons(skin: pv.PolyData, skeletons: wp.Mesh) -> None:
-    points: Float[Tensor, " p 3"] = torch.tensor(skin.points, dtype=torch.float32)
-    point_normals: Float[Tensor, " p 3"] = torch.tensor(
+    points: Float[Tensor, "p 3"] = torch.tensor(skin.points, dtype=torch.float32)
+    point_normals: Float[Tensor, "p 3"] = torch.tensor(
         skin.point_normals, dtype=torch.float32
     )
     distance: Float[Tensor, " p"] = melon.tri.query_ray(
@@ -36,27 +36,32 @@ def skin_to_skeletons(skin: pv.PolyData, skeletons: wp.Mesh) -> None:
     skin.point_data["ToSkeletons"] = distance.numpy(force=True)
 
 
-def skin_to_muscles(skin: pv.PolyData, muscles: tm.Trimesh) -> None:
+def skin_to_muscles(skin: pv.PolyData, muscles: wp.Mesh) -> None:
     skin_to_skeletons: Float[np.ndarray, " p"] = skin.point_data["ToSkeletons"]
-    locations, index_ray, _index_tri = muscles.ray.intersects_location(
-        ray_origins=skin.points, ray_directions=-skin.point_normals
+    skin_to_skeletons: Float[Tensor, " p"] = torch.tensor(
+        skin_to_skeletons, dtype=torch.float32
     )
-    ray_distance: Float[np.ndarray, " p"] = np.linalg.norm(
-        locations - skin.points[index_ray], axis=-1
+    skin_to_skeletons.nan_to_num_(nan=THICKNESS_THRESHOLD)
+    points: Float[Tensor, "p 3"] = torch.tensor(skin.points, dtype=torch.float32)
+    point_normals: Float[Tensor, "p 3"] = torch.tensor(
+        skin.point_normals, dtype=torch.float32
     )
-    thickness_min: Float[np.ndarray, " p"] = np.full((skin.n_points,), np.inf)
-    thickness_max: Float[np.ndarray, " p"] = np.zeros((skin.n_points,))
-    hit: Bool[np.ndarray, " M"] = (ray_distance < skin_to_skeletons[index_ray]) & (
-        ray_distance < THICKNESS_THRESHOLD
+    distance_min: Float[Tensor, " p"] = melon.tri.query_ray(
+        muscles, points, -point_normals, max_t=THICKNESS_THRESHOLD
     )
-    idx: Integer[np.ndarray, " K"] = index_ray[hit]
-    dist: Float[np.ndarray, " K"] = ray_distance[hit]
-    np.minimum.at(thickness_min, idx, dist)
-    np.maximum.at(thickness_max, idx, dist)
-    thickness_min[~np.isfinite(thickness_min)] = np.nan
-    thickness_max[thickness_max == 0] = np.nan
-    skin.point_data["ToMusclesMin"] = thickness_min
-    skin.point_data["ToMusclesMax"] = thickness_max
+    distance_max: Float[Tensor, " p"] = THICKNESS_THRESHOLD - melon.tri.query_ray(
+        muscles,
+        points - THICKNESS_THRESHOLD * point_normals,
+        point_normals,
+        max_t=THICKNESS_THRESHOLD,
+    )
+    valid: Bool[Tensor, " p"] = (distance_min < distance_max) & (
+        distance_max < 1.001 * skin_to_skeletons
+    )
+    distance_min[~valid] = torch.nan
+    distance_max[~valid] = torch.nan
+    skin.point_data["ToMusclesMin"] = distance_min.numpy(force=True)
+    skin.point_data["ToMusclesMax"] = distance_max.numpy(force=True)
 
 
 def extend_scalar(
@@ -68,6 +73,7 @@ def extend_scalar(
 
 
 def main(cfg: Config) -> None:
+    torch.set_default_device("cuda")
     cranium: pv.PolyData = melon.io.load_polydata(cfg.cranium)
     mandible: pv.PolyData = melon.io.load_polydata(cfg.mandible)
     skin: pv.PolyData = melon.io.load_polydata(cfg.skin)
@@ -77,13 +83,14 @@ def main(cfg: Config) -> None:
     skin.subdivide_adaptive(
         max_edge_len=0.001,  # meters
         inplace=True,
-        progress_bar=True,
     )
-    skeletons_tm: tm.Trimesh = pv.to_trimesh(skeletons)
-    muscles_tm: tm.Trimesh = pv.to_trimesh(muscles.combine())
+    muscles: pv.UnstructuredGrid = muscles.combine()
+    muscles: pv.PolyData = muscles.extract_surface(algorithm=None)
+    skeletons_wp: wp.Mesh = melon.io.as_warp_mesh(skeletons)
+    muscles_wp: wp.Mesh = melon.io.as_warp_mesh(muscles)
 
-    skin_to_skeletons(skin, skeletons_tm)
-    skin_to_muscles(skin, muscles_tm)
+    skin_to_skeletons(skin, skeletons_wp)
+    skin_to_muscles(skin, muscles_wp)
 
     solver: pp3d.MeshVectorHeatSolver = pp3d.MeshVectorHeatSolver(
         skin.points, skin.regular_faces
