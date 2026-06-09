@@ -8,7 +8,6 @@ import warp as wp
 from jaxtyping import Bool, Float, Integer
 
 from liblaf.melon import io
-from liblaf.melon.tri import fill_point
 
 
 def tri_point_to_tri_point(
@@ -48,8 +47,8 @@ def tri_point_to_tri_point(
         target_data: Float[np.ndarray, "T ..."] = einops.einsum(
             barycentric, source_data[indices], "t i, t i ... -> t ..."
         )
-        mask: Bool[np.ndarray, "T ..."] = result.reshape(
-            (-1, *[1] * (target_data.ndim - 1))
+        mask: Bool[np.ndarray, "T ..."] = np.expand_dims(
+            result, axis=tuple(range(1, target_data.ndim))
         )
         target.point_data[name] = np.where(mask, target_data, np.nan)
     return target

@@ -25,6 +25,7 @@ words:
   - arithmatex
   - atlanto
   - auricularis
+  - bary
   - callosum
   - capitis
   - cava
@@ -35,6 +36,7 @@ words:
   - colli
   - cricoarytenoid
   - cricothyroid
+  - csgraph
   - cytoolz
   - digastiric
   - einops

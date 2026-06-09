@@ -7,6 +7,8 @@ import warp as wp
 from jaxtyping import Bool, Float, Integer
 from torch import Tensor
 
+from liblaf.melon.utils import warp_stream_from_torch
+
 
 @attrs.frozen
 class MeshQueryPointResult:
@@ -25,13 +27,13 @@ def mesh_query_point(
     result_wp: wp.array = wp.zeros((n_points,), wp.bool)
     face_wp: wp.array = wp.zeros((n_points,), wp.int32)
     distance_wp: wp.array = wp.zeros((n_points,), wp.float32)
-    with _stream():
-        wp.launch(
-            _mesh_query_point_kernel,
-            dim=(n_points,),
-            inputs=[mesh.id, points_wp, max_dist],
-            outputs=[result_wp, face_wp, distance_wp],
-        )
+    wp.launch(
+        _mesh_query_point_kernel,
+        dim=(n_points,),
+        inputs=[mesh.id, points_wp, max_dist],
+        outputs=[result_wp, face_wp, distance_wp],
+        stream=warp_stream_from_torch(),
+    )
     result: Bool[Tensor, "*Q"] = torch.reshape(wp.to_torch(result_wp), shape)
     face: Integer[Tensor, "*Q"] = torch.reshape(wp.to_torch(face_wp), shape)
     distance: Float[Tensor, "*Q"] = torch.reshape(wp.to_torch(distance_wp), shape)
@@ -59,11 +61,6 @@ def _mesh_query_point_kernel(
         if query.sign < 0:
             dist = -dist
         distance[tid] = dist
-
-
-def _stream() -> wp.ScopedStream:
-    if not torch.cuda.is_available():
-        return wp.ScopedStream(None)
-    stream_torch: torch.cuda.Stream = torch.cuda.current_stream()
-    stream_wp: wp.Stream = wp.stream_from_torch(stream_torch)
-    return wp.ScopedStream(stream_wp)
+    else:
+        face[tid] = -1
+        distance[tid] = wp.inf

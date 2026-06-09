@@ -4,8 +4,11 @@ from typing import cast
 import numpy as np
 import potpourri3d as pp3d
 import pyvista as pv
+import torch
 import trimesh as tm
+import warp as wp
 from jaxtyping import Bool, Float, Integer
+from torch import Tensor
 
 from liblaf import cherries, melon
 
@@ -22,25 +25,19 @@ class Config(cherries.BaseConfig):
 THICKNESS_THRESHOLD: float = 0.015  # meters
 
 
-def skin_to_skeletons(skin: pv.PolyData, skeletons: tm.Trimesh) -> None:
-    locations, index_ray, _index_tri = skeletons.ray.intersects_location(
-        ray_origins=skin.points, ray_directions=-skin.point_normals
+def skin_to_skeletons(skin: pv.PolyData, skeletons: wp.Mesh) -> None:
+    points: Float[Tensor, " p 3"] = torch.tensor(skin.points, dtype=torch.float32)
+    point_normals: Float[Tensor, " p 3"] = torch.tensor(
+        skin.point_normals, dtype=torch.float32
     )
-    thickness: Float[np.ndarray, " p"] = np.full(skin.n_points, np.inf)
-    distance: Float[np.ndarray, " p"] = np.linalg.norm(
-        locations - skin.points[index_ray], axis=-1
+    distance: Float[Tensor, " p"] = melon.tri.query_ray(
+        skeletons, points, -point_normals, max_t=THICKNESS_THRESHOLD
     )
-    np.minimum.at(thickness, index_ray, distance)
-    thickness[~np.isfinite(thickness)] = np.nan
-    thickness[thickness > THICKNESS_THRESHOLD] = np.nan
-    skin.point_data["ToSkeletons"] = thickness
+    skin.point_data["ToSkeletons"] = distance.numpy(force=True)
 
 
 def skin_to_muscles(skin: pv.PolyData, muscles: tm.Trimesh) -> None:
     skin_to_skeletons: Float[np.ndarray, " p"] = skin.point_data["ToSkeletons"]
-    skin_to_skeletons: Float[np.ndarray, " p"] = np.nan_to_num(
-        skin_to_skeletons, nan=np.inf
-    )
     locations, index_ray, _index_tri = muscles.ray.intersects_location(
         ray_origins=skin.points, ray_directions=-skin.point_normals
     )
@@ -80,6 +77,7 @@ def main(cfg: Config) -> None:
     skin.subdivide_adaptive(
         max_edge_len=0.001,  # meters
         inplace=True,
+        progress_bar=True,
     )
     skeletons_tm: tm.Trimesh = pv.to_trimesh(skeletons)
     muscles_tm: tm.Trimesh = pv.to_trimesh(muscles.combine())
@@ -113,6 +111,7 @@ def main(cfg: Config) -> None:
     smas_inner_tm: tm.Trimesh = pv.to_trimesh(smas_inner)
     smas_tm: tm.Trimesh = tm.boolean.difference([smas_outer_tm, smas_inner_tm])
     smas: pv.PolyData = cast("pv.PolyData", pv.wrap(smas_tm))
+    smas: pv.PolyData = melon.ext.meshfix(smas)
 
     melon.save(smas, cfg.output)
 
