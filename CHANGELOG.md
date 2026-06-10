@@ -7,6 +7,27 @@ All notable changes to this project will be documented in this file.
 The format is based on [Conventional Changelog](https://github.com/conventional-changelog/conventional-changelog-config-spec/blob/master/versions/2.2.0/README.md),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v1.3.0](https://github.com/liblaf/melon/releases/tag/v1.3.0) - 2026-06-10
+
+### ✨ Features
+
+- **(io)** add VTKHDF temporal unstructured grid writer - [35ac3c6](https://github.com/liblaf/melon/commit/35ac3c6d8fbec98b65f40258013f5940a47dad7a) by [@liblaf](https://github.com/liblaf)
+- compute mesh volume fractions with warp queries - [d2e4b61](https://github.com/liblaf/melon/commit/d2e4b619dcfd786448aa808d2b2d087be69cfd87) by [@liblaf](https://github.com/liblaf)
+- add triangular point transfer for expression fields - [d53e18a](https://github.com/liblaf/melon/commit/d53e18a24deab3fed24532f4cbf221c22b6b9d24) by [@liblaf](https://github.com/liblaf)
+- add tetra surface fraction utilities - [0671749](https://github.com/liblaf/melon/commit/0671749a611260aa1c738975b34fa15b17545e64) by [@liblaf](https://github.com/liblaf)
+
+### ♻️ Code Refactoring
+
+- **(vtk)** simplify temporal grid HDF5 appends - [d3d5ea7](https://github.com/liblaf/melon/commit/d3d5ea75e05dfa6b4580f719eebc44937df75a92) by [@liblaf](https://github.com/liblaf)
+
+### 🛠 Builds
+
+- update Python dependency locks - [ebeceff](https://github.com/liblaf/melon/commit/ebeceff77494c7f6903289c854d5a0f4ca7b8a56) by [@liblaf](https://github.com/liblaf)
+
+### ❤️ Contributors
+
+- [@liblaf](https://github.com/liblaf)
+
 ## [v1.2.0](https://github.com/liblaf/melon/releases/tag/v1.2.0) - 2026-06-08
 
 ### ✨ Features
@@ -34,8 +55,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### ❤️ Contributors
 
+- [@liblaf-release-please[bot]](https://github.com/apps/liblaf-release-please) made their first contribution in [#128](https://github.com/liblaf/melon/pull/128)
 - [@liblaf](https://github.com/liblaf)
-- [@liblaf-release-please[bot]](https://github.com/apps/liblaf-release-please) made their first contribution in [#127](https://github.com/liblaf/melon/pull/127)
 - [@renovate[bot]](https://github.com/apps/renovate)
 
 ## [v1.1.3](https://github.com/liblaf/melon/releases/tag/v1.1.3) - 2026-03-24
