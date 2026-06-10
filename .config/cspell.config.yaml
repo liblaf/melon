@@ -24,6 +24,7 @@ words:
   - anguli
   - arithmatex
   - atlanto
+  - atleast
   - auricularis
   - bary
   - callosum
@@ -61,7 +62,6 @@ words:
   - interansversarii
   - intertransversarii
   - isdtype
-  - issubdtype
   - itertools
   - jaxtyping
   - kdtree
