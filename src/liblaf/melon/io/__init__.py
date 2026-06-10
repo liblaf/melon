@@ -1,6 +1,6 @@
 """I/O dispatchers and mesh-format conversion helpers."""
 
-from . import abc, pyvista, trimesh, warp, wrap
+from . import abc, pyvista, trimesh, vtk, warp, wrap
 from .abc import (
     AbstractConverter,
     AbstractReader,
@@ -19,6 +19,7 @@ from .pyvista import (
     load_unstructured_grid,
 )
 from .trimesh import as_trimesh
+from .vtk import VTKHDFTemporalUnstructuredGridWriter
 from .warp import as_warp_mesh
 from .wrap import load_landmarks, load_polygons, save_landmarks, save_polygons
 
@@ -28,6 +29,7 @@ __all__ = [
     "AbstractWriter",
     "ConverterDispatcher",
     "ReaderDispatcher",
+    "VTKHDFTemporalUnstructuredGridWriter",
     "WriterDispatcher",
     "abc",
     "as_multiblock",
@@ -45,6 +47,7 @@ __all__ = [
     "save_landmarks",
     "save_polygons",
     "trimesh",
+    "vtk",
     "warp",
     "wrap",
 ]
