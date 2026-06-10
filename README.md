@@ -103,7 +103,7 @@ Contributions of all types are welcome. For bugs, API ideas, or mesh workflow im
 
 ---
 
-#### 📝 License
+### 📝 License
 
 Copyright © 2025 [liblaf](https://github.com/liblaf). <br />
 This project is [MIT](https://github.com/liblaf/melon/blob/main/LICENSE) licensed.
