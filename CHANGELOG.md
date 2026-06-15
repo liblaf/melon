@@ -7,6 +7,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Conventional Changelog](https://github.com/conventional-changelog/conventional-changelog-config-spec/blob/master/versions/2.2.0/README.md),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v1.4.0](https://github.com/liblaf/melon/releases/tag/v1.4.0) - 2026-06-15
+
+### ✨ Features
+
+- **(head)** add delta transfer and displacement transfer pipelines - [39484b3](https://github.com/liblaf/melon/commit/39484b313760c87bb973f13d3c485d4539dba585) by [@liblaf](https://github.com/liblaf)
+- **(wrap)** add delta transfer helper - [6872d36](https://github.com/liblaf/melon/commit/6872d3670cb871236ba94e0162dd3496494abe29) by [@liblaf](https://github.com/liblaf)
+
+### 🐛 Bug Fixes
+
+- **(vtk)** limit temporal dataset chunk sizes - [4610c15](https://github.com/liblaf/melon/commit/4610c158c5fc534730bec61689558fcc7a6db6be) by [@liblaf](https://github.com/liblaf)
+
+### ❤️ Contributors
+
+- [@liblaf](https://github.com/liblaf)
+
 ## [v1.3.0](https://github.com/liblaf/melon/releases/tag/v1.3.0) - 2026-06-10
 
 ### ✨ Features
@@ -26,6 +41,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### ❤️ Contributors
 
+- [@liblaf-release-please[bot]](https://github.com/apps/liblaf-release-please)
 - [@liblaf](https://github.com/liblaf)
 
 ## [v1.2.0](https://github.com/liblaf/melon/releases/tag/v1.2.0) - 2026-06-08
