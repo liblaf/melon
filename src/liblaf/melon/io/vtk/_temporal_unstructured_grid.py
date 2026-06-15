@@ -18,6 +18,20 @@ DEFAULT_DATASET_OPTIONS: dict[str, object] = {
 }
 
 
+def _chunk_shape(
+    data: np.ndarray, *, target_bytes: int = 4 * 2**20
+) -> tuple[int, ...] | None:
+    if data.size == 0:
+        return None
+    n_rows: int = data.shape[0]
+    row_bytes: int = data.dtype.itemsize * np.prod(data.shape[1:], dtype=int)
+    max_chunk_rows: int = min(max(1, target_bytes // row_bytes), n_rows)
+    for chunk_rows in range(max_chunk_rows, max_chunk_rows // 2, -1):
+        if n_rows % chunk_rows == 0:
+            return chunk_rows, *data.shape[1:]
+    return max_chunk_rows, *data.shape[1:]
+
+
 def _sanitize_name(name: str) -> str:
     for invalid_char in ["/", "."]:
         if invalid_char in name:
@@ -50,8 +64,7 @@ class FileWrapper:
             return self.file[name]
         data: np.ndarray = _sanitize_array(data)
         kwargs: dict[str, object] = DEFAULT_DATASET_OPTIONS.copy()
-        if data.size > 0:
-            kwargs["chunks"] = data.shape
+        kwargs["chunks"] = _chunk_shape(data)
         dataset: h5.Dataset = self.file.require_dataset(
             name=name,
             shape=(0, *data.shape[1:]),
@@ -72,9 +85,7 @@ class FileWrapper:
             dataset: h5.Dataset = self.dataset(dataset_name, data)
         else:
             dataset: h5.Dataset = self.dataset(dataset_name)
-        offsets: h5.Dataset = self.dataset(
-            offsets_name, np.array([dataset.len() - data.shape[0]])
-        )
+        offsets: h5.Dataset = self.dataset(offsets_name, dataset.len() - data.shape[0])
         return dataset, offsets
 
     def dataset_tail_equal(self, name: str, data: ArrayLike) -> bool:
@@ -251,4 +262,4 @@ class VTKHDFTemporalUnstructuredGridWriter(FileWrapper):
         self._append_cell_data(mesh)
         self._append_field_data(mesh)
         self.dataset("/VTKHDF/Steps/Values", time)
-        self.steps.n_steps += 1
+        self.n_steps += 1
