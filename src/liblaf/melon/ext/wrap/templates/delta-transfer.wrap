@@ -1,0 +1,282 @@
+{
+    "commonDir": "",
+    "formatVersion": 69,
+    "layout": {
+        "items": [{
+            "itemId": 0,
+            "itemType": "node",
+            "nodeId": 0,
+            "x": 319,
+            "y": 239
+        }, {
+            "itemId": 1,
+            "itemType": "node",
+            "nodeId": 1,
+            "x": 569,
+            "y": 239
+        }, {
+            "itemId": 2,
+            "itemType": "node",
+            "nodeId": 2,
+            "x": 69,
+            "y": 239
+        }, {
+            "itemId": 3,
+            "itemType": "node",
+            "nodeId": 3,
+            "x": 319,
+            "y": 339
+        }, {
+            "itemId": 4,
+            "itemType": "node",
+            "nodeId": 4,
+            "x": 319,
+            "y": 439
+        }],
+        "layoutFormatVersion": 0,
+        "shown2d": [],
+        "shown3d": [0, 1, 2, 3],
+        "timelineAudio": []
+    },
+    "metadata": {},
+    "nodes": {
+        "DeltaTransfer": {
+            "isEnabled": true,
+            "nodeId": 3,
+            "nodeType": "DeltaTransfer",
+            "nodeVersion": 1,
+            "params": {
+                "decreaseMask": {},
+                "deformationSpace": {
+                    "value": 0
+                },
+                "floatingNeutral": {
+                    "connectedNodeId": 2
+                },
+                "localRadius": {
+                    "value": 3
+                },
+                "referenceExpression": {
+                    "connectedNodeId": 1
+                },
+                "referenceNeutral": {
+                    "connectedNodeId": 0
+                },
+                "scaleMultiplier": {
+                    "value": 1
+                },
+                "smoothIterations": {
+                    "value": 0
+                },
+                "smoothnessMask": {},
+                "useLocalScale": {
+                    "value": true
+                }
+            }
+        },
+        "FloatingNeutral": {
+            "isEnabled": true,
+            "nodeId": 2,
+            "nodeType": "LoadGeom",
+            "params": {
+                "fileName": {
+                    "value": "{{ floating_neutral }}"
+                },
+                "rotation": {
+                    "value": {
+                        "x": 0,
+                        "y": 0,
+                        "z": 0
+                    }
+                },
+                "scale": {
+                    "value": 1
+                },
+                "texture": {},
+                "translation": {
+                    "value": {
+                        "x": 0,
+                        "y": 0,
+                        "z": 0
+                    }
+                },
+                "visualParam": {
+                    "value": {
+                        "colorBack": {
+                            "b": 23,
+                            "g": 23,
+                            "r": 23
+                        },
+                        "colorFront": {
+                            "b": 255,
+                            "g": 56,
+                            "r": 12
+                        },
+                        "colorWire": {
+                            "b": 34,
+                            "g": 26,
+                            "r": 17
+                        },
+                        "isLightingEnabled": true,
+                        "isSurfaceEnabled": true,
+                        "isWireframeEnabled": true,
+                        "surfaceFillType": 1
+                    }
+                }
+            }
+        },
+        "ReferenceExpression": {
+            "isEnabled": true,
+            "nodeId": 1,
+            "nodeType": "LoadGeom",
+            "params": {
+                "fileName": {
+                    "expression": "\n",
+                    "value": "{{ ref_expression }}"
+                },
+                "rotation": {
+                    "value": {
+                        "x": 0,
+                        "y": 0,
+                        "z": 0
+                    }
+                },
+                "scale": {
+                    "value": 1
+                },
+                "texture": {},
+                "translation": {
+                    "value": {
+                        "x": 0,
+                        "y": 0,
+                        "z": 0
+                    }
+                },
+                "visualParam": {
+                    "value": {
+                        "colorBack": {
+                            "b": 23,
+                            "g": 23,
+                            "r": 23
+                        },
+                        "colorFront": {
+                            "b": 255,
+                            "g": 56,
+                            "r": 12
+                        },
+                        "colorWire": {
+                            "b": 34,
+                            "g": 26,
+                            "r": 17
+                        },
+                        "isLightingEnabled": true,
+                        "isSurfaceEnabled": true,
+                        "isWireframeEnabled": true,
+                        "surfaceFillType": 1
+                    }
+                }
+            }
+        },
+        "ReferenceNeutral": {
+            "isEnabled": true,
+            "nodeId": 0,
+            "nodeType": "LoadGeom",
+            "params": {
+                "fileName": {
+                    "expression": "\n",
+                    "value": "{{ ref_neutral }}"
+                },
+                "rotation": {
+                    "value": {
+                        "x": 0,
+                        "y": 0,
+                        "z": 0
+                    }
+                },
+                "scale": {
+                    "value": 1
+                },
+                "texture": {},
+                "translation": {
+                    "value": {
+                        "x": 0,
+                        "y": 0,
+                        "z": 0
+                    }
+                },
+                "visualParam": {
+                    "value": {
+                        "colorBack": {
+                            "b": 23,
+                            "g": 23,
+                            "r": 23
+                        },
+                        "colorFront": {
+                            "b": 255,
+                            "g": 55,
+                            "r": 11
+                        },
+                        "colorWire": {
+                            "b": 34,
+                            "g": 26,
+                            "r": 17
+                        },
+                        "isLightingEnabled": true,
+                        "isSurfaceEnabled": true,
+                        "isWireframeEnabled": true,
+                        "surfaceFillType": 1
+                    }
+                }
+            }
+        },
+        "SaveGeom": {
+            "isEnabled": true,
+            "nodeId": 4,
+            "nodeType": "SaveGeom",
+            "params": {
+                "createDirectories": {
+                    "value": true
+                },
+                "dracoCompression": {
+                    "value": 7
+                },
+                "dracoNormalQuant": {
+                    "value": 30
+                },
+                "dracoTexCoordQuant": {
+                    "value": 30
+                },
+                "dracoVertexQuant": {
+                    "value": 30
+                },
+                "fileName": {
+                    "value": "{{ output }}"
+                },
+                "geom": {
+                    "connectedNodeId": 3
+                },
+                "includeTransform": {
+                    "value": true
+                },
+                "saveNormals": {
+                    "value": false
+                }
+            }
+        }
+    },
+    "pythonCode": "",
+    "settings": {
+        "fps": 60,
+        "playbackRepeat": false,
+        "playbackSkip": true,
+        "playbackStep": 1,
+        "playbackVolume": 1,
+        "syncAudioSec": 0,
+        "syncTimelineFrame": 0
+    },
+    "timeline": {
+        "current": 0,
+        "max": 25,
+        "min": 0
+    }
+}

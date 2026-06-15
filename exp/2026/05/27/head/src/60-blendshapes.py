@@ -1,0 +1,24 @@
+from pathlib import Path
+
+import pyvista as pv
+
+from liblaf import cherries, melon
+
+
+class Config(cherries.BaseConfig):
+    folder: Path = cherries.input("~/.local/opt/Wrap/Gallery/Blendshapes/")
+    output: Path = cherries.output("60-blendshapes.vtp")
+
+
+def main(cfg: Config) -> None:
+    mesh: pv.PolyData = melon.io.load_polydata(cfg.folder / "Basemesh.obj")
+    for file in cfg.folder.glob("*.obj"):
+        if file.name == "Basemesh.obj":
+            continue
+        blendshape: pv.PolyData = melon.io.load_polydata(file)
+        mesh.point_data[file.stem] = blendshape.points - mesh.points
+    melon.save(mesh, cfg.output)
+
+
+if __name__ == "__main__":
+    cherries.main(main)
