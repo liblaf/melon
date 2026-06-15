@@ -15,7 +15,7 @@ class Config(cherries.BaseConfig):
 def main(cfg: Config) -> None:
     blendshapes: pv.PolyData = pv.read(cfg.blendshapes, cls=pv.PolyData)
     mesh: pv.UnstructuredGrid = pv.read(
-        cherries.input(f"50-tetmesh-{cfg.suffix}.vtu"), cls=pv.UnstructuredGrid
+        cherries.input(f"42-tetmesh-{cfg.suffix}.vtu"), cls=pv.UnstructuredGrid
     )
     blendshapes.triangulate(inplace=True)
     expression_names: list[str] = blendshapes.field_data["ExpressionName"].tolist()
