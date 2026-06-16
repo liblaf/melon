@@ -1,7 +1,7 @@
-import functools
+import shutil
+import types
 from collections.abc import Generator
 from pathlib import Path
-from types import TracebackType
 from typing import Self, SupportsFloat
 
 import attrs
@@ -53,8 +53,52 @@ def _sanitize_array(arr: ArrayLike | str) -> np.ndarray:
     return arr
 
 
-class FileWrapper:
-    file: h5.File
+@attrs.define
+class VTKHDFTemporalUnstructuredGridWriter:
+    _path: Path = attrs.field(converter=Path, alias="file")
+    _mode: str = "w"
+    _file: h5.File | None = attrs.field(default=None, repr=False, init=False)
+
+    def __enter__(self) -> Self:
+        group: h5.Group = self.group("/VTKHDF")
+        group.attrs["Version"] = (2, 5)
+        group.attrs["Type"] = "UnstructuredGrid"
+        steps: h5.Group = self.group("/VTKHDF/Steps")
+        if "NSteps" not in steps.attrs:
+            steps.attrs["NSteps"] = 0
+        return self
+
+    def __exit__(
+        self,
+        exc_type: type[BaseException] | None,
+        exc_value: BaseException | None,
+        traceback: types.TracebackType | None,
+    ) -> None:
+        if self._file is not None:
+            self._file.close()
+        self._tmp_path.unlink(missing_ok=True)
+
+    @property
+    def file(self) -> h5.File:
+        if self._file:
+            return self._file
+        self._file = h5.File(self._tmp_path, self._mode)
+        self._mode = "r+"
+        return self._file
+
+    @property
+    def n_steps(self) -> int:
+        group: h5.Group = self.group("/VTKHDF/Steps")
+        return group.attrs["NSteps"]
+
+    @n_steps.setter
+    def n_steps(self, value: int) -> None:
+        group: h5.Group = self.group("/VTKHDF/Steps")
+        group.attrs["NSteps"] = value
+
+    @property
+    def _tmp_path(self) -> Path:
+        return self._path.with_name(self._path.name + ".tmp")
 
     def group(self, name: str) -> h5.Group:
         return self.file.require_group(name)
@@ -101,58 +145,6 @@ class FileWrapper:
             return False
         numeric: bool = dataset.dtype.kind in {"b", "i", "u", "f", "c"}
         return np.array_equal(tail, data, equal_nan=numeric)
-
-
-@attrs.define
-class StepsGroup(FileWrapper):
-    file: h5.File
-
-    @property
-    def n_steps(self) -> int:
-        group: h5.Group = self.group("/VTKHDF/Steps")
-        return group.attrs["NSteps"]
-
-    @n_steps.setter
-    def n_steps(self, value: int) -> None:
-        group: h5.Group = self.group("/VTKHDF/Steps")
-        group.attrs["NSteps"] = value
-
-
-@attrs.define
-class VTKHDFTemporalUnstructuredGridWriter(FileWrapper):
-    _file: Path = attrs.field(converter=Path, alias="file")
-
-    def __enter__(self) -> Self:
-        self.file.__enter__()
-        group: h5.Group = self.group("/VTKHDF")
-        group.attrs["Version"] = (2, 5)
-        group.attrs["Type"] = "UnstructuredGrid"
-        self.n_steps = 0
-        return self
-
-    def __exit__(
-        self,
-        exc_type: type[BaseException] | None,
-        exc_value: BaseException | None,
-        traceback: TracebackType | None,
-    ) -> None:
-        self.file.__exit__(exc_type, exc_value, traceback)
-
-    @functools.cached_property
-    def file(self) -> h5.File:
-        return h5.File(self._file, "w")
-
-    @functools.cached_property
-    def steps(self) -> StepsGroup:
-        return StepsGroup(self.file)
-
-    @property
-    def n_steps(self) -> int:
-        return self.steps.n_steps
-
-    @n_steps.setter
-    def n_steps(self, value: int) -> None:
-        self.steps.n_steps = value
 
     def _append_topology(self, mesh: pv.UnstructuredGrid) -> None:
         if not (
@@ -263,3 +255,5 @@ class VTKHDFTemporalUnstructuredGridWriter(FileWrapper):
         self._append_field_data(mesh)
         self.dataset("/VTKHDF/Steps/Values", time)
         self.n_steps += 1
+        self.file.close()
+        shutil.copy2(self._tmp_path, self._path)
