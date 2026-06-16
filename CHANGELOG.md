@@ -7,6 +7,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Conventional Changelog](https://github.com/conventional-changelog/conventional-changelog-config-spec/blob/master/versions/2.2.0/README.md),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v1.5.0](https://github.com/liblaf/melon/releases/tag/v1.5.0) - 2026-06-16
+
+### ✨ Features
+
+- compute and store FatFraction in volume fraction recipe - [22d4b98](https://github.com/liblaf/melon/commit/22d4b98a148fb440e81391f3ae634796cd105737) by [@liblaf](https://github.com/liblaf)
+
+### ♻️ Code Refactoring
+
+- restructure `VTKHDFTemporalUnstructuredGridWriter` with temp-file approach - [354d0f9](https://github.com/liblaf/melon/commit/354d0f96640005b344ae5398bec7aeb0d6feaecb) by [@liblaf](https://github.com/liblaf)
+- move `fat_fraction` into `FractionResult` as cached property - [8ba56a2](https://github.com/liblaf/melon/commit/8ba56a29b671ad0e854660539b741a59b6c57050) by [@liblaf](https://github.com/liblaf)
+
+### ❤️ Contributors
+
+- [@liblaf](https://github.com/liblaf)
+
 ## [v1.4.0](https://github.com/liblaf/melon/releases/tag/v1.4.0) - 2026-06-15
 
 ### ✨ Features
@@ -20,6 +35,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### ❤️ Contributors
 
+- [@liblaf-release-please[bot]](https://github.com/apps/liblaf-release-please)
 - [@liblaf](https://github.com/liblaf)
 
 ## [v1.3.0](https://github.com/liblaf/melon/releases/tag/v1.3.0) - 2026-06-10
