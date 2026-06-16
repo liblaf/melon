@@ -1,3 +1,4 @@
+import functools
 import logging
 
 import attrs
@@ -24,6 +25,10 @@ class FractionResult:
     muscle_fraction: Float[Tensor, " c"]
     muscle_id: Integer[Tensor, " c"]
     smas_fraction: Float[Tensor, " c"]
+
+    @functools.cached_property
+    def fat_fraction(self) -> Float[Tensor, " c"]:
+        return 1.0 - self.aponeurosis_fraction - self.muscle_fraction
 
 
 def count_to_fraction(
