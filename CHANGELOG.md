@@ -7,6 +7,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Conventional Changelog](https://github.com/conventional-changelog/conventional-changelog-config-spec/blob/master/versions/2.2.0/README.md),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v1.5.1](https://github.com/liblaf/melon/releases/tag/v1.5.1) - 2026-06-23
+
+### 🐛 Bug Fixes
+
+- preserve expression names in transferred tetmesh data - [3eccfe3](https://github.com/liblaf/melon/commit/3eccfe3578420d9443fb541f9feb797ab5939307) by [@liblaf](https://github.com/liblaf)
+
+### ❤️ Contributors
+
+- [@liblaf](https://github.com/liblaf)
+
 ## [v1.5.0](https://github.com/liblaf/melon/releases/tag/v1.5.0) - 2026-06-16
 
 ### ✨ Features
@@ -20,6 +30,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### ❤️ Contributors
 
+- [@liblaf-release-please[bot]](https://github.com/apps/liblaf-release-please)
 - [@liblaf](https://github.com/liblaf)
 
 ## [v1.4.0](https://github.com/liblaf/melon/releases/tag/v1.4.0) - 2026-06-15
