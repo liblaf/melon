@@ -32,6 +32,7 @@ def main(cfg: Config) -> None:
     mesh: pv.UnstructuredGrid = melon.xfer.tri_point_to_tet_point(
         surface, mesh, fill_values=dict.fromkeys(expression_names, 0.0)
     )
+    mesh.field_data["ExpressionName"] = expression_names
     melon.save(mesh, cherries.output(f"62-tetmesh-{cfg.suffix}.vtu"))
 
 
